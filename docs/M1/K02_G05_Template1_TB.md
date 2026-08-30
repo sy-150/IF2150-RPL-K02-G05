@@ -97,4 +97,10 @@ Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja p
 <br>
 
 # Referensi
-- Diagram UML: https://www.drawio.com/, https://staruml.io/
+- https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan 
+- https://brin.go.id/drid/posts/kabar/113-juta-ton-sampah-di-indonesia-tidak-terkelola-dengan-baik
+- https://paxel.co/id/berita-dan-promo/dampak-sampah-yang-tidak-dikelola-dengan-baik
+- https://www.jejakin.com/id/blog/if-sdgs-fail-by-2030
+- https://setneg.go.id/baca/index/pengelolaan_sampah_jadi_prioritas_pemerintah_siapkan_strategi_komprehensif
+- https://dlh.blitarkab.go.id/alasan-kenapa-kita-harus-memilah-sampah/
+- https://www.megasyariah.co.id/id/artikel/edukasi-tips/lainnya/manfaat-daur-ulang
