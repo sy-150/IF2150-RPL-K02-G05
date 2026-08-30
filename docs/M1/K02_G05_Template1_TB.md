@@ -53,7 +53,10 @@ Lakukan analisis terhadap proses yang berjalan saat ini di dunia nyata, baik itu
 # BAB 2: Analisis Solusi
 
 ## 2.1 Deskripsi Perangkat Lunak
-Abstraksikan solusi perangkat lunak yang diusulkan dari sudut pandang pengguna. Jelaskan target platform yang akan digunakan (misalnya: desktop application) beserta alasan pemilihannya. Deskripsikan juga nilai unik (inovasi inti) dari perangkat lunak kalian dan apa yang membedakannya dari solusi yang sudah ada.
+Berdasarkan permasalahan yang telah dikaji, dirumuskan sebuah solusi untuk memitigasi isu sampah, yaitu mobile application pendeteksi sampah. Aplikasi ini dirancang agar pengguna dapat dengan mudah mengidentifikasi jenis sampah melalui handphone, kemudian mendapatkan solusi untuk menanganinya. Mengidentifikasi jenis sampah adalah fitur utama dari aplikasi ini, dengan 2 metode identifikasi tersedia, yaitu barcode untuk sampah produk spesifik dan visual untuk sampah secara umum. Aplikasi ini juga menawarkan informasi terkait metode daur ulang berdasarkan jenis sampah sebagai alternatif dari membuang sampah. Selain itu, tersedia layanan bagi petugas kebersihan untuk membuat dan mengawasi jadwal pembuangan sampah.
+
+Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan petugas kebersihan dalam mengelola sampah. Saat ini, tidak tersedia layanan spesifik yang dapat menjadi alat identifikasi jenis sampah atau media komunikasi cepat antara masyarakat dengan petugas kebersihan. Untuk masyarakat, aplikasi ini menyediakan layanan untuk dengan cepat mengidentifikasi jenis sampah, sehingga pengguna tidak kebingungan saat memilah sampah. Petugas sendiri dimudahkan pekerjaannya karena tidak kerepotan memilah kembali sampah yang dikelompokkan dalam jenis salah, serta dapat mengatur jadwal dengan fleksibel. Selain itu, karena aplikasi ini berbasis seluler, pengguna dapat dengan mudah mengaksesnya kapan saja melalui handphonenya.
+
 
 ## 2.2 Asumsi dan Batasan
 Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang menjadi dasar pengembangan. Tuliskan batasan seperti regulasi/hukum, keterbatasan sumber daya, dan ruang lingkup solusi.
