@@ -66,22 +66,15 @@ Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang men
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
 
 ## 3.1 Identifikasi Aktor
-Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan sistem solusi yang kalian kembangkan. Berikan penjelasan singkat mengenai peran dan karakteristik dari masing-masing aktor tersebut.
-
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
-| ... | ... |
+| *Masyarakat Umum* | *Pengguna ini bertindak sebagai pihak yang memindai sampah dengan barcode kemasan produk atau visual sampah untuk mengetahui kategori sampah tersebut. Karakteristik dari pengguna ini adalah mengutamakan kemudahan dan kepraktisan akses melalui handphone agar tidak bingung saat memilah sampah.* |
 
 
 ## 3.2 Kebutuhan Pengguna Awal
-Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
-
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Kasir* |  *Memindai barcode barang* | *Proses pembayaran berjalan cepat dan akurat* |
-| US-02 | *[Nama Aktor]* | *[Kebutuhan pengguna]* | *[Tujuan yang dicapai pengguna]* |
-| ... | ... | ... | ... |
+| US-01 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Dapat mengetahui kategori dari sampah yang dipindai dan mendapatkan saran serta cara mendaur ulang sampah yang dipindai.* |
 
 ## 3.3 Model Proses Bisnis
 Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
