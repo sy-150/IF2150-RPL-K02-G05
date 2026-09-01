@@ -39,14 +39,16 @@ Apabila permasalahan sampah dibiarkan terus, agenda global yang disusun oleh Per
 2. Memberikan dampak buruk bagi kesehatan manusia sebab timbulnya beberapa penyakit.
 3. Tingkat kematian hewan dan tumbuhan meningkat sebab rusaknya habitat mereka.
 
-Pemerintah telah menyiapkan strategi komprehensif untuk mengelola sampah. Ujar Agus Harimurti Yudhoyono diperlukan terobosan termasuk penggunaan teknologi dan infrastruktur yang berfokus pada penangan sampah dari hulu hingga hilir, dari rumah tangga, industri, dan semua yang memproduksi sampah. Menurut AHY, tak hanya teknologi yang penting, tetapi meningkatkan kesadaran masyarakat dan memastikan pengelolaan sampah dilakukan secara berkelanjutan. Namun, selain solusi yang ditawarkan oleh pemerintah, terdapat aksi yang dapat dilakukan oleh semua orang, yaitu:
+Pemerintah telah menyiapkan strategi komprehensif untuk mengelola sampah. Agus Harimurti Yudhoyono pada Rapat Terbatas di Istana Merdeka, Jakarta, Rabu (12/03/2025) berkata bahwa diperlukan terobosan termasuk penggunaan teknologi dan infrastruktur yang berfokus pada penangan sampah dari hulu hingga hilir, dari rumah tangga, industri, dan semua yang memproduksi sampah. Menurut AHY, tak hanya teknologi yang penting, tetapi meningkatkan kesadaran masyarakat dan memastikan pengelolaan sampah dilakukan secara berkelanjutan. Namun, selain solusi yang ditawarkan oleh pemerintah, terdapat aksi yang dapat dilakukan oleh semua orang, yaitu:
 1. Pilah-pilih sampah sebab memudahkan pengelolaan selanjutnya dan mengurangi pencemaran yang diakibatkan penumpukkan sampah yang tercampur.
 2. Daur ulang sampah sebab meminimalisir pencemaran lingkungan dan melestarikan sumber daya alam.
 
 Meskipun berbagai upaya tersebut sudah dilakukan, pengelolaan sampah tetap membutuhkan keterlibatan masyarakat secara aktif dan berkelanjutan. Pemilahan dan daur ulang sampah tidak akan berjalan optimal apabila masyarakat belum memiliki pengetahuan yang cukup mengenai jenis sampah, cara pengelolaan, dan tindakan yang tepat terhadap sampah yang dihasilkan. Maka dari itu, diperlukan sumber atau pendekatan yang mudah diakses oleh semua masyarakat untuk meningkatkan pemahaman dan mendorong perubahan perilaku masyarakat secara berkelanjutan.
 
 ## 1.2 Analisis Kondisi Saat Ini
-Lakukan analisis terhadap proses yang berjalan saat ini di dunia nyata, baik itu sistem lama ataupun solusi yang sudah ada. Soroti kesenjangan atau celah dari kondisi tersebut yang nantinya akan diselesaikan oleh perangkat lunak kalian.
+Saat ini, sudah ada beberapa aplikasi berbasis deteksi jenis sampah dan daur ulang. Aplikasi yang peneliti telah coba yaitu Scrapp dan EcoScan. Scrapp memiliki fitur scan sampah berbasis *barcode*. Apabila data *barcode*-nya ada, maka info terkait jenis sampah dan cara daur ulang akan muncul. Namun, aplikasi Scrapp tidak dapat memindai sampah yang tidak memiliki *barcode*, pengguna harus memasukkan sendiri informasinya. Sedangkan, aplikasi EcoScan sudah menerapkan pemindaian sampah hanya dengan memfoto sampah tersebut, tetapi hasil deteksi jenis sampah tidak seakurat Scrapp.
+
+Kekurangan yang dimiliki dua aplikasi tersebut adalah tidak memiliki jadwal pembuangan sampah. Walaupun Scrapp memiliki fitur peta untuk melihat lokasi untuk melakukan daur ulang, tetapi hanya berbasis di Amerika Serikat saja dan tidak memenuhi kondisi di Indonesia yang mana lokasi untuk melakukan daur ulang masih terbatas. Maka dari itu, diperlukan perangkat lunak yang tidak hanya menyediakan sistem pemindaian sampah tanpa barcode dengan hasil deteksi yang akurat, tetapi juga dilengkapi dengan fitur jadwal pembuangan sampah. Fitur tersebut memungkinkan pengguna melihat jadwal pembuangan sampah secara konsisten, sementara petugas kebersihan dapat memperbarui jadwal tersebut sesuai dengan kondisi operasional di lapangan.
 
 ---
 
@@ -66,18 +68,22 @@ Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang men
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
 
 ## 3.1 Identifikasi Aktor
+Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan sistem solusi yang kalian kembangkan. Berikan penjelasan singkat mengenai peran dan karakteristik dari masing-masing aktor tersebut.
+
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Masyarakat Umum* | *Pengguna ini bertindak sebagai pihak yang memindai sampah dengan barcode kemasan produk atau visual sampah untuk mengetahui kategori sampah tersebut. Karakteristik dari pengguna ini adalah mengutamakan kemudahan dan kepraktisan akses melalui handphone agar tidak bingung saat memilah sampah.* |
-| *Petugas Kebersihan* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam pembuatan dan pengelolaan jadwal pembuangan sampah. Karakteristik dari pengguna ini adalah mengutamakan kemudahan input data dengan cepat dan fleksibel.* |
+| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
+| ... | ... |
 
 
 ## 3.2 Kebutuhan Pengguna Awal
+Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
+
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Dapat mengetahui kategori dari sampah yang dipindai.* |
-| US-02 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Mendapatkan saran dan cara mendaur ulang sampah yang dipindai.* |
-| US-03 | *Petugas Kebersihan* |  *Membuat dan mengelola jadwal pembuangan sampah* | *Jadwal pembuangan sampah dapat terdata dan ditampilkan kepada pengguna.* |
+| US-01 | *Kasir* |  *Memindai barcode barang* | *Proses pembayaran berjalan cepat dan akurat* |
+| US-02 | *[Nama Aktor]* | *[Kebutuhan pengguna]* | *[Tujuan yang dicapai pengguna]* |
+| ... | ... | ... | ... |
 
 ## 3.3 Model Proses Bisnis
 Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
