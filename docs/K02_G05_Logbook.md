@@ -4,20 +4,20 @@
 
 | Informasi | Keterangan |
 |---|---|
-| Kelas | *[Kelas]* |
-| Nomor Kelompok | *[Nomor Kelompok]* |
-| Nama Kelompok | *[Nama Kelompok]* |
-| Nama Perangkat Lunak | *[Nama P/L]* |
+| Kelas | *K2* |
+| Nomor Kelompok | *5* |
+| Nama Kelompok | *Join yang mau* |
+| Nama Perangkat Lunak | *EcoTrack* |
 
 **Anggota Kelompok:**
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| *13525038* | *Mochammad Adhitya Nur Rohman* |
+| *13525068* | *Kelvin Sebastian Yen* |
+| *13525086* | *Arla Salsabila* |
+| *13525137* | *Maharani Puan Satira* |
+| *13525146* | *Muhammad Reffah* |
 
 ---
 
@@ -29,12 +29,11 @@
 ---
 
 ### Milestone 1
-**Periode:** [Tanggal Mulai] - [Tanggal Selesai]
+**Periode:** 28/08/2026 - 01/09/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| *04-05-2026* | *[Nama Mahasiswa]* | *[Jelaskan Pekerjaan secara Singkat]* | *[Durasi Pengerjaan]* | *[On Progress/Done]* | [Kendala yang dialami, jika tidak ada cukup tandai "-"] | 
-| *05-05-2026* | *John Doe* | *Mendesain diagram kelas* | *3* | *Done* | *-* | 
+| *01-09-2026* | *Arla Salsabila* | *Mengerjakan bagian 3.2 dan 3.3 di K02_G05_Template1_TB.md* | *3* | *Done* | Sempat bingung apakah User Story untuk aktor dengan tujuan berbeda harus dipisah atau tidak |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
