@@ -97,6 +97,9 @@ Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang men
 <i>Gambar 1. Diagram Pengguna</i>
 </p>
 
+<br>
+<br>
+
 <p align="center">
 <img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-petugas.png" width="70%">
 </p>
