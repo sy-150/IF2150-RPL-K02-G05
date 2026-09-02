@@ -61,8 +61,16 @@ Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan pe
 
 
 ## 2.2 Asumsi dan Batasan
-Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang menjadi dasar pengembangan. Tuliskan batasan seperti regulasi/hukum, keterbatasan sumber daya, dan ruang lingkup solusi.
+Keefektifan berjalannya aplikasi mengasumsikan beberapa hal:
+1. Pengguna diasumsikan memanfaatkan aplikasi sebagai langkah pemilahan sampah.
+2. Pengguna diasumsikan menggunakan perangkat keras yang mendukung bejalannya aplikasi.
+3. Teknis pengumpulan sampah diasumsikan sama di setiap daerah (dengan pengambilan terjadwal oleh petugas).
 
+Dukungan berjalannya aplikasi juga terbatas:
+1. Perangkat keras aplikasi terbatas pada perangkat mobile berbasis android dengan kemampuan koneksi internet dan kamera.
+2. Domisili operasional aplikasi berada di Bandung
+3. Aplikasi mendeteksi sampah yang telah terdata di dalam database.
+4. Aplikasi memilah sampah menjadi empat tipe, yaitu organik, anorganik, residu, dan B3.
 ---
 
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
