@@ -80,15 +80,28 @@ Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang men
 | US-02 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Mendapatkan saran dan cara mendaur ulang sampah yang dipindai.* |
 | US-03 | *Petugas Kebersihan* |  *Membuat dan mengelola jadwal pembuangan sampah* | *Jadwal pembuangan sampah dapat terdata dan ditampilkan kepada pengguna.* |
 
-## 3.3 Model Proses Bisnis
-Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
+## 3.3 Deskripsi Aktivitas
+| ID | Aktivitas | Penjelasan | ID User Story |
+| :--- | :--- | :--- | :--- |
+| A01 | *Melakukan pemindaian Sampah* | *Pengguna memulai proses dengan memindai sampah dengan menggunakan aplikasi.* | *US-01 US-02* |
+| A02 | *Memasukkan jadwal* | *Petugas menambahkan atau mengubah jadwal pengambilan sampah.* | *US-03*|
+
+
+## 3.4 Model Proses Bisnis
 <br>
 
 <p align="center">
-<img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-act-1.avif" width="70%">
+<img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-pengguna.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 1. Contoh Activity Diagram</i>
+<i>Gambar 1. Diagram Pengguna</i>
+</p>
+
+<p align="center">
+<img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-petugas.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 2. Diagram Petugas</i>
 </p>
 
 <br>
