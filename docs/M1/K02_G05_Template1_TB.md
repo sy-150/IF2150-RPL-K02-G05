@@ -39,7 +39,7 @@ Apabila permasalahan sampah dibiarkan terus, agenda global yang disusun oleh Per
 2. Memberikan dampak buruk bagi kesehatan manusia sebab timbulnya beberapa penyakit.
 3. Tingkat kematian hewan dan tumbuhan meningkat sebab rusaknya habitat mereka.
 
-Pemerintah telah menyiapkan strategi komprehensif untuk mengelola sampah. Agus Harimurti Yudhoyono pada Rapat Terbatas di Istana Merdeka, Jakarta, Rabu (12/03/2025) berkata bahwa diperlukan terobosan termasuk penggunaan teknologi dan infrastruktur yang berfokus pada penangan sampah dari hulu hingga hilir, dari rumah tangga, industri, dan semua yang memproduksi sampah. Menurut AHY, tak hanya teknologi yang penting, tetapi meningkatkan kesadaran masyarakat dan memastikan pengelolaan sampah dilakukan secara berkelanjutan. Namun, selain solusi yang ditawarkan oleh pemerintah, terdapat aksi yang dapat dilakukan oleh semua orang, yaitu:
+Pemerintah telah menyiapkan strategi komprehensif untuk mengelola sampah. Menurut Kementerian Sekretariat Negara Republik Indonesia (2025), Agus Harimurti Yudhoyono (AHY) menyatakan bahwa diperlukan terobosan termasuk penggunaan teknologi dan infrastruktur yang berfokus pada penangan sampah dari hulu hingga hilir, dari rumah tangga, industri, dan semua yang memproduksi sampah. Menurut AHY, tak hanya teknologi yang penting, tetapi meningkatkan kesadaran masyarakat dan memastikan pengelolaan sampah dilakukan secara berkelanjutan. Namun, selain solusi yang ditawarkan oleh pemerintah, terdapat aksi yang dapat dilakukan oleh semua orang, yaitu:
 1. Pilah-pilih sampah sebab memudahkan pengelolaan selanjutnya dan mengurangi pencemaran yang diakibatkan penumpukkan sampah yang tercampur.
 2. Daur ulang sampah sebab meminimalisir pencemaran lingkungan dan melestarikan sumber daya alam.
 
@@ -68,22 +68,17 @@ Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang men
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
 
 ## 3.1 Identifikasi Aktor
-Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan sistem solusi yang kalian kembangkan. Berikan penjelasan singkat mengenai peran dan karakteristik dari masing-masing aktor tersebut.
-
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
-| ... | ... |
-
+| *Masyarakat Umum* | *Pengguna ini bertindak sebagai pihak yang memindai sampah dengan barcode kemasan produk atau visual sampah untuk mengetahui kategori sampah tersebut. Karakteristik dari pengguna ini adalah mengutamakan kemudahan dan kepraktisan akses melalui handphone agar tidak bingung saat memilah sampah.
+| *Petugas Kebersihan* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam pembuatan dan pengelolaan jadwal pembuangan sampah. Karakteristik dari pengguna ini adalah mengutamakan kemudahan input data dengan cepat dan fleksibel.* |
 
 ## 3.2 Kebutuhan Pengguna Awal
-Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
-
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Kasir* |  *Memindai barcode barang* | *Proses pembayaran berjalan cepat dan akurat* |
-| US-02 | *[Nama Aktor]* | *[Kebutuhan pengguna]* | *[Tujuan yang dicapai pengguna]* |
-| ... | ... | ... | ... |
+| US-01 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Dapat mengetahui kategori dari sampah yang dipindai.* |
+| US-02 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Mendapatkan saran dan cara mendaur ulang sampah yang dipindai.* |
+| US-03 | *Petugas Kebersihan* |  *Membuat dan mengelola jadwal pembuangan sampah* | *Jadwal pembuangan sampah dapat terdata dan ditampilkan kepada pengguna.* |
 
 ## 3.3 Model Proses Bisnis
 Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
@@ -99,10 +94,11 @@ Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja p
 <br>
 
 # Referensi
-- https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan 
-- https://brin.go.id/drid/posts/kabar/113-juta-ton-sampah-di-indonesia-tidak-terkelola-dengan-baik
-- https://paxel.co/id/berita-dan-promo/dampak-sampah-yang-tidak-dikelola-dengan-baik
-- https://www.jejakin.com/id/blog/if-sdgs-fail-by-2030
-- https://setneg.go.id/baca/index/pengelolaan_sampah_jadi_prioritas_pemerintah_siapkan_strategi_komprehensif
-- https://dlh.blitarkab.go.id/alasan-kenapa-kita-harus-memilah-sampah/
-- https://www.megasyariah.co.id/id/artikel/edukasi-tips/lainnya/manfaat-daur-ulang
+- 11,3 Juta Ton Sampah di Indonesia Tidak Terkelola dengan Baik, brin.go.id, 26 Juli 2024, https://brin.go.id/drid/posts/kabar/113-juta-ton-sampah-di-indonesia-tidak-terkelola-dengan-baik. Accessed 30 Agustus 2026.
+- Dampak Sampah yang Tidak Dikelola dengan Baik, paxel.co, 8 Juni 2025, https://paxel.co/id/berita-dan-promo/dampak-sampah-yang-tidak-dikelola-dengan-baik. Accessed 30 Agustus 2026.
+- Apa yang terjadi jika target SDGs gagal tercapai pada tahun 2030?, jejakin.com, https://www.jejakin.com/id/blog/if-sdgs-fail-by-2030. Accessed 30 Agustus 2026.
+- Pengelolaan Sampah Jadi Prioritas, Pemerintah Siapkan Strategi Komprehensif, Kementerian Sekretariat Negara Republik Indonesia, 12 Maret 2025, https://setneg.go.id/baca/index/pengelolaan_sampah_jadi_prioritas_pemerintah_siapkan_strategi_komprehensif. Accessed 30 Agustus 2026.
+- 8 Manfaat Daur Ulang Sampah dan Cara Membiasakannya, BANK MEGA Syariah, 9 Desember 2024, https://www.megasyariah.co.id/id/artikel/edukasi-tips/lainnya/manfaat-daur-ulang. Accessed 30 Agustus 2026.
+- Pristiandaru, Danur Lumbang. Mengenal Tujuan 15 SDGs: Ekosistem Daratan Sumber: https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Membership: https://kmp.im/plus6 Download aplikasi: https://kmp.im/app6, Kompas.com, 23 Mei 2023, https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Accessed 30 Agustus 2026.
+
+# Lampiran
