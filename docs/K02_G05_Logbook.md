@@ -29,7 +29,7 @@
 ---
 
 ### Milestone 1
-**Periode:** 28/08/2026 - 01/09/2026
+**Periode:** 28/08/2026 - 02/09/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
