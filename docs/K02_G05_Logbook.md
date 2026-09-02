@@ -36,6 +36,7 @@
 | *30-08-2026* | *Kelvin Sebastian Yen* | *Mengerjakan bagian 2.1 di K02_G05_Template1_TB.md* | *3* | *Done* | Ketika mengerjakan di docs, banyak ide baru untuk fitur muncul. Karena belom pasti, pengerjaan sempat terhambat dan memerlukan waktu tambahan untuk menentukan fitur yang akan dimasukkan di draft. | |
 | *01-09-2026* | *Arla Salsabila* | *Mengerjakan bagian 3.2 dan 3.3 di K02_G05_Template1_TB.md* | *3* | *Done* | Sempat bingung apakah User Story untuk aktor dengan tujuan berbeda harus dipisah atau tidak |
 | *01-09-2026* | *Maharani Puan Satira* | *Mengerjakan bagian 1.1 dan 1.2 di K02_G05_Template1_TB.md* | *3* | *Done* | *Sempat bingung bagian 1.2 yang dimaksud dengan " Analisis Kondisi Saat Ini" apa* |
+| *02-09-2026* | *Muhammad Reffah* | *Mengerjakan bagian 2.2 di K02_G05_Template1_TB.md* | *2* | *Done* | *Bingung terkait asumsi vs batasan dan perlu sedetail apa* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
