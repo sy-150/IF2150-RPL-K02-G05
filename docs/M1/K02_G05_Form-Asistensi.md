@@ -4,23 +4,23 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | *Senin* |
-| **Tanggal** | *31/08/2026* |
-| **Kelas** | *K2* |
-| **Nomor Kelompok** | *5*  |
-| **Nama Kelompok** | *Join yang mau*  |
-| **Nama Perangkat Lunak** | *EcoTrack*  |
-| **Dokumen** | *K02_G05_Template1_TB.md*  |
+| **Hari** | Senin |
+| **Tanggal** | 31/08/2026 |
+| **Kelas** | K2 |
+| **Nomor Kelompok** | 5  |
+| **Nama Kelompok** | Join yang mau  |
+| **Nama Perangkat Lunak** | EcoTrack |
+| **Dokumen** | K02_G05_Final_TB.md  |
 
 ### Anggota Kelompok
 
 | NIM | Nama |
 | --- | --- |
-| *13525038* | *Mochammad Adhitya Nur Rohman* |
-| *13525068* | *Kelvin Sebastian Yen* |
-| *13525086* | *Arla Salsabila* |
-| *13525137* | *Maharani Puan Satira* |
-| *13525146* | *Muhammad Reffah* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+| 13525146 | Muhammad Reffah |
 
 ### Catatan
 

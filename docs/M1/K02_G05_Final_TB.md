@@ -7,23 +7,23 @@ TOPIC BRAINSTORMING
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
+## EcoTrack
 
-### Untuk: Agatha
+### Untuk: Agatha Tatianingseto
 
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *K2* |
-| Kelompok | *5* |
+| Kelas | K2 |
+| Kelompok | 5 |
 
 | NIM | Nama |
 |---|---|
-| *13525038* | *Mochammad Adhitya Nur Rohman* |
-| *13525068* | *Kelvin Sebastian Yen* |
-| *13525086* | *Arla Salsabila* |
-| *13525137* | *Maharani Puan Satira* |
-| *13525146* | *Muhammad Reffah* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+| 13525146 | Muhammad Reffah |
 ---
 
 <br>
@@ -48,16 +48,16 @@ Meskipun berbagai upaya tersebut sudah dilakukan, pengelolaan sampah tetap membu
 ## 1.2 Analisis Kondisi Saat Ini
 Saat ini, sudah ada beberapa aplikasi berbasis deteksi jenis sampah dan daur ulang. Aplikasi yang peneliti telah coba yaitu Scrapp dan EcoScan. Scrapp memiliki fitur scan sampah berbasis *barcode*. Apabila data *barcode*-nya ada, maka info terkait jenis sampah dan cara daur ulang akan muncul. Namun, aplikasi Scrapp tidak dapat memindai sampah yang tidak memiliki *barcode*, pengguna harus memasukkan sendiri informasinya. Sedangkan, aplikasi EcoScan sudah menerapkan pemindaian sampah hanya dengan memfoto sampah tersebut, tetapi hasil deteksi jenis sampah tidak seakurat Scrapp.
 
-Kekurangan yang dimiliki dua aplikasi tersebut adalah tidak memiliki jadwal pembuangan sampah. Walaupun Scrapp memiliki fitur peta untuk melihat lokasi untuk melakukan daur ulang, tetapi hanya berbasis di Amerika Serikat saja dan tidak memenuhi kondisi di Indonesia yang mana lokasi untuk melakukan daur ulang masih terbatas. Maka dari itu, diperlukan perangkat lunak yang tidak hanya menyediakan sistem pemindaian sampah tanpa barcode dengan hasil deteksi yang akurat, tetapi juga dilengkapi dengan fitur jadwal pembuangan sampah. Fitur tersebut memungkinkan pengguna melihat jadwal pembuangan sampah secara konsisten, sementara petugas kebersihan dapat memperbarui jadwal tersebut sesuai dengan kondisi operasional di lapangan.
+Kekurangan yang dimiliki dua aplikasi tersebut adalah tidak memiliki jadwal pembuangan sampah. Walaupun Scrapp memiliki fitur peta untuk melihat lokasi untuk melakukan daur ulang, tetapi hanya berbasis di Amerika Serikat saja dan tidak memenuhi kondisi di Indonesia yang mana lokasi untuk melakukan daur ulang masih terbatas. Maka dari itu, diperlukan perangkat lunak yang tidak hanya menyediakan sistem pemindaian sampah tanpa *barcode* dengan hasil deteksi yang akurat, tetapi juga dilengkapi dengan fitur jadwal pembuangan sampah. Fitur tersebut memungkinkan pengguna melihat jadwal pembuangan sampah secara konsisten, sementara petugas kebersihan dapat memperbarui jadwal tersebut sesuai dengan kondisi operasional di lapangan.
 
 ---
 
 # BAB 2: Analisis Solusi
 
 ## 2.1 Deskripsi Perangkat Lunak
-Berdasarkan permasalahan yang telah dikaji, dirumuskan sebuah solusi untuk memitigasi isu sampah, yaitu mobile application pendeteksi sampah. Aplikasi ini dirancang agar pengguna dapat dengan mudah mengidentifikasi jenis sampah melalui handphone, kemudian mendapatkan solusi untuk menanganinya. Mengidentifikasi jenis sampah adalah fitur utama dari aplikasi ini, dengan 2 metode identifikasi tersedia, yaitu barcode untuk sampah produk spesifik dan visual untuk sampah secara umum. Aplikasi ini juga menawarkan informasi terkait metode daur ulang berdasarkan jenis sampah sebagai alternatif dari membuang sampah. Selain itu, tersedia layanan bagi petugas kebersihan untuk membuat dan mengawasi jadwal pembuangan sampah.
+Berdasarkan permasalahan yang telah dikaji, dirumuskan sebuah solusi untuk memitigasi isu sampah, yaitu *mobile application* pendeteksi sampah. Aplikasi ini dirancang agar pengguna dapat dengan mudah mengidentifikasi jenis sampah melalui *handphone*, kemudian mendapatkan solusi untuk menanganinya. Mengidentifikasi jenis sampah adalah fitur utama dari aplikasi ini, dengan 2 metode identifikasi tersedia, yaitu **barcode** untuk sampah produk spesifik dan visual untuk sampah secara umum. Aplikasi ini juga menawarkan informasi terkait metode daur ulang berdasarkan jenis sampah sebagai alternatif dari membuang sampah. Selain itu, tersedia layanan bagi petugas kebersihan untuk membuat dan mengawasi jadwal pembuangan sampah.
 
-Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan petugas kebersihan dalam mengelola sampah. Saat ini, tidak tersedia layanan spesifik yang dapat menjadi alat identifikasi jenis sampah atau media komunikasi cepat antara masyarakat dengan petugas kebersihan. Untuk masyarakat, aplikasi ini menyediakan layanan untuk dengan cepat mengidentifikasi jenis sampah, sehingga pengguna tidak kebingungan saat memilah sampah. Petugas sendiri dimudahkan pekerjaannya karena tidak kerepotan memilah kembali sampah yang dikelompokkan dalam jenis salah, serta dapat mengatur jadwal dengan fleksibel. Selain itu, karena aplikasi ini berbasis seluler, pengguna dapat dengan mudah mengaksesnya kapan saja melalui handphonenya.
+Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan petugas kebersihan dalam mengelola sampah. Saat ini, tidak tersedia layanan spesifik yang dapat menjadi alat identifikasi jenis sampah atau media komunikasi cepat antara masyarakat dengan petugas kebersihan. Untuk masyarakat, aplikasi ini menyediakan layanan untuk dengan cepat mengidentifikasi jenis sampah, sehingga pengguna tidak kebingungan saat memilah sampah. Petugas sendiri dimudahkan pekerjaannya karena tidak kerepotan memilah kembali sampah yang dikelompokkan dalam jenis salah, serta dapat mengatur jadwal dengan fleksibel. Selain itu, karena aplikasi ini berbasis seluler, pengguna dapat dengan mudah mengaksesnya kapan saja melalui *handphone*-nya.
 
 
 ## 2.2 Asumsi dan Batasan
@@ -67,7 +67,7 @@ Keefektifan berjalannya aplikasi mengasumsikan beberapa hal:
 3. Teknis pengumpulan sampah diasumsikan sama di setiap daerah (dengan pengambilan terjadwal oleh petugas).
 
 Dukungan berjalannya aplikasi juga terbatas:
-1. Perangkat keras aplikasi terbatas pada perangkat mobile berbasis android dengan kemampuan koneksi internet dan kamera.
+1. Perangkat keras aplikasi terbatas pada perangkat *mobile* berbasis android dengan kemampuan koneksi internet dan kamera.
 2. Domisili operasional aplikasi berada di Bandung
 3. Aplikasi mendeteksi sampah yang telah terdata di dalam database.
 4. Aplikasi memilah sampah menjadi empat tipe, yaitu organik, anorganik, residu, dan B3.
@@ -78,21 +78,21 @@ Dukungan berjalannya aplikasi juga terbatas:
 ## 3.1 Identifikasi Aktor
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Masyarakat Umum* | *Pengguna ini bertindak sebagai pihak yang memindai sampah dengan barcode kemasan produk atau visual sampah untuk mengetahui kategori sampah tersebut. Karakteristik dari pengguna ini adalah mengutamakan kemudahan dan kepraktisan akses melalui handphone agar tidak bingung saat memilah sampah.
-| *Petugas Kebersihan* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam pembuatan dan pengelolaan jadwal pembuangan sampah. Karakteristik dari pengguna ini adalah mengutamakan kemudahan input data dengan cepat dan fleksibel.* |
+| Masyarakat Umum | Pengguna ini bertindak sebagai pihak yang memindai sampah dengan *barcode* kemasan produk atau visual sampah untuk mengetahui kategori sampah tersebut. Karakteristik dari pengguna ini adalah mengutamakan kemudahan dan kepraktisan akses melalui *handphone* agar tidak bingung saat memilah sampah.
+| Petugas Kebersihan | Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam pembuatan dan pengelolaan jadwal pembuangan sampah. Karakteristik dari pengguna ini mengutamakan kemudahan input data dengan cepat. |
 
 ## 3.2 Kebutuhan Pengguna Awal
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Dapat mengetahui kategori dari sampah yang dipindai.* |
-| US-02 | *Masyarakat Umum* |  *Memindai sampah dengan barcode kemasan produk atau visual sampah* | *Mendapatkan saran dan cara mendaur ulang sampah yang dipindai.* |
-| US-03 | *Petugas Kebersihan* |  *Membuat dan mengelola jadwal pembuangan sampah* | *Jadwal pembuangan sampah dapat terdata dan ditampilkan kepada pengguna.* |
+| US-01 | Masyarakat Umum | Memindai sampah dengan *barcode* kemasan produk atau visual sampah | Dapat mengetahui kategori dari sampah yang dipindai. |
+| US-02 | Masyarakat Umum | Memindai sampah dengan *barcode* kemasan produk atau visual sampah | Mendapatkan saran dan cara mendaur ulang sampah yang dipindai. |
+| US-03 | Petugas Kebersihan | Membuat dan mengelola jadwal pembuangan sampah | Jadwal pembuangan sampah dapat terdata dan ditampilkan kepada pengguna. |
 
 ## 3.3 Deskripsi Aktivitas
 | ID | Aktivitas | Penjelasan | ID User Story |
 | :--- | :--- | :--- | :--- |
-| A01 | *Melakukan pemindaian Sampah* | *Pengguna memulai proses dengan memindai sampah dengan menggunakan aplikasi.* | *US-01 US-02* |
-| A02 | *Memasukkan jadwal* | *Petugas menambahkan atau mengubah jadwal pengambilan sampah.* | *US-03*|
+| A01 | Melakukan pemindaian Sampah | Pengguna memulai proses dengan memindai sampah dengan menggunakan aplikasi. | US-01 US-02 |
+| A02 | Memasukkan jadwal | Petugas menambahkan atau mengubah jadwal pengambilan sampah. | US-03 |
 
 
 ## 3.4 Model Proses Bisnis
@@ -124,5 +124,3 @@ Dukungan berjalannya aplikasi juga terbatas:
 - Pengelolaan Sampah Jadi Prioritas, Pemerintah Siapkan Strategi Komprehensif, Kementerian Sekretariat Negara Republik Indonesia, 12 Maret 2025, https://setneg.go.id/baca/index/pengelolaan_sampah_jadi_prioritas_pemerintah_siapkan_strategi_komprehensif. Accessed 30 Agustus 2026.
 - 8 Manfaat Daur Ulang Sampah dan Cara Membiasakannya, BANK MEGA Syariah, 9 Desember 2024, https://www.megasyariah.co.id/id/artikel/edukasi-tips/lainnya/manfaat-daur-ulang. Accessed 30 Agustus 2026.
 - Pristiandaru, Danur Lumbang. Mengenal Tujuan 15 SDGs: Ekosistem Daratan Sumber: https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Membership: https://kmp.im/plus6 Download aplikasi: https://kmp.im/app6, Kompas.com, 23 Mei 2023, https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Accessed 30 Agustus 2026.
-
-# Lampiran

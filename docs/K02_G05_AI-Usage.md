@@ -4,20 +4,20 @@
 
 | Informasi | Keterangan |
 |---|---|
-| Kelas | *K2* |
-| Nomor Kelompok | *5* |
-| Nama Kelompok | *Join yang mau* |
-| Nama Perangkat Lunak | *EcoTrack* |
+| Kelas | K2 |
+| Nomor Kelompok | 5 |
+| Nama Kelompok | Join yang mau |
+| Nama Perangkat Lunak | EcoTrack |
 
 **Anggota Kelompok:**
 
 | NIM | Nama |
 |---|---|
-| *13525038* | *Mochammad Adhitya Nur Rohman* |
-| *13525068* | *Kelvin Sebastian Yen* |
-| *13525086* | *Arla Salsabila* |
-| *13525137* | *Maharani Puan Satira* |
-| *13525146* | *Muhammad Reffah* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+| 13525146 | Muhammad Reffah |
 
 ---
 
@@ -35,8 +35,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 ### Milestone 1
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
-| *ChatGPT* | *Brainstorming ide nama perangkat lunak* | *Tolong berikan saran nama perangkat lunak untuk perangkat lunak tentang pengelolaan sampah* | *AI memberikan beberapa saran nama perangkat lunak dan setelah kami berdiskusi, kami memilih nama EcoTrack.* |
-| | | | | |
+| ChatGPT | Brainstorming ide nama perangkat lunak | Tolong berikan saran nama perangkat lunak untuk perangkat lunak tentang pengelolaan sampah | AI memberikan beberapa saran nama perangkat lunak dan setelah kami berdiskusi, kami memilih nama EcoTrack. |
 
 ### Milestone 2
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
@@ -51,8 +50,8 @@ Kami yang bertanda tangan di bawah ini menyatakan bahwa seluruh log penggunaan A
 
 | Tanda Tangan | Nama Anggota |
 | :---: | :--- |
-| <img src="./assets/ttd-anggota1.png" width="100"> | **[NIM - Nama Anggota 1]** |
-| <img src="./assets/ttd-anggota2.png" width="100"> | **[NIM - Nama Anggota 2]** |
-| <img src="./assets/ttd-anggota3.png" width="100"> | **[NIM - Nama Anggota 3]** |
-| <img src="./assets/ttd-anggota4.png" width="100"> | **[NIM - Nama Anggota 4]** |
-| <img src="./assets/ttd-anggota5.png" width="100"> | **[NIM - Nama Anggota 5]** |
+| <img src="./assets/ttd-anggota1.jpeg" width="100"> | **[13525038 - Mochammad Adhitya Nur Rohman]** |
+| <img src="./assets/ttd-anggota2.jpeg" width="100"> | **[13525068 - Kelvin Sebastian Yen]** |
+| <img src="./assets/ttd-anggota3.jpeg" width="100"> | **[13525086 - Arla Salsabila]** |
+| <img src="./assets/ttd-anggota4.png" width="100"> | **[13525137 - Maharani Puan Satira]** |
+| <img src="./assets/ttd-anggota5.png" width="100"> | **[13525146 - Muhammad Reffah]** |
