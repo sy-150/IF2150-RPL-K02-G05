@@ -47,7 +47,6 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| 06-08-2026 | Kelvin Sebastian Yen | Membuat draft untuk Kebutuhan Pengguna Awal dan Deskripsi Aktivitas | 1 | Done | Tidak Ada | 
 | 07-09-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 1.1 dan 1.2 di K02_G05_Template2_TB.md | 3 | Done | Tidak ada |
 | 09-09-2026 | Maharani Puan Satira | Mengerjakan bagian 2.3 Pemenuhan Kebutuhan K02_G05_Template2_TB.md | 4 | Done | Kendala penjelasan mengenai deskripsi kebutuhan sistem |
 | 09-09-2026 | Muhammad Reffah | Mengerjakan bagian 2.4 Kebutuhan Fungsional di K02_G05_Template2_TB.md | 3 | Done | Kendala menstruktur kalimat sesuai kaidah EARS dan kendala "harus sedetail apa" |
