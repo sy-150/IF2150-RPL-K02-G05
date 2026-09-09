@@ -43,15 +43,14 @@
 ---
 
 ### Milestone 2
-**Periode:** 02/08/2026 - 09/09/2026
+**Periode:** 02/09/2026 - 09/09/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| 30-08-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 2.1 di K02_G05_Template1_TB.md | 3 | Done | Ketika mengerjakan di docs, banyak ide baru untuk fitur muncul. Karena belom pasti, pengerjaan sempat terhambat dan memerlukan waktu tambahan untuk menentukan fitur yang akan dimasukkan di draft. | |
+| 07-09-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 1.1 dan 1.2 di K02_G05_Template2_TB.md | 3 | Done | Tidak ada |
+| 09-09-2026 | Maharani Puan Satira | Mengerjakan bagian 2.3 Pemenuhan Kebutuhan K02_G05_Template2_TB.md | 4 | Done | Kendala penjelasan mengenai deskripsi kebutuhan sistem |
+| 09-09-2026 | Muhammad Reffah | Mengerjakan bagian 2.4 Kebutuhan Fungsional di K02_G05_Template2_TB.md | 3 | Done | Kendala menstruktur kalimat sesuai kaidah EARS dan kendala "harus sedetail apa" |
 | 09-09-2026 | Arla Salsabila | Mengerjakan bagian 2.5 di K02_G05_RG.md | 2 | Done | Sempat bingung apakah untuk satu parameter kebutuhan non fungsional boleh terdiri dari lebih dari satu ID kebutuhan. |
-| 01-09-2026 | Maharani Puan Satira | Mengerjakan bagian 1.1 dan 1.2 di K02_G05_Template1_TB.md | 3 | Done | Sempat bingung bagian 1.2 yang dimaksud dengan " Analisis Kondisi Saat Ini" apa |
-| 02-09-2026 | Muhammad Reffah | Mengerjakan bagian 2.2 di K02_G05_Template1_TB.md | 2 | Done | Bingung terkait asumsi vs batasan dan perlu sedetail apa |
-| 02-09-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 3.3 dan 3.4 di K02_G05_Template1_TB.md | 3 | Done | Sempat ada kendala dimana diagram yang telah dibuat tidak tersimpan sehingga harus buat ulang |
 
 ---
 
