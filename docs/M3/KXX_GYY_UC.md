@@ -39,36 +39,38 @@ Dipersiapkan oleh:
 <br>
 
 # BAB 1: Deskripsi Perangkat Lunak
-Bagian ini boleh disalin dari 1.1 Deskripsi Umum Sistem pada dokumen *Requirement Gathering*. Pastikan isinya memang membahas deskripsi perangkat lunak kalian, seperti fitur, fungsi utama, dan cakupan sistem.
+
+EcoTrack adalah sebuah sistem aplikasi perangkat lunak berbasis mobile yang dirancang untuk mengatasi isutentang sampah. Aplikasi ini digunakan untuk mengidentifikasi jenis sampah secara praktis serta penghubung antara masyarakat dengan petugas kebersihan. Alur kerja sistem dibagi menjadi dua berdasarkan penggunanya. Bagi masyarakat, alur kerja dimulai dengan pengguna memindai sampah menggunakan perangkat mobile. Setelah itu, sistem akan mengidentifikasi jenis sampah tersebut dan menampilkan informasi terkait metode daur ulang yang dapat dilakukan. Sementara itu, bagi petugas kebersihan, alur kerjanya meliputi memasukkan, mengubah, dan mengelola jadwal pengambilan sampah. Jadwal yang dimasukkan oleh petugas ini kemudian akan ditampilkan kepada masyarakat secara konsisten. 
+
+Harapan dari penerapan solusi ini adalah untuk memberikan kemudahan bagi masyarakat agar tidak kebingungan saat memilah sampah, sekaligus mempermudah pekerjaan petugas kebersihan agar tidak perlu memilah kembali sampah yang salah dikelompokkan. Secara jangka panjang, sistem ini diharapkan dapat meningkatkan pemahaman masyarakat dan mendorong perubahan perilaku yang berkelanjutan terkait daur ulang dan pemilahan sampah.  
 
 ---
 
 # BAB 2: Kebutuhan Fungsional (KF)
-Salin ulang **seluruh Kebutuhan Fungsional (KF)** yang telah didefinisikan pada dokumen *Requirement Gathering*. Tabel ini menjadi acuan *traceability*, dimana setiap Use Case pada BAB 3 wajib ditelusuri ke satu atau lebih ID KF di tabel ini, dan sebaliknya setiap KF idealnya tercakup oleh minimal satu Use Case. Pastikan juga sudah menggunakan **format EARS** dalam penulisan KF.
 
-| ID KF | Kebutuhan | Penjelasan |
+| ID KF | ID Kebutuhan | Penjelasan |
 | :--- | :--- | :--- |
-| *KF01* | *Menampilkan pilihan metode pembayaran* | *Perangkat lunak dapat menampilkan pilihan antarmuka metode pembayaran (transfer bank, e-wallet, kartu kredit) setelah pengguna melakukan checkout.* |
-| *KF02* | *Mengirim permintaan otorisasi pembayaran* | *Perangkat lunak dapat mengirimkan permintaan otorisasi transaksi ke API Payment Gateway beserta nominal tagihan dan ID Pesanan.* |
-| *...* | *...* | *...* |
-
-<sub> ***Catatan***: *Jika ada KF dari ML2 yang berubah/bertambah/dihapus setelah asistensi, pastikan tabel ini konsisten dengan versi KF terbaru sebelum dikumpulkan.*
-<sub>
+| *KF01* | *R01* | *PL dapat menggunakan kamera setelah menyetujui akses aplikasi terkait penggunaan kamera* |
+| *KF02* | *R01* | *PL dapat melakukan request ke API model computer vision setelah pengguna menyorot sampah melalui kamera* |
+| *KF03* | *R03* | *PL dapat mengirimkan query jadwal pengambilan sampah setelah pengguna membuka menu cek jadwal* |
+| *KF04* | *R03* | *PL dapat menampilkan jadwal pengambilan sampah setelah mendapat respons dari query ke database jadwal pengambilan sampah* |
+| *KF05* | *R04* | *PL dapat melakukan query penambahan maupun perubahan jadwal ke database setelah petugas mengirimkan perubahan* |
+| *KF06* | *R05* | *PL dapat menampilkan hasil pemilahan sampah dari respons API model computer vision* |
+| *KF07* | *R06* | *PL dapat menampilkan cara mendaur ulang yang sesuai setelah pengguna melakukan search tipe sampah* |
+| *KF08* | *R08* | *PL dapat melakukan autentikasi akun terhadap database ketika petugas melakukan login* |
 
 ---
 
 # BAB 3: Model Use Case
 
 ## 3.1 Identifikasi Aktor
-Daftarkan seluruh aktor yang terlibat dalam use case yang akan dimodelkan. Aktor berupa pengguna manusia yang berinteraksi dengan solusi. Perlu diperhatikan bahwa Admin/Developer/ Pihak Eksternal lain yang bisa diotomisasi, tidak perlu dijadikan aktor.
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Pelanggan* | *Pengguna yang melakukan transaksi pembelian dan pembayaran melalui sistem.* |
-| *Kasir* | *Pengguna internal toko yang memverifikasi status pembayaran pelanggan sebelum menyerahkan barang.* |
-| *...* | *...* |
-
-
+| *Masyarakat Umum* | *Pengguna yang melakukan scan pada sampah dan cek jadwal melalui sistem.* |
+| *Petugas* | *Pengguna yang mengupdate jadwal secara berkala pada sistem.* |
+| *API model computer vision* | *Sistem yang melakukan identifikasi jenis sampah yang didapat dari pengguna.* |
+| *Database* | *Sistem yang menyimpan data jadwal yang didapat dari petugas.* |
 
 ## 3.2 Identifikasi Use Case
 Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Satu use case boleh mencakup lebih dari satu KF, dan sebaliknya satu KF boleh muncul di lebih dari satu use case bila memang relevan.
