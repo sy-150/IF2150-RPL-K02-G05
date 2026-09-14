@@ -55,5 +55,13 @@
 
 ---
 
+### Milestone 2
+**Periode:** 02/09/2026 - 09/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-14-2026 | Maharani Puan Satira | Mengerjakan bagian 3.3 Diagram Use Case | 1 | Done | Tidak ada |
+
+---
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
