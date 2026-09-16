@@ -75,10 +75,13 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor Terlibat | ID KF Terkait |
 | :--- | :--- | :--- | :--- | :--- |
-| *UC01* | *Melakukan Log In* | *Petugas kebersihan memasukkan kredensial dan masuk ke akunnya di aplikasi* | *Petugas Kebersihan | *KF08* |
+| *UC01* | *Melakukan Log In* | *Petugas kebersihan memasukkan kredensial dan masuk ke akunnya di aplikasi* | *Petugas Kebersihan* | *KF08* |
 | *UC02* | *Memindai Sampah* | *Masyarakat dapat menggunakan kamera untuk memindai sampah dan mendapatkan informasi terkait jenis sampahnya* | *Masyarakat* | *KF01, KF02, KF06* |
 | *UC03* | *Mengatur Jadwal* | *Petugas kebersihan mengatur jadwal di aplikasi sesuai dengan kehendaknya* | *Petugas Kebersihan* | *KF05* |
 | *UC04* | *Melihat Jadwal* | *Masyarakat memeriksa jadwal yang sudah ditetapkan oleh petugas kebersihan* | *Masyarakat* | *KF03, KF04* |
+| *UC05* | *Mengakses Tampilan Informasi* | *Masyarakat membuka tampilan berisi informasi terkait sampah seperti jenis sampah, contoh sampah, dan cara mendaur ulang sampah* | *Masyarakat* | *KF06* |
+| *UC06* | *Membuat Akun* | *Petugas kebersihan dapat membuat akun menggunakan kredensialnya* | *Petugas Kebersihan* | *KF0(?)* |
+| *UC07* | *Menambahkan Informasi* | *Masyarakat bisa menambahkan langsung informasi terkait sampah melalui tampilan* | *Masyarakat* | *KF0(?)* |
 
 ## 3.3 Use Case Diagram
 Buatlah **satu** use case diagram yang mencakup seluruh aktor dan use case. Sertakan relasi *include*/*extend* apabila ada use case yang saling bergantung.
