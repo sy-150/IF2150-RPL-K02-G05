@@ -33,6 +33,7 @@
 | 5. Tidak perlu one on one antara trigger dan reaksi, bisa langsung ada reaksi dari sistem, bisa juga hanya trigger |
 | 6. Tidak ada minimal skenario untuk setiap use case |
 | 7. Minggu depan akan merancang terkait dengan diagram kelas, saat implementasi juga direkomendasikan menggunakan OOP |
+
 ## Dokumentasi
 
 <!-- ![](./assets/foto-asistensi.jpg) -->
@@ -42,5 +43,4 @@
 
 <p align="center">
   <i>Gambar 1. Dokumentasi kegiatan asistensi.</i>
-  
 </p>

@@ -66,6 +66,7 @@
 | 09-16-2026 | Kelvin Sebastian Yen | Melakukan finalisasi untuk Identifikasi Use Case | 1 | Done | Tidak ada |
 | 09-16-2026 | Arla Salsabila | Mengerjakan bagian 3.4.1, 3.4.2, dan 3.4.3 di K02_G05_UC.md | 2 | Done | Sempat bingung apakah fitur input manual pengguna jika ada data yang salah harus ditambahkan di use case atau tidak. |
 | 09-16-2026 | Mochammad Adhitya Nur Rohman | Modifikasi bagian 2 dan 3.1 | 1 | Done | Tidak ada |
+| 09-16-2026 | Muhammad Reffah | Mengerjakan bagian 3.4.4 , 3.4.5, 3.4.6, menambahkan logbook, dan menambahkan AI usage | 2 | Done | Tidak ada |
 
 ---
 
