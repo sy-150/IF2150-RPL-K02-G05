@@ -60,7 +60,9 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-13-2026 | Kelvin Sebastian Yen | Mengerjakan draft bagian 3.2 Identifikasi Use Case | 1 | Done | Tidak ada |
 | 09-14-2026 | Maharani Puan Satira | Mengerjakan bagian 3.3 Diagram Use Case | 1 | Done | Tidak ada |
+| 09-16-2026 | Kelvin Sebastian Yen | Melakukan finalisasi untuk Identifikasi Use Case | 1 | Done | Tidak ada |
 
 ---
 
