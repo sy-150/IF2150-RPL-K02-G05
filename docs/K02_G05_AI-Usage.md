@@ -43,6 +43,11 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | :--- | :--- | :--- | :--- |
 | ChatGPT | Konsultasi bagian Pemetaan Kebutuhan terutama bagian sistem | Bantu aku perbaiki terutama sisi sistem, seperti sistem apa yang harus diaplikasikan untuk mencapai yang bagian *User* | Setelah berkonsultasi bersama asisten bersama teman-teman, akhirnya bagian sistem sudah dibenarkan. Jawaban dari AI tidak jadi dipakai. |
 
+### Milestone 3
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| - | - | - | - |
+
 ---
 ### Pernyataan Integritas dan Persetujuan
 
