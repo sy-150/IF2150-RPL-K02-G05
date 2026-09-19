@@ -14,16 +14,16 @@ CLASS DIAGRAM
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
+| Kelas | K2 |
+| Kelompok | 5 |
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+| 13525146 | Muhammad Reffah |
 ---
 
 ## Daftar Perubahan
@@ -169,20 +169,17 @@ Pada bagian ini, Anda diperbolehkan untuk menyalin dari dokumen sebelumnya.
 Bagian ini berisi identifikasi kelas dan pemodelan struktur kelas yang diperlukan untuk merealisasikan use case pada BAB 3. Gunakan skenario use case (3.4) sebagai dasar untuk menentukan kelas, atribut, metode, dan hubungan antarkelas.
 
 ## 4.1 Identifikasi Kelas
-Identifikasi seluruh kelas yang diperlukan berdasarkan use case dan skenarionya. Satu kelas boleh terkait dengan lebih dari satu use case.
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas | ID Use Case |
 | :--- | :--- | :--- | :--- |
-| *C01* | *Pelanggan* | *Menyimpan data akun pelanggan yang membuat pesanan.* | *UC01, UC05* |
-| *C02* | *Pesanan* | *Menyimpan data pesanan beserta status pembayarannya.* | *UC01, UC03, UC05* |
-| *C03* | *Keranjang* | *Menyimpan sementara item yang dipilih sebelum checkout.* | *UC01, UC02* |
-| *C04* | *MetodePembayaran* | *Kelas abstrak yang merepresentasikan metode pembayaran yang dipilih pelanggan.* | *UC03, UC04* |
-| *C05* | *Kartu* | *Merealisasikan pembayaran melalui kartu kredit/debit dengan mengirimkan permintaan ke payment gateway (dummy).* | *UC03, UC04* |
-| *C06* | *EWallet* | *Merealisasikan pembayaran melalui e-wallet, termasuk pengecekan saldo, dengan mengirimkan permintaan ke payment gateway (dummy).* | *UC03, UC04* |
-| *C07* | *RiwayatTransaksi* | *Menyimpan catatan transaksi beserta status yang dikembalikan payment gateway (dummy).* | *UC03, UC05* |
-| *...* | *...* | *...* | *...* |
-
-Pastikan setiap kelas memiliki tanggung jawab yang jelas dan memang diperlukan untuk merealisasikan fungsi yang dimodelkan. Hindari kelas yang tidak memiliki keterkaitan dengan KF atau use case manapun.
+| *C01* | *Petugas* | *Menyimpan data petugas yang membuat jadwal.* | *UC01, UC03, UC06* |
+| *C02* | *Jadwal* | *Menyimpan data jadwal pengambilan sampah.* | *UC03, UC04* |
+| *C03* | *Computer Vision Model* | *Antarmuka untuk menggunakan model computer vision.* | *UC02* |
+| *C04* | *Database Ecotrack* | *Antarmuka untuk mengakses database jadwal dan akun ecotrack di database.* | *UC01, UC02, UC03, UC04, UC05, UC06* |
+| *C05* | *Layar Pengguna* | *Antarmuka masyarakat dengan aplikasi.* | *UC02, UC04, UC05* |
+| *C06* | *Layar Petugas* | *Antarmuka petugas dengan aplikasi.* | *UC01, UC03, UC06* |
+| *C07* | *Kamera* | *Antarmuka untuk mengakses kamera.* | *UC02* |
+| *C08* | *Tipe Sampah* | *Menyimpan data jenis sampah dan cara mendaur ulang.* | *UC02, UC05* |
 
 ## 4.2 Diagram Kelas per Use Case
 Buat diagram kelas untuk setiap use case pada 3.2.
