@@ -24,6 +24,8 @@
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -60,14 +62,20 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| 09-13-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 1, 2 dan 3.1 | 1 | Done | Tidak ada |
 | 09-13-2026 | Kelvin Sebastian Yen | Mengerjakan draft bagian 3.2 Identifikasi Use Case | 1 | Done | Tidak ada |
 | 09-14-2026 | Maharani Puan Satira | Mengerjakan bagian 3.3 Diagram Use Case | 1 | Done | Tidak ada |
 | 09-16-2026 | Kelvin Sebastian Yen | Melakukan finalisasi untuk Identifikasi Use Case | 1 | Done | Tidak ada |
 | 09-16-2026 | Arla Salsabila | Mengerjakan bagian 3.4.1, 3.4.2, dan 3.4.3 di K02_G05_UC.md | 2 | Done | Sempat bingung apakah fitur input manual pengguna jika ada data yang salah harus ditambahkan di use case atau tidak. |
-| 09-16-2026 | Mochammad Adhitya Nur Rohman | Modifikasi bagian 2 dan 3.1 | 1 | Done | Tidak ada |
-| 09-16-2026 | Muhammad Reffah | Mengerjakan bagian 3.4.4 , 3.4.5, 3.4.6, menambahkan logbook, dan menambahkan AI usage | 2 | Done | Tidak ada |
+| 09-16-2026 | Maharani Puan Satira | Membenarkan dan melakukan finalisasi bagian 3.3 Diagram Use Case | 1 | Done | Tidak ada |
 
 ---
+
+### Milestone 4
+**Periode:** 16/09/2026 - 23/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-20-2026| Maharani Puan Satira | Mengerjakan draft bagian 4.2.6 Use Case UC06 | 2 | On Progress | Masih bingung membuat class diagram serta atribut & metode/operasi pada C06 yaitu Layar Petugas |
+
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
