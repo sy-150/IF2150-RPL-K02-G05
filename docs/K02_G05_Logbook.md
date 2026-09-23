@@ -80,7 +80,7 @@
 | 09-23-2026 | Arla Salsabila | Mengerjakan bagian 4.2.3 dan 4.2.4. | 3 | Done | Sempat bingung dengan notasi diagram kelas, atribut, dan metode/operasi kelas |
 | 09-23-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 4.2.1 dan 4.2.2. | 4 | Done | Kesulitan dalam mehami notasi diagram kelas serta relasi antar kelas |
 | 23-09-2026 | Muhammad Reffah | Mengerjakan bagian analisis kelas | 3 | Done | apalah kelas kelas ini ak lelah |
-
+| 23-20-2026| Maharani Puan Satira | Mengerjakan 4.2.6 dan 4.3 | 2 | Done | Masih gak lengkap dan deadliner |
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
