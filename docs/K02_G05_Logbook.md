@@ -79,6 +79,7 @@
 | 09-23-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 3.4.5 dan 5 serta menambahkan bagian 1, 2, dan 3 |  3| Done | Sempat bingung dengan atribut dan metode/operasi kelas |
 | 09-23-2026 | Arla Salsabila | Mengerjakan bagian 4.2.3 dan 4.2.4. | 3 | Done | Sempat bingung dengan notasi diagram kelas, atribut, dan metode/operasi kelas |
 | 09-23-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 4.2.1 dan 4.2.2. | 4 | Done | Kesulitan dalam mehami notasi diagram kelas serta relasi antar kelas |
+| 23-09-2026 | Muhammad Reffah | Mengerjakan bagian analisis kelas | 3 | Done | apalah kelas kelas ini ak lelah |
 
 
 
