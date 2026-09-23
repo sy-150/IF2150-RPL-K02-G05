@@ -76,6 +76,8 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 09-20-2026| Maharani Puan Satira | Mengerjakan draft bagian 4.2.6 Use Case UC06 | 2 | On Progress | Masih bingung membuat class diagram serta atribut & metode/operasi pada C06 yaitu Layar Petugas |
+| 09-23-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 3.4.5 dan 5 serta menambahkan bagian 1, 2, dan 3 |  3| Done | Sempat bingung dengan atribut dan metode/operasi kelas |
+
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
