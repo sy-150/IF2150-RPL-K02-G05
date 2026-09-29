@@ -116,11 +116,14 @@ Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan pe
 | *Petugas* | *Pengguna yang mengupdate jadwal secara berkala pada sistem.* |
 
 ## 2.4 Batasan Perangkat Lunak
-Batasan yang harus dituliskan, di antaranya:
-1. *P/L harus memakai file data/API dari sistem lain (sebutkan, misal Payment Gateway dummy).*
-2. *P/L harus memakai format data yang sama dengan sistem lain.*
-3. *P/L harus berfungsi pada platform tertentu (misal: web browser modern, atau desktop Windows dan Linux).*
-4. *...*
+
+1. Data terkait jenis sampah dan informasi daur ulang yang tersedia pada P/L terbatas sehingga tidak semua jenis sampah dan metode daur ulang dapat dikenali atau ditampilkan oleh sistem.
+2. Apabila hasil identifikasi sampah tidak ditemukan pada database jenis sampah, P/L tidak dapat menentukan kategori secara otomatis dan pengguna harus memasukkan kategori sampah secara manual. Hal ini sesuai dengan skenario ketika data barcode belum tersedia pada database.
+3. Apabila jenis sampah telah teridentifikasi tetapi informasi mengenai cara daur ulangnya belum tersedia pada database, P/L tidak dapat menampilkan informasi daur ulang tersebut sampai dilakukan pembaruan data oleh pengembang.
+4. Lokasi jadwal pengambilan sampah pada P/L hanya dibatasi pada area Kota Bandung.
+5. Data jadwal pengambilan sampah pada P/L masih menggunakan *dummy data*, sehingga jadwal yang ditampilkan belum merepresentasikan data pengambilan sampah secara aktual.
+6. Akurasi identifikasi sampah bergantung pada model *computer vision* yang digunakan dengan target akurasi sistem sebesar 90%.
+7. P/L dirancang untuk digunakan pada perangkat mobile karena penggunaan fitur utama, terutama pemindaian sampah menggunakan kamera, lebih optimal dan mudah diakses melalui perangkat mobile.
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
 Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroperasi. Bagian ini digunakan untuk memastikan pengguna memiliki spesifikasi yang cukup untuk menjalankan P/L. Misalnya mencakup komponen server, client, OS, DBMS, tetapi tidak menutupi kemungkinan komponen lain.
