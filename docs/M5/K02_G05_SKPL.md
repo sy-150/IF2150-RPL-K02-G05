@@ -437,7 +437,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC01" src="./assets/diagram/UC01-UC06-class-diagram.png" width="10%">
+<img alt="Class Diagram UC01" src="./assets/diagram/UC01-UC06-class-diagram.png" width="20%">
 </p>
 <p align="center">
 <i>Gambar 4. Diagram Kelas Use Case UC01</i>
@@ -457,13 +457,14 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas |
 | :--- | :--- | :--- |
+| *C07* | *Informasi Sampah* | *Menyimpan data informasi sampah dan cara mendaur ulang.* |
 | *C11* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* |
 | *C12* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* |
 
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC01" src="./assets/diagram/UC02-class-diagram.png" width="70%">
+<img alt="Class Diagram UC01" src="./assets/diagram/UC02-class-diagram.png" width="50%">
 </p>
 <p align="center">
 <i>Gambar 5. Diagram Kelas Use Case UC02</i>
@@ -472,6 +473,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
+| *C07* | *Informasi Sampah* | | |
 | *C11* | *Pemindai Controller* | *-isScanning, -hasilIdentifikasi* | *+startPemindaian(), +prosesFrame(), +stopPemindaian()* |
 | *C12* | *Pemindai Interface* | *-viewKamera, -overlayBox, -labelJenisSampah* | *+openKamera(), +ambilFrame(), +showLiveFeed(), +showJenis(), +closeKamera()* |
 
@@ -482,15 +484,15 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas |
 | :--- | :--- | :--- |
-| C06 | JadwalInterface | Menampilkan layar jadwal dan pengaturan jadwal. |
-| C05 | JadwalController | Melakukan operasi yang berkaitan dengan penjadwalan. |
-| C04 | Jadwal | Menyimpan data jadwal pengambilan sampah. |
 | C01 | AkunPetugas | Menyimpan data petugas yang membuat jadwal. |
+| C04 | Jadwal | Menyimpan data jadwal pengambilan sampah. |
+| C05 | JadwalController | Melakukan operasi yang berkaitan dengan penjadwalan. |
+| C06 | JadwalInterface | Menampilkan layar jadwal dan pengaturan jadwal. |
 
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC03" src="./assets/diagram/UC03-class-diagram.jpg" width="70%">
+<img alt="Class Diagram UC03" src="./assets/diagram/UC03-class-diagram.png" width="20%">
 </p>
 <p align="center">
 <i>Gambar 6. Diagram Kelas Use Case UC03</i>
@@ -499,10 +501,10 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| C06 | JadwalInterface | - | +showHalamanJadwal(), +showPencarianLokasiTPS(), +showDaftarLokasiTPS(), +showFormJadwal(), +showFormLokasiTPS(), +showNotifikasi(), +showKonfirmasiHapus() |
-| C05 | JadwalController | -daftarJadwal | +cariLokasiTPS(), +getDaftarKecamatan(), +getDaftarKelurahan(), +addJadwal(), +editJadwal(), +removeJadwal(), +addLokasiTPS() |
-| C04 | Jadwal | -idJadwal, -tanggal, -kecamatan, -kelurahan | +getIdJadwal(), +getTanggal(), +getKecamatan(), +getKelurahan(), +setTanggal(), +setKecamatan(), +setKelurahan() |
 | C01 | AkunPetugas | -statusLogin | +cekStatusLogin() |
+| C04 | Jadwal | -idJadwal, -tanggal, -kecamatan, -kelurahan | +getIdJadwal(), +getTanggal(), +getKecamatan(), +getKelurahan(), +setTanggal(), +setKecamatan(), +setKelurahan() |
+| C05 | JadwalController | -daftarJadwal | +cariLokasiTPS(), +getDaftarKecamatan(), +getDaftarKelurahan(), +addJadwal(), +editJadwal(), +removeJadwal(), +addLokasiTPS() |
+| C06 | JadwalInterface | - | +showHalamanJadwal(), +showPencarianLokasiTPS(), +showDaftarLokasiTPS(), +showFormJadwal(), +showFormLokasiTPS(), +showNotifikasi(), +showKonfirmasiHapus() |
 
 ### 5.2.4 Use Case UC04
 **Nama Use Case:** Melihat jadwal
@@ -518,7 +520,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC04" src="./assets/diagram/UC04-class-diagram.jpg" width="70%">
+<img alt="Class Diagram UC04" src="./assets/diagram/UC04-class-diagram.png" width="20%">
 </p>
 <p align="center">
 <i>Gambar 7. Diagram Kelas Use Case UC04</i>
@@ -575,7 +577,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC01" src="./assets/diagram/UC01-UC06-class-diagram.png" width="10%">
+<img alt="Class Diagram UC01" src="./assets/diagram/UC01-UC06-class-diagram.png" width="20%">
 </p>
 <p align="center">
 <i>Gambar 9. Diagram Kelas Use Case UC06</i>

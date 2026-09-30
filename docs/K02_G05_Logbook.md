@@ -90,8 +90,10 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-29-2026 | Maharani Puan Satira | Mengerjakan bagian 2.4 | 1 | Done | - |
 | 09-30-2026| Arla Salsabila | Mengerjakan bagian 1.3 dan 1.4. | 1 | Done | - |
 | 09-30-2026| Kelvin Sebastian Yen | Mengerjakan bagian 1.2, merevisi kelas sesuai arahan saat asistensi | 1 | Done | - |
+| 09-30-2026 | Maharani Puan Satira | Mengerjakan revisi bagian 5.3 | 1 | Done | Sempat ada kendala saat menggabungkan entity dan controller. |
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
