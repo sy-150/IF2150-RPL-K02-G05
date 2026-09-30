@@ -219,7 +219,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 ## 4.4 Skenario Use Case
 
-### 3.4.1 Skenario UC01
+### 4.4.1 Skenario UC01
 **Nama Use Case:** Melakukan Log In
 
 **Skenario Normal**
@@ -242,7 +242,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | 2 | Petugas memilih pilihan Log In. | Sistem mengarahkan petugas ke halaman Log In dan meminta kredensial akun petugas. |
 | 3 | Petugas memasukkan kredensial akun yang salah dan menekan tombol Log In. | Sistem menampilkan pesan "Email atau password salah" dan meminta petugas memasukkan kredensial ulang. |
 
-### 3.4.2 Skenario UC02
+### 4.4.2 Skenario UC02
 **Nama Use Case:** Memindai Sampah
 
 **Skenario Normal**
@@ -291,7 +291,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | 6 | Masyarakat mengisi input kategori sampah yang benar lalu menekan tombol "Selesai". | Sistem menerima input dan menambah data tersebut ke database. Setelah itu sistem  memberikan notifikasi bahwa data berhasil diperbarui disertai tombol bertulisan "Selesai". |
 | 7 | Masyarakat menekan tombol "Selesai". | Sistem mengarahkan masyarakat kembali ke menu pindai sampah. |
 
-### 3.4.3 Skenario UC03
+### 4.4.3 Skenario UC03
 **Nama Use Case:** Mengatur Jadwal
 
 **Skenario Normal**
@@ -316,7 +316,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | 4 | Petugas kebersihan memasukkan input tempat pembuangan sampah baru dan menekan tombol "Kirim". | Sistem menambahkan tempat pembuangan sampah di database dan memberikan notifikasi bahwa data sudah ditambah disertai tombol bertulisan "Selesai". |
 | 5 | Petugas kebersihan menekan tombol "Selesai". | Sistem mengarahkan petugas kembali ke menu jadwal. |
 
-### 3.4.4 Skenario UC04
+### 4.4.4 Skenario UC04
 **Nama Use Case:** Melihat Jadwal
 
 **Skenario Normal**
@@ -337,7 +337,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | 1 | Masyarakat membuka menu jadwal. | Sistem gagal mengambil data jadwal dari database dalam waktu 20 detik. |
 | 2 |  | Sistem menampilkan notifikasi error 504 dan menampilkan tombol refresh |
 
-### 3.4.5 Skenario UC05
+### 4.4.5 Skenario UC05
 **Nama Use Case:** Mengakses Tampilan Informasi
 
 **Skenario Normal**
@@ -368,7 +368,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 <br>
 
-### 3.4.6 Skenario UC06
+### 4.4.6 Skenario UC06
 **Nama Use Case:** Membuat Akun
 
 **Skenario Normal**
