@@ -95,6 +95,7 @@
 | 09-30-2026| Kelvin Sebastian Yen | Mengerjakan bagian 1.2, merevisi kelas sesuai arahan saat asistensi | 1 | Done | - |
 | 09-30-2026 | Maharani Puan Satira | Mengerjakan revisi bagian 5.3 | 1 | Done | Sempat ada kendala saat menggabungkan entity dan controller. |
 | 09-30-2026 | Muhammad Reffah | Mengerjakan bagian 1.6 | 1 | Done | - |
+| 09-30-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 1.2 dan 2.5 | 1 | Done | - |
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
