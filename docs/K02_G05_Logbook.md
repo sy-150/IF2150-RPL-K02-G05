@@ -26,6 +26,7 @@
 * [Milestone 2](#milestone-2)
 * [Milestone 3](#milestone-3)
 * [Milestone 4](#milestone-4)
+* [Milestone 5](#milestone-5)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -81,6 +82,15 @@
 | 09-23-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 4.2.1 dan 4.2.2. | 4 | Done | Kesulitan dalam mehami notasi diagram kelas serta relasi antar kelas |
 | 23-09-2026 | Muhammad Reffah | Mengerjakan bagian analisis kelas | 3 | Done | apalah kelas kelas ini ak lelah |
 | 23-20-2026| Maharani Puan Satira | Mengerjakan 4.2.6 dan 4.3 | 2 | Done | Masih gak lengkap dan deadliner |
+
+---
+
+### Milestone 5
+**Periode:** 23/09/2026 - 30/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-30-2026| Arla Salsabila | Mengerjakan bagian 1.3 dan 1.4. | 1 | Done | - |
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
