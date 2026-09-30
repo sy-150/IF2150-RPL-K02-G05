@@ -43,7 +43,7 @@ Dipersiapkan oleh:
 Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
 
 ## 1.2 Lingkup Masalah
-Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
+EcoTrack adalah sebuah sistem aplikasi perangkat lunak berbasis mobile yang dirancang untuk mengatasi isu tentang sampah. Aplikasi ini digunakan untuk mengidentifikasi jenis sampah secara praktis, penyedia panduan daur ulang serta sebagai penghubung antara masyarakat dengan petugas kebersihan. 
 
 ## 1.3 Definisi, Istilah, dan Singkatan
 Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
@@ -541,14 +541,13 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | :--- | :--- | :--- |
 | *C09* | *InformasiSampahInterface* | *Menampilkan halaman informasi kepada pengguna dan menerima input pengguna.* |
 | *C08* | *InformasiSampahController* | *Menerima input dari interface, mencari informasi dengan bantuan katalog.* |
-| *C10* | *InformasiSampahKatalog* | *Menyaring informasi berdasarkan filter yang ada.* |
 | *C07* | *InformasiSampah* | *Menyimpan data terkait sampah.* |
 
 
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC01" src="./assets/diagram/UC05-class-diagram.png" width="10%">
+<img alt="Class Diagram UC01" src="./assets/diagram/UC05-class-diagram.png" width="20%">
 </p>
 <p align="center">
 <i>Gambar 8. Diagram Kelas Use Case UC05</i>
@@ -558,8 +557,7 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C09* | *InformasiSampahInterface* | | +showMain(), +showDetail(id), +showSearch(list), +showError(kode) |
-| *C08* | *InformasiSampahController* | | +getMain(), +getDetail(id) |
-| *C10* | *InformasiSampahKatalog* | |+getMain(), +getDetail(id), +cariInformasi(query) |
+| *C08* | *InformasiSampahController* | | +getMain(), +getDetail(id), +cariInformasi(query) |
 | *C07* | *InformasiSampah* | -id, -judul, -deskripsi | +getDetail() |
 
 ### 5.2.6 Use Case UC06
