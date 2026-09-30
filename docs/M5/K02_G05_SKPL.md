@@ -138,7 +138,7 @@ Keunggulan inti dari aplikasi ini adalah mengkoordinasi antara masyarakat dan pe
 7. P/L dirancang untuk digunakan pada perangkat mobile karena penggunaan fitur utama, terutama pemindaian sampah menggunakan kamera, lebih optimal dan mudah diakses melalui perangkat mobile.
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
-Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroperasi. Bagian ini digunakan untuk memastikan pengguna memiliki spesifikasi yang cukup untuk menjalankan P/L. Misalnya mencakup komponen server, client, OS, DBMS, tetapi tidak menutupi kemungkinan komponen lain.
+Perangkat lunak menggunakan layanan server Firebase, dengan DBMS Firebase. Aplikasi client berbasis android, dan terhubung dengan model computer vision Roboflow.
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
@@ -415,8 +415,8 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | *C06* | *Jadwal Interface* | *Menampilkan layar jadwal dan pengaturan jadwal.* | *UC03, UC04* |
 | *C07* | *Informasi Sampah* | *Menyimpan data informasi sampah dan cara mendaur ulang.* | *UC02, UC05* |
 | *C08* | *Informasi Sampah Controller* | *Melakukan operasi yang berkaitan dengan informasi sampah.* | *UC02, UC05* |
-| *C09* | *Informasi Sampah Interface* | *Menampilkan layar informasi sampah.* | *UC02, UC05* |
-| *C10* | *Informasi Sampah Katalog* | *Mengelompokkan data informasi sampah yang ada.* | *UC02, UC05* |
+| *C09* | *Informasi Sampah Interface* | *Menampilkan layar informasi sampah.* | *UC05* |
+| *C10* | *Informasi Sampah Katalog* | *Mengelompokkan data informasi sampah yang ada.* | *UC05* |
 | *C11* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* | *UC02* |
 | *C12* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* | *UC02* |
 
