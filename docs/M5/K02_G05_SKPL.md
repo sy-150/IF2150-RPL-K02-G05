@@ -40,6 +40,9 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
+Dokumen SKPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
+
+Pengguna dokumen ini mencakup sejumlah pihak yang terlibat dalam proses pengembangan perangkat lunak. Pertama, dokumen ini akan digunakan oleh pengembang awal dan pengembang yang akan datang sebagai acuan kesesuaian spesifikasi dalam pengembangan dan perawatan lanjut. Kedua, dokumen ini menjadi standar untuk memverifikasi kesesuaian fungsionalitas perangkat lunak bagi penguji/evaluator. Ketiga, klien yang merupakan pemangku kepentingan dapat mengacu pada dokumen ini untuk memastikan kebutuhannya telah dipahami dan diimplementasikan dengan benar.
 Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
 
 ## 1.2 Lingkup Masalah
@@ -412,10 +415,8 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | *C08* | *Informasi Sampah Controller* | *Melakukan operasi yang berkaitan dengan informasi sampah.* | *UC02, UC05* |
 | *C09* | *Informasi Sampah Interface* | *Menampilkan layar informasi sampah.* | *UC02, UC05* |
 | *C10* | *Informasi Sampah Katalog* | *Mengelompokkan data informasi sampah yang ada.* | *UC02, UC05* |
-| *C11* | *Computer Vision Model* | *Antarmuka untuk menggunakan model computer vision.* | *UC02* |
-| *C12* | *Kamera* | *Antarmuka untuk mengakses kamera perangkat.* | *UC02* |
-| *C13* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* | *UC02* |
-| *C14* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* | *UC02* |
+| *C11* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* | *UC02* |
+| *C12* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* | *UC02* |
 
 ## 5.2 Diagram Kelas per Use Case
 
@@ -454,10 +455,8 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas |
 | :--- | :--- | :--- |
-| *C11* | *Computer Vision Model* | *Antarmuka untuk menggunakan model computer vision.* |
-| *C12* | *Kamera* | *Antarmuka untuk mengakses kamera perangkat.* |
-| *C13* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* |
-| *C14* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* |
+| *C11* | *Pemindai Controller* | *Melakukan operasi yang berkaitan dengan aktivitas pemindaian.* |
+| *C12* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* |
 
 #### Diagram Kelas
 
@@ -471,10 +470,8 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *C11* | *Computer Vision Model* | *-labelSampah, -confidenceThreshold* | *+identifikasiSampah()* |
-| *C12* | *Kamera* | *-statusKamera* | *+openKamera(), +ambilFrame(), +closeKamera()* |
-| *C13* | *Pemindai Controller* | *-isScanning, -hasilIdentifikasi* | *+startPemindaian(), +prosesFrame(), +stopPemindaian()* |
-| *C14* | *Pemindai Interface* | *-viewKamera, -overlayBox, -labelJenisSampah* | *+showLiveFeed(), +showJenis()* |
+| *C11* | *Pemindai Controller* | *-isScanning, -hasilIdentifikasi* | *+startPemindaian(), +prosesFrame(), +stopPemindaian()* |
+| *C12* | *Pemindai Interface* | *-viewKamera, -overlayBox, -labelJenisSampah* | *+openKamera(), +ambilFrame(), +showLiveFeed(), +showJenis(), +closeKamera()* |
 
 ### 5.2.3 Use Case UC03
 **Nama Use Case:** Mengatur jadwal
