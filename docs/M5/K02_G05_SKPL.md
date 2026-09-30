@@ -46,33 +46,40 @@ Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan 
 EcoTrack adalah sebuah sistem aplikasi perangkat lunak berbasis mobile yang dirancang untuk mengatasi isu tentang sampah. Aplikasi ini digunakan untuk mengidentifikasi jenis sampah secara praktis, penyedia panduan daur ulang serta sebagai penghubung antara masyarakat dengan petugas kebersihan. 
 
 ## 1.3 Definisi, Istilah, dan Singkatan
-Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
 
 Tabel 1.3. Definisi Istilah dan Singkatan
 
 | Singkatan, Akronim, atau Istilah | Penjelasan |
 | :--- | :--- |
-| *P/L* | *Singkatan dari Perangkat Lunak, yaitu aplikasi yang memberikan perintah kepada komputer untuk menjalankan tugas tertentu.* |
-| *SKPL* | *Singkatan dari Spesifikasi Kebutuhan Perangkat Lunak, yaitu dokumen yang merangkum kriteria-kriteria yang diperlukan untuk membangun aplikasi menjalankan tugasnya.* |
-| *KF* | *Singkatan dari Kebutuhan Fungsional.* |
-| *KNF* | *Singkatan dari Kebutuhan Non-Fungsional.* |
-| *UC* | *Singkatan dari Use Case.* |
-| *EARS* | *Easy Approach to Requirements Syntax, yaitu pola penulisan kebutuhan agar konsisten dan mudah diuji.* |
-| *...* | *...* |
+| P/L | Singkatan dari Perangkat Lunak, yaitu aplikasi yang memberikan perintah kepada komputer untuk menjalankan tugas tertentu. |
+| SKPL | Singkatan dari Spesifikasi Kebutuhan Perangkat Lunak, yaitu dokumen yang merangkum kriteria-kriteria yang diperlukan dalam membangun aplikasi agar dapat menjalankan tugasnya. |
+| KF | Singkatan dari Kebutuhan Fungsional. |
+| KNF | Singkatan dari Kebutuhan Non-Fungsional. |
+| UC | Singkatan dari Use Case. |
+| OS | Singkatan dari Operating System. |
+| DBMS | Singkatan dari Database Management System. |
+| UML | Singkatan dari Unified Modeling Language, yaitu bahasa notasi grafis untuk memodelkan sistem perangkat lunak. |
+| TPS | Singkatan dari Tempat Penampungan Sementara untuk sampah. |
+| API | Singkatan dari Application Programming Interface, yaitu mekanisme yang memungkinkan perangkat lunak berkomunikasi dengan perangkat lunak lainnya untuk bertukar data. |
+| Computer Vision | Bidang dari kecerdasan buatan yang memungkinkan komputer memproses dan menganalisis gambar atau video agar dapat menghasilkan suatu informasi yang dapat digunakan untuk pengambilan keputusan. |
+| Database | Kumpulan data yang disimpan secara terstruktur dalam sistem komputer. |
+| Barcode | Representasi data dalam pola garis-garis vertikal dengan ketebalan dan jarak yang berbeda-beda yang dapat dipindai untuk mengidentifikasi suatu produk. |
+| Query | Perintah yang dikirimkan ke database untuk mengambil, menambah, mengubah, atau menghapus data. |
+| Dummy Data | Data tiruan yang digunakan untuk menguji sistem perangkat lunak. |
+| Server | Sistem yang digunakan untuk memberikan layanan kepada komputer lain dalam satu jaringan. |
+| Client | Sistem yang digunakan untuk mengakses layanan server. |
 
 ## 1.4 Aturan Penomoran
-Tuliskan aturan penomoran (ID) yang digunakan dalam dokumen ini. Gunakan pola ID yang **sama** dengan yang sudah dipakai pada dokumen-dokumen sebelumnya, jangan membuat pola baru di dokumen ini.
 
 Tabel 1.4. Aturan Penomoran
 
 | Hal/Bagian | Penomoran | Keterangan |
 | :--- | :--- | :--- |
-| *Kebutuhan Fungsional* | *KFXX* | |
-| *Kebutuhan Non-Fungsional* | *KNFXX* | |
-| *Aktor* | *AXX* | |
-| *Use Case* | *UCXX* | |
-| *Kelas* | *CXX* | |
-| *...* | *...* |
+| Kebutuhan Fungsional | KFXX | Penomoran untuk ID kebutuhan fungsional dengan 2 digit angka yang dimulai dari KF01. |
+| Kebutuhan Non-Fungsional | KNFXX | Penomoran untuk ID kebutuhan non-fungsional dengan 2 digit angka yang dimulai dari KNF01. |
+| Use Case | UCXX | Penomoran untuk ID use case dengan 2 digit angka yang dimulai dari UC01. |
+| Kelas | CXX | Penomoran untuk ID kelas dengan 2 digit angka yang dimulai dari C01. |
+| Kebutuhan | RXX | Penomoran untuk ID kebutuhan dengan 2 digit angka yang dimulai dari R01. |
 
 ## 1.5 Referensi
 Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
@@ -130,11 +137,10 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server* | *[contoh: Node.js v20, dijalankan pada layanan cloud]* |
-| *Client* | *[contoh: Web Browser modern (Chrome, Firefox terbaru)]* |
-| *DBMS* | *[contoh: PostgreSQL 15]* |
-| *OS* | *[contoh: Cross-platform (Windows/Linux/MacOS) melalui browser]* |
-| *...* | *...* |
+| Server | [contoh: Node.js v20, dijalankan pada layanan cloud] |
+| Client | [contoh: Web Browser modern (Chrome, Firefox terbaru)] |
+| DBMS | [contoh: PostgreSQL 15] |
+| OS | Android versi ... dan IOS versi ... |
 
 # BAB 3: Deskripsi Kebutuhan Perangkat Lunak
 
@@ -142,15 +148,15 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | ID KF | ID Kebutuhan | Penjelasan |
 | :--- | :--- | :--- |
-| *KF01* | *R01* | *PL dapat menggunakan kamera setelah menyetujui akses aplikasi terkait penggunaan kamera* |
-| *KF02* | *R01* | *PL dapat melakukan request ke API model computer vision setelah pengguna menyorot sampah melalui kamera* |
-| *KF03* | *R03* | *PL dapat mengirimkan query jadwal pengambilan sampah setelah pengguna membuka menu cek jadwal* |
-| *KF04* | *R03* | *PL dapat menampilkan jadwal pengambilan sampah setelah mendapat respons dari query ke database jadwal pengambilan sampah* |
-| *KF05* | *R04* | *PL dapat melakukan query penambahan, perubahan, maupun penghapusan jadwal ke database setelah petugas mengirimkan perubahan* |
-| *KF06* | *R05* | *PL dapat menampilkan hasil pemilahan sampah dari respons API model computer vision* |
-| *KF07* | *R06* | *PL dapat menampilkan cara mendaur ulang yang sesuai setelah pengguna melakukan search tipe sampah* |
-| *KF08* | *R08* | *PL dapat melakukan autentikasi akun terhadap database ketika petugas melakukan login* |
-| *KF09* | *R08* | *PL dapat menambahkan akun baru pada database ketika petugas melakukan Register* |
+| *KF01* | *R01* | *P/L dapat menggunakan kamera setelah menyetujui akses aplikasi terkait penggunaan kamera* |
+| *KF02* | *R01* | *P/L dapat melakukan request ke API model computer vision setelah pengguna menyorot sampah melalui kamera* |
+| *KF03* | *R03* | *P/L dapat mengirimkan query jadwal pengambilan sampah setelah pengguna membuka menu cek jadwal* |
+| *KF04* | *R03* | *P/L dapat menampilkan jadwal pengambilan sampah setelah mendapat respons dari query ke database jadwal pengambilan sampah* |
+| *KF05* | *R04* | *P/L dapat melakukan query penambahan, perubahan, maupun penghapusan jadwal ke database setelah petugas mengirimkan perubahan* |
+| *KF06* | *R05* | *P/L dapat menampilkan hasil pemilahan sampah dari respons API model computer vision* |
+| *KF07* | *R06* | *P/L dapat menampilkan cara mendaur ulang yang sesuai setelah pengguna melakukan search tipe sampah* |
+| *KF08* | *R08* | *P/L dapat melakukan autentikasi akun terhadap database ketika petugas melakukan login* |
+| *KF09* | *R08* | *P/L dapat menambahkan akun baru pada database ketika petugas melakukan Register* |
 
 ---
 
@@ -412,7 +418,6 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | *C14* | *Pemindai Interface* | *Menampilkan layar pemindaian sampah.* | *UC02* |
 
 ## 5.2 Diagram Kelas per Use Case
-Buat diagram kelas untuk setiap use case pada 3.2.
 
 ### 5.2.1 Use Case UC01
 
@@ -435,8 +440,6 @@ Buat diagram kelas untuk setiap use case pada 3.2.
 <i>Gambar 4. Diagram Kelas Use Case UC01</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
@@ -465,8 +468,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 <i>Gambar 5. Diagram Kelas Use Case UC02</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
