@@ -47,20 +47,14 @@ Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dap
 ## 1.3 Gambar style/pattern EcoTrack
 
 <p align="center">
-<img alt="Contoh Arsitektur MVC" src="./assets/diagram/contoh-arsitektur-mvc.webp" width="70%">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/arsitektur-mvc.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 1. Contoh Arsitektur MVC</i>
+<i>Gambar 1. Arsitektur MVC EcoTrack</i>
 </p>
 
-Isi bab ini dengan hal-hal berikut:
-1. **Style/pattern yang dipilih** beserta penjelasan singkat peran setiap bagiannya. Untuk MVC, jelaskan peran *Model*, *View*, dan *Controller*.
-2. **Alasan pemilihan** berdasarkan karakteristik P/L Anda, misalnya jenis pengguna, alur proses bisnis, serta KF dan KNF pada dokumen SKPL.
-3. **Gambar style/pattern yang diterapkan pada P/L Anda.** Jangan hanya menyalin Gambar 1. Isi setiap bagian pattern dengan komponen milik P/L Anda. Misalnya, kotak *Controller* berisi daftar *controller* yang ada di aplikasi dan kotak *Model* berisi daftar *model* yang ada di aplikasi.
-
-Selain *style/pattern*, tuliskan juga lingkungan operasi P/L. Tabel berikut **disalin dari subbab 2.5 *Lingkungan Operasi Perangkat Lunak* pada dokumen SKPL** tanpa perubahan. Setelah tabel, jelaskan kaitan teknologi yang dipakai dengan *style/pattern* yang dipilih. Contohnya, Django (Python) secara bawaan mengikuti pola MVT (*Model-View-Template*), yaitu varian dari MVC.
-
 Tabel 1.1. Lingkungan Operasi Perangkat Lunak
+
 Perangkat lunak menggunakan layanan server Firebase, dengan DBMS Firebase. Aplikasi client berbasis android, dan terhubung dengan model computer vision Roboflow.
 
 | Komponen | Spesifikasi |
@@ -71,7 +65,7 @@ Perangkat lunak menggunakan layanan server Firebase, dengan DBMS Firebase. Aplik
 | OS | Aplikasi Android |
 | Computer Vision | Roboflow |
 
-<sub><b><i>Catatan</i></b>: <i>Style/pattern yang dipilih di bab ini menjadi acuan untuk BAB 2 (pengelompokan komponen) dan BAB 3 (model arsitektur). Contoh pada dokumen ini memakai MVC secara konsisten dari BAB 1 sampai BAB 3. Kelompok boleh memakai pattern lain selama alasannya dijelaskan dan BAB 2 serta BAB 3 disesuaikan. Tabel 1.1 harus sama persis dengan subbab 2.5 dokumen SKPL; jangan menambah atau mengubah isinya karena SKPL sudah final.</i></sub>
+Teknologi yang digunakan pada EcoTrack mendukung penerapan Model-View-Controller (MVC), dengan aplikasi Android sebagai lingkungan antarmuka (View), Firebase sebagai server dan DBMS yang mendukung pengelolaan data (Model), serta Roboflow sebagai computer vision model yang digunakan dalam proses pemindaian melalui Controller. Dengan demikian, teknologi tersebut mendukung pembagian tanggung jawab antara View, Controller, dan Model pada EcoTrack.
 
 ---
 
