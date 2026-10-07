@@ -61,6 +61,11 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | :--- | :--- | :--- | :--- |
 | ChatGPT | Mengarahkan jawaban | Tolong lengkapi bagian 2.4 yaitu (Ini contoh) 2.4 Batasan Perangkat Lunak: Batasan yang harus dituliskan, di antaranya: 1. P/L harus memakai file data/API dari sistem lain (sebutkan, misal Payment Gateway dummy). 2. P/L harus memakai format data yang sama dengan sistem lain.3. P/L harus berfungsi pada platform tertentu (misal: web browser modern, atau desktop Windows dan Linux). ... | Awalnya melihat jawaban AI, tetapi setelah pertimbangan hasil diskusi dengan anggota kelompok, ada beberapa poin yang jawaban manusia, AI hanya memperbaiki struktur kalimat.|
 
+### Milestone 6
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| ChatGPT | Mengarahkan jawaban | Tolong bantuan untuk BAB 1: Style/Pattern Arsitektur Acuan menyesuaikan dengan konten yang di SKPL | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
+
 ---
 ### Pernyataan Integritas dan Persetujuan
 

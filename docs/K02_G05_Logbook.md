@@ -27,6 +27,7 @@
 * [Milestone 3](#milestone-3)
 * [Milestone 4](#milestone-4)
 * [Milestone 5](#milestone-5)
+* [Milestone 6](#milestone-6)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -97,5 +98,12 @@
 | 09-30-2026 | Muhammad Reffah | Mengerjakan bagian 1.6 | 1 | Done | - |
 | 09-30-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian 1.2 dan 2.5 | 1 | Done | - |
 
+### Milestone 6
+**Periode:** 30/09/2026 - 07/10/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 09-29-2026 | Maharani Puan Satira | Mengerjakan Bab 1 | 2 | Done | Belum paham gambar style sebelum asistensi |
+| 09-30-2026 | Arla Salsabila | Mengerjakan Bab 2 | 1 | Done | - |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
