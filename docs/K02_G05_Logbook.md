@@ -107,5 +107,6 @@
 | 07-10-2026 | Arla Salsabila | Mengerjakan Bab 2 | 1 | Done | - |
 | 07-10-2026 | Kelvin Sebastian Yen | Mengerjakan Bab 3 | 1 | Done | Mencari kata-kata yang tepat untuk alasan pemilihan model arsitektur |
 | 07-10-2026 | Mochammad Adhitya Nur Rohman | Membuat diagram bab 3 | 1 | Done | - |
+| 07-10-2026 | Muhammad Reffah | Bantu bersih-bersih ngohehe | 1 | Done | - |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
