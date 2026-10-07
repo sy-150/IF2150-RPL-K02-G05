@@ -103,7 +103,8 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| 09-29-2026 | Maharani Puan Satira | Mengerjakan Bab 1 | 2 | Done | Belum paham gambar style sebelum asistensi |
-| 09-30-2026 | Arla Salsabila | Mengerjakan Bab 2 | 1 | Done | - |
+| 06-10-2026| Maharani Puan Satira | Mengerjakan Bab 1 | 2 | Done | Belum paham gambar style sebelum asistensi |
+| 07-10-2026 | Arla Salsabila | Mengerjakan Bab 2 | 1 | Done | - |
+| 07-10-2026 | Kelvin Sebastian Yen | Mengerjakan Bab 3 | 1 | Done | Mencari kata-kata yang tepat untuk alasan pemilihan model arsitektur |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
