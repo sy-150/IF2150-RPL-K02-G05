@@ -108,7 +108,7 @@ Ketentuan pengisian BAB 3:
 ## 3.1 Logical View
 
 <p align="center">
-<img alt="Logical View Perangkat Lunak EcoTrack" src="./assets/diagram/contoh-logical-view.webp" width="100%">
+<img alt="Logical View Perangkat Lunak EcoTrack" src="./assets/diagram/logical-view.png" width="100%">
 </p>
 <p align="center">
 <i>Gambar 2. Logical View pada P/L EcoTrack</i>
