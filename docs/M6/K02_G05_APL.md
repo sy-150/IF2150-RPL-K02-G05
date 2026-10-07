@@ -42,7 +42,7 @@ Dipersiapkan oleh:
 MVC dipilih karena EcoTrack memiliki beberapa jenis pengguna dan fitur dengan antarmuka serta proses yang berbeda, seperti pemindaian sampah, pengelolaan jadwal, akses informasi sampah, dan autentikasi petugas. Pemisahan antara View, Controller, dan Model memungkinkan antarmuka, proses aplikasi, dan data dikelola secara terpisah sehingga tanggung jawab setiap komponen menjadi lebih jelas.
 
 ### 1.2.2 Kesesuaian dengan Kebutuhan Fungsional
-Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dapat memiliki* nterface* sebagai View, *controller* sebagai pengolah proses, dan *entity* sebagai Model. Sebagai contoh, proses pengelolaan jadwal melibatkan Jadwal Interface untuk interaksi pengguna, Jadwal Controller untuk menangani proses pengelolaan, dan Jadwal untuk mengelola data jadwal. Pembagian ini juga dapat diterapkan pada fitur autentikasi, pemindaian sampah, dan informasi sampah.
+Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dapat memiliki *interface* sebagai View, *controller* sebagai pengolah proses, dan *entity* sebagai Model. Sebagai contoh, proses pengelolaan jadwal melibatkan Jadwal Interface untuk interaksi pengguna, Jadwal Controller untuk menangani proses pengelolaan, dan Jadwal untuk mengelola data jadwal. Pembagian ini juga dapat diterapkan pada fitur autentikasi, pemindaian sampah, dan informasi sampah.
 
 ## 1.3 Gambar style/pattern EcoTrack
 
@@ -62,7 +62,7 @@ Perangkat lunak menggunakan layanan server Firebase, dengan DBMS Firebase. Aplik
 | Server | Firebase |
 | Client | Aplikasi Android |
 | DBMS | Firebase |
-| OS | Aplikasi Android |
+| OS | Android |
 | Computer Vision | Roboflow |
 
 Teknologi yang digunakan pada EcoTrack mendukung penerapan Model-View-Controller (MVC), dengan aplikasi Android sebagai lingkungan antarmuka (View), Firebase sebagai server dan DBMS yang mendukung pengelolaan data (Model), serta Roboflow sebagai computer vision model yang digunakan dalam proses pemindaian melalui Controller. Dengan demikian, teknologi tersebut mendukung pembagian tanggung jawab antara View, Controller, dan Model pada EcoTrack.
