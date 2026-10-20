@@ -28,6 +28,7 @@
 * [Milestone 4](#milestone-4)
 * [Milestone 5](#milestone-5)
 * [Milestone 6](#milestone-6)
+* [Milestone 7](#milestone-7)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -108,5 +109,10 @@
 | 07-10-2026 | Kelvin Sebastian Yen | Mengerjakan Bab 3 | 1 | Done | Mencari kata-kata yang tepat untuk alasan pemilihan model arsitektur |
 | 07-10-2026 | Mochammad Adhitya Nur Rohman | Membuat diagram bab 3 | 1 | Done | - |
 | 07-10-2026 | Muhammad Reffah | Bantu bersih-bersih ngohehe | 1 | Done | - |
+
+### Milestone 7
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 06-10-2026| Maharani Puan Satira | Membuat logo PL, mengerjakan bab 1-2 dan bab 4 | 3 | Done | Ada ketidak konsistenan |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
