@@ -9,7 +9,10 @@ DESKRIPSI PERANCANGAN PERANGKAT LUNAK (DPPL)
 
 
 ## EcoTrack
-### *[Logo Perangkat Lunak]*
+### <p align="center">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/logo-EcoTrack.PNG" width="25%">
+</p>
+<p align="center">
 
 ### Untuk: Agatha Tatianingseto
 
@@ -32,23 +35,13 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
-| *B* |  |
-| *C* |  |
-| ... |  |
+| *A* | Bab 4 Diagram Kelas Keseluruhan bagian Daftar Kelas Perancangan Keseluruhan ada beberapa ID Kelas yang dihapus. |
 
 ---
 
 <br>
 
-> **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
->
-> Dokumen ini melanjutkan **Spesifikasi Kebutuhan Perangkat Lunak (SKPL)** dan **Arsitektur Perangkat Lunak (APL)**. Gunakan nama, ID, kebutuhan, dan use case yang konsisten dengan kedua dokumen tersebut. Contoh pola ID baru di bawah dapat disesuaikan dengan kesepakatan kelompok, ID yang sudah ada tetap dipertahankan.
-
-<br>
-
 ---
-
 
 # BAB 1: Pendahuluan
 
@@ -120,9 +113,9 @@ Tabel 2.1. Rancangan Lingkungan Implementasi
 | :--- | :--- |
 | OS | Android |
 | DBMS | Firebase |
-| *Development Tools* | |
-| *Filling System* | |
-| Bahasa Pemrograman | |
+| *Development Tools* | GitHub, Visual Studio Code, Figma, Procreate |
+| *Filing System* | Direktori model/ menyimpan kelas entitas dan representasi data, controller/ menyimpan kelas yang menangani logika PL, ui/ menyimpan komponen antarmuka pengguna, database/ menyimpan komponen untuk mengakses dan mengelola data Firebase, serta utils/ menyimpan fungsi utilitas yang digunakan bersama. |
+| Bahasa Pemrograman | Python, Javascript |
 
 ## 2.2 Style/Pattern Arsitektur Acuan
 Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dapat memiliki interface sebagai View, controller sebagai pengolah proses, dan entity sebagai Model. Sebagai contoh, proses pengelolaan jadwal melibatkan Jadwal Interface untuk interaksi pengguna, Jadwal Controller untuk menangani proses pengelolaan, dan Jadwal untuk mengelola data jadwal. Pembagian ini juga dapat diterapkan pada fitur autentikasi, pemindaian sampah, dan informasi sampah.
@@ -235,10 +228,8 @@ Silahkan lanjutkan untuk  *use case* berikutnya dengan content yang sama dengan 
 
 ## 4.1 Diagram Kelas
 
-**Bagian ini diisi dengan diagram kelas keseluruhan.**
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-class_diargam.png" width="35%">
+<img alt="Kelas Diagram EcoTrack" src="./assets/diagram/KelasDiagramKeseluruhan.png" width="35%">
 </p>
 <p align="center">
 <i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan [Nama P/L]</i>
@@ -248,14 +239,19 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *[C01]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C02]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C03]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *...* | *...* | *...* | *...* |
+| *C01* | AkunPetugas | -statusLogin, #lokasi, #email, #lokasi, -enskripsiPass | +cekStatusLogin(), +getNama(), +getLokasi(), +getEmail(), -validasiEmail(), -validasiPass() |
+| *C02* | AkunPetugasController | - | -enskripsi(), -deskripsi(), +singup() |
+| *C03* | AkunPetugasInterface | - | +showSignup() |
+| *C04* | Jadwal | -idJadwal, -tanggal, -kecamatan, -kelurahan | +getIdJadwal(), +getTanggal(), +getKecamatan(), +getKelurahan(), +setTanggal(), +setKecamatan(), +setKelurahan() |
+| *C05* | JadwalController | -daftarJadwal | +cariLokasiTPS(), +getDaftarKecamatan(), +getDaftarKelurahan(), +addJadwal(), +editJadwal(), +removeJadwal(), +addLokasiTPS(), +getJadwal() |
+| *C06* | JadwalInterface | - | +showHalamanJadwal(), +showPencarianLokasiTPS(), +showDaftarLokasiTPS(), +showFormJadwal(), +showFormLokasiTPS(), +showNotifikasi(), +showKonfirmasiHapus(), +showJadwal(), +refresh() |
+| *C07* | InformasiSampah | -id, -judul, -deskripsi | +getDetail(id) |
+| *C08* | InformasiSampahController | - | +getMain(), +getDetail(id) |
+| *C09* | InformasiSampahInterface | - | +showMain(), +showDetail(id), +showSearch(list), +showError(kode) |
+| *C10* | PemindaiController | *-isScanning, -hasilIdentifikasi* | *+startPemindaian(), +prosesFrame(), +stopPemindaian()* |
+| *C11* | *Pemindai Interface* | *-viewKamera, -overlayBox, -labelJenisSampah* | *+showLiveFeed(), +showJenis()* |
 
 <br>
-
----
 
 # BAB 5: Matriks Kerunutan
 
