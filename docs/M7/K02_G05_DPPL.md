@@ -220,6 +220,78 @@ Pada diagram, pastikan:
 
 Silahkan lanjutkan untuk  *use case* berikutnya dengan content yang sama dengan 3.1
 
+## 3.3 Use Case Mengatur Jadwal
+
+**ID Use Case:** UC03 
+**Nama Use Case:** Mengatur Jadwal
+
+### 3.3.1 Identifikasi Kelas
+
+Tabel 3.3. Identifikasi Kelas Use Case [UC03]
+
+| No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
+|:--- | :--- | :--- |
+| 1 | JadwalInterface | JadwalInterface |
+| 2 | JadwalController | JadwalController |
+| 3 | Jadwal | Jadwal |
+| 4 | AkunPetugas | AkunPetugas |
+
+### 3.3.2 Sequence Diagram
+
+- **Skenario Normal**
+
+<p align="center">
+<img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC03]</i>
+</p>
+
+### 3.3.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+</p>
+
+## 3.4 Use Case Melihat Jadwal
+
+**ID Use Case:** UC04 
+**Nama Use Case:** Melihat Jadwal
+
+### 3.4.1 Identifikasi Kelas
+
+Tabel 3.4. Identifikasi Kelas Use Case [UC04]
+
+| No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
+|:--- | :--- | :--- |
+| 1 | JadwalInterface | JadwalInterface |
+| 2 | JadwalController | JadwalController |
+| 3 | Jadwal | Jadwal |
+| 4 | AkunPetugas | AkunPetugas |
+
+### 3.4.2 Sequence Diagram
+
+- **Skenario Normal**
+
+<p align="center">
+<img alt="Sequence Diagram UC04" src="./assets/diagram/uc04-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC04]</i>
+</p>
+
+### 3.4.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC04" src="./assets/diagram/diagram-kelas-uc04-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+</p>
+
 <br>
 
 ---
