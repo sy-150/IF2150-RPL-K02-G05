@@ -253,7 +253,7 @@ Tabel 3.3. Identifikasi Kelas Use Case [UC03]
 <img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar X. Diagram Kelas [UC03]</i>
 </p>
 
 ## 3.4 Use Case Melihat Jadwal
@@ -289,7 +289,7 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 <img alt="Diagram Kelas UC04" src="./assets/diagram/diagram-kelas-uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar X. Diagram Kelas [UC04]</i>
 </p>
 
 <br>
