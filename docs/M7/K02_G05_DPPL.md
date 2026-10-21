@@ -188,7 +188,7 @@ Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario no
 <img alt="Contoh Diagram Sekuens Skenario Normal UC01 P/L E-Commerce" src="./assets/diagram/UC01_N.drawio.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01]</i>
+<i>Gambar 3. Sequence Diagram [UC01]</i>
 </p>
 
 - **Skenario Alternatif 1: Otorisasi Log In Akun Gagal**
@@ -197,7 +197,7 @@ Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario no
 <img alt="Contoh Diagram Sekuens Skenario Alternatif 1 UC01 P/L E-Commerce" src="./assets/diagram/UC01_A1.drawio.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - Otorisasi Log In Akun Gagal</i>
+<i>Gambar 4. Sequence Diagram [UC01] - Otorisasi Log In Akun Gagal</i>
 </p>
 
 
@@ -209,7 +209,7 @@ Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.
 <img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/diagram-kelas-uc01.jpg" width="35%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 5. Diagram Kelas [UC01]</i>
 </p>
 
 Pada diagram, pastikan:
