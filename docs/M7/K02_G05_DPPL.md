@@ -200,10 +200,10 @@ Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 ### 3.1.3 Diagram Kelas
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/diagram-kelas-uc01.jpg" width="35%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 5. Diagram Kelas [UC01]</i>
 </p>
 
 ## 3.2 Use Case Memindai Sampah
@@ -259,6 +259,15 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 </p>
 <p align="center">
 <i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
+</p>
+
+### 3.3.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 9. Diagram Kelas [UC03]</i>
 </p>
 
 
