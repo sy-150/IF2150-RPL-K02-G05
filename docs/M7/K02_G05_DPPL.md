@@ -35,7 +35,9 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | Bab 4 Diagram Kelas Keseluruhan bagian Daftar Kelas Perancangan Keseluruhan ada beberapa ID Kelas yang dihapus. |
+| *A* | Bab 4 Diagram Kelas Keseluruhan bagian Diagram Kelas dan Daftar Kelas Perancangan Keseluruhan ada beberapa ID Kelas yang diganti. |
+| *B* | Ada beberapa atribut dan metode yang diubah dan ditambah untuk UC03 dan UC04. |
+| *C* | Skenario UC03 dan UC04 disesuaikan dengan *design system* sekarang yang sudah diperbarui. |
 
 ---
 
@@ -219,58 +221,40 @@ Pada diagram, pastikan:
 
 ## 3.2 Use Case Memindai Sampah
 
-**ID Use Case:** UC02  
-**Nama Use Case:** Memindai Sampah  
+**ID Use Case:** UC02 
+**Nama Use Case:** Memindai Sampah
 
 ### 3.2.1 Identifikasi Kelas
 
-Tabel 3.2. Identifikasi Kelas Use Case UC02
+Tabel 3.2. Identifikasi Kelas Use Case [UC02]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
-| :--- | :--- | :--- |
-| 1 | *PemindaiInterface* | *Pemindai Interface* |
-| 2 | *PemindaiController* | *Pemindai Controller* |
-| 3 | *InformasiSampahInterface* | *Informasi Sampah Interface* |
-| 4 | *InformasiSampahController* | *Informasi Sampah Controller* |
-| 5 | *InformasiSampah* | *Informasi Sampah* |
+|:--- | :--- | :--- |
+| 1 | JadwalInterface | JadwalInterface |
+| 2 | JadwalController | JadwalController |
+| 3 | Jadwal | Jadwal |
+| 4 | AkunPetugas | AkunPetugas |
 
 ### 3.2.2 Sequence Diagram
 
-#### Skenario Normal
+- **Skenario Normal**
 
 <p align="center">
-<img alt="Sequence Diagram Skenario Normal UC02" src="./assets/diagram/UC02_N.drawio.png" width="80%">
+<img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 3.2. Sequence Diagram Skenario Normal UC02</i>
+<i>Gambar 6. Sequence Diagram [UC02]</i>
 </p>
 
-#### Skenario Alternatif 1: Memindai dengan Barcode
+### 3.2.3 Diagram Kelas
 
 <p align="center">
-<img alt="Sequence Diagram Skenario Alternatif 1 UC02" src="./assets/diagram/UC02_A1.drawio.png" width="80%">
+<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram_kelas_UC02.png" width="75%">
 </p>
 <p align="center">
-<i>Gambar 3.3. Sequence Diagram Skenario Alternatif 1 UC02</i>
+<i>Gambar 7. Diagram Kelas [UC02]</i>
 </p>
 
-#### Skenario Alternatif 2: Data Barcode Tidak Ditemukan
-
-<p align="center">
-<img alt="Sequence Diagram Skenario Alternatif 2 UC02" src="./assets/diagram/UC02_A2.drawio.png" width="80%">
-</p>
-<p align="center">
-<i>Gambar 3.4. Sequence Diagram Skenario Alternatif 2 UC02</i>
-</p>
-
-#### Skenario Alternatif 3: Kategori Sampah yang Ditampilkan Salah
-
-<p align="center">
-<img alt="Sequence Diagram Skenario Alternatif 3 UC02" src="./assets/diagram/UC02_A3.drawio.png" width="80%">
-</p>
-<p align="center">
-<i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
-</p>
 
 ## 3.3 Use Case Mengatur Jadwal
 
@@ -296,7 +280,7 @@ Tabel 3.3. Identifikasi Kelas Use Case [UC03]
 <img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC03]</i>
+<i>Gambar 8. Sequence Diagram [UC03]</i>
 </p>
 
 ### 3.3.3 Diagram Kelas
@@ -305,7 +289,7 @@ Tabel 3.3. Identifikasi Kelas Use Case [UC03]
 <img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [UC03]</i>
+<i>Gambar 9. Diagram Kelas [UC03]</i>
 </p>
 
 ## 3.4 Use Case Melihat Jadwal
@@ -332,7 +316,7 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 <img alt="Sequence Diagram UC04" src="./assets/diagram/uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC04]</i>
+<i>Gambar 9. Sequence Diagram [UC04]</i>
 </p>
 
 ### 3.4.3 Diagram Kelas
@@ -341,95 +325,7 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 <img alt="Diagram Kelas UC04" src="./assets/diagram/diagram-kelas-uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [UC04]</i>
-</p>
-
-## 3.5 Use Case Mengakses Tampilan Informasi
-
-**ID Use Case:** UC05
-**Nama Use Case:** Mengakses Tampilan Informasi
-
-### 3.5.1 Identifikasi Kelas
-
-Tabel 3.5. Identifikasi Kelas Use Case [UC05]
-
-| No | Nama Kelas | Nama Kelas Analisis Terkait |
-| :--- | :--- | :--- |
-| *1* | *InformasiSampahInterface* |*InformasiSampahInterface*|
-| *2* | *InformasiSampahController* | *InformasiSampahController* |
-| *3* | *InformasiSampah* | *InformasiSampah* |
-
-### 3.5.2 Sequence Diagram
-
-- **Skenario Normal: Masyarakat mengakses halaman informasi**
-
-<p align="center">
-<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc05-normal.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Normal</i>
-</p>
-
-- **Skenario Alternatif: Masyarakat menggunakan fitur _search_**
-
-<p align="center">
-<img alt="Sequence Diagram UC05 Alt" src="./assets/diagram/uc05-alt.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Alt</i>
-</p>
-
-- **Skenario Eksepsi: Database gagal diakses**
-
-<p align="center">
-<img alt="Sequence Diagram UC05 Except" src="./assets/diagram/uc05-except.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Except</i>
-</p>
-
-### 3.5.3 Diagram Kelas
-
-<p align="center">
-<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc05.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Diagram Kelas [UC05]</i>
-</p>
-
-## 3.6 Use Case Membuat Akun
-
-**ID Use Case:** UC05
-**Nama Use Case:** Membuat Akun
-
-### 3.6.1 Identifikasi Kelas
-
-Tabel 3.6. Identifikasi Kelas Use Case [UC06]
-
-| No | Nama Kelas | Nama Kelas Analisis Terkait |
-| :--- | :--- | :--- |
-| *1* | *AkunPetugas* | *AkunPetugas* |
-| *2* | *AkunPetugasController* | *AkunPetugasController* |
-| *3* | *AkunPetugasInterface* | *AkunPetugasInterface* |
-
-### 3.6.2 Sequence Diagram
-
-- **Skenario Normal: Masyarakat mengakses halaman informasi**
-
-<p align="center">
-<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Sequence Diagram [UC06]</i>
-</p>
-
-### 3.6.3 Diagram Kelas
-
-<p align="center">
-<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc06.jpg" width="75%">
-</p>
-<p align="center">
-<i>Gambar X. Diagram Kelas [UC06]</i>
+<i>Gambar 10. Diagram Kelas [UC04]</i>
 </p>
 
 <br>
@@ -451,17 +347,17 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *C01* | AkunPetugas | -statusLogin, #lokasi, #email, #lokasi, -enskripsiPass | +cekStatusLogin(), +getNama(), +getLokasi(), +getEmail(), -validasiEmail(), -validasiPass() |
-| *C02* | AkunPetugasController | - | -enskripsi(), -deskripsi(), +singup() |
-| *C03* | AkunPetugasInterface | - | +showSignup() |
-| *C04* | Jadwal | -idJadwal, -tanggal, -kecamatan, -kelurahan | +getIdJadwal(), +getTanggal(), +getKecamatan(), +getKelurahan(), +setTanggal(), +setKecamatan(), +setKelurahan() |
-| *C05* | JadwalController | -daftarJadwal | +cariLokasiTPS(), +getDaftarKecamatan(), +getDaftarKelurahan(), +addJadwal(), +editJadwal(), +removeJadwal(), +addLokasiTPS(), +getJadwal() |
-| *C06* | JadwalInterface | - | +showHalamanJadwal(), +showPencarianLokasiTPS(), +showDaftarLokasiTPS(), +showFormJadwal(), +showFormLokasiTPS(), +showNotifikasi(), +showKonfirmasiHapus(), +showJadwal(), +refresh() |
-| *C07* | InformasiSampah | -id, -judul, -deskripsi | +getDetail(id) |
-| *C08* | InformasiSampahController | - | +getMain(), +getDetail(id) |
-| *C09* | InformasiSampahInterface | - | +showMain(), +showDetail(id), +showSearch(list), +showError(kode) |
-| *C10* | PemindaiController | *-isScanning, -hasilIdentifikasi* | *+startPemindaian(), +prosesFrame(), +stopPemindaian()* |
-| *C11* | *Pemindai Interface* | *-viewKamera, -overlayBox, -labelJenisSampah* | *+showLiveFeed(), +showJenis()* |
+| *C01* | AkunPetugas | -usernameExist, -passwordCorrect, -status | +validasiLogin(username, password), +cekUsername(username), +cekPassword(password), +encrypt(password), +createAkunPetugas() |
+| *C02* | AkunPetugasController | -invalidLogin(), -validLogin, -status | +prosesLogin(), +prosesLogin(username, password), +clearInput(), +signup() |
+| *C03* | AkunPetugasInterface | - | +showSignup(), +openLogin(), +showLogin(), +inputKredensial(username, password), +showPesan("Username/Password salah"), +showPesan("Selamat datang"), +showTampilan(masuk tampilan profil), +showSignUp(), +showSignUp(status) |
+| *C04* | Jadwal | -idJadwal, -kecamatan, -kelurahan, -daftarTanggal, -statusSimpan | +getIdJadwal(), +getKecamatan(), +getKelurahan(), +getTanggal(), +setTanggal(daftarTanggalBaru), +simpanJadwal() |
+| *C05* | JadwalController | -daftarJadwal | +getDaftarJadwal(), +cariLokasiTPS(keyword), +getJadwal(idJadwal), +cekStatusLogin(), +editJadwal(idJadwal, daftarTanggalBaru) |
+| *C06* | JadwalInterface | - | +openJadwalPage(), +showHalamanJadwal(daftarJadwal), +inputKeywordLokasiTPS(keyword), +chooseJadwal(idJadwal), +showJadwal(jadwal, statusLogin), showErrorMessage(notFound), chooseEditJadwal(), fillFormEditJadwal(idJadwal, daftarTanggalBaru), showNotifikasi("Jadwal berhasil diperbarui"), showJadwal(jadwalDiperbarui, statusLogin) |
+| *C07* | InformasiSampah | -dataSampah, -detailData, -infoSampah | +ambilDataDetail(idSampah), +cariBarcode(barcode), +getInfoSampah(), getInfoSampah(keyword) |
+| *C08* | InformasiSampahController | -detailData, -infoSampah | +getDetailSampah(idSampah), +getMaterial(), +search(keyword) |
+| *C09* | InformasiSampahInterface | - | +bukaDetail(idSampah), +showTampilanDetail(), +showMain(), +showDetail(), +showSearch(infoSampah) |
+| *C10* | PemindaiController | -hasilIdentifikasi | +ubahMode("Barcode"), +startPemindaian(), +ambilFrame(), +prosesBarcode(frameData) |
+| *C11* | PemindaiInterface | | +openPemindai(), +showLiveFeed(), +gantiMode(), +showJenis(), +klikNotifikasi() |
 
 <br>
 
