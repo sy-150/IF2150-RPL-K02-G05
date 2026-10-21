@@ -298,11 +298,11 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 
 Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 
-| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| No | Nama Kelas | Nama Kelas Analisis Terkait |
 | :--- | :--- | :--- |
-| *C09* | *InformasiSampahInterface* |*InformasiSampahInterface*|
-| *C08* | *InformasiSampahController* | *InformasiSampahController* |
-| *C07* | *InformasiSampah* | *InformasiSampah* |
+| *1* | *InformasiSampahInterface* |*InformasiSampahInterface*|
+| *2* | *InformasiSampahController* | *InformasiSampahController* |
+| *3* | *InformasiSampah* | *InformasiSampah* |
 
 ### 3.5.2 Sequence Diagram
 
@@ -351,11 +351,11 @@ Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 
 Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 
-| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| No | Nama Kelas | Nama Kelas Analisis Terkait |
 | :--- | :--- | :--- |
-| *C09* | *AkunPetugas* | *AkunPetugas* |
-| *C08* | *AkunPetugasController* | *AkunPetugasController* |
-| *C07* | *AkunPetugasInterface* | *AkunPetugasInterface* |
+| *1* | *AkunPetugas* | *AkunPetugas* |
+| *2* | *AkunPetugasController* | *AkunPetugasController* |
+| *3* | *AkunPetugasInterface* | *AkunPetugasInterface* |
 
 ### 3.6.2 Sequence Diagram
 
