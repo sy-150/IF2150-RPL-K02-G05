@@ -182,21 +182,22 @@ Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario no
 
 - **Skenario Normal**
 
-<p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<<p align="center">
+<img alt="Contoh Diagram Sekuens Skenario Normal UC01 P/L E-Commerce" src="./assets/diagram/UC01_N.drawio.png" width="50%">
 </p>
 <p align="center">
 <i>Gambar X. Sequence Diagram [UC01]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Otorisasi Log In Akun Gagal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Contoh Diagram Sekuens Skenario Alternatif 1 UC01 P/L E-Commerce" src="./assets/diagram/UC01_A1.drawio.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar X. Sequence Diagram [UC01] - Otorisasi Log In Akun Gagal</i>
 </p>
+
 
 ### 3.1.3 Diagram Kelas
 
@@ -240,19 +241,37 @@ Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario no
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Contoh Diagram Sekuens Skenario Normal UC02 P/L E-Commerce" src="./assets/diagram/UC02_N.drawio.png" width="50%">
 </p>
 <p align="center">
 <i>Gambar X. Sequence Diagram [UC01]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Masyarakat memilih memindai sampah dengan barcode**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Contoh Diagram Sekuens Skenario Alternatif 1 UC02 P/L E-Commerce" src="./assets/diagram/UC02_A1.drawio.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar X. Sequence Diagram [UC01] - Masyarakat memilih memindai sampah dengan barcode</i>
+</p>
+
+- **Skenario Alternatif 2: Data barcode sampah tidak ada di database**
+
+<p align="center">
+<img alt="Contoh Diagram Sekuens Skenario Alternatif 2 UC02 P/L E-Commerce" src="./assets/diagram/UC02_A2.drawio.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC01] - Data barcode sampah tidak ada di database</i>
+</p>
+
+- **Skenario Alternatif 3: Kategori sampah yang ditampilkan salah**
+
+<p align="center">
+<img alt="Contoh Diagram Sekuens Skenario Alternatif 3 UC02 P/L E-Commerce" src="./assets/diagram/UC0_A3..drawio.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC01] - Kategori sampah yang ditampilkan salah</i>
 </p>
 
 ### 3.2.3 Diagram Kelas

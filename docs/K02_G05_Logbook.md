@@ -114,6 +114,8 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 19-10-2026| Maharani Puan Satira | Membuat logo PL, mengerjakan bab 1-2 dan bab 4 | 3 | Done | Ada ketidak konsistenan |
+| 19-10-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bab 5 | 1 | Done | - |
 | 21-10-2026| Arla Salsabila | Mengerjakan bab 3.3 dan 3.4 | 5 | Done | Sempat bingung akan sequence diagram skenario eksepsi dan ketidak konsistenan |
+| 21-10-2026| Kelvin Sebastian Yen | Mengerjakan bab 3.1 dan 3.2 | 5 | Done | Kebingungan cara menggambar sekuens diagram dengan benar di awal, kelas yang belum diidentifikasi dengan tepat, dan alternatif yang banyak dengan langkah panjang menyebabkan pembuatan diagram semakin kompleks |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``

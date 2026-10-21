@@ -73,6 +73,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | :--- | :--- | :--- | :--- |
 | ChatGPT | Mengarahkan jawaban | apa dev tools, filing system, dan bahasa pemrogramannya yak | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
 | Claude | Validasi diagram | Permisi Claude, tolong bantu cek diagram ini. | Jawaban dari AI divalidasi dengan cara berkonsultasi dengan asisten. |
+| Gemini | Memeriksa pemetaan kelas pada diagram | Apakah sekuens kelas sudah terpetakan dengan benar pada diagram ini? | Jawaban gemini dievaluasi secara menyeluruh dan didiskusikan dengan teman. |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
