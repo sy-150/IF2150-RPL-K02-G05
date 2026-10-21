@@ -219,81 +219,58 @@ Pada diagram, pastikan:
 
 ## 3.2 Use Case Memindai Sampah
 
-**ID Use Case:** *UC02*  
-**Nama Use Case:** *Memindai Sampah*
+**ID Use Case:** UC02  
+**Nama Use Case:** Memindai Sampah  
 
 ### 3.2.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
-Tabel 3.1. Identifikasi Kelas Use Case [UC01]
+Tabel 3.2. Identifikasi Kelas Use Case UC02
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
-|:--- | :--- | :--- |
-| 1 | *Informasi Sampah* | *Informasi Sampah* |
-| 2 | *Pemindai Controller* | *Pemindai Controller* |
-| 3 | *Pemindai Interface* | *Pemindai Interface* |
+| :--- | :--- | :--- |
+| 1 | *PemindaiInterface* | *Pemindai Interface* |
+| 2 | *PemindaiController* | *Pemindai Controller* |
+| 3 | *InformasiSampahInterface* | *Informasi Sampah Interface* |
+| 4 | *InformasiSampahController* | *Informasi Sampah Controller* |
+| 5 | *InformasiSampah* | *Informasi Sampah* |
 
 ### 3.2.2 Sequence Diagram
 
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
-
-- **Skenario Normal**
+#### Skenario Normal
 
 <p align="center">
-<img alt="Contoh Diagram Sekuens Skenario Normal UC02 P/L E-Commerce" src="./assets/diagram/UC02_N.drawio.png" width="50%">
+<img alt="Sequence Diagram Skenario Normal UC02" src="./assets/diagram/UC02_N.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01]</i>
+<i>Gambar 3.2. Sequence Diagram Skenario Normal UC02</i>
 </p>
 
-- **Skenario Alternatif 1: Masyarakat memilih memindai sampah dengan barcode**
+#### Skenario Alternatif 1: Memindai dengan Barcode
 
 <p align="center">
-<img alt="Contoh Diagram Sekuens Skenario Alternatif 1 UC02 P/L E-Commerce" src="./assets/diagram/UC02_A1.drawio.png" width="50%">
+<img alt="Sequence Diagram Skenario Alternatif 1 UC02" src="./assets/diagram/UC02_A1.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - Masyarakat memilih memindai sampah dengan barcode</i>
+<i>Gambar 3.3. Sequence Diagram Skenario Alternatif 1 UC02</i>
 </p>
 
-- **Skenario Alternatif 2: Data barcode sampah tidak ada di database**
+#### Skenario Alternatif 2: Data Barcode Tidak Ditemukan
 
 <p align="center">
-<img alt="Contoh Diagram Sekuens Skenario Alternatif 2 UC02 P/L E-Commerce" src="./assets/diagram/UC02_A2.drawio.png" width="50%">
+<img alt="Sequence Diagram Skenario Alternatif 2 UC02" src="./assets/diagram/UC02_A2.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - Data barcode sampah tidak ada di database</i>
+<i>Gambar 3.4. Sequence Diagram Skenario Alternatif 2 UC02</i>
 </p>
 
-- **Skenario Alternatif 3: Kategori sampah yang ditampilkan salah**
+#### Skenario Alternatif 3: Kategori Sampah yang Ditampilkan Salah
 
 <p align="center">
-<img alt="Contoh Diagram Sekuens Skenario Alternatif 3 UC02 P/L E-Commerce" src="./assets/diagram/UC0_A3..drawio.png" width="50%">
+<img alt="Sequence Diagram Skenario Alternatif 3 UC02" src="./assets/diagram/UC02_A3.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - Kategori sampah yang ditampilkan salah</i>
+<i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
 </p>
-
-### 3.2.3 Diagram Kelas
-
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
-<p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
-</p>
-<p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
-</p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
-
-
-Silahkan lanjutkan untuk  *use case* berikutnya dengan content yang sama dengan 3.1
 
 ## 3.3 Use Case Mengatur Jadwal
 
@@ -365,6 +342,94 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 </p>
 <p align="center">
 <i>Gambar X. Diagram Kelas [UC04]</i>
+</p>
+
+## 3.5 Use Case Mengakses Tampilan Informasi
+
+**ID Use Case:** UC05
+**Nama Use Case:** Mengakses Tampilan Informasi
+
+### 3.5.1 Identifikasi Kelas
+
+Tabel 3.5. Identifikasi Kelas Use Case [UC05]
+
+| No | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *1* | *InformasiSampahInterface* |*InformasiSampahInterface*|
+| *2* | *InformasiSampahController* | *InformasiSampahController* |
+| *3* | *InformasiSampah* | *InformasiSampah* |
+
+### 3.5.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc05-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Normal</i>
+</p>
+
+- **Skenario Alternatif: Masyarakat menggunakan fitur _search_**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Alt" src="./assets/diagram/uc05-alt.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Alt</i>
+</p>
+
+- **Skenario Eksepsi: Database gagal diakses**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Except" src="./assets/diagram/uc05-except.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Except</i>
+</p>
+
+### 3.5.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc05.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [UC05]</i>
+</p>
+
+## 3.6 Use Case Membuat Akun
+
+**ID Use Case:** UC05
+**Nama Use Case:** Membuat Akun
+
+### 3.6.1 Identifikasi Kelas
+
+Tabel 3.6. Identifikasi Kelas Use Case [UC06]
+
+| No | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *1* | *AkunPetugas* | *AkunPetugas* |
+| *2* | *AkunPetugasController* | *AkunPetugasController* |
+| *3* | *AkunPetugasInterface* | *AkunPetugasInterface* |
+
+### 3.6.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC06]</i>
+</p>
+
+### 3.6.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc06.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [UC06]</i>
 </p>
 
 <br>

@@ -117,5 +117,6 @@
 | 19-10-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bab 5 | 1 | Done | - |
 | 21-10-2026| Arla Salsabila | Mengerjakan bab 3.3 dan 3.4 | 5 | Done | Sempat bingung akan sequence diagram skenario eksepsi dan ketidak konsistenan |
 | 21-10-2026| Kelvin Sebastian Yen | Mengerjakan bab 3.1 dan 3.2 | 5 | Done | Kebingungan cara menggambar sekuens diagram dengan benar di awal, kelas yang belum diidentifikasi dengan tepat, dan alternatif yang banyak dengan langkah panjang menyebabkan pembuatan diagram semakin kompleks |
+| 21-10-2026| Muhammad Reffah | Mengerjakan bab 3.5 dan 3.6 | 3 | Done | - |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
