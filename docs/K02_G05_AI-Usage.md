@@ -72,6 +72,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | ChatGPT | Mengarahkan jawaban | apa dev tools, filing system, dan bahasa pemrogramannya yak | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
+| Claude | Validasi diagram | Permisi Claude, tolong bantu cek diagram ini. | Jawaban dari AI divalidasi dengan cara berkonsultasi dengan asisten. |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
