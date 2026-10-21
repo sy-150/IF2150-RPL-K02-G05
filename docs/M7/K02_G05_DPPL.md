@@ -208,39 +208,57 @@ Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 
 ## 3.2 Use Case Memindai Sampah
 
-**ID Use Case:** UC02 
-**Nama Use Case:** Memindai Sampah
+*ID Use Case:* UC02  
+*Nama Use Case:* Memindai Sampah  
 
 ### 3.2.1 Identifikasi Kelas
 
-Tabel 3.2. Identifikasi Kelas Use Case [UC02]
+Tabel 3.2. Identifikasi Kelas Use Case UC02
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
-|:--- | :--- | :--- |
-| 1 | PemindaiInterface | PemindaiInterface |
-| 2 | PemindaiController | PemindaiController |
-| 3 | InformasiSampahInterface | InformasiSampahInterface |
-| 4 | InformasiSampahController | InformasiSampahController |
-| 5 | InformasiSampah | InformasiSampah |
+| :--- | :--- | :--- |
+| 1 | PemindaiInterface | Pemindai Interface |
+| 2 | PemindaiController | Pemindai Controller |
+| 3 | InformasiSampahInterface | Informasi Sampah Interface |
+| 4 | InformasiSampahController | Informasi Sampah Controller |
+| 5 | InformasiSampah | Informasi Sampah |
 
 ### 3.2.2 Sequence Diagram
 
-- **Skenario Normal**
+#### Skenario Normal
 
 <p align="center">
-<img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
+<img alt="Sequence Diagram Skenario Normal UC02" src="./assets/diagram/UC02_N.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 6. Sequence Diagram [UC02]</i>
+<i>Gambar 3.2. Sequence Diagram Skenario Normal UC02</i>
 </p>
 
-### 3.2.3 Diagram Kelas
+#### Skenario Alternatif 1: Memindai dengan Barcode
 
 <p align="center">
-<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram_kelas_UC02.png" width="75%">
+<img alt="Sequence Diagram Skenario Alternatif 1 UC02" src="./assets/diagram/UC02_A1.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 7. Diagram Kelas [UC02]</i>
+<i>Gambar 3.3. Sequence Diagram Skenario Alternatif 1 UC02</i>
+</p>
+
+#### Skenario Alternatif 2: Data Barcode Tidak Ditemukan
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Alternatif 2 UC02" src="./assets/diagram/UC02_A2.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.4. Sequence Diagram Skenario Alternatif 2 UC02</i>
+</p>
+
+#### Skenario Alternatif 3: Kategori Sampah yang Ditampilkan Salah
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Alternatif 3 UC02" src="./assets/diagram/UC02_A3.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
 </p>
 
 
