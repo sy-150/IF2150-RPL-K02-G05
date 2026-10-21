@@ -216,9 +216,6 @@ Pada diagram, pastikan:
 - Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
 - Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
-## 3.2 Use Case XX
-
-Silahkan lanjutkan untuk  *use case* berikutnya dengan content yang sama dengan 3.1
 
 ## 3.3 Use Case Mengatur Jadwal
 
@@ -290,6 +287,94 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 </p>
 <p align="center">
 <i>Gambar X. Diagram Kelas [UC04]</i>
+</p>
+
+## 3.5 Use Case Mengakses Tampilan Informasi
+
+**ID Use Case:** UC05
+**Nama Use Case:** Mengakses Tampilan Informasi
+
+### 3.5.1 Identifikasi Kelas
+
+Tabel 3.5. Identifikasi Kelas Use Case [UC05]
+
+| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *C09* | *InformasiSampahInterface* |*InformasiSampahInterface*|
+| *C08* | *InformasiSampahController* | *InformasiSampahController* |
+| *C07* | *InformasiSampah* | *InformasiSampah* |
+
+### 3.5.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc05-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Normal</i>
+</p>
+
+- **Skenario Alternatif: Masyarakat menggunakan fitur _search_**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Alt" src="./assets/diagram/uc05-alt.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Alt</i>
+</p>
+
+- **Skenario Eksepsi: Database gagal diakses**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Except" src="./assets/diagram/uc05-except.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Except</i>
+</p>
+
+### 3.5.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc05.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [UC05]</i>
+</p>
+
+## 3.6 Use Case Membuat Akun
+
+**ID Use Case:** UC05
+**Nama Use Case:** Membuat Akun
+
+### 3.6.1 Identifikasi Kelas
+
+Tabel 3.6. Identifikasi Kelas Use Case [UC06]
+
+| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *C09* | *AkunPetugas* | *AkunPetugas* |
+| *C08* | *AkunPetugasController* | *AkunPetugasController* |
+| *C07* | *AkunPetugasInterface* | *AkunPetugasInterface* |
+
+### 3.6.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC06]</i>
+</p>
+
+### 3.6.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc06.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [UC06]</i>
 </p>
 
 <br>

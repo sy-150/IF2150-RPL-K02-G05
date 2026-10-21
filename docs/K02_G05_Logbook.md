@@ -115,5 +115,6 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 19-10-2026| Maharani Puan Satira | Membuat logo PL, mengerjakan bab 1-2 dan bab 4 | 3 | Done | Ada ketidak konsistenan |
 | 21-10-2026| Arla Salsabila | Mengerjakan bab 3.3 dan 3.4 | 5 | Done | Sempat bingung akan sequence diagram skenario eksepsi dan ketidak konsistenan |
+| 21-10-2026| Muhammad Reffah | Mengerjakan bab 3.5 dan 3.6 | 3 | Done | - |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
