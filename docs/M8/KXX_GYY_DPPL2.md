@@ -303,6 +303,145 @@ Tabel 5.1.1. Query Operasi [Nama Operasi]
 
 *[Ulangi pola 5.1: nama dan ID kelas, tabel operasi, tabel atribut, serta subbab algoritma/query untuk operasi penting jika diperlukan.]*
 
+# 5.10 Kelas PemindaiController
+
+**Nama Kelas:** *PemindaiController*  
+**ID Kelas:** *[ID kelas]*
+
+Tabel 5.10.1. Operasi Kelas [Nama Kelas 1]
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *+ startPemindaian(): void* | *public* | *Mengaktifkan model CV untuk melakukan pemindaian* |
+| *+ prosesFrame(frameData: Byte[]): String* | *public** | *Memroses frame yang telah ditangkap dan melakukan identifikasi* |
+| *+ prosesBarcode(frameData: Byte[]): String* | *public** | *Memroses barcode yang dipindai oleh kamera dan melakukan identifikasi berdasarkan barcode* |
+
+
+Tabel 5.10.2. Atribut Kelas [Nama Kelas 1]
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *- isMemindai* | *private* | *Boolean* |
+
+| *...* | *...* | *...* |
+
+### 5.10.1 Algoritma/Query
+
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *PemindaiController*  
+**Nama Operasi:** *Memindai Frame(?)*  
+**ID Algoritma:** *[Algo-001]*
+
+```text
+startPemindaian
+if isMemindai = True then
+    dataFrame <- frame.prosesFrame
+    if dataFrame != NULL then
+        dataHasil <- InformasiSampah.cariLabel(dataFrame)
+        if dataHasil != NULL then
+            return dataHasil.label
+        else
+            return "NOT_FOUND"
+        endif
+    endif
+endif
+return NULL
+        
+
+
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.10.1. Query Operasi [Nama Operasi]
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.10.2 Algoritma/Query
+
+*Nama Kelas:** *PemindaiController*  
+**Nama Operasi:** *Memindai Barcode(?)*  
+**ID Algoritma:** *[Algo-002]*
+
+```text
+startPemindaian
+if isMemindai = True then
+    rawBarcode <- BarcodeScannerLibrary.decode
+    if rawBarcode != NULL then
+        dataHasil <- InformasiSampah.cariBarcode(rawBarcode)
+        if dataHasil != NULL then
+            return dataHasil.label
+        else
+            return "NOT_FOUND"
+        endif
+    endif
+endif
+return NULL
+        
+
+
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+# 5.11 Kelas PemindaiInterface
+
+**Nama Kelas:** *PemindaiInterface*  
+**ID Kelas:** *C11*
+
+Tabel 5.11.1. Operasi Kelas [Nama Kelas 1]
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
+| *+ openPemindai(): void* | *public* | *Membuka layar pemindai dan mengaktifkan kamera perangkat* |
+| *+ showLiveFeed(): void* | *public* | *Menampilkan hasil tangkapan kamera pada antarmuka pemindai* |
+| *+ gantiMode(): void* | *public* | *Menerima aksi pengguna ketika tombol mengganti mode pemindaian ditekan* |
+| *+ ubahMode(mode: String): void* | *public* | *Mengubah mode pemindai untuk memeindai barcode* |
+| *+ ambilFrame(): Byte[]* | *public* | *Mengambil tangkapan frame gambar dari kamera* |
+| *+ showJenis(kategori: String): void* | *public* | *Menampilkan jenis sampah berdasarkan hasil identifikasi* |
+| *+ showOpsi(opsi: String): void* | *public* | *Menampilkan opsi bagi pengguna untuk menyetujui atau menolak penambahan data barcode * |
+| *+ pilihOpsi(opsi: String): void* | *public* | *Menerima opsi pengguna* |
+| *+ navigasiKembali(): void* | *public* | *Menerima instruksi navigasi dari antarmuka informasi sampah untuk kembali ke pemindai* |
+
+Tabel 5.11.2. Atribut Kelas PemindaiInterface
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
+| *- modeSekarang* | *private* | *String* |
+| *- frameBuffer* | *private* | *Byte[]* |
+
+### 5.11.1 Algoritma/Query
+
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *[Nama kelas]*  
+**Nama Operasi:** *[Signature operasi]*  
+**ID Algoritma:** *[Algo-001]*
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.11.1. Query Operasi [Nama Operasi]
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.11.2 Algoritma/Query
+
+*[Ulangi pola 5.1.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
+
 <br>
 
 ---
