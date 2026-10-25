@@ -303,7 +303,39 @@ Tabel 5.1.1. Query Operasi [Nama Operasi]
 
 *[Ulangi pola 5.1: nama dan ID kelas, tabel operasi, tabel atribut, serta subbab algoritma/query untuk operasi penting jika diperlukan.]*
 
-# 5.10 Kelas PemindaiController
+## 5.3 Kelas AkunPetugasInterface
+
+**Nama Kelas:** *AkunPetugasInterface*
+**ID Kelas: [C03]**
+
+Tabel 5.3.1 Operasi Kelas AkunPetugasInterface
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| +openJadwalPage() | *public* | Membuka halaman jadwal pengangkutan sampah. |
+| +showHalamanJadwal(daftarJadwal) | *public* | Menampilkan daftar jadwal pengangkutan sampah yang tersedia. |
+| +inputKeywordLokasiTPS(keyword) | *public* | Menerima *keyword* lokasi yang dimasukkan pengguna untuk mencari jadwal terkait. |
+| +chooseJadwal(idJadwal) | *public* | Memilih jadwal pengangkutan sampah berdasarkan ID jadwal yang dipilih. |
+| +showJadwal(jadwal, statusLogin) | *public* | Menampilkan detail jadwal pengangkutan sampah. |
+| +showErrorMessage(notFound) | *public* | Menampilkan pesan *error* jika jadwal yang dicari tidak ditemukan. |
+| +fillFormEditJadwal(idJadwal, daftarTanggalBaru) | *private* | Menambah, mengganti, atau menghapus jadwal. |
+| +showNotifikasi("Jadwal berhasil diperbarui") | *private* | Menampilkan notifikasi bahwa jadwal berhasil diperbarui. |
+| +showJadwal(jadwalDiperbarui, statusLogin) | *public* | Menampilkan kembali detail jadwal pengangkutan sampah setelah diperbarui. |
+
+Tabel 5.3.2 Atribut Kelas AkunPetugasInterface
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+
+### 5.3.1 Algoritma/Query
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *[Signature operasi]*  
+**ID Algoritma:** *[Algo-001]*
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+## 5.10 Kelas PemindaiController
 
 **Nama Kelas:** *PemindaiController*  
 **ID Kelas:** *[ID kelas]*
@@ -388,7 +420,7 @@ return NULL
 
 [Tuliskan pseudocode algoritma operasi di sini.]
 ```
-# 5.11 Kelas PemindaiInterface
+## 5.11 Kelas PemindaiInterface
 
 **Nama Kelas:** *PemindaiInterface*  
 **ID Kelas:** *C11*
