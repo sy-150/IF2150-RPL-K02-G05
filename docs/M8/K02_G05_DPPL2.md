@@ -324,15 +324,97 @@ Tabel 5.3.1 Operasi Kelas AkunPetugasInterface
 Tabel 5.3.2 Atribut Kelas AkunPetugasInterface
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
+| - | - | - |
 
 ### 5.3.1 Algoritma/Query
 
 **Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *[Signature operasi]*  
+**Nama Operasi:** *+openJadwalPage()*  
 **ID Algoritma:** *[Algo-001]*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROGRAM openJadwalPage()
+DEKLARASI
+    daftarJadwal : List of Jadwal
+ALGORITMA
+    daftarJadwal <- JadwalController.getDaftarJadwal
+    showHalamanJadwal(daftarJadwal)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+showHalamanJadwal(daftarJadwal)*  
+**ID Algoritma:** *[Algo-002]*
+
+```text
+PROGRAM showHalamanJadwal(daftarJadwal)
+DEKLARASI
+    jadwal : Jadwal
+    statusLogin : Boolean
+ALGORITMA
+    statusLogin <- JadwalController.cekStatusLogin()
+    for jadwal in daftarJadwal
+        showJadwal(jadwal, statusLogin)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+inputKeywordLokasiTPS(keyword)*  
+**ID Algoritma:** *[Algo-003]*
+
+```text
+PROGRAM inputKeywordLokasiTPS(keyword)
+DEKLARASI
+    daftarJadwal : List of Jadwal
+ALGORITMA
+    daftarJadwal <- JadwalController.cariLokasiTPS(keyword)
+    showHalamanJadwal(daftarJadwal)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+chooseJadwal(idJadwal)*  
+**ID Algoritma:** *[Algo-004]*
+
+```text
+chooseJadwal(idJadwal)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+showJadwal(jadwal, statusLogin)*  
+**ID Algoritma:** *[Algo-005]*
+
+```text
+showJadwal(jadwal, statusLogin)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+showErrorMessage(notFound)*  
+**ID Algoritma:** *[Algo-006]*
+
+```text
+showErrorMessage(notFound)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+fillFormEditJadwal(idJadwal, daftarTanggalBaru)*  
+**ID Algoritma:** *[Algo-007]*
+
+```text
+fillFormEditJadwal(idJadwal, daftarTanggalBaru)
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+showNotifikasi("Jadwal berhasil diperbarui")*  
+**ID Algoritma:** *[Algo-008]*
+
+```text
+showNotifikasi("Jadwal berhasil diperbarui")
+```
+
+**Nama Kelas:** *AkunPetugasInterface*  
+**Nama Operasi:** *+showJadwal(jadwalDiperbarui, statusLogin)*  
+**ID Algoritma:** *[Algo-008]*
+
+```text
+showJadwal(jadwalDiperbarui, statusLogin)
 ```
 
 ## 5.10 Kelas PemindaiController
