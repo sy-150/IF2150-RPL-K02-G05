@@ -7,24 +7,27 @@ DESKRIPSI PERANCANGAN PERANGKAT LUNAK (DPPL)
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
-### *[Logo Perangkat Lunak]*
+## EcoTrack
+### <p align="center">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/logo-EcoTrack.PNG" width="25%">
+</p>
+<p align="center">
 
-### Untuk: *[Nama Asisten]*
+### Untuk: Agatha Tatianingseto
 
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
+| Kelas | K2 |
+| Kelompok | 5 |
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+| 13525146 | Muhammad Reffah |
 ---
 
 ## Daftar Perubahan
@@ -48,43 +51,64 @@ Dipersiapkan oleh:
 
 ---
 
-
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Tuliskan dengan ringkas tujuan dokumen DPPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
+Dokumen SKPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
+
+Pengguna dokumen ini mencakup sejumlah pihak yang terlibat dalam proses pengembangan perangkat lunak. Pertama, dokumen ini akan digunakan oleh pengembang awal dan pengembang yang akan datang sebagai acuan kesesuaian spesifikasi dalam pengembangan dan perawatan lanjut. Kedua, dokumen ini menjadi standar untuk memverifikasi kesesuaian fungsionalitas perangkat lunak bagi penguji/evaluator. Ketiga, klien yang merupakan pemangku kepentingan dapat mengacu pada dokumen ini untuk memastikan kebutuhannya telah dipahami dan diimplementasikan dengan benar.
 
 ## 1.2 Lingkup Masalah
-Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diambil dari SKPL.
+EcoTrack adalah sebuah sistem aplikasi perangkat lunak berbasis mobile yang dirancang untuk mengatasi isu tentang sampah. Aplikasi ini digunakan untuk mengidentifikasi jenis sampah secara praktis, penyedia panduan daur ulang serta sebagai penghubung antara masyarakat dengan petugas kebersihan.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
-Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
 
-Tabel 1.3. Definisi Istilah dan Singkatan
+Tabel 1.3. Definisi, Istilah, dan Singkatan
 
 | Singkatan, Akronim, atau Istilah | Penjelasan |
 | :--- | :--- |
-| *P/L* | *Singkatan dari Perangkat Lunak, yaitu aplikasi yang memberikan perintah kepada komputer untuk menjalankan tugas tertentu.* |
-| *DPPL* | *Singkatan dari Spesifikasi Kebutuhan Perangkat Lunak, yaitu dokumen yang merangkum kriteria-kriteria yang diperlukan untuk membangun aplikasi menjalankan tugasnya.* |
-| *UC* | *Singkatan dari Use Case.* |
-| *...* | *...* |
+| P/L | Singkatan dari Perangkat Lunak, yaitu aplikasi yang memberikan perintah kepada komputer untuk menjalankan tugas tertentu. |
+| SKPL | Singkatan dari Spesifikasi Kebutuhan Perangkat Lunak, yaitu dokumen yang merangkum kriteria-kriteria yang diperlukan dalam membangun aplikasi agar dapat menjalankan tugasnya. |
+| KF | Singkatan dari Kebutuhan Fungsional. |
+| KNF | Singkatan dari Kebutuhan Non-Fungsional. |
+| UC | Singkatan dari Use Case. |
+| OS | Singkatan dari Operating System. |
+| DBMS | Singkatan dari Database Management System. |
+| UML | Singkatan dari Unified Modeling Language, yaitu bahasa notasi grafis untuk memodelkan sistem perangkat lunak. |
+| TPS | Singkatan dari Tempat Penampungan Sementara untuk sampah. |
+| API | Singkatan dari Application Programming Interface, yaitu mekanisme yang memungkinkan perangkat lunak berkomunikasi dengan perangkat lunak lainnya untuk bertukar data. |
+| Computer Vision | Bidang dari kecerdasan buatan yang memungkinkan komputer memproses dan menganalisis gambar atau video agar dapat menghasilkan suatu informasi yang dapat digunakan untuk pengambilan keputusan. |
+| Database | Kumpulan data yang disimpan secara terstruktur dalam sistem komputer. |
+| Barcode | Representasi data dalam pola garis-garis vertikal dengan ketebalan dan jarak yang berbeda-beda yang dapat dipindai untuk mengidentifikasi suatu produk. |
+| Query | Perintah yang dikirimkan ke database untuk mengambil, menambah, mengubah, atau menghapus data. |
+| Dummy Data | Data tiruan yang digunakan untuk menguji sistem perangkat lunak. |
+| Server | Sistem yang digunakan untuk memberikan layanan kepada komputer lain dalam satu jaringan. |
+| Client | Sistem yang digunakan untuk mengakses layanan server. |
 
 ## 1.4 Aturan Penomoran
-Tuliskan aturan penomoran (ID) yang digunakan dalam dokumen ini. Gunakan pola ID yang **sama** dengan yang sudah dipakai pada dokumen-dokumen sebelumnya, jangan membuat pola baru di dokumen ini.
 
 Tabel 1.4. Aturan Penomoran
 
 | Hal/Bagian | Penomoran | Keterangan |
 | :--- | :--- | :--- |
-| *Uce Case* | *UCXX* | |
-| *Kelas* | *CXX* | |
-| *...* | *...* |
+| Kebutuhan Fungsional | KFXX | Penomoran untuk ID kebutuhan fungsional dengan 2 digit angka yang dimulai dari KF01. |
+| Kebutuhan Non-Fungsional | KNFXX | Penomoran untuk ID kebutuhan non-fungsional dengan 2 digit angka yang dimulai dari KNF01. |
+| Use Case | UCXX | Penomoran untuk ID use case dengan 2 digit angka yang dimulai dari UC01. |
+| Kelas | CXX | Penomoran untuk ID kelas dengan 2 digit angka yang dimulai dari C01. |
+| Kebutuhan | RXX | Penomoran untuk ID kebutuhan dengan 2 digit angka yang dimulai dari R01. |
 
 ## 1.5 Referensi
-Cantumkan dokumentasi P/L yang dirujuk oleh dokumen ini, **minimal dokumen SKPL dan APL**. Tambahkan buku, panduan, atau dokumentasi lain apabila digunakan.
+- 11,3 Juta Ton Sampah di Indonesia Tidak Terkelola dengan Baik, brin.go.id, 26 Juli 2024, https://brin.go.id/drid/posts/kabar/113-juta-ton-sampah-di-indonesia-tidak-terkelola-dengan-baik. Accessed 30 Agustus 2026.
+- Dampak Sampah yang Tidak Dikelola dengan Baik, paxel.co, 8 Juni 2025, https://paxel.co/id/berita-dan-promo/dampak-sampah-yang-tidak-dikelola-dengan-baik. Accessed 30 Agustus 2026.
+- Apa yang terjadi jika target SDGs gagal tercapai pada tahun 2030?, jejakin.com, https://www.jejakin.com/id/blog/if-sdgs-fail-by-2030. Accessed 30 Agustus 2026.
+- Pengelolaan Sampah Jadi Prioritas, Pemerintah Siapkan Strategi Komprehensif, Kementerian Sekretariat Negara Republik Indonesia, 12 Maret 2025, https://setneg.go.id/baca/index/pengelolaan_sampah_jadi_prioritas_pemerintah_siapkan_strategi_komprehensif. Accessed 30 Agustus 2026.
+- 8 Manfaat Daur Ulang Sampah dan Cara Membiasakannya, BANK MEGA Syariah, 9 Desember 2024, https://www.megasyariah.co.id/id/artikel/edukasi-tips/lainnya/manfaat-daur-ulang. Accessed 30 Agustus 2026.
+- Pristiandaru, Danur Lumbang. Mengenal Tujuan 15 SDGs: Ekosistem Daratan Sumber: https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Membership: https://kmp.im/plus6 Download aplikasi: https://kmp.im/app6, Kompas.com, 23 Mei 2023, https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Accessed 30 Agustus 2026.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
-Tuliskan sistematika pembahasan dokumen ini secara ringkas dan runut, dengan maksimal 1 paragraf.
+Dokumen SKPL ini terdiri dari enam bab. Bab pertama adalah pendahuluan, yang merupakan penjelasan dari dokumen SKPL ini. Bab tersebut terdiri dari tujuan penulisan, lingkup masalah, tabel definisi, istilah, dan singkatan, aturan penomoran yang digunakan, referensi pembuatan dokumen, serta deskripsi umum dokumen. Bab kedua membahas deskripsi perangkat lunak yang dirancang. Bab tersebut terdiri dari deskripsi umum sistem, dan perangkat lunak, pengguna dan kebutuhannya, batasan perangkat lunak, dan lingkungan operasi perangkat lunak.
+
+Bab tiga berisi deskripsi kebutuhan perangkat lunak, yang terdiri dari kebutuhan fungsional dan non fungsional perangkat lunak terkait. Bab empat membahas pemodelan use case, yang berisi identifikasi aktor dan use case, diagram use case, dan skenario-skenario terhadap use case terkait. Bab lima mendeskripsikan pemodelan kelas, yang terdiri dari identifikasi kelas, pemodelan kelas per use case, dan gabungan pemodelan kelas secara keseluruhan. Terkahkih, bab enam berisi tabel traceability yang menghubungkan kelas dan use case dengan kebutuhan awalnya.
 
 <br>
 
@@ -93,56 +117,55 @@ Tuliskan sistematika pembahasan dokumen ini secara ringkas dan runut, dengan mak
 # BAB 2: Perancangan Arsitektur
 
 ## 2.1 Rancangan Lingkungan Implementasi
+Tabel 2.1. Rancangan Lingkungan Implementasi
 
-Sebutkan *operating system*, DBMS, *development tools*, *filing system*, dan bahasa pemrograman yang digunakan.
+| Komponen | Spesifikasi |
+| :--- | :--- |
+| OS | Android |
+| DBMS | Firebase |
+| *Development Tools* | GitHub, Visual Studio Code, Figma, Procreate |
+| *Filing System* | Direktori model/ menyimpan kelas entitas dan representasi data, controller/ menyimpan kelas yang menangani logika PL, ui/ menyimpan komponen antarmuka pengguna, database/ menyimpan komponen untuk mengakses dan mengelola data Firebase, serta utils/ menyimpan fungsi utilitas yang digunakan bersama. |
+| Bahasa Pemrograman | Python, Javascript |
 
 ## 2.2 Style/Pattern Arsitektur Acuan
-
-Tentukan *architectural style* atau *pattern* yang menjadi acuan aplikasi, misalnya *layered architecture*, *client-server*, *repository*, *pipe and filter*, atau MVC (*Model-View-Controller*).
-
-
-Gunakan hasil **BAB 1 Style/Pattern Arsitektur Acuan pada dokumen APL**, termasuk alasan pemilihan dan gambar penerapannya pada P/L kelompok. Gunakan komponen aplikasi sendiri pada gambar, bukan hanya contoh pola umum.
+Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dapat memiliki interface sebagai View, controller sebagai pengolah proses, dan entity sebagai Model. Sebagai contoh, proses pengelolaan jadwal melibatkan Jadwal Interface untuk interaksi pengguna, Jadwal Controller untuk menangani proses pengelolaan, dan Jadwal untuk mengelola data jadwal. Pembagian ini juga dapat diterapkan pada fitur autentikasi, pemindaian sampah, dan informasi sampah.
 
 <p align="center">
-<img alt="Contoh Arsitektur MVC" src="./assets/diagram/contoh-arsitektur-mvc.webp" width="40%">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/arsitektur-mvc.png" width="40%">
 </p>
 <p align="center">
 <i>Gambar 1. Contoh Arsitektur MVC</i>
 </p>
 
 ## 2.3 Identifikasi Komponen / Modul / Subsistem
-
-Identifikasi komponen, modul, atau subsistem penyusun aplikasi berdasarkan *pattern* yang telah ditetapkan. Jelaskan tanggung jawab masing-masing komponen. Pengelompokan dapat mengikuti lapisan arsitektur atau fungsi/peran komponen dalam sistem.
-
-Dapat menyalin dari dokumen DPPL sebelumnya
-
 Tabel 2.3. Identifikasi Komponen/Modul/Subsistem
 
-| Nama Komponen/Modul/Subsistem | Jenis | Penjelasan |
-| :--- | :--- | :--- |
-| *[Nama komponen/modul/subsistem]* | *[Jenis]* | *[Tanggung jawab komponen]* |
-| *[Nama komponen/modul/subsistem]* | *[Jenis]* | *[Tanggung jawab komponen]* |
-| *...* | *...* | *...* |
+| Nama Komponen/Modul/Subsistem | Jenis                 | Penjelasan                                                                                                           |
+| :---------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| AkunPetugasInterface                 | View                | Menampilkan antarmuka Log In, Sign Up, Log Out, dan akun petugas. Lalu meneruskan aksi ke AkunPetugasController     |
+| JadwalInterface               | View                | Menampilkan antarmuka daftar jadwal pembuangan sampah, pencarian lokasi TPS, dan pengaturan jadwal. Lalu meneruskan aksi ke JadwalController.                                                       |
+| InformasiSampahInterface                | View                | Menampilkan antarmuka daftar katalog informasi sampah dan cara mendaur ulang.                                        |
+| PemindaiInterface          | View                | Menampilkan antarmuka pemindaian sampah.                                         |
+| AkunPetugasController           | Controller          | Memproses logika autentikasi petugas (Log In, Sign Up, Log Out), melakukan validasi kredensial, dan melakukan enkripsi dan dekripsi data kredensial.                                             |
+| JadwalController         | Controller          | Memproses permintaan penambahan, perubahan, dan penghapusan jadwal pengambilan sampah, serta mencari lokasi TPS.                                          |
+| InformasiSampahController        | Controller          | Memproses permintaan data informasi sampah dan cara daur ulang yang sesuai.                |
+| PemindaiController           | Controller          | Memproses pemindaian sampah.                                                              |
+| AkunPetugas                      | Model               | Merepresentasikan data akun petugas kebersihan serta metode untuk verifikasi dan mengelola kredensial.                        |
+| Jadwal                   | Model               | Merepresentasikan data jadwal pengambilan sampah serta metode untuk mengakses dan mengubahnya.       |
+| InformasiSampah                     | Model               | Merepresentasikan data informasi sampah serta metode untuk mengakses detailnya.          |
+| Database                     | Penyimpanan Data               | Menyimpan seluruh data model secara terpusat di Firebase.          |
 
 ## 2.4 Model Arsitektur Perangkat Lunak
 
-Buat model arsitektur dalam bentuk satu atau lebih *view* yang memperlihatkan interaksi dan kolaborasi komponen, modul, serta subsistem dalam menjalankan fungsi sistem. Pilih notasi yang sesuai. Contoh *view*: *Logical View*, *Process View*, *Development View*, dan *Physical View*.
-
-Gunakan hasil **BAB 3 Model Arsitektur Perangkat Lunak pada dokumen APL**. 
-
-### 2.4.1 View [Nama View]
-
-Tuliskan secara singkat model arsitektur yang dipilih dan alasan model tersebut cocok untuk aplikasi.
+### 2.4.1 Logical View 
+Alasan penggunaan Logical View sebagai arsitektur model perangkat lunak EcoTrack adalah pemisahan tanggung jawab, ketertelusuran komponen, dan tingkat abstraksi logis. Melalui logical view, tanggung jawab setiap kelas terisolasi dengan jelas menurut perannya selaras arsitektur Modell-View-Controller (MVC). Selain itu, Logical View menjamin setiap komponen yang diidentifikasi pada bab 2 terpetakan secara lengkap dan konsisten pada diagram perancangan selama pengembangan. Relasi dan alur interaksi logis antar setiap komponen juga dapat dipahami dengan mudah.
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-logical-view.webp" width="50%">
+<img alt="Gambar 2. Logical View pada P/L EcoTrack" src="./assets/diagram/logical-view.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 2. Contoh Logical View pada P/L E-Commerce</i>
+<i>Gambar 2. Logical View pada P/L EcoTrack</i>
 </p>
-
-### 2.4.X View [Nama View]
-*[Lakukan hal yang sama dengan bagian sebelumnya]*
 
 <br>
 
@@ -151,79 +174,286 @@ Tuliskan secara singkat model arsitektur yang dipilih dan alasan model tersebut 
 
 # BAB 3: Realisasi Use Case
 
-## 3.1 Use Case [Nama Use Case 1]
+## 3.1 Use Case Melakukan Log In
 
-**ID Use Case:** *[UC01 sesuai SKPL]*  
-**Nama Use Case:** *[Nama use case sesuai SKPL]*
+**ID Use Case:** *UC01*  
+**Nama Use Case:** *Melakukan Log In*
 
 ### 3.1.1 Identifikasi Kelas
-
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
 
 Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *Akun Petugas* | *Akun Petugas* |
+| 2 | *Akun Petugas Controller* | *Akun Petugas Controller* |
+| 3 | *Akun Petugas Interface* | *Akun Petugas Interface* |
 
 ### 3.1.2 Sequence Diagram
 
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
+- **Skenario Normal**
+
+<<p align="center">
+<img alt="Contoh Diagram Sekuens Skenario Normal UC01 P/L E-Commerce" src="./assets/diagram/UC01_N.drawio.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 4. Sequence Diagram [UC01]</i>
+</p>
+
+- **Skenario Alternatif 1: Otorisasi Log In Akun Gagal**
+
+<p align="center">
+<img alt="Contoh Diagram Sekuens Skenario Alternatif 1 UC01 P/L E-Commerce" src="./assets/diagram/UC01_A1.drawio.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 5. Sequence Diagram [UC01]</i>
+</p>
+
+
+### 3.1.3 Diagram Kelas
+
+<p align="center">
+<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/diagram-kelas-uc01.jpg" width="35%">
+</p>
+<p align="center">
+<i>Gambar 5. Diagram Kelas [UC01]</i>
+</p>
+
+## 3.2 Use Case Memindai Sampah
+
+**ID Use Case:** UC02  
+**Nama Use Case:** Memindai Sampah  
+
+### 3.2.1 Identifikasi Kelas
+
+Tabel 3.2. Identifikasi Kelas Use Case UC02
+
+| No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| 1 | PemindaiInterface | Pemindai Interface |
+| 2 | PemindaiController | Pemindai Controller |
+| 3 | InformasiSampahInterface | Informasi Sampah Interface |
+| 4 | InformasiSampahController | Informasi Sampah Controller |
+| 5 | InformasiSampah | Informasi Sampah |
+
+### 3.2.2 Sequence Diagram
+
+#### Skenario Normal
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Normal UC02" src="./assets/diagram/UC02_N.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.2. Sequence Diagram Skenario Normal UC02</i>
+</p>
+
+#### Skenario Alternatif 1: Memindai dengan Barcode
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Alternatif 1 UC02" src="./assets/diagram/UC02_A1.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.3. Sequence Diagram Skenario Alternatif 1 UC02</i>
+</p>
+
+#### Skenario Alternatif 2: Data Barcode Tidak Ditemukan
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Alternatif 2 UC02" src="./assets/diagram/UC02_A2.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.4. Sequence Diagram Skenario Alternatif 2 UC02</i>
+</p>
+
+#### Skenario Alternatif 3: Kategori Sampah yang Ditampilkan Salah
+
+<p align="center">
+<img alt="Sequence Diagram Skenario Alternatif 3 UC02" src="./assets/diagram/UC02_A3.drawio.png" width="80%">
+</p>
+<p align="center">
+<i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
+</p>
+
+### 3.3.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram_kelas_UC02.png" width="75%">
+</p>
+<p align="center">
+<i>Gambar 9. Diagram Kelas [UC03]</i>
+</p>
+
+
+## 3.3 Use Case Mengatur Jadwal
+
+**ID Use Case:** UC03  
+**Nama Use Case:** Mengatur Jadwal
+
+### 3.3.1 Identifikasi Kelas
+
+Tabel 3.3. Identifikasi Kelas Use Case [UC03]
+
+| No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
+|:--- | :--- | :--- |
+| 1 | JadwalInterface | JadwalInterface |
+| 2 | JadwalController | JadwalController |
+| 3 | Jadwal | Jadwal |
+| 4 | AkunPetugas | AkunPetugas |
+
+### 3.3.2 Sequence Diagram
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01]</i>
+<i>Gambar 8. Sequence Diagram [UC03]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+### 3.3.3 Diagram Kelas
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar 9. Diagram Kelas [UC03]</i>
 </p>
 
-### 3.1.3 Diagram Kelas
+## 3.4 Use Case Melihat Jadwal
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
+**ID Use Case:** UC04  
+**Nama Use Case:** Melihat Jadwal
+
+### 3.4.1 Identifikasi Kelas
+
+Tabel 3.4. Identifikasi Kelas Use Case [UC04]
+
+| No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
+|:--- | :--- | :--- |
+| 1 | JadwalInterface | JadwalInterface |
+| 2 | JadwalController | JadwalController |
+| 3 | Jadwal | Jadwal |
+| 4 | AkunPetugas | AkunPetugas |
+
+### 3.4.2 Sequence Diagram
+
+- **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Sequence Diagram UC04" src="./assets/diagram/uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 9. Sequence Diagram [UC04]</i>
 </p>
 
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
+### 3.4.3 Diagram Kelas
 
-## 3.2 Use Case XX
+<p align="center">
+<img alt="Diagram Kelas UC04" src="./assets/diagram/diagram-kelas-uc04-fix.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 10. Diagram Kelas [UC04]</i>
+</p>
 
-Silahkan lanjutkan untuk  *use case* berikutnya dengan content yang sama dengan 3.1
+## 3.5 Use Case Mengakses Tampilan Informasi
+
+**ID Use Case:** UC05  
+**Nama Use Case:** Mengakses Tampilan Informasi
+
+### 3.5.1 Identifikasi Kelas
+
+Tabel 3.5. Identifikasi Kelas Use Case [UC05]
+
+| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *C09* | *InformasiSampahInterface* |*InformasiSampahInterface*|
+| *C08* | *InformasiSampahController* | *InformasiSampahController* |
+| *C07* | *InformasiSampah* | *InformasiSampah* |
+
+### 3.5.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc05-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Normal</i>
+</p>
+
+- **Skenario Alternatif: Masyarakat menggunakan fitur _search_**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Alt" src="./assets/diagram/uc05-alt.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Alt</i>
+</p>
+
+- **Skenario Eksepsi: Database gagal diakses**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Except" src="./assets/diagram/uc05-except.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC05] Except</i>
+</p>
+
+### 3.5.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc05.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar X. Diagram Kelas [UC05]</i>
+</p>
+
+## 3.6 Use Case Membuat Akun
+
+**ID Use Case:** UC06  
+**Nama Use Case:** Membuat Akun
+
+### 3.6.1 Identifikasi Kelas
+
+Tabel 3.6. Identifikasi Kelas Use Case [UC06]
+
+| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| *C09* | *AkunPetugas* | *AkunPetugas* |
+| *C08* | *AkunPetugasController* | *AkunPetugasController* |
+| *C07* | *AkunPetugasInterface* | *AkunPetugasInterface* |
+
+### 3.6.2 Sequence Diagram
+
+- **Skenario Normal: Masyarakat mengakses halaman informasi**
+
+<p align="center">
+<img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 11. Sequence Diagram [UC06]</i>
+</p>
+
+### 3.6.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc06.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 12. Diagram Kelas [UC06]</i>
+</p>
 
 <br>
 
 ---
 
-# BAB 4: Diagram Kelas Keseluruhan
+## BAB 4: Diagram Kelas Keseluruhan
 
 ## 4.1 Diagram Kelas
 
-**Bagian ini diisi dengan diagram kelas keseluruhan.**
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-class_diargam.png" width="35%">
+<img alt="Kelas Diagram EcoTrack" src="./assets/diagram/KelasDiagramKeseluruhan.png" width="35%">
 </p>
 <p align="center">
 <i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan [Nama P/L]</i>
@@ -233,26 +463,37 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *[C01]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C02]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C03]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *...* | *...* | *...* | *...* |
+| *C01* | AkunPetugas | -usernameExist, -passwordCorrect, -status | +validasiLogin(username, password), +cekUsername(username), +cekPassword(password), +encrypt(password), +createAkunPetugas() |
+| *C02* | AkunPetugasController | -invalidLogin(), -validLogin, -status | +prosesLogin(), +prosesLogin(username, password), +clearInput(), +signup() |
+| *C03* | AkunPetugasInterface | - | +showSignup(), +openLogin(), +showLogin(), +inputKredensial(username, password), +showPesan("Username/Password salah"), +showPesan("Selamat datang"), +showTampilan(masuk tampilan profil), +showSignUp(), +showSignUp(status) |
+| *C04* | Jadwal | -idJadwal, -kecamatan, -kelurahan, -daftarTanggal, -statusSimpan | +getIdJadwal(), +getKecamatan(), +getKelurahan(), +getTanggal(), +setTanggal(daftarTanggalBaru), +simpanJadwal() |
+| *C05* | JadwalController | -daftarJadwal | +getDaftarJadwal(), +cariLokasiTPS(keyword), +getJadwal(idJadwal), +cekStatusLogin(), +editJadwal(idJadwal, daftarTanggalBaru) |
+| *C06* | JadwalInterface | - | +openJadwalPage(), +showHalamanJadwal(daftarJadwal), +inputKeywordLokasiTPS(keyword), +chooseJadwal(idJadwal), +showJadwal(jadwal, statusLogin), showErrorMessage(notFound), chooseEditJadwal(), fillFormEditJadwal(idJadwal, daftarTanggalBaru), showNotifikasi("Jadwal berhasil diperbarui"), showJadwal(jadwalDiperbarui, statusLogin) |
+| *C07* | InformasiSampah | -dataSampah, -detailData, -infoSampah | +ambilDataDetail(idSampah), +cariBarcode(barcode), +getInfoSampah(), getInfoSampah(keyword) |
+| *C08* | InformasiSampahController | -detailData, -infoSampah | +getDetailSampah(idSampah), +getMaterial(), +search(keyword) |
+| *C09* | InformasiSampahInterface | - | +bukaDetail(idSampah), +showTampilanDetail(), +showMain(), +showDetail(), +showSearch(infoSampah) |
+| *C10* | PemindaiController | -hasilIdentifikasi | +ubahMode("Barcode"), +startPemindaian(), +ambilFrame(), +prosesBarcode(frameData) |
+| *C11* | PemindaiInterface | | +openPemindai(), +showLiveFeed(), +gantiMode(), +showJenis(), +klikNotifikasi() |
 
 ---
 
 # BAB 5: Perancangan Rinci Kelas
 
-Bagian ini diisi dengan daftar seluruh kelas dalam tabel berikut:
-
 Tabel 5.1. Daftar Kelas Perancangan dan Kelas Analisis Terkait
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 | :--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL atau -]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL atau -]* |
-| ... | *...* | *...* |
-
-Untuk **setiap kelas**, identifikasi operasi berdasarkan tanggung jawab kelas beserta *visibility*-nya, serta atribut beserta *visibility* dan tipenya. Buat subbab tersendiri untuk setiap kelas.
+| 1 | AkunPetugas | AkunPetugas |
+| 2 | AkunPetugasController | AkunPetugasController |
+| 3 | AkunPetugasInterface | AkunPetugasInterface |
+| 4 | Jadwal | Jadwal |
+| 5 | JadwalController | JadwalController |
+| 6 | JadwalInterface | JadwalInterface |
+| 7 | InformasiSampah | InformasiSampah |
+| 8 | InformasiSampahController | InformasiSampahController |
+| 9 | InformasiSampahInterface | InformasiSampahInterface |
+| 10 | PemindaiController | PemindaiController |
+| 11 | PemindaiInterface | PemindaiInterface |
 
 ## 5.1 Kelas [Nama Kelas 1]
 
@@ -601,7 +842,7 @@ Tabel 5.6.2. Atribut Kelas JadwalInterface
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +openJadwalPage()  
-**ID Algoritma:** Algo-001  
+**ID Algoritma:** Algo-JI-001  
 
 ```text
 PROGRAM openJadwalPage()
@@ -624,7 +865,7 @@ Tabel 5.6.1. Query Operasi openJadwalPage()
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +inputKeywordLokasiTPS(keyword)  
-**ID Algoritma:** Algo-003  
+**ID Algoritma:** Algo-JI-002  
 
 ```text
 PROGRAM inputKeywordLokasiTPS(keyword)
@@ -647,7 +888,7 @@ Tabel 5.6.2. Query Operasi inputKeywordLokasiTPS(keyword: String)
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +chooseJadwal(idJadwal)  
-**ID Algoritma:** Algo-004  
+**ID Algoritma:** Algo-JI-003  
 
 ```text
 chooseJadwal(idJadwal)
@@ -684,7 +925,7 @@ Tabel 5.6.4. Query Operasi chooseEditJadwal()
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +fillFormEditJadwal(idJadwal, daftarTanggalBaru)  
-**ID Algoritma:** Algo-007  
+**ID Algoritma:** Algo-JI-005  
 
 ```text
 fillFormEditJadwal(idJadwal, daftarTanggalBaru)
@@ -701,7 +942,7 @@ Tabel 5.6.5. Query Operasi fillFormEditJadwal(idJadwal: String, daftarTanggalBar
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +showHalamanJadwal(daftarJadwal)  
-**ID Algoritma:** Algo-002
+**ID Algoritma:** Algo-JI-006
 
 ```text
 PROGRAM showHalamanJadwal(daftarJadwal)
@@ -725,7 +966,7 @@ Tabel 5.6.6. Query Operasi showHalamanJadwal(daftarJadwal: List<Jadwal>)
 
 **Nama Kelas:** *AkunPetugasInterface*  
 **Nama Operasi:** *+showJadwal(jadwal, statusLogin)*  
-**ID Algoritma:** *[Algo-005]*
+**ID Algoritma:** Algo-JI-007
 
 ```text
 showJadwal(jadwal, statusLogin)
@@ -742,7 +983,7 @@ Tabel 5.6.7. Query Operasi showJadwal(jadwal: Jadwal, statusLogin: Boolean)
 
 **Nama Kelas:** JadwalInterface  
 **Nama Operasi:** showFormEditJadwal()
-**ID Algoritma:** *[Algo-JI-008]*
+**ID Algoritma:** Algo-JI-008
 
 ```text
 [Tuliskan pseudocode algoritma operasi di sini.]
@@ -761,7 +1002,7 @@ Tabel 5.6.8. Query Operasi showFormEditJadwal()
 
 **Nama Kelas:** *AkunPetugasInterface*  
 **Nama Operasi:** *+showNotifikasi("Jadwal berhasil diperbarui")*  
-**ID Algoritma:** *[Algo-008]*
+**ID Algoritma:** Algo-JI-009
 
 ```text
 showNotifikasi("Jadwal berhasil diperbarui")
@@ -778,7 +1019,7 @@ Tabel 5.6.9. Query Operasi showNotifikasi(pesan: String)
 
 **Nama Kelas:** AkunPetugasInterface  
 **Nama Operasi:** +showErrorMessage(notFound)  
-**ID Algoritma:** Algo-006  
+**ID Algoritma:** Algo-JI-010  
 
 ```text
 showErrorMessage(notFound)
@@ -793,10 +1034,10 @@ Tabel 5.6.10. Query Operasi showErrorMessage(jenisError: String)
 
 # 5.10 Kelas PemindaiController
 
-**Nama Kelas:** *PemindaiController*  
-**ID Kelas:** *[ID kelas]*
+**Nama Kelas:** PemindaiController  
+**ID Kelas:** C10
 
-Tabel 5.10.1. Operasi Kelas [Nama Kelas 1]
+Tabel 5.10.1. Operasi Kelas PemindaiController
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
@@ -805,7 +1046,7 @@ Tabel 5.10.1. Operasi Kelas [Nama Kelas 1]
 | *+ prosesBarcode(frameData: Byte[]): String* | *public** | *Memroses barcode yang dipindai oleh kamera dan melakukan identifikasi berdasarkan barcode* |
 
 
-Tabel 5.10.2. Atribut Kelas [Nama Kelas 1]
+Tabel 5.10.2. Atribut Kelas PemindaiController
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
@@ -817,7 +1058,7 @@ Tabel 5.10.2. Atribut Kelas [Nama Kelas 1]
 
 Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
 
-**Nama Kelas:** *PemindaiController*  
+**Nama Kelas:** PemindaiController  
 **Nama Operasi:** *Memindai Frame(?)*  
 **ID Algoritma:** *[Algo-001]*
 
