@@ -305,32 +305,303 @@ Tabel 5.1.1. Query Operasi [Nama Operasi]
 
 ## 5.3 Kelas AkunPetugasInterface
 
-**Nama Kelas:** *AkunPetugasInterface*
-**ID Kelas: [C03]**
+**Nama Kelas:** AkunPetugasInterface  
+**ID Kelas:** C03
 
-Tabel 5.3.1 Operasi Kelas AkunPetugasInterface
+Tabel 5.3.1. Operasi Kelas AkunPetugasInterface
+
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| +openJadwalPage() | *public* | Membuka halaman jadwal pengangkutan sampah. |
-| +showHalamanJadwal(daftarJadwal) | *public* | Menampilkan daftar jadwal pengangkutan sampah yang tersedia. |
-| +inputKeywordLokasiTPS(keyword) | *public* | Menerima *keyword* lokasi yang dimasukkan pengguna untuk mencari jadwal terkait. |
-| +chooseJadwal(idJadwal) | *public* | Memilih jadwal pengangkutan sampah berdasarkan ID jadwal yang dipilih. |
-| +showJadwal(jadwal, statusLogin) | *public* | Menampilkan detail jadwal pengangkutan sampah. |
-| +showErrorMessage(notFound) | *public* | Menampilkan pesan *error* jika jadwal yang dicari tidak ditemukan. |
-| +fillFormEditJadwal(idJadwal, daftarTanggalBaru) | *private* | Menambah, mengganti, atau menghapus jadwal. |
-| +showNotifikasi("Jadwal berhasil diperbarui") | *private* | Menampilkan notifikasi bahwa jadwal berhasil diperbarui. |
-| +showJadwal(jadwalDiperbarui, statusLogin) | *public* | Menampilkan kembali detail jadwal pengangkutan sampah setelah diperbarui. |
+| + openLogin(): void | public | Menerima aksi petugas membuka halaman Log In, lalu menampilkan form Log In melalui showLogin(). |
+| + showLogin(): void | public | Menampilkan form Log In yang berisi kolom username, kolom password, dan tombol masuk. |
+| + inputKredensial(username: String, password: String): void | public | Menerima username dan password yang diisi petugas, lalu meneruskannya ke AkunPetugasController melalui prosesLogin() untuk divalidasi. |
+| + showPesan(pesan: String): void | public | Menampilkan pesan hasil Log In kepada petugas, yaitu "Selamat datang" jika berhasil atau "Username/Password salah" jika gagal. |
+| + clearInput(): void | public | Mengosongkan kolom username dan password pada form Log In setelah Log In gagal. |
+| + showTampilan(): void | public | Mengarahkan petugas ke tampilan profil setelah Log In berhasil. |
+| + showSignUp(statusCreate: Boolean): void | public | Menampilkan hasil pembuatan akun sesuai statusCreate, yaitu pesan berhasil jika status = true atau pesan gagal jika status = false. |
+| + inputDataSignUp(username: String, email: String, password: String): void | public | Menerima data diri yang diisi petugas pada form Sign Up, lalu meneruskannya ke AkunPetugasController melalui signUp() untuk dibuatkan akun. |
 
-Tabel 5.3.2 Atribut Kelas AkunPetugasInterface
+Tabel 5.3.2. Atribut Kelas AkunPetugasInterface
+
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
 | - | - | - |
 
 ### 5.3.1 Algoritma/Query
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+openJadwalPage()*  
-**ID Algoritma:** *[Algo-001]*
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** openLogin()  
+**ID Algoritma:** Algo-API-001
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.1. Query Operasi openLogin()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.2 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** showLogin()  
+**ID Algoritma:** Algo-API-002
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.2. Query Operasi showLogin()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.3 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** inputKredensial(username: String, password: String)  
+**ID Algoritma:** Algo-API-003
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.3. Query Operasi inputKredensial(username: String, password: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.4 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** showPesan(pesan: String)  
+**ID Algoritma:** Algo-API-004
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.4. Query Operasi showPesan(pesan: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.5 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** clearInput()  
+**ID Algoritma:** Algo-API-005
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.5. Query Operasi clearInput()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.6 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** showTampilan()  
+**ID Algoritma:** Algo-API-006
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.6. Query Operasi showTampilan()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.7 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** showSignUp(statusCreate: Boolean)  
+**ID Algoritma:** Algo-API-007
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.7. Query Operasi showSignUp(statusCreate: Boolean)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.3.8 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** inputDataSignUp(username: String, email: String, password: String)  
+**ID Algoritma:** Algo-API-008
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.3.8. Query Operasi inputDataSignUp(username: String, email: String, password: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+## 5.5 Kelas JadwalController
+
+**Nama Kelas:** JadwalController  
+**ID Kelas:** C05
+
+Tabel 5.5.1. Operasi Kelas JadwalController
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| + getDaftarJadwal(): List<Jadwal> | public | Mengambil data jadwal dari database, lalu menyusun daftar jadwal yang masing-masingnya berisi idJadwal, kecamatan, kelurahan untuk ditampilkan pada halaman jadwal. |
+| + cariLokasiTPS(keyword: String): List<Jadwal> | public | Mencari jadwal yang kecamatan atau kelurahannya cocok dengan keyword yang dimasukkan pengguna. Operasi ini akan mengembalikan list kosong jika tidak ada yang cocok (notFound). |
+| + getJadwal(idJadwal: String): Map<String, Object> | public | Mengambil detail jadwal yang berisi kecamatan, kelurahan, dan daftarTanggal berdasarkan idJadwal dan memeriksa status login pengguna melalui AkunPetugas, lalu mengembalikan keduanya ke antarmuka. |
+| + editJadwal(idJadwal: String, daftarTanggalBaru: List<Date>): Jadwal | public | Mengubah daftar tanggal pada jadwal yang dipilih dan menyimpannya ke database. Mengembalikan jadal yang telah diperbarui atau NULL jika penyimpanan gagal. |
+
+Tabel 5.5.2. Atribut Kelas JadwalController
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| daftarJadwal | private | List<Jadwal> |
+
+### 5.5.1 Algoritma/Query
+
+**Nama Kelas:** JadwalController  
+**Nama Operasi:** getDaftarJadwal(): List<Jadwal>  
+**ID Algoritma:** Algo-JC-001
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Tabel 5.5.1. Query Operasi getDaftarJadwal()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.5.2 Algoritma/Query
+
+**Nama Kelas:** JadwalController  
+**Nama Operasi:** cariLokasiTPS(keyword: String): List<Jadwal>  
+**ID Algoritma:** Algo-JC-002
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Tabel 5.5.2. Query Operasi cariLokasiTPS(keyword: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.5.3 Algoritma/Query
+
+**Nama Kelas:** JadwalController  
+**Nama Operasi:** getJadwal(idJadwal: String): Map<String, Object>  
+**ID Algoritma:** Algo-JC-003
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Tabel 5.5.3. Query Operasi getJadwal(idJadwal: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.5.4 Algoritma/Query
+
+**Nama Kelas:** JadwalController  
+**Nama Operasi:** editJadwal(idJadwal: String, daftarTanggalBaru: List<Date>): Jadwal  
+**ID Algoritma:** Algo-JC-004
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Tabel 5.5.4. Query Operasi editJadwal(idJadwal: String, daftarTanggalBaru: List<Date>)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+## 5.6 Kelas JadwalInterface
+
+**Nama Kelas:** JadwalInterface  
+**ID Kelas:** C06
+
+Tabel 5.6.1. Operasi Kelas JadwalInterface
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| + openJadwalPage() | public | Menerima aksi pengguna membuka halaman jadwal, lalu meminta daftarJadwal ke JadwalController. |
+| + inputKeywordLokasiTPS() | public | Menerima *keyword* lokasi TPS, yaitu kecamatan atau kelurahan dari pengguna dan meneruskannya ke JadwalController untuk dicari. |
+| + chooseJadwal(idJadwal: String) | public | Menerima pilihan jadwal dari pengguna dan meminta detail jadwal ke JadwalController. |
+| + chooseEditJadwal() | public | Menerima aksi petugas kebersihan menekan tombol edit jadwal. |
+| + fillFormEditJadwal(idJadwal: String, daftarTanggalBaru: List<Date>) | public | Menerima isian form edit jadwal dari pengguna dan meneruskannya ke JadwalController untuk disimpan. |
+| + showHalamanJadwal(daftarJadwal: List<Jadwal>) | public | Menampilkan daftarJadwal pada halaman jadwal. |
+| + showJadwal(jadwal: Jadwal, statusLogin: Boolean) | public | Menampilkan detail jadwal dan tanggal pengambilan sampah. Tombol edit hanya ditampilkan jika statusLogin = true. |
+| + showFormEditJadwal() | public | Menampilkan form edit jadwal untuk menambah atau menghapus daftarTanggal. |
+| + showNotifikasi(pesan: String) | public | Menampilkan notifikasi keberhasilan. |
+| + showErrorMessage(jenisError: String) | public | Menampilkan pesan kesalahan sesuai jenisnya. |
+
+Tabel 5.6.2. Atribut Kelas JadwalInterface
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| - | - | - |
+
+### 5.6.1 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +openJadwalPage()  
+**ID Algoritma:** Algo-001  
 
 ```text
 PROGRAM openJadwalPage()
@@ -341,9 +612,96 @@ ALGORITMA
     showHalamanJadwal(daftarJadwal)
 ```
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+showHalamanJadwal(daftarJadwal)*  
-**ID Algoritma:** *[Algo-002]*
+Tabel 5.6.1. Query Operasi openJadwalPage()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.6.2 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +inputKeywordLokasiTPS(keyword)  
+**ID Algoritma:** Algo-003  
+
+```text
+PROGRAM inputKeywordLokasiTPS(keyword)
+DEKLARASI
+    daftarJadwal : List of Jadwal
+ALGORITMA
+    daftarJadwal <- JadwalController.cariLokasiTPS(keyword)
+    showHalamanJadwal(daftarJadwal)
+```
+
+Tabel 5.6.2. Query Operasi inputKeywordLokasiTPS(keyword: String) 
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.6.3 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +chooseJadwal(idJadwal)  
+**ID Algoritma:** Algo-004  
+
+```text
+chooseJadwal(idJadwal)
+```
+
+Tabel 5.6.3. Query Operasi chooseJadwal(idJadwal: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.6.4 Algoritma/Query
+
+**Nama Kelas:** JadwalInterface  
+**Nama Operasi:** chooseEditJadwal()  
+**ID Algoritma:** Algo-JI-004  
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.6.4. Query Operasi chooseEditJadwal()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.6.5 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +fillFormEditJadwal(idJadwal, daftarTanggalBaru)  
+**ID Algoritma:** Algo-007  
+
+```text
+fillFormEditJadwal(idJadwal, daftarTanggalBaru)
+```
+
+Tabel 5.6.5. Query Operasi fillFormEditJadwal(idJadwal: String, daftarTanggalBaru: List<Date>)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.6.6 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showHalamanJadwal(daftarJadwal)  
+**ID Algoritma:** Algo-002
 
 ```text
 PROGRAM showHalamanJadwal(daftarJadwal)
@@ -356,26 +714,14 @@ ALGORITMA
         showJadwal(jadwal, statusLogin)
 ```
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+inputKeywordLokasiTPS(keyword)*  
-**ID Algoritma:** *[Algo-003]*
+Tabel 5.6.6. Query Operasi showHalamanJadwal(daftarJadwal: List<Jadwal>)
 
-```text
-PROGRAM inputKeywordLokasiTPS(keyword)
-DEKLARASI
-    daftarJadwal : List of Jadwal
-ALGORITMA
-    daftarJadwal <- JadwalController.cariLokasiTPS(keyword)
-    showHalamanJadwal(daftarJadwal)
-```
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+chooseJadwal(idJadwal)*  
-**ID Algoritma:** *[Algo-004]*
-
-```text
-chooseJadwal(idJadwal)
-```
+### 5.6.7 Algoritma/Query
 
 **Nama Kelas:** *AkunPetugasInterface*  
 **Nama Operasi:** *+showJadwal(jadwal, statusLogin)*  
@@ -385,21 +731,33 @@ chooseJadwal(idJadwal)
 showJadwal(jadwal, statusLogin)
 ```
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+showErrorMessage(notFound)*  
-**ID Algoritma:** *[Algo-006]*
+Tabel 5.6.7. Query Operasi showJadwal(jadwal: Jadwal, statusLogin: Boolean)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.6.8 Algoritma/Query
+
+**Nama Kelas:** JadwalInterface  
+**Nama Operasi:** showFormEditJadwal()
+**ID Algoritma:** *[Algo-JI-008]*
 
 ```text
-showErrorMessage(notFound)
+[Tuliskan pseudocode algoritma operasi di sini.]
 ```
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+fillFormEditJadwal(idJadwal, daftarTanggalBaru)*  
-**ID Algoritma:** *[Algo-007]*
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
 
-```text
-fillFormEditJadwal(idJadwal, daftarTanggalBaru)
-```
+Tabel 5.6.8. Query Operasi showFormEditJadwal()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.6.9 Algoritma/Query
 
 **Nama Kelas:** *AkunPetugasInterface*  
 **Nama Operasi:** *+showNotifikasi("Jadwal berhasil diperbarui")*  
@@ -409,15 +767,31 @@ fillFormEditJadwal(idJadwal, daftarTanggalBaru)
 showNotifikasi("Jadwal berhasil diperbarui")
 ```
 
-**Nama Kelas:** *AkunPetugasInterface*  
-**Nama Operasi:** *+showJadwal(jadwalDiperbarui, statusLogin)*  
-**ID Algoritma:** *[Algo-008]*
+Tabel 5.6.9. Query Operasi showNotifikasi(pesan: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.6.10 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showErrorMessage(notFound)  
+**ID Algoritma:** Algo-006  
 
 ```text
-showJadwal(jadwalDiperbarui, statusLogin)
+showErrorMessage(notFound)
 ```
 
-## 5.10 Kelas PemindaiController
+Tabel 5.6.10. Query Operasi showErrorMessage(jenisError: String)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+# 5.10 Kelas PemindaiController
 
 **Nama Kelas:** *PemindaiController*  
 **ID Kelas:** *[ID kelas]*
