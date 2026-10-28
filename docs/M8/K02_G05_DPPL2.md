@@ -35,6 +35,9 @@ Dipersiapkan oleh:
 | Revisi | Deskripsi |
 | :--- | :--- |
 | *A* | *Penambahan operasi/metode di antarmuka* |
+| *B* | *Penambahan operasi/metode di kelas informasiSampah* |
+| *C* | *Pembenaran dan penyesuaian diagram sekuens UC01 dan UC02* |
+
 
 ---
 
@@ -1322,48 +1325,158 @@ ALGORITMA
 
 ## 5.4 Kelas Jadwal
 
-**Nama Kelas:** Jadwal  
-**ID Kelas:** C04
+**Nama Kelas:** *Jadwal*  
+**ID Kelas:** *C07*
 
 Tabel 5.4.1. Operasi Kelas Jadwal
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
+| *getIdJadwal()* | *public* | *Mengambil data id jadwal dari database* |
+| *getTanggal()* | *public* | *Mengambil data tanggal dari database* |
+| *getKecamatan()* | *public* | *Mengambil data kecamatan dari database* |
+| *getKelurahan()* | *public* | *Mengambil data kelurahan dari database* |
+| *setTanggal(daftarTanggalBaru)* | *public* | *Menerima data yang diberikan* |
+| *simpanJadwal()* | *public* | *Mengambil data kelurahan dari data* |
+
 | *...* | *...* | *...* |
 
 Tabel 5.4.2. Atribut Kelas Jadwal
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
+| *idJadwal* | *private* | *String* |
+| *kecamatan* | *private* | *String* |
+| *kelurahan* | *private* | *String* |
+| *daftarTanggal* | *private* | *String* |
+| *statusSimpan* | *private* | *Boolean* |
 | *...* | *...* | *...* |
 
 ### 5.4.1 Algoritma/Query
 
-Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
-
-**Nama Kelas:** Jadwal  
-**Nama Operasi:** *[Signature operasi]*  
-**ID Algoritma:** Algo-J-001
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *getIdJadwal()*  
+**ID Algoritma:** *Algo-J-001*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+function getIdJadwal():
+        data = getData()
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
 ```
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.4.1. Query Operasi [Nama Operasi]
+Tabel 5.4.1. Query Operasi getIdJadwal()
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-J-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *Q-J-001* | *getData()* | *mengambil data id dari database* |
 | *...* | *...* | *...* |
-
 
 ### 5.4.2 Algoritma/Query
 
-*[Ulangi pola 5.4.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *getTanggal()*  
+**ID Algoritma:** *Algo-J-002*
+
+```text
+function getTanggal():
+        data = getDataTanggal()
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
+```
+
+Tabel 5.4.1. Query Operasi getTanggal()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-J-002* | *getDataTanggal()* | *mengambil data tanggal dari database* |
+| *...* | *...* | *...* |
+
+### 5.4.3 Algoritma/Query
+
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *getKecamatan()*  
+**ID Algoritma:** *Algo-J-003*
+
+```text
+function getKecamatan():
+        data = getDataKecamatan()
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
+```
+
+Tabel 5.4.1. Query Operasi getKecamatan()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-J-003* | *getDataKecamatan()* | *mengambil data kecamatan dari database* |
+| *...* | *...* | *...* |
+
+### 5.4.4 Algoritma/Query
+
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *getKelurahan()*  
+**ID Algoritma:** *Algo-J-004*
+
+```text
+function getKelurahan():
+        data = getDataKelurahan()
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
+```
+
+Tabel 5.4.1. Query Operasi getKelurahan()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-J-004* | *getDataKelurahan()* | *mengambil data kelurahan dari database* |
+| *...* | *...* | *...* |
+### 5.4.5 Algoritma/Query
+
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *setTanggal(daftarTanggalBaru)*  
+**ID Algoritma:** *Algo-J-005*
+
+```text
+function setTanggal(daftarTanggalBaru):
+    data <- daftarTanggalBaru 
+    i <- 1
+    if not(isEmpty(daftarTanggalBaru[1])) then
+        deleteAllData()
+        while not(isEmpty(daftarTanggalBaru[i])) do
+            setTanggal(daftarTanggalBaru[i])
+        simpanJadwal()
+    else
+        -> "jadwal gagal disimpan"
+
+```
+
+Tabel 5.4.1. Query Operasi setTanggal(daftarTanggalBaru)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-J-005* | *setTanggal(jadwal)* | *menyimpan objek jadwal ke database* |
+| *Q-J-006* | *deleteAllData()* | *menghapus semua data jadwal dari database* |
+| *...* | *...* | *...* |
+
+### 5.4.6 Algoritma/Query
+
+**Nama Kelas:** *Jadwal*  
+**Nama Operasi:** *simpanJadwal()*  
+**ID Algoritma:** *Algo-IS-006*
+
+```text
+function simpanJadwal():
+    -> "data berhasil disimpan"
+```
 
 ## 5.5 Kelas JadwalController
 
@@ -1716,138 +1829,251 @@ ALGORITMA
 
 ## 5.7 Kelas InformasiSampah
 
-**Nama Kelas:** InformasiSampah  
-**ID Kelas:** C07
+**Nama Kelas:** *InformasiSampah*  
+**ID Kelas:** *C07*
 
 Tabel 5.7.1. Operasi Kelas InformasiSampah
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
+| *getDetail(id)* | *public* | *Mengambil objek sampah dengan id tertentu dari database* |
+| *getMain()* | *public* | *Mengambil seluruh data objek sampah dari database* |
+| *cariInformasi(query)* | *public* | *Mengambil objek sesuai dengan query yang diberikan* |
 | *...* | *...* | *...* |
 
 Tabel 5.7.2. Atribut Kelas InformasiSampah
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
+| *id* | *private* | *String* |
+| *judul* | *private* | *String* |
+| *preview* | *private* | *String* |
+| *deskripsi* | *private* | *String* |
 | *...* | *...* | *...* |
 
 ### 5.7.1 Algoritma/Query
 
-Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
-
-**Nama Kelas:** InformasiSampah  
-**Nama Operasi:** *[Signature operasi]*  
-**ID Algoritma:** Algo-IS-001
+**Nama Kelas:** *InformasiSampah*  
+**Nama Operasi:** *getDetail(id)*  
+**ID Algoritma:** *Algo-IS-001*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+function getDetail(id):
+        data = getData(id)
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
 ```
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+Tabel 5.7.1. Query Operasi getDetail(id)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-IS-001* | *getData(id)* | *mengambil data sesuai dengan id yang dimasukkan* |
+| *...* | *...* | *...* |
+
+### 5.7.2 Algoritma/Query
+
+**Nama Kelas:** *InformasiSampah*  
+**Nama Operasi:** *getMain()*  
+**ID Algoritma:** *Algo-IS-002*
+
+```text
+function getMain():
+        data <- getAll()
+        if not (isEmpty(data)) then
+            -> data
+        else 
+            -> Null
+```
+
+Tabel 5.7.2. Query Operasi getMain()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-IS-002* | *getAll()* | *mengambil semua data informasi sampah* |
+| *...* | *...* | *...* |
+
+### 5.7.3 Algoritma/Query
+
+**Nama Kelas:** *InformasiSampah*  
+**Nama Operasi:** *cariInformasi(query)*  
+**ID Algoritma:** *Algo-IS-003*
+
+```text
+//query bertipe string
+function getMain():
+        data <- getAll()
+        list <- []
+        j <- 1
+        i <- 1
+        while not(isEmpty(data[i])) do
+            if cek(data[i], query) then //fungsi untuk mengecek apakah dari data[i] mengandung sebuah teks seperti query
+                list[j] <- data[i]
+                j <- j+1
+            i <- i+1
+```
 
 Tabel 5.7.1. Query Operasi [Nama Operasi]
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-IS-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *Q-IS-002* | *getAll()* | *mengambil semua data informasi sampah* |
 | *...* | *...* | *...* |
-
-
-### 5.7.2 Algoritma/Query
-
-*[Ulangi pola 5.7.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
 
 ## 5.8 Kelas InformasiSampahController
 
-**Nama Kelas:** InformasiSampahController  
-**ID Kelas:** C08
+**Nama Kelas:** *InformasiSampahController*  
+**ID Kelas:** *C08*
 
 Tabel 5.8.1. Operasi Kelas InformasiSampahController
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
-| *...* | *...* | *...* |
-
-Tabel 5.8.2. Atribut Kelas InformasiSampahController
-
-| Nama Atribut | Visibility (private, public) | Tipe |
-| :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
+| *getMain()* | *public* | *Mengambil data informasi utama* |
+| *getDetail(id)* | *public* | *Mengambil data deskripsi sampah sesuai masukan pengguna* |
+| *cariInformasi(query)* | *public* | *Memproses pencarian informasi berdasarkan kata kunci yang dimasukkan pengguna* |
 | *...* | *...* | *...* |
 
 ### 5.8.1 Algoritma/Query
 
-Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
-
-**Nama Kelas:** InformasiSampahController  
-**Nama Operasi:** *[Signature operasi]*  
-**ID Algoritma:** Algo-ISC-001
+**Nama Kelas:** *InformasiSampahController*  
+**Nama Operasi:** *getMain()*  
+**ID Algoritma:** *Algo-ISC-001*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+function getMain():
+    data <- InformasiSampah.getMain()
+    if not(isEmpty(data)) then
+        -> data
+    else 
+        -> Null    
+
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.8.1. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-ISC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
 
 ### 5.8.2 Algoritma/Query
 
-*[Ulangi pola 5.8.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
+**Nama Kelas:** *InformasiSampahController*  
+**Nama Operasi:** *getDetail(id)*  
+**ID Algoritma:** *Algo-ISC-002*
+
+```text
+function getDetail(id):
+    data <- InformasiSampah.getDetail(id)
+    if not(isEmpty(data)) then
+        -> data
+    else 
+        -> Null    
+```
+
+### 5.8.3 Algoritma/Query
+
+**Nama Kelas:** *InformasiSampahController*  
+**Nama Operasi:** *cariInformasi(query)*  
+**ID Algoritma:** *Algo-ISC-003*
+
+```text
+function cariInformasi(query):
+    data <- InformasiSampah.cariInformasi(query)
+    if not(isEmpty(data)) then
+        -> data
+    else 
+        -> Null    
+```
 
 ## 5.9 Kelas InformasiSampahInterface
 
-**Nama Kelas:** InformasiSampahInterface  
-**ID Kelas:** C09
+**Nama Kelas:** *InformasiSampahInterface*  
+**ID Kelas:** *C08*
 
 Tabel 5.9.1. Operasi Kelas InformasiSampahInterface
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
+| *showMain()* | *public* | *Menampilkan halaman utama (lihat bagian rancangan antarmuka dengan id .......)* |
+| *showDetail(id)* | *public* | *Menampilkan detail page dari sampah yang dipilih (lihat bagian rancangan antarmuka dengan id .......)* |
+| *showSearch(input)* | *public* | *Menampilkan page sesuai dengan filter yang diberikan (lihat bagian rancangan antarmuka dengan id .......)* |
+| *showError(kode)* | *public* | *Menampilkan page error, ketika terjadi masalah (lihat bagian rancangan antarmuka dengan id .......)* |
 | *...* | *...* | *...* |
 
-Tabel 5.9.2. Atribut Kelas InformasiSampahInterface
-
-| Nama Atribut | Visibility (private, public) | Tipe |
-| :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
-| *...* | *...* | *...* |
 
 ### 5.9.1 Algoritma/Query
 
 Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
 
-**Nama Kelas:** InformasiSampahInterface  
-**Nama Operasi:** *[Signature operasi]*  
-**ID Algoritma:** Algo-ISI-001
+**Nama Kelas:** *InformasiSampahInterface*  
+**Nama Operasi:** *showMain()*  
+**ID Algoritma:** *Algo-ISI-001*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+//asumsi sudah ada tombol pada page yang akan mentrigger showMain
+function showMain():
+    data <- InformasiSampahController.getMain()
+    cards <- []
+    i <- 1
+    while (not(isEmpty(data[i]))) do
+        Cards <- {buat menjadi bentuk kartu yang terdiri dari gambar, judul, deskripsi singkat dan tombol yang mentrigger showDetail sesuai id masing-masing (lihat bagian rancangan antarmuka dengan id [I-05] id objek O-05)}
+        i <- i+1
+    {buat halaman page daur ulang dari kartu-kartu yang telah dibentuk (lihat bagian rancangan antarmuka dengan id [I-03])}
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.9.1. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-ISI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
 
 ### 5.9.2 Algoritma/Query
 
-*[Ulangi pola 5.9.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *InformasiSampahInterface*  
+**Nama Operasi:** *showDetail(id)*  
+**ID Algoritma:** *Algo-ISI-002*
+
+```text
+//asumsi sudah ada tombol pada kartu dari showMain atau showSearch yang akan mentrigger showDetail sesuai dengan id masing masing
+function showDetail(id):
+    data <- InformasiSampahController.getDetail(id)
+    if (not(isEmpty(data[i]))) then
+        {buat halaman page daur ulang dari kartu kartu yang telah dibentuk (lihat bagian rancangan antarmuka dengan id [I-05])}
+    else
+        showError(EmptyDetailPage)
+```
+
+### 5.9.3 Algoritma/Query
+
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *InformasiSampahInterface*  
+**Nama Operasi:** *showSearch(input)*  
+**ID Algoritma:** *Algo-ISI-003*
+
+```text
+//asumsi sudah ada bagian pada halaman utama yang menerima input user dan tombol yang mentrigger showSearch(input)
+function showSearch(input):
+    data <- InformasiSampahController.cariInformasi(input)
+    if (not(isEmpty(data[i]))) then
+        cards <- []
+        i <- 1
+        while (not(isEmpty(data[i]))) do
+            Cards <- {buat menjadi bentuk kartu yang terdiri dari gambar, judul, deskripsi singkat dan tombol yang mentrigger showDetail sesuai id masing-masing (lihat bagian rancangan antarmuka dengan id [I-03])}
+            i <- i+1
+    else
+        showError(EmptySearchPage)
+```
+
+### 5.9.4 Algoritma/Query
+
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *InformasiSampahInterface*  
+**Nama Operasi:** *showError(kode)*  
+**ID Algoritma:** *Algo-ISI-004*
+
+```text
+//asumsi kode yang diterima oleh showError hanya EmptySearchPage atau EmptyDetailPage
+function showError(kode):
+    if kode = EmptySearchPage then
+        {tampilkan page error untuk searchpage (lihat bagian rancangan antarmuka dengan id [I-04])}
+    else if kode = EmptyDetailPage then
+        {tampilkan page error untuk detailpage (lihat bagian rancangan antarmuka dengan id [I-04])}
+```
 
 ## 5.10 Kelas PemindaiController
 
@@ -1926,6 +2152,7 @@ ALGORITMA
     endif
     return NULL
 ```
+
 ## 5.11 Kelas PemindaiInterface
 
 **Nama Kelas:** PemindaiInterface  
@@ -2092,7 +2319,7 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 | O-02 | Label | Material tidak ditemukan | Menampilkan pesan bahwa tidak ada kategori material yang sesuai dengan kata kunci pencarian. |
 | O-03 | Label | Coba kata kunci lain atau periksa ejaan pencarianmu | Memberikan arahan kepada pengguna untuk mencoba kata kunci lain atau memperbaiki ejaan pencarian. |
 
-## 6.5 Rancangan Antarmuka [I-06]
+## 6.5 Rancangan Antarmuka [I-05]
 **Antarmuka:** [I-06] 
 **Nama Layar:** *Halaman Informasi Material Sampah*
 

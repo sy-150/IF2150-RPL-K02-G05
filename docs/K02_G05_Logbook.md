@@ -128,5 +128,7 @@
 | 24-10-2026| Kelvin Sebastian Yen | Mengerjakan bagian 5.10 dan 5.11 | 2 | Done | - |
 | 27-10-2026| Kelvin Sebastian Yen | Mengerjakan draft antarmuka mendaftar/masuk akun di Figma | 2| Done | Tidak bagus membuat desain antarmuka |
 | 28-10-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 5.2, merevisi bagian 5.10 dan 5.11 agar sesuai, membenarkan parameter yang tidak sesuai, membenarkan diagram kelas agar menerima parameter yang sesuai dalam metode dan menyamakan tampilan | 5 | Done | Kesulitan menemukan hubungan, kesulitan menentukan penulisan pseudocode, terlalu banyak hal yang harus dikerjakan/direvisi |
+| 28-10-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bab 5.4, 5.7, 5.8, 5.9 | 2 | Done | - |
+
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
