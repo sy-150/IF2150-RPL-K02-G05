@@ -54,7 +54,7 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Dokumen SKPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
+Dokumen DPPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
 
 Pengguna dokumen ini mencakup sejumlah pihak yang terlibat dalam proses pengembangan perangkat lunak. Pertama, dokumen ini akan digunakan oleh pengembang awal dan pengembang yang akan datang sebagai acuan kesesuaian spesifikasi dalam pengembangan dan perawatan lanjut. Kedua, dokumen ini menjadi standar untuk memverifikasi kesesuaian fungsionalitas perangkat lunak bagi penguji/evaluator. Ketiga, klien yang merupakan pemangku kepentingan dapat mengacu pada dokumen ini untuk memastikan kebutuhannya telah dipahami dan diimplementasikan dengan benar.
 
@@ -115,6 +115,7 @@ Tabel 1.4. Aturan Penomoran
 | Query Kelas InformasiSampahInterface | Q-ISI-XXX | Penomoran untuk ID Query kelas InformasiSampahInterface dengan 3 digit angka yang dimulai dari Q-ISI-001. |
 | Query Kelas PemindaiController | Q-PC-XXX | Penomoran untuk ID Query kelas PemindaiController dengan 3 digit angka yang dimulai dari Q-PC-001. |
 | Query Kelas PemindaiInterface | Q-PI-XXX | Penomoran untuk ID Query kelas PemindaiInterface dengan 3 digit angka yang dimulai dari Q-PI-001. |
+| Layar | I-XX | Penomoran untuk ID layar dengan 2 digit angka yang dimulai dari Q-PI-01. |
 
 ## 1.5 Referensi
 - 11,3 Juta Ton Sampah di Indonesia Tidak Terkelola dengan Baik, brin.go.id, 26 Juli 2024, https://brin.go.id/drid/posts/kabar/113-juta-ton-sampah-di-indonesia-tidak-terkelola-dengan-baik. Accessed 30 Agustus 2026.
@@ -515,49 +516,270 @@ Tabel 5.1. Daftar Kelas Perancangan dan Kelas Analisis Terkait
 | 11 | PemindaiInterface | PemindaiInterface |
 
 ## 5.1 Kelas AkunPetugas
-
+ 
 **Nama Kelas:** AkunPetugas  
 **ID Kelas:** C01
-
+ 
 Tabel 5.1.1. Operasi Kelas AkunPetugas
-
+ 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
-| *...* | *...* | *...* |
-
+| + cekEmail(email: String): Boolean | public | Mencari akun petugas di database berdasarkan email. Jika ditemukan, data akun dimuat ke atribut kelas dan operasi mengembalikan true. Jika tidak ditemukan, operasi mengembalikan false. |
+| + cekPassword(password: String): Boolean | public | Mencocokkan password yang dimasukkan dengan password akun yang sudah dimuat oleh cekEmail(), lalu memperbarui statusLogin sesuai hasilnya. |
+| + encrypt(password: String): String | public | Mengubah password menjadi bentuk terenkripsi (hash) sebelum disimpan atau dicocokkan, sehingga password asli tidak pernah tersimpan di database. |
+| + createAkunPetugas(username: String, nik: String, email: String, noTelepon: String, password: String): Boolean | public | Menyimpan data akun petugas baru ke database. Parameter password yang diterima sudah dalam bentuk terenkripsi. Wilayah tugas dikosongkan dan diisi kemudian melalui editProfil(). Mengembalikan statusCreate. |
+| + cekStatusLogin(): Boolean | public | Mengembalikan status login petugas saat ini. Digunakan JadwalController untuk menentukan apakah tombol edit jadwal ditampilkan. |
+| + getProfil(): Map<String, Object> | public | Mengembalikan data profil petugas yang sedang login, yaitu username, email, noTelepon, dan wilayahTugas, untuk ditampilkan pada halaman Profil Petugas. |
+| + editProfil(email: String, noTelepon: String, wilayahTugas: String): Boolean | public | Memperbarui email, nomor telepon, dan wilayah tugas petugas yang sedang login di database. Mengembalikan statusEdit. |
+| + changePassword(passwordBaru: String): Boolean | public | Mengenkripsi password baru lalu memperbaruinya di database untuk petugas yang sedang login. Mengembalikan statusUbah. |
+| + verifikasiPetugas(nik: String, username: String): String | public | Mencocokkan NIK dan nama lengkap (username) dengan data petugas kebersihan pada database pemerintah untuk memastikan pendaftar benar-benar petugas. Mengembalikan "VALID", "NIK_TIDAK_TERDAFTAR", atau "NAMA_TIDAK_SESUAI" agar antarmuka dapat menandai kolom yang salah. |
+| + logout(): Boolean | public | Mengakhiri sesi petugas dengan mengubah statusLogin menjadi false dan mengosongkan data akun yang dimuat. |
+ 
 Tabel 5.1.2. Atribut Kelas AkunPetugas
-
+ 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
-| *...* | *...* | *...* |
-
+| - idPetugas | private | String |
+| - username | private | String |
+| - nik | private | String |
+| - email | private | String |
+| - noTelepon | private | String |
+| - password | private | String |
+| - wilayahTugas | private | String |
+| - statusLogin | private | Boolean |
+ 
+Atribut username berisi nama lengkap petugas sesuai data kependudukan.
+ 
 ### 5.1.1 Algoritma/Query
-
-Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
-
+ 
 **Nama Kelas:** AkunPetugas  
-**Nama Operasi:** *[Signature operasi]*  
+**Nama Operasi:** +cekEmail(email: String) -> Boolean  
 **ID Algoritma:** Algo-AP-001
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+FUNCTION cekEmail(email: String) -> Boolean
+DEKLARASI KAMUS
+    dataAkun : Map<String, Object>
+ALGORITMA
+    dataAkun <- cari akun petugas dengan email = email di database
+    if dataAkun != NULL then
+        idPetugas <- dataAkun["idPetugas"]
+        username <- dataAkun["username"]
+        nik <- dataAkun["nik"]
+        this.email <- dataAkun["email"]
+        noTelepon <- dataAkun["noTelepon"]
+        password <- dataAkun["password"]
+        wilayahTugas <- dataAkun["wilayahTugas"]
+        return true
+    else
+        return false
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.1.1. Query Operasi [Nama Operasi]
-
+ 
+Tabel 5.1.1. Query Operasi cekEmail(email: String)
+ 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-AP-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
-
+| Q-AP-001 | getDocs(query(collection(db, "akunPetugas"), where("email", "==", email))) | Mengambil dokumen akun petugas yang email-nya sama dengan email yang dimasukkan. Hasil kosong berarti email belum terdaftar. |
+ 
 ### 5.1.2 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +cekPassword(password: String) -> Boolean  
+**ID Algoritma:** Algo-AP-002
+ 
+```text
+FUNCTION cekPassword(password: String) -> Boolean
+DEKLARASI KAMUS
+    passwordHash : String
+ALGORITMA
+    passwordHash <- encrypt(password)
+    if passwordHash = this.password then
+        statusLogin <- true
+        return true
+    else
+        statusLogin <- false
+        return false
+```
+ 
+### 5.1.3 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +encrypt(password: String) -> String  
+**ID Algoritma:** Algo-AP-003
+ 
+```text
+FUNCTION encrypt(password: String) -> String
+DEKLARASI KAMUS
+    passwordHash : String
+ALGORITMA
+    passwordHash <- SHA256(password)
+    return passwordHash
+```
+ 
+### 5.1.4 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +createAkunPetugas(username: String, nik: String, email: String, noTelepon: String, password: String) -> Boolean  
+**ID Algoritma:** Algo-AP-004
+ 
+```text
+FUNCTION createAkunPetugas(username: String, nik: String, email: String, noTelepon: String, password: String) -> Boolean
+DEKLARASI KAMUS
+    idBaru : String
+    statusCreate : Boolean
+ALGORITMA
+    idBaru <- simpan akun baru (username, nik, email, noTelepon, password) ke database
+    if idBaru != NULL then
+        idPetugas <- idBaru
+        this.username <- username
+        this.nik <- nik
+        this.email <- email
+        this.noTelepon <- noTelepon
+        this.password <- password
+        wilayahTugas <- ""
+        statusCreate <- true
+    else
+        statusCreate <- false
+    return statusCreate
+```
+ 
+Tabel 5.1.4. Query Operasi createAkunPetugas(username: String, nik: String, email: String, noTelepon: String, password: String)
+ 
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-AP-002 | addDoc(collection(db, "akunPetugas"), { username: username, nik: nik, email: email, noTelepon: noTelepon, password: password, wilayahTugas: "" }) | Menambahkan dokumen akun petugas baru. Password yang disimpan sudah terenkripsi oleh encrypt(). |
+ 
+### 5.1.5 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +cekStatusLogin() -> Boolean  
+**ID Algoritma:** Algo-AP-005
+ 
+```text
+FUNCTION cekStatusLogin() -> Boolean
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    return statusLogin
+```
+ 
+### 5.1.6 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +getProfil() -> Map<String, Object>  
+**ID Algoritma:** Algo-AP-006
+ 
+```text
+FUNCTION getProfil() -> Map<String, Object>
+DEKLARASI KAMUS
+    profil : Map<String, Object>
+ALGORITMA
+    profil["username"] <- username
+    profil["email"] <- email
+    profil["noTelepon"] <- noTelepon
+    profil["wilayahTugas"] <- wilayahTugas
+    return profil
+```
+ 
+### 5.1.7 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +editProfil(email: String, noTelepon: String, wilayahTugas: String) -> Boolean  
+**ID Algoritma:** Algo-AP-007
+ 
+```text
+FUNCTION editProfil(email: String, noTelepon: String, wilayahTugas: String) -> Boolean
+DEKLARASI KAMUS
+    statusEdit : Boolean
+ALGORITMA
+    statusEdit <- perbarui email, noTelepon, dan wilayahTugas akun dengan idPetugas di database
+    if statusEdit = true then
+        this.email <- email
+        this.noTelepon <- noTelepon
+        this.wilayahTugas <- wilayahTugas
+    return statusEdit
+```
+ 
+Tabel 5.1.7. Query Operasi editProfil(email: String, noTelepon: String, wilayahTugas: String)
+ 
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-AP-003 | updateDoc(doc(db, "akunPetugas", idPetugas), { email: email, noTelepon: noTelepon, wilayahTugas: wilayahTugas }) | Memperbarui email, nomor telepon, dan wilayah tugas pada dokumen akun petugas yang sedang login. |
+ 
+### 5.1.8 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +changePassword(passwordBaru: String) -> Boolean  
+**ID Algoritma:** Algo-AP-008
+ 
+```text
+FUNCTION changePassword(passwordBaru: String) -> Boolean
+DEKLARASI KAMUS
+    passwordHash : String
+    statusUbah : Boolean
+ALGORITMA
+    passwordHash <- encrypt(passwordBaru)
+    statusUbah <- perbarui password akun dengan idPetugas di database menjadi passwordHash
+    if statusUbah = true then
+        password <- passwordHash
+    return statusUbah
+```
+ 
+Tabel 5.1.8. Query Operasi changePassword(passwordBaru: String)
+ 
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-AP-004 | updateDoc(doc(db, "akunPetugas", idPetugas), { password: passwordHash }) | Mengganti password pada dokumen akun petugas yang sedang login dengan password baru yang sudah terenkripsi. |
+ 
+### 5.1.9 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +logout() -> Boolean  
+**ID Algoritma:** Algo-AP-009
+ 
+```text
+FUNCTION logout() -> Boolean
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    statusLogin <- false
+    idPetugas <- ""
+    username <- ""
+    nik <- ""
+    email <- ""
+    noTelepon <- ""
+    password <- ""
+    wilayahTugas <- ""
+    return true
+```
+ 
+### 5.1.10 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugas  
+**Nama Operasi:** +verifikasiPetugas(nik: String, username: String) -> String  
+**ID Algoritma:** Algo-AP-010
+ 
+```text
+FUNCTION verifikasiPetugas(nik: String, username: String) -> String
+DEKLARASI KAMUS
+    dataPetugas : Map<String, Object>
+ALGORITMA
+    dataPetugas <- cari data petugas dengan nik = nik di database pemerintah
+    if dataPetugas = NULL then
+        return "NIK_TIDAK_TERDAFTAR"
+    else
+        if dataPetugas["namaLengkap"] != username then
+            return "NAMA_TIDAK_SESUAI"
+        else
+            return "VALID"
+```
+ 
+Tabel 5.1.10. Query Operasi verifikasiPetugas(nik: String, username: String)
+ 
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| Q-AP-005 | GET {URL_API_PEMERINTAH}/petugas?nik={nik} | Asumsi: sistem terhubung ke API database pemerintah yang menyimpan data petugas kebersihan. Request mengembalikan data petugas (termasuk nama lengkap) jika NIK terdaftar, atau kosong jika tidak terdaftar. |
 
-*[Ulangi pola 5.1.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
 
 ## 5.2 Kelas AkunPetugasController
 
@@ -684,180 +906,382 @@ Tabel 5.2.1. Query Operasi [Nama Operasi]
 
 
 ## 5.3 Kelas AkunPetugasInterface
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
 **ID Kelas:** C03
-
+ 
 Tabel 5.3.1. Operasi Kelas AkunPetugasInterface
-
+ 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
 | + openLogin(): void | public | Menerima aksi petugas membuka halaman Log In, lalu menampilkan form Log In melalui showLogin(). |
-| + showLogin(): void | public | Menampilkan form Log In yang berisi kolom username, kolom password, dan tombol masuk. |
-| + inputKredensial(username: String, password: String): void | public | Menerima username dan password yang diisi petugas, lalu meneruskannya ke AkunPetugasController melalui prosesLogin() untuk divalidasi. |
-| + showPesan(pesan: String): void | public | Menampilkan pesan hasil Log In kepada petugas, yaitu "Selamat datang" jika berhasil atau "Username/Password salah" jika gagal. |
-| + clearInput(): void | public | Mengosongkan kolom username dan password pada form Log In setelah Log In gagal. |
-| + showTampilan(): void | public | Mengarahkan petugas ke tampilan profil setelah Log In berhasil. |
-| + showSignUp(statusCreate: Boolean): void | public | Menampilkan hasil pembuatan akun sesuai statusCreate, yaitu pesan berhasil jika status = true atau pesan gagal jika status = false. |
-| + inputDataSignUp(username: String, email: String, password: String): void | public | Menerima data diri yang diisi petugas pada form Sign Up, lalu meneruskannya ke AkunPetugasController melalui signUp() untuk dibuatkan akun. |
-
+| + showLogin(): void | public | Menampilkan form Log In yang berisi kolom email, kolom kata sandi, tombol Masuk, dan tautan ke halaman Sign Up. |
+| + inputKredensial(email: String, password: String): void | public | Menerima email dan kata sandi yang diisi petugas, memeriksa kolom yang masih kosong, lalu meneruskannya ke AkunPetugasController melalui prosesLogin() untuk divalidasi. |
+| + showPesan(pesan: String): void | public | Menampilkan pesan atau notifikasi kepada petugas, misalnya "Selamat datang", "Email/Kata sandi salah", "Profil berhasil diperbarui", atau "Kata sandi gagal diperbarui". |
+| + showErrorInput(kolom: String, pesan: String): void | public | Menandai kolom input yang salah dengan border merah dan menampilkan pesan kesalahan tepat di bawah kolom tersebut, misalnya "Kata sandi wajib diisi" atau "NIK tidak terdaftar sebagai petugas kebersihan". |
+| + clearInput(): void | public | Mengosongkan kolom email dan kata sandi pada form Log In setelah Log In gagal. |
+| + showTampilan(): void | public | Menampilkan halaman Profil Petugas yang berisi username, email, nomor telepon, wilayah tugas, tombol Edit Profil, menu Ganti Kata Sandi, dan tombol Keluar Akun. |
+| + openSignUp(): void | public | Menerima aksi petugas menekan tautan daftar akun, lalu menampilkan form Sign Up. |
+| + inputDataSignUp(username: String, nik: String, email: String, noTelepon: String, password: String, konfirmasiPassword: String): void | public | Menerima data diri yang diisi petugas pada form Sign Up, memeriksa kesamaan kata sandi dan konfirmasinya, lalu meneruskan data ke AkunPetugasController melalui signUp(). |
+| + showSignUp(statusCreate: String): void | public | Menampilkan hasil pembuatan akun sesuai statusCreate. Jika "BERHASIL", menampilkan pesan berhasil dan membuka halaman Log In. Jika gagal, menandai kolom yang salah melalui showErrorInput() sesuai jenis kegagalannya. |
+| + chooseEditProfil(): void | public | Menerima aksi petugas menekan tombol Edit Profil. |
+| + showFormEditProfil(): void | public | Menampilkan form edit profil berisi email, nomor telepon, dan wilayah tugas saat ini, beserta tombol Batal dan Simpan. |
+| + fillFormEditProfil(email: String, noTelepon: String, wilayahTugas: String): void | public | Menerima isian form edit profil dan meneruskannya ke AkunPetugasController untuk disimpan. |
+| + chooseChangePassword(): void | public | Menerima aksi petugas menekan menu Ganti Kata Sandi. |
+| + showFormChangePassword(): void | public | Menampilkan dialog Ubah Kata Sandi berisi kolom kata sandi baru, konfirmasi kata sandi baru, tombol Batal, dan tombol Simpan. |
+| + fillFormChangePassword(passwordBaru: String, konfirmasiPassword: String): void | public | Menerima isian dialog Ubah Kata Sandi, memeriksa kesamaan kedua kata sandi, lalu meneruskannya ke AkunPetugasController untuk disimpan. |
+| + chooseLogout(): void | public | Menerima aksi petugas menekan tombol Keluar Akun. |
+| + showKonfirmasiLogout(): void | public | Menampilkan dialog konfirmasi Keluar Akun berisi tombol Keluar dan Batal. |
+| + konfirmasiLogout(pilihan: Boolean): void | public | Menerima pilihan petugas pada dialog Keluar Akun. Jika pilihan = true, logout diproses dan petugas diarahkan ke halaman Log In. Jika pilihan = false, dialog ditutup. |
+ 
 Tabel 5.3.2. Atribut Kelas AkunPetugasInterface
-
+ 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
 | - | - | - |
-
+ 
 ### 5.3.1 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** openLogin()  
+**Nama Operasi:** +openLogin()  
 **ID Algoritma:** Algo-API-001
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE openLogin()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    showLogin()
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.1. Query Operasi openLogin()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.2 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** showLogin()  
+**Nama Operasi:** +showLogin()  
 **ID Algoritma:** Algo-API-002
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE showLogin()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    tampilkan halaman Log In
+    tampilkan kolom email kosong
+    tampilkan kolom kata sandi kosong
+    tampilkan tombol "Masuk"
+    tampilkan tautan "Belum punya akun? Klik di sini"
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.2. Query Operasi showLogin()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.3 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** inputKredensial(username: String, password: String)  
+**Nama Operasi:** +inputKredensial(email: String, password: String)  
 **ID Algoritma:** Algo-API-003
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE inputKredensial(email: String, password: String)
+DEKLARASI KAMUS
+    adaKosong : Boolean
+    validLogin : Boolean
+ALGORITMA
+    adaKosong <- false
+    if email = "" then
+        showErrorInput("email", "Email wajib diisi")
+        adaKosong <- true
+    endif
+    if password = "" then
+        showErrorInput("password", "Kata sandi wajib diisi")
+        adaKosong <- true
+    endif
+    if adaKosong = false then
+        validLogin <- AkunPetugasController.prosesLogin(email, password)
+        if validLogin = true then
+            showPesan("Selamat datang")
+            showTampilan()
+        else
+            showPesan("Email/Kata sandi salah")
+            clearInput()
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.3. Query Operasi inputKredensial(username: String, password: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.4 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** showPesan(pesan: String)  
+**Nama Operasi:** +showPesan(pesan: String)  
 **ID Algoritma:** Algo-API-004
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE showPesan(pesan: String)
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    tampilkan pesan pada layar
+    tunggu 5 detik
+    sembunyikan pesan
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.4. Query Operasi showPesan(pesan: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.5 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** clearInput()  
+**Nama Operasi:** +clearInput()  
 **ID Algoritma:** Algo-API-005
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE clearInput()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    kosongkan kolom email
+    kosongkan kolom kata sandi
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.5. Query Operasi clearInput()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.6 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** showTampilan()  
+**Nama Operasi:** +showTampilan()  
 **ID Algoritma:** Algo-API-006
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE showTampilan()
+DEKLARASI KAMUS
+    profil : Map<String, Object>
+ALGORITMA
+    profil <- AkunPetugasController.getProfil()
+    tampilkan halaman Profil Petugas
+    tampilkan profil["username"]
+    tampilkan profil["email"]
+    tampilkan profil["noTelepon"]
+    tampilkan profil["wilayahTugas"]
+    tampilkan tombol "Edit Profil"
+    tampilkan menu "Ganti Kata Sandi"
+    tampilkan tombol "Keluar Akun"
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.6. Query Operasi showTampilan()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+ 
 ### 5.3.7 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** showSignUp(statusCreate: Boolean)  
+**Nama Operasi:** +openSignUp()  
 **ID Algoritma:** Algo-API-007
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE openSignUp()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    tampilkan halaman Sign Up
+    tampilkan kolom nama lengkap, NIK, email, nomor telepon, kata sandi, dan konfirmasi kata sandi dalam keadaan kosong
+    tampilkan tombol "Daftar"
+    tampilkan tautan "Sudah punya akun? Klik di sini"
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.7. Query Operasi showSignUp(statusCreate: Boolean)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.3.8 Algoritma/Query
-
+ 
 **Nama Kelas:** AkunPetugasInterface  
-**Nama Operasi:** inputDataSignUp(username: String, email: String, password: String)  
+**Nama Operasi:** +inputDataSignUp(username: String, nik: String, email: String, noTelepon: String, password: String, konfirmasiPassword: String)  
 **ID Algoritma:** Algo-API-008
-
+ 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROCEDURE inputDataSignUp(username: String, nik: String, email: String, noTelepon: String, password: String, konfirmasiPassword: String)
+DEKLARASI KAMUS
+    statusCreate : String
+ALGORITMA
+    if password != konfirmasiPassword then
+        showErrorInput("konfirmasiPassword", "Konfirmasi kata sandi tidak sama")
+    else
+        statusCreate <- AkunPetugasController.signUp(username, nik, email, noTelepon, password)
+        showSignUp(statusCreate)
+```
+ 
+### 5.3.9 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showSignUp(statusCreate: String)  
+**ID Algoritma:** Algo-API-009
+ 
+```text
+PROCEDURE showSignUp(statusCreate: String)
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    if statusCreate = "BERHASIL" then
+        showPesan("Akun berhasil dibuat")
+        openLogin()
+    else if statusCreate = "EMAIL_TERDAFTAR" then
+        showErrorInput("email", "Email sudah terdaftar")
+    else if statusCreate = "NIK_TIDAK_TERDAFTAR" then
+        showErrorInput("nik", "NIK tidak terdaftar sebagai petugas kebersihan")
+    else if statusCreate = "NAMA_TIDAK_SESUAI" then
+        showErrorInput("username", "Nama lengkap tidak sesuai dengan data NIK")
+    else
+        showPesan("Akun gagal dibuat. Silakan coba lagi")
+```
+ 
+### 5.3.10 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +chooseEditProfil()  
+**ID Algoritma:** Algo-API-010
+ 
+```text
+PROCEDURE chooseEditProfil()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    showFormEditProfil()
+```
+ 
+### 5.3.11 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showFormEditProfil()  
+**ID Algoritma:** Algo-API-011
+ 
+```text
+PROCEDURE showFormEditProfil()
+DEKLARASI KAMUS
+    profil : Map<String, Object>
+ALGORITMA
+    profil <- AkunPetugasController.getProfil()
+    tampilkan kolom email berisi profil["email"]
+    tampilkan kolom nomor telepon berisi profil["noTelepon"]
+    tampilkan kolom wilayah tugas berisi profil["wilayahTugas"]
+    tampilkan tombol "Batal" dan "Simpan"
+```
+ 
+### 5.3.12 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +fillFormEditProfil(email: String, noTelepon: String, wilayahTugas: String)  
+**ID Algoritma:** Algo-API-012
+ 
+```text
+PROCEDURE fillFormEditProfil(email: String, noTelepon: String, wilayahTugas: String)
+DEKLARASI KAMUS
+    statusEdit : Boolean
+ALGORITMA
+    statusEdit <- AkunPetugasController.editProfil(email, noTelepon, wilayahTugas)
+    showTampilan()
+    if statusEdit = true then
+        showPesan("Profil berhasil diperbarui")
+    else
+        showPesan("Profil gagal diperbarui")
+```
+ 
+### 5.3.13 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +chooseChangePassword()  
+**ID Algoritma:** Algo-API-013
+ 
+```text
+PROCEDURE chooseChangePassword()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    showFormChangePassword()
+```
+ 
+### 5.3.14 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showFormChangePassword()  
+**ID Algoritma:** Algo-API-014
+ 
+```text
+PROCEDURE showFormChangePassword()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    tampilkan dialog "Ubah Kata Sandi"
+    tampilkan kolom kata sandi baru kosong
+    tampilkan kolom konfirmasi kata sandi baru kosong
+    tampilkan tombol "Batal" dan "Simpan"
+```
+ 
+### 5.3.15 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +fillFormChangePassword(passwordBaru: String, konfirmasiPassword: String)  
+**ID Algoritma:** Algo-API-015
+ 
+```text
+PROCEDURE fillFormChangePassword(passwordBaru: String, konfirmasiPassword: String)
+DEKLARASI KAMUS
+    statusUbah : Boolean
+ALGORITMA
+    if passwordBaru != konfirmasiPassword then
+        showErrorInput("konfirmasiPassword", "Konfirmasi kata sandi tidak sama")
+    else
+        statusUbah <- AkunPetugasController.changePassword(passwordBaru)
+        tutup dialog "Ubah Kata Sandi"
+        if statusUbah = true then
+            showPesan("Kata sandi berhasil diperbarui")
+        else
+            showPesan("Kata sandi gagal diperbarui")
+```
+ 
+### 5.3.16 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +chooseLogout()  
+**ID Algoritma:** Algo-API-016
+ 
+```text
+PROCEDURE chooseLogout()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    showKonfirmasiLogout()
+```
+ 
+### 5.3.17 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showKonfirmasiLogout()  
+**ID Algoritma:** Algo-API-017
+ 
+```text
+PROCEDURE showKonfirmasiLogout()
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    tampilkan dialog "Keluar Akun"
+    tampilkan pesan "Apakah Anda yakin ingin keluar akun ini?"
+    tampilkan tombol "Keluar" dan "Batal"
+```
+ 
+### 5.3.18 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +konfirmasiLogout(pilihan: Boolean)  
+**ID Algoritma:** Algo-API-018
+ 
+```text
+PROCEDURE konfirmasiLogout(pilihan: Boolean)
+DEKLARASI KAMUS
+    statusLogout : Boolean
+ALGORITMA
+    tutup dialog "Keluar Akun"
+    if pilihan = true then
+        statusLogout <- AkunPetugasController.logout()
+        if statusLogout = true then
+            openLogin()
+```
+ 
+### 5.3.19 Algoritma/Query
+ 
+**Nama Kelas:** AkunPetugasInterface  
+**Nama Operasi:** +showErrorInput(kolom: String, pesan: String)  
+**ID Algoritma:** Algo-API-019
+ 
+```text
+PROCEDURE showErrorInput(kolom: String, pesan: String)
+DEKLARASI KAMUS
+    -
+ALGORITMA
+    ubah border kolom menjadi merah
+    tampilkan ikon peringatan dan pesan di bawah kolom
 ```
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.3.8. Query Operasi inputDataSignUp(username: String, email: String, password: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-API-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ## 5.4 Kelas Jadwal
 
@@ -931,15 +1355,30 @@ Tabel 5.5.2. Atribut Kelas JadwalController
 **ID Algoritma:** Algo-JC-001
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+FUNCTION getDaftarJadwal() -> List<Jadwal>
+DEKLARASI KAMUS
+    dataJadwal : List of Jadwal
+    jadwal : Jadwal
+    idJadwal : String
+    kecamatan : String
+    kelurahan : String
+ALGORITMA
+    dataJadwal <- ambil seluruh data jadwal dari database
+    daftarJadwal <- []
+    for jadwal in dataJadwal
+        idJadwal <- jadwal.getIdJadwal()
+        kecamatan <- jadwal.getKecamatan()
+        kelurahan <- jadwal.getKelurahan()
+        daftarJadwal.tambah(jadwal)
+    endfor
+    return daftarJadwal
 ```
 
 Tabel 5.5.1. Query Operasi getDaftarJadwal()
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
+| Q-JC-001 | getDocs(collection(db, "jadwal")) | Mengambil seluruh dokumen jadwal (idJadwal, kecamatan, kelurahan, daftarTanggal) dari database. |
 
 
 ### 5.5.2 Algoritma/Query
@@ -949,15 +1388,25 @@ Tabel 5.5.1. Query Operasi getDaftarJadwal()
 **ID Algoritma:** Algo-JC-002
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+FUNCTION cariLokasiTPS(keyword: String) -> List<Jadwal>
+DEKLARASI KAMUS
+    hasilCari : List of Jadwal
+    jadwal : Jadwal
+    idJadwal : String
+    kecamatan : String
+    kelurahan : String
+ALGORITMA
+    hasilCari <- []
+    for jadwal in daftarJadwal
+        kecamatan <- jadwal.getKecamatan()
+        kelurahan <- jadwal.getKelurahan()
+        if kecamatan cocok dengan keyword or kelurahan cocok dengan keyword then
+            idJadwal <- jadwal.getIdJadwal()
+            hasilCari.tambah(jadwal)
+        endif
+    endfor
+    return hasilCari
 ```
-
-Tabel 5.5.2. Query Operasi cariLokasiTPS(keyword: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 
 ### 5.5.3 Algoritma/Query
@@ -967,15 +1416,30 @@ Tabel 5.5.2. Query Operasi cariLokasiTPS(keyword: String)
 **ID Algoritma:** Algo-JC-003
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+FUNCTION getJadwal(idJadwal: String) -> Map<String, Object>
+DEKLARASI KAMUS
+    hasil : Map<String, Object>
+    jadwal : Jadwal
+    jadwalDipilih : Jadwal
+    daftarTanggal : List of Date
+    statusLogin : Boolean
+ALGORITMA
+    jadwalDipilih <- NULL
+    for jadwal in daftarJadwal
+        if jadwal.getIdJadwal() = idJadwal then
+            jadwalDipilih <- jadwal
+        endif
+    endfor
+    if jadwalDipilih != NULL then
+        daftarTanggal <- jadwalDipilih.getTanggal()
+        statusLogin <- AkunPetugas.cekStatusLogin()
+        hasil["jadwal"] <- jadwalDipilih
+        hasil["statusLogin"] <- statusLogin
+        return hasil
+    else
+        return NULL
+    endif
 ```
-
-Tabel 5.5.3. Query Operasi getJadwal(idJadwal: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 
 ### 5.5.4 Algoritma/Query
@@ -985,15 +1449,31 @@ Tabel 5.5.3. Query Operasi getJadwal(idJadwal: String)
 **ID Algoritma:** Algo-JC-004
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+FUNCTION editJadwal(idJadwal: String, daftarTanggalBaru: List<Date>) -> Jadwal
+DEKLARASI KAMUS
+    jadwal : Jadwal
+    jadwalDipilih : Jadwal
+    statusSimpan : Boolean
+ALGORITMA
+    jadwalDipilih <- NULL
+    for jadwal in daftarJadwal
+        if jadwal.getIdJadwal() = idJadwal then
+            jadwalDipilih <- jadwal
+    if jadwalDipilih = NULL then
+        return NULL
+    jadwalDipilih.setTanggal(daftarTanggalBaru)
+    statusSimpan <- jadwalDipilih.simpanJadwal()
+    if statusSimpan = true then
+        return jadwalDipilih
+    else
+        return NULL
 ```
 
 Tabel 5.5.4. Query Operasi editJadwal(idJadwal: String, daftarTanggalBaru: List<Date>)
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| Q-JC-01 | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
+| Q-JC-002 | updateDoc(doc(db, "jadwal", idJadwal), { daftarTanggal: daftarTanggalBaru }) | Memperbarui daftar tanggal pada dokumen jadwal yang dipilih. Query dijalankan di dalam Jadwal.simpanJadwal() yang dipanggil oleh operasi ini. |
 
 
 ## 5.6 Kelas JadwalInterface
