@@ -463,6 +463,43 @@ Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 
 <br>
 
+## 3.7 Use Case Melakukan Logout
+
+*ID Use Case:* UC07  
+*Nama Use Case:* Melakukan Logout
+
+### 3.7.1 Identifikasi Kelas
+
+Tabel 3.7. Identifikasi Kelas Use Case [UC07]
+
+| ID Kelas | Nama Kelas | Nama Kelas Analisis Terkait |
+| :--- | :--- | :--- |
+| C09 | AkunPetugas | AkunPetugas |
+| C08 | AkunPetugasController | AkunPetugasController |
+| C07 | AkunPetugasInterface | AkunPetugasInterface |
+
+### 3.7.2 Sequence Diagram
+
+- *Skenario Normal: Petugas berhasil melakukan log out dari akunnya*
+
+<p align="center">
+<img alt="Sequence Diagram UC07 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 11. Sequence Diagram [UC06]</i>
+</p>
+
+### 3.7.3 Diagram Kelas
+
+<p align="center">
+<img alt="Diagram Kelas UC07" src="./assets/diagram/diagram-kelas-uc07.jpg" width="75%">
+</p>
+<p align="center">
+<i>Gambar 12. Diagram Kelas [UC07]</i>
+</p>
+
+<br>
+
 ---
 
 ## BAB 4: Diagram Kelas Keseluruhan
@@ -799,7 +836,6 @@ Tabel 5.2.2. Atribut Kelas AkunPetugasController
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
 | *- statusLogin* | *private* | *Boolean* |
 
 ### 5.2.1 Algoritma/Query
@@ -823,17 +859,7 @@ ALGORITMA
         statusLogin <- false
         return false
     endif
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.2.3. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.2.2 Algoritma/Query
 
@@ -858,18 +884,8 @@ ALGORITMA
     else
         return false
     endif
-
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.2.4. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.2.3 Algoritma/Query
 
@@ -902,19 +918,29 @@ ALGORITMA
     passwordHash <- AkunPetugas.encrypt(password)
     statusCreate <- AkunPetugas.createAkunPetugas()
     return statusCreate
-
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
+### 5.2.4 Algoritma/Query
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.2.5. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+**Nama Kelas:** AkunPetugasController  
+**Nama Operasi:** *+ logout: Boolean*  
+**ID Algoritma:** Algo-APC-004
+```
+PROGRAM Logout() -> Boolean
+DEKLARASI KAMUS
+    statusLogout : Boolean
+ALGORITMA
+    statusLogout <- AkunPetugas.logout()
+    if statusLogout = true then
+        statusLogin <- 
+    if pilihan = true then
+        statusLogout <- AkunPetugasController.logout()
+        if statusLogout = true then
+            statusLogin <- False
+            return true
+        else
+            return false
+        endif
+```
 
 ## 5.3 Kelas AkunPetugasInterface
  
@@ -1870,19 +1896,7 @@ ALGORITMA
     endif
     return NULL
         
-
-
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.10.1. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-PC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 
 ### 5.10.2 Algoritma/Query
@@ -1896,6 +1910,7 @@ PROGRAM prosesBarcode(frameData: Byte[]): String
 DEKLARASI
     rawBarcode: String
     dataHasil: InformasiSampah
+    kategori: String
 ALGORITMA
     if isMemindai = True then
         rawBarcode <- BarcodeScannerLibrary.decode(frameData)
@@ -1910,10 +1925,6 @@ ALGORITMA
         endif
     endif
     return NULL
-        
-
-
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
 ## 5.11 Kelas PemindaiInterface
 
@@ -1959,22 +1970,7 @@ ALGORITMA
     else
         renderlabel(kategori)
     endif
-[Tuliskan pseudocode algoritma operasi di sini.]
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.11.1. Query Operasi [Nama Operasi]
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-PI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
-
-### 5.11.2 Algoritma/Query
-
-*[Ulangi pola 5.11.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
 
 <br>
 
