@@ -213,7 +213,7 @@ Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 
 - **Skenario Normal**
 
-<<p align="center">
+<p align="center">
 <img alt="Contoh Diagram Sekuens Skenario Normal UC01 P/L E-Commerce" src="./assets/diagram/UC01_N.drawio.png" width="50%">
 </p>
 <p align="center">
@@ -2204,20 +2204,6 @@ ALGORITMA
 ---
 
 # BAB 6: Perancangan Antarmuka
-
-## 6.1 Rancangan Antarmuka [ID]
-
-Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tuliskan spesifikasi rinci objek yang ditampilkan dan reaksi sistem terhadap interaksi pengguna.
-
-**Antarmuka:** *[ID layar]*  
-**Nama Layar:** *[Nama layar]*
-
-<p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-design.png" width="50%">
-</p>
-<p align="center">
-<i>Gambar 6.1. Rancangan Antarmuka [ID Layar] - [Nama Layar]</i>
-</p>
 
 ## 6.1 Rancangan Antarmuka [I-01]
 **Antarmuka:** [I-01] 
