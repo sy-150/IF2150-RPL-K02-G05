@@ -34,10 +34,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
-| *B* |  |
-| *C* |  |
-| ... |  |
+| *A* | *Penambahan operasi/metode di antarmuka* |
 
 ---
 
@@ -236,7 +233,7 @@ Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 <img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/diagram-kelas-uc01.jpg" width="35%">
 </p>
 <p align="center">
-<i>Gambar 5. Diagram Kelas [UC01]</i>
+<i>Gambar 6. Diagram Kelas [UC01]</i>
 </p>
 
 ## 3.2 Use Case Memindai Sampah
@@ -264,7 +261,7 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 <img alt="Sequence Diagram Skenario Normal UC02" src="./assets/diagram/UC02_N.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.2. Sequence Diagram Skenario Normal UC02</i>
+<i>Gambar 7. Sequence Diagram Skenario Normal UC02</i>
 </p>
 
 #### Skenario Alternatif 1: Memindai dengan Barcode
@@ -273,7 +270,7 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 <img alt="Sequence Diagram Skenario Alternatif 1 UC02" src="./assets/diagram/UC02_A1.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.3. Sequence Diagram Skenario Alternatif 1 UC02</i>
+<i>Gambar 8. Sequence Diagram Skenario Alternatif 1 UC02</i>
 </p>
 
 #### Skenario Alternatif 2: Data Barcode Tidak Ditemukan
@@ -282,7 +279,7 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 <img alt="Sequence Diagram Skenario Alternatif 2 UC02" src="./assets/diagram/UC02_A2.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.4. Sequence Diagram Skenario Alternatif 2 UC02</i>
+<i>Gambar 9. Sequence Diagram Skenario Alternatif 2 UC02</i>
 </p>
 
 #### Skenario Alternatif 3: Kategori Sampah yang Ditampilkan Salah
@@ -291,7 +288,7 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 <img alt="Sequence Diagram Skenario Alternatif 3 UC02" src="./assets/diagram/UC02_A3.drawio.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.5. Sequence Diagram Skenario Alternatif 3 UC02</i>
+<i>Gambar 10. Sequence Diagram Skenario Alternatif 3 UC02</i>
 </p>
 
 ### 3.3.3 Diagram Kelas
@@ -300,7 +297,7 @@ Tabel 3.2. Identifikasi Kelas Use Case UC02
 <img alt="Diagram Kelas UC03" src="./assets/diagram/diagram_kelas_UC02.png" width="75%">
 </p>
 <p align="center">
-<i>Gambar 9. Diagram Kelas [UC03]</i>
+<i>Gambar 11. Diagram Kelas [UC03]</i>
 </p>
 
 
@@ -328,7 +325,7 @@ Tabel 3.3. Identifikasi Kelas Use Case [UC03]
 <img alt="Sequence Diagram UC03" src="./assets/diagram/uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 8. Sequence Diagram [UC03]</i>
+<i>Gambar 12. Sequence Diagram [UC03]</i>
 </p>
 
 ### 3.3.3 Diagram Kelas
@@ -337,7 +334,7 @@ Tabel 3.3. Identifikasi Kelas Use Case [UC03]
 <img alt="Diagram Kelas UC03" src="./assets/diagram/diagram-kelas-uc03-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 9. Diagram Kelas [UC03]</i>
+<i>Gambar 13. Diagram Kelas [UC03]</i>
 </p>
 
 ## 3.4 Use Case Melihat Jadwal
@@ -364,7 +361,7 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 <img alt="Sequence Diagram UC04" src="./assets/diagram/uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 9. Sequence Diagram [UC04]</i>
+<i>Gambar 14. Sequence Diagram [UC04]</i>
 </p>
 
 ### 3.4.3 Diagram Kelas
@@ -373,7 +370,7 @@ Tabel 3.4. Identifikasi Kelas Use Case [UC04]
 <img alt="Diagram Kelas UC04" src="./assets/diagram/diagram-kelas-uc04-fix.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 10. Diagram Kelas [UC04]</i>
+<i>Gambar 15. Diagram Kelas [UC04]</i>
 </p>
 
 ## 3.5 Use Case Mengakses Tampilan Informasi
@@ -399,7 +396,7 @@ Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 <img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc05-normal.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Normal</i>
+<i>Gambar 16. Sequence Diagram [UC05] Normal</i>
 </p>
 
 - **Skenario Alternatif: Masyarakat menggunakan fitur _search_**
@@ -408,7 +405,7 @@ Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 <img alt="Sequence Diagram UC05 Alt" src="./assets/diagram/uc05-alt.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Alt</i>
+<i>Gambar 17. Sequence Diagram [UC05] Alt</i>
 </p>
 
 - **Skenario Eksepsi: Database gagal diakses**
@@ -417,7 +414,7 @@ Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 <img alt="Sequence Diagram UC05 Except" src="./assets/diagram/uc05-except.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC05] Except</i>
+<i>Gambar 18. Sequence Diagram [UC05] Except</i>
 </p>
 
 ### 3.5.3 Diagram Kelas
@@ -426,7 +423,7 @@ Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 <img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc05.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [UC05]</i>
+<i>Gambar 19. Diagram Kelas [UC05]</i>
 </p>
 
 ## 3.6 Use Case Membuat Akun
@@ -452,7 +449,7 @@ Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 <img alt="Sequence Diagram UC05 Normal" src="./assets/diagram/uc06-normal.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 11. Sequence Diagram [UC06]</i>
+<i>Gambar 20. Sequence Diagram [UC06]</i>
 </p>
 
 ### 3.6.3 Diagram Kelas
@@ -461,7 +458,7 @@ Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 <img alt="Diagram Kelas UC05" src="./assets/diagram/diagram-kelas-uc06.jpg" width="75%">
 </p>
 <p align="center">
-<i>Gambar 12. Diagram Kelas [UC06]</i>
+<i>Gambar 21. Diagram Kelas [UC06]</i>
 </p>
 
 <br>
@@ -476,7 +473,7 @@ Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 <img alt="Kelas Diagram EcoTrack" src="./assets/diagram/KelasDiagramKeseluruhan.png" width="35%">
 </p>
 <p align="center">
-<i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan [Nama P/L]</i>
+<i>Gambar 22. Diagram Kelas Perancangan Keseluruhan EcoTrack</i>
 </p>
 
 Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
@@ -2010,6 +2007,24 @@ Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tu
 <i>Gambar 6.1. Rancangan Antarmuka I-01 - Daftar Akun/Sign Up</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Daftar Akun Petugas | Menampilkan judul halaman pendaftaran akun petugas kebersihan. |
+| O-02 | Label | Buat akun untuk mulai mengelola sampah | Menampilkan deskripsi singkat halaman pendaftaran. |
+| O-03 | Label | Nama Lengkap | Menampilkan label kolom nama lengkap. |
+| O-04 | Text Field | Masukkan nama lengkap | Menerima input nama lengkap petugas. |
+| O-05 | Label | NIK | Menampilkan label kolom Nomor Induk Kependudukan. |
+| O-06 | Text Field | Masukkan NIK | Menerima input NIK calon petugas. |
+| O-07 | Label | Email | Menampilkan label kolom email. |
+| O-08 | Text Field | Masukkan Email | Menerima input alamat email calon petugas. |
+| O-09 | Label | No. Telepon | Menampilkan label kolom nomor telepon. |
+| O-10 | Text Field | Masukkan No. Telepon | Menerima input nomor telepon calon petugas. |
+| O-11 | Label | Kata Sandi | Menampilkan label kolom kata sandi. |
+| O-12 | Text Field | Masukkan kata sandi | Menerima input kata sandi untuk akun baru. |
+| O-13 | Label | Konfirmasi Kata Sandi | Menampilkan label kolom konfirmasi kata sandi. |
+| O-14 | Text Field | Ulangi kata sandi | Menerima input ulang kata sandi untuk memeriksa kesesuaian dengan kata sandi sebelumnya. |
+| O-15 | Button | DAFTAR | Memvalidasi seluruh input dan mengirim data pendaftaran. Jika valid, sistem membuat akun; jika tidak, sistem menampilkan pesan kesalahan. |
+
 ## 6.2 Rancangan Antarmuka [I-02]
 **Antarmuka:** [I-02] 
 **Nama Layar:** *Masuk Akun/Log In*
@@ -2020,6 +2035,20 @@ Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tu
 <p align="center">
 <i>Gambar 6.2. Rancangan Antarmuka I-01 - Masuk Akun/Log In</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Image | Logo EcoTrack | Menampilkan logo aplikasi EcoTrack. |
+| O-02 | Label | EcoTrack | Menampilkan nama aplikasi. |
+| O-03 | Label | Masuk Akun | Menampilkan judul halaman login. |
+| O-04 | Label | Masuk untuk mengakses akun petugas | Menampilkan deskripsi singkat halaman login. |
+| O-05 | Label | Email | Menampilkan label kolom email. |
+| O-06 | Text Field | Masukkan Email | Menerima input email yang terdaftar. |
+| O-07 | Label | Kata Sandi | Menampilkan label kolom kata sandi. |
+| O-08 | Text Field | Masukkan kata sandi | Menerima input kata sandi akun. |
+| O-09 | Button | Lupa kata sandi? | Ketika ditekan, sistem membuka alur pemulihan kata sandi jika fitur tersebut tersedia. |
+| O-10 | Button | MASUK | Memvalidasi email dan kata sandi. Jika valid, sistem mengarahkan pengguna ke halaman sesuai perannya; jika tidak, sistem menampilkan pesan kesalahan. |
+| O-11 | Label/Button | Belum punya akun? Klik di sini | Ketika bagian “Klik di sini” ditekan, sistem membuka halaman pendaftaran akun petugas. |
 
 ## 6.3 Rancangan Antarmuka [I-03]
 **Antarmuka:** [I-03]
@@ -2063,9 +2092,9 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
-| O-14 | Ilustrasi | Ikon kaca pembesar | Menampilkan ilustrasi sebagai penanda bahwa hasil pencarian tidak ditemukan. |
-| O-15 | Label | Material tidak ditemukan | Menampilkan pesan bahwa tidak ada kategori material yang sesuai dengan kata kunci pencarian. |
-| O-16 | Label | Coba kata kunci lain atau periksa ejaan pencarianmu | Memberikan arahan kepada pengguna untuk mencoba kata kunci lain atau memperbaiki ejaan pencarian. |
+| O-01 | Ilustrasi | Ikon kaca pembesar | Menampilkan ilustrasi sebagai penanda bahwa hasil pencarian tidak ditemukan. |
+| O-02 | Label | Material tidak ditemukan | Menampilkan pesan bahwa tidak ada kategori material yang sesuai dengan kata kunci pencarian. |
+| O-03 | Label | Coba kata kunci lain atau periksa ejaan pencarianmu | Memberikan arahan kepada pengguna untuk mencoba kata kunci lain atau memperbaiki ejaan pencarian. |
 
 ## 6.5 Rancangan Antarmuka [I-06]
 **Antarmuka:** [I-06] 
@@ -2080,15 +2109,15 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
-| O-17 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
-| O-18 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
-| O-19 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
-| O-20 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
-| O-21 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
-| O-22 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
-| O-23 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
-| O-24 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
-| O-25 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-01 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
+| O-02 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
+| O-03 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
+| O-04 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
+| O-05 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
+| O-06 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
+| O-07 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
+| O-08 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-09 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
 
 ## 6.6 Rancangan Antarmuka [I-06]
 **Antarmuka:** [I-06] 
@@ -2103,15 +2132,15 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
-| O-17 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
-| O-18 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
-| O-19 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
-| O-20 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
-| O-21 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
-| O-22 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
-| O-23 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
-| O-24 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
-| O-25 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-01 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
+| O-02 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
+| O-03 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
+| O-04 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
+| O-05 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
+| O-06 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
+| O-07 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
+| O-08 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-09 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
 
 
 ## 6.7 Rancangan Antarmuka [I-07]
@@ -2125,6 +2154,22 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.7. Rancangan Antarmuka I-07 - Halaman Utama Jadwal Pengambilan Sampah</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Jadwal Pengambilan Sampah | Menampilkan judul halaman jadwal pengambilan sampah. |
+| O-02 | Button | Ikon profil | Ketika ditekan, sistem membuka halaman profil petugas jika pengguna sudah login. |
+| O-03 | Text Field | Cari Kecamatan/Kelurahan | Menerima kata kunci lokasi TPS berdasarkan kecamatan atau kelurahan. Sistem menampilkan daftar lokasi yang sesuai dengan pencarian. |
+| O-04 | Label | Lokasi TPS Kota Bandung | Menampilkan judul daftar lokasi TPS yang tersedia di Kota Bandung. |
+| O-05 | Card | Kelurahan Lebak Siliwangi, Kecamatan Coblong | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-06 | Card | Kelurahan Pasteur, Kecamatan Sukajadi | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-07 | Card | Kelurahan Sukarasa, Kecamatan Sukasari | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-08 | Card | Kelurahan Tamansari, Kecamatan Bandung Wetan | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-09 | Card | Kelurahan Kopo, Kecamatan Bojongloa Kaler | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-10 | Card | Kelurahan Hegarmanah | Menampilkan lokasi TPS. Ketika dipilih, sistem membuka halaman kalender jadwal pengambilan sampah untuk lokasi tersebut. |
+| O-11 | Navigation Bar | Daur Ulang | Ketika ditekan, sistem membuka halaman utama daur ulang. |
+| O-12 | Button | Pindai | Ketika ditekan, sistem membuka halaman pemindai sampah. |
+| O-13 | Navigation Bar | Kalender | Menampilkan menu kalender sebagai navigasi aktif. |
+
 ## 6.8 Rancangan Antarmuka [I-08]
 **Antarmuka:** [I-08] 
 **Nama Layar:** *Halaman Utama Kosong Jadwal Pengambilan Sampah*
@@ -2135,6 +2180,14 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.8. Rancangan Antarmuka I-08 - Halaman Utama Kosong Jadwal Pengambilan Sampah</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Jadwal Pengambilan Sampah | Menampilkan judul halaman jadwal pengambilan sampah. |
+| O-02 | Text Field | Bekasi | Menampilkan kata kunci lokasi yang dimasukkan pengguna untuk melakukan pencarian TPS. |
+| O-03 | Icon | Ikon kaca pembesar | Menampilkan ilustrasi bahwa hasil pencarian lokasi tidak ditemukan. |
+| O-04 | Label | Lokasi TPS tidak ditemukan | Menampilkan pesan bahwa tidak terdapat lokasi TPS yang sesuai dengan kata kunci pencarian. |
+| O-05 | Label | Coba kata kunci lain atau periksa ejaan pencarianmu | Memberikan arahan kepada pengguna untuk mencoba pencarian kembali. |
 
 ## 6.9 Rancangan Antarmuka [I-09]
 **Antarmuka:** [I-09] 
@@ -2147,6 +2200,22 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.09. Rancangan Antarmuka I-09 - Halaman Utama Kalendar (Masyarakat Umum)</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman daftar lokasi TPS. |
+| O-02 | Label | Jadwal Pengambilan Sampah | Menampilkan judul halaman jadwal pengambilan sampah. |
+| O-03 | Button | Ikon profil | Ketika ditekan, sistem membuka halaman profil atau pilihan akun sesuai status login pengguna. |
+| O-04 | Card | Lokasi TPS | Menampilkan informasi kelurahan dan kecamatan dari lokasi TPS yang dipilih. |
+| O-05 | Label | Oktober 2026 | Menampilkan bulan dan tahun kalender yang sedang ditampilkan. |
+| O-06 | Button | Panah kiri | Menampilkan kalender bulan sebelumnya. |
+| O-07 | Button | Panah kanan | Menampilkan kalender bulan berikutnya. |
+| O-08 | Calendar | Kalender Pengambilan Sampah | Menampilkan tanggal dalam satu bulan beserta penanda tanggal pengambilan sampah yang telah dijadwalkan. |
+| O-09 | Legend | Hari ini: Kamis, 5 Oktober 2026 | Menampilkan keterangan penanda tanggal hari ini pada kalender. |
+| O-10 | Legend | Hari pengambilan sampah | Menampilkan keterangan bahwa tanggal berwarna hijau merupakan jadwal pengambilan sampah. |
+| O-11 | Navigation Bar | Daur Ulang | Ketika ditekan, sistem membuka halaman utama daur ulang. |
+| O-12 | Button | Pindai | Ketika ditekan, sistem membuka halaman pemindai sampah. |
+| O-13 | Navigation Bar | Kalender | Menampilkan menu kalender sebagai navigasi aktif. |
+
 ## 6.10 Rancangan Antarmuka [I-10]
 **Antarmuka:** [I-10] 
 **Nama Layar:** *Halaman Utama Kalendar (Petugas Kebersihan)*
@@ -2157,6 +2226,23 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.10. Rancangan Antarmuka I-10 - Halaman Utama Kalendar (Petugas Kebersihan)</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman daftar lokasi TPS. |
+| O-02 | Label | Jadwal Pengambilan Sampah | Menampilkan judul halaman jadwal pengambilan sampah. |
+| O-03 | Button | Ikon profil | Ketika ditekan, sistem membuka halaman profil petugas kebersihan. |
+| O-04 | Card | Lokasi TPS | Menampilkan informasi kelurahan dan kecamatan dari lokasi TPS yang dipilih. |
+| O-05 | Label | Oktober 2026 | Menampilkan bulan dan tahun kalender yang sedang ditampilkan. |
+| O-06 | Button | Panah kiri | Menampilkan kalender bulan sebelumnya. |
+| O-07 | Button | Panah kanan | Menampilkan kalender bulan berikutnya. |
+| O-08 | Calendar | Kalender Pengambilan Sampah | Menampilkan tanggal dalam satu bulan beserta penanda tanggal pengambilan sampah yang telah dijadwalkan. |
+| O-09 | Legend | Hari ini: Kamis, 5 Oktober 2026 | Menampilkan keterangan penanda tanggal hari ini pada kalender. |
+| O-10 | Legend | Hari pengambilan sampah | Menampilkan keterangan bahwa tanggal berwarna hijau merupakan jadwal pengambilan sampah. |
+| O-11 | Button | EDIT PROFIL | Ketika ditekan, sistem membuka halaman edit kalender agar petugas dapat mengubah jadwal pengambilan sampah. |
+| O-12 | Navigation Bar | Daur Ulang | Ketika ditekan, sistem membuka halaman utama daur ulang. |
+| O-13 | Button | Pindai | Ketika ditekan, sistem membuka halaman pemindai sampah. |
+| O-14 | Navigation Bar | Kalender | Menampilkan menu kalender sebagai navigasi aktif. |
 
 ## 6.11 Rancangan Antarmuka [I-11]
 **Antarmuka:** [I-11] 
@@ -2169,6 +2255,22 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.11. Rancangan Antarmuka I-11 - Halaman Edit Kalendar (Petugas Kebersihan)</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Jadwal Pengambilan Sampah | Menampilkan judul halaman jadwal pengambilan sampah. |
+| O-02 | Card | Lokasi TPS | Menampilkan informasi kelurahan dan kecamatan dari lokasi TPS yang sedang diedit. |
+| O-03 | Label | Oktober 2026 | Menampilkan bulan dan tahun kalender yang sedang diedit. |
+| O-04 | Button | Panah kiri | Menampilkan kalender bulan sebelumnya. |
+| O-05 | Button | Panah kanan | Menampilkan kalender bulan berikutnya. |
+| O-06 | Calendar | Kalender Pengambilan Sampah | Menampilkan seluruh tanggal pada bulan yang dipilih. Petugas dapat menekan tanggal untuk menambah atau menghapus jadwal pengambilan sampah. |
+| O-07 | Legend | Jadwal tersedia | Menampilkan keterangan tanggal yang belum dipilih sebagai jadwal pengambilan sampah. |
+| O-08 | Legend | Jadwal terpilih | Menampilkan keterangan tanggal yang telah dipilih sebagai jadwal pengambilan sampah. |
+| O-09 | Button | BATAL | Membatalkan perubahan jadwal dan kembali ke halaman kalender petugas tanpa menyimpan perubahan. |
+| O-10 | Button | SIMPAN | Ketika ditekan, sistem menampilkan pop-up konfirmasi penyimpanan perubahan jadwal. |
+| O-11 | Navigation Bar | Daur Ulang | Ketika ditekan, sistem membuka halaman utama daur ulang. |
+| O-12 | Button | Pindai | Ketika ditekan, sistem membuka halaman pemindai sampah. |
+| O-13 | Navigation Bar | Kalender | Menampilkan menu kalender sebagai navigasi aktif. |
+
 ## 6.12 Rancangan Antarmuka [I-12]
 **Antarmuka:** [I-12] 
 **Nama Layar:** *Pop Up Simpan Kalendar Baru (Petugas Kebersihan)*
@@ -2179,6 +2281,15 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.12. Rancangan Antarmuka I-12 - Pop Up Simpan Kalendar Baru (Petugas Kebersihan)</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Modal/Popup | Simpan Jadwal | Menampilkan pop-up konfirmasi sebelum perubahan jadwal disimpan. |
+| O-02 | Icon | Ikon simpan | Menampilkan ikon yang merepresentasikan proses penyimpanan jadwal. |
+| O-03 | Label | Simpan Jadwal | Menampilkan judul pop-up konfirmasi penyimpanan jadwal. |
+| O-04 | Label | Pastikan tanggal yang dipilih sudah benar! | Memberikan pengingat kepada petugas untuk memeriksa kembali tanggal yang telah dipilih. |
+| O-05 | Button | Simpan | Mengirim perubahan jadwal ke sistem untuk disimpan. Sistem menampilkan notifikasi keberhasilan atau kegagalan sesuai hasil penyimpanan. |
+| O-06 | Button | Batal | Menutup pop-up dan kembali ke halaman edit kalender tanpa menyimpan perubahan. |
 
 ## 6.13 Rancangan Antarmuka [I-13]
 **Antarmuka:** [I-13] 
@@ -2191,6 +2302,12 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.13. Rancangan Antarmuka I-13 - Pop Up Kalendar Baru Berhasil Tersimpan (Petugas Kebersihan)</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Jadwal berhasil diperbarui | Menampilkan notifikasi bahwa perubahan jadwal pengambilan sampah berhasil disimpan. Kalender menampilkan tanggal pengambilan sampah yang telah diperbarui. |
+| O-02 | Icon | Ikon centang hijau | Menampilkan indikator visual bahwa proses penyimpanan jadwal berhasil. |
+| O-03 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi keberhasilan. |
+
 ## 6.14 Rancangan Antarmuka [I-14]
 **Antarmuka:** [I-14] 
 **Nama Layar:** *Pop Up Kalendar Baru Gagal Tersimpan (Petugas Kebersihan)*
@@ -2201,6 +2318,12 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.14. Rancangan Antarmuka I-14 - Pop Up Kalendar Baru Gagal Tersimpan (Petugas Kebersihan)</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Jadwal gagal diperbarui | Menampilkan notifikasi bahwa perubahan jadwal pengambilan sampah gagal disimpan. Pengguna dapat mencoba menyimpan perubahan kembali. |
+| O-02 | Icon | Ikon silang merah | Menampilkan indikator visual bahwa proses penyimpanan jadwal gagal. |
+| O-03 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi kegagalan. |
 
 ## 6.15 Rancangan Antarmuka [I-15]
 **Antarmuka:** [I-15] 
@@ -2213,6 +2336,19 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.15. Rancangan Antarmuka I-15 - Halaman Utama Profil Petugas Kebersihan</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Profil Petugas | Menampilkan judul halaman profil petugas kebersihan. |
+| O-02 | Icon | Ikon profil | Menampilkan ikon yang merepresentasikan pengguna. |
+| O-03 | Label | Nama Lengkap | Menampilkan nama lengkap petugas kebersihan yang sedang login. |
+| O-04 | Label | Petugas Kebersihan | Menampilkan peran pengguna dalam aplikasi. |
+| O-05 | Label | Email dan alamat email | Menampilkan alamat email petugas yang terdaftar. |
+| O-06 | Label | No. Telepon dan nomor telepon | Menampilkan nomor telepon petugas yang terdaftar. |
+| O-07 | Label | Wilayah Tugas dan nama wilayah | Menampilkan wilayah penugasan petugas kebersihan. |
+| O-08 | Button | EDIT PROFIL | Ketika ditekan, sistem membuka halaman edit profil petugas. |
+| O-09 | Button | Ganti Kata Sandi | Ketika ditekan, sistem menampilkan pop-up untuk mengubah kata sandi akun. |
+| O-10 | Button | KELUAR AKUN | Ketika ditekan, sistem menampilkan pop-up konfirmasi keluar akun. |
+
 ## 6.16 Rancangan Antarmuka [I-16]
 **Antarmuka:** [I-16] 
 **Nama Layar:** *Halaman Edit Profil Petugas Kebersihan*
@@ -2223,6 +2359,11 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.16. Rancangan Antarmuka I-16 - Halaman Edit Profil Petugas Kebersihan</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Profil berhasil diperbarui | Menampilkan notifikasi bahwa perubahan profil berhasil disimpan. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi keberhasilan. |
 
 ## 6.17 Rancangan Antarmuka [I-17]
 **Antarmuka:** [I-17] 
@@ -2235,6 +2376,11 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.17. Rancangan Antarmuka I-17 - Halaman Edit Profil Petugas Kebersihan</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Profil gagal diperbarui | Menampilkan notifikasi bahwa perubahan profil gagal disimpan. Pengguna dapat memperbaiki input atau mencoba menyimpan kembali. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi kegagalan. |
+
 ## 6.18 Rancangan Antarmuka [I-18]
 **Antarmuka:** [I-18] 
 **Nama Layar:** *Halaman Gagal Simpan Profil Baru Petugas Kebersihan*
@@ -2245,6 +2391,11 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.18. Rancangan Antarmuka I-18 - Halaman Gagal Profil Petugas Kebersihan</i>
 </p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Profil gagal diperbarui | Menampilkan notifikasi bahwa perubahan profil gagal disimpan. Pengguna dapat memperbaiki input atau mencoba menyimpan kembali. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi kegagalan. |
 
 ## 6.19 Rancangan Antarmuka [I-19]
 **Antarmuka:** [I-19] 
@@ -2257,6 +2408,14 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.19. Rancangan Antarmuka I-19 - Pop up Keluar Akun Petugas</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Modal/Popup | Keluar Akun | Menampilkan pop-up konfirmasi sebelum pengguna keluar dari akun. |
+| O-02 | Icon | Ikon keluar akun | Memberikan ilustrasi visual untuk tindakan keluar akun. |
+| O-03 | Label | Keluar Akun | Menampilkan judul konfirmasi keluar akun. |
+| O-04 | Label | Apakah Anda yakin hendak keluar akun ini? | Meminta konfirmasi pengguna sebelum proses keluar akun dilakukan. |
+| O-05 | Button | Keluar | Mengakhiri sesi pengguna dan mengarahkan pengguna ke halaman login. |
+| O-06 | Button | Batal | Menutup pop-up dan kembali ke halaman profil tanpa keluar dari akun. |
 
 ## 6.20 Rancangan Antarmuka [I-20]
 **Antarmuka:** [I-20] 
@@ -2268,7 +2427,18 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.20. Rancangan Antarmuka I-20 - Halaman Edit Password Akun Petugas</i>
 
-## 6.25 Rancangan Antarmuka [I-21]
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Modal/Popup | Ubah Kata Sandi | Menampilkan formulir untuk mengubah kata sandi akun petugas. |
+| O-02 | Icon | Ikon gembok | Memberikan ilustrasi visual terkait keamanan akun. |
+| O-03 | Label | Ubah Kata Sandi | Menampilkan judul formulir pengubahan kata sandi. |
+| O-04 | Label | Ganti kata sandi Anda untuk meningkatkan keamanan akun Anda. | Memberikan penjelasan singkat mengenai tujuan penggantian kata sandi. |
+| O-05 | Text Field | Kata Sandi Baru | Menerima input kata sandi baru dari pengguna. |
+| O-06 | Text Field | Konfirmasi Kata Sandi Baru | Menerima input ulang kata sandi baru untuk memastikan kesesuaian dengan kata sandi yang dimasukkan sebelumnya. |
+| O-07 | Button | BATAL | Menutup formulir tanpa menyimpan perubahan kata sandi. |
+| O-08 | Button | SIMPAN | Memvalidasi kata sandi baru dan konfirmasinya, kemudian meminta sistem menyimpan perubahan. Sistem menampilkan notifikasi berhasil atau gagal sesuai hasil proses. |
+
+## 6.21 Rancangan Antarmuka [I-21]
 **Antarmuka:** [I-21] 
 **Nama Layar:** *Halaman Berhasil Edit Password Akun Petugas*
 
@@ -2277,6 +2447,11 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 </p>
 <p align="center">
 <i>Gambar 6.21. Rancangan Antarmuka I-21 - Halaman Berhasil Edit Password Akun Petugas</i>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Kata sandi berhasil diperbarui | Menampilkan notifikasi bahwa kata sandi akun berhasil diubah. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi keberhasilan. |
 
 ## 6.22 Rancangan Antarmuka [I-22]
 **Antarmuka:** [I-22] 
@@ -2287,6 +2462,11 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 </p>
 <p align="center">
 <i>Gambar 6.22. Rancangan Antarmuka I-22 - Halaman Gagal Edit Password Akun Petugas</i>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Toast Notification | Kata sandi gagal diperbarui | Menampilkan notifikasi bahwa proses pengubahan kata sandi gagal. Pengguna dapat memperbaiki input atau mencoba kembali. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup notifikasi kegagalan. |
 
 ## 6.23 Rancangan Antarmuka [I-23]
 **Antarmuka:** [I-23] 
@@ -2299,6 +2479,13 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.23. Rancangan Antarmuka I-23 - Halaman Utama Pemindaian Sampah</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-26 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup halaman pemindaian dan kembali ke halaman sebelumnya. |
+| O-27 | Camera Preview | Tampilan kamera | Menampilkan tangkapan kamera secara langsung untuk membantu pengguna mengarahkan kamera ke objek sampah yang ingin dipindai. |
+| O-28 | Label | Arahkan kamera ke sampah | Memberikan petunjuk kepada pengguna agar mengarahkan kamera ke objek sampah yang akan diidentifikasi. |
+| O-29 | Button | Tombol pemindaian (ikon kamera) | Ketika ditekan, sistem mengambil gambar objek sampah dan memprosesnya untuk mengidentifikasi jenis material sampah. |
+
 ## 6.24 Rancangan Antarmuka [I-24]
 **Antarmuka:** [I-24] 
 **Nama Layar:** *Halaman Hasil Pemindaian Sampah*
@@ -2310,6 +2497,15 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <i>Gambar 6.24. Rancangan Antarmuka I-24 - Halaman Hasil Pemindaian Sampah</i>
 </p>
 
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-30 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup halaman hasil pemindaian dan kembali ke halaman sebelumnya. |
+| O-31 | Image | Foto hasil pemindaian | Menampilkan foto asli yang diambil oleh kamera sebagai dasar visual untuk identifikasi objek sampah. |
+| O-32 | Bounding Box | Kotak deteksi sampah | Menandai lokasi setiap objek sampah yang terdeteksi pada foto. Kotak disesuaikan dengan posisi objek hasil identifikasi. |
+| O-33 | Label | Plastik | Menampilkan jenis material yang teridentifikasi sebagai plastik pada objek yang ditandai. |
+| O-34 | Label | Kaca | Menampilkan jenis material yang teridentifikasi sebagai kaca pada objek yang ditandai. |
+| O-35 | Label | Belum tersedia | Menandai objek yang berhasil terdeteksi, tetapi informasi jenis material atau detailnya belum tersedia dalam database aplikasi. Ketika dipilih, sistem menampilkan pop-up Material Sampah Belum Tersedia. |
+
 ## 6.25 Rancangan Antarmuka [I-25]
 **Antarmuka:** [I-25] 
 **Nama Layar:** *Pop Up Material Sampah Belum Tersedia*
@@ -2320,17 +2516,100 @@ Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 <p align="center">
 <i>Gambar 6.25. Rancangan Antarmuka I-25 - Pop Up Material Sampah Belum Tersedia</i>
 
-## 6.Y Rancangan Antarmuka Keseluruhan
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Modal/Popup | Informasi Sampah Belum Tersedia | Menampilkan pemberitahuan bahwa informasi detail mengenai daur ulang objek sampah belum tersedia dalam database aplikasi. |
+| O-02 | Button | Ikon tutup (X) | Ketika ditekan, sistem menutup pop-up dan kembali menampilkan halaman hasil pemindaian sampah. |
+| O-03 | Icon | Ikon informasi tidak tersedia | Memberikan ilustrasi visual bahwa informasi detail material sampah belum tersedia. |
+| O-04 | Label | Informasi Sampah Belum Tersedia | Menampilkan judul pemberitahuan kepada pengguna. |
+| O-05 | Label | Informasi detail tentang daur ulang belum tersedia di database kami. | Menjelaskan bahwa informasi daur ulang untuk objek yang dipilih belum tersedia dalam database aplikasi. |
+| O-06 | Button | Mengerti | Ketika ditekan, sistem menutup pop-up dan kembali menampilkan halaman hasil pemindaian sampah. |
 
-Tuliskan daftar gambar seluruh antarmuka. Berikan ID unik untuk setiap tampilan dan gunakan ID yang sama pada subbab perancangan antarmuka masing-masing.
+## 6.26 Rancangan Antarmuka [I-26]
+**Antarmuka:** [I-26] 
+**Nama Layar:** *Masuk Akun/Log In Salah*
 
-Tabel 6.Y. Rancangan Antarmuka Keseluruhan
+<p align="center">
+<img alt="Masuk Akun/Log In Salah" src="./assets/diagram/I26.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.26. Rancangan Antarmuka I-26 - Masuk Akun/Log In Salah</i>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Image | Logo EcoTrack | Menampilkan logo aplikasi EcoTrack. |
+| O-02 | Label | EcoTrack | Menampilkan nama aplikasi. |
+| O-03 | Label | Masuk Akun | Menampilkan judul halaman login. |
+| O-04 | Label | Masuk untuk mengakses akun petugas | Menampilkan deskripsi singkat halaman login. |
+| O-05 | Label | Email | Menampilkan label kolom email. |
+| O-06 | Text Field | Masukkan Email | Menerima input email yang terdaftar. |
+| O-07 | Label | Kata Sandi | Menampilkan label kolom kata sandi. |
+| O-08 | Text Field | Masukkan Kata Sandi | Menerima input kata sandi dan ditandai merah ketika kosong setelah validasi. |
+| O-09 | Error Message | Kata sandi wajib diisi | Menampilkan pesan kesalahan ketika pengguna mencoba login tanpa memasukkan kata sandi. |
+| O-10 | Button | Lupa kata sandi? | Ketika ditekan, sistem membuka alur pemulihan kata sandi jika fitur tersebut tersedia. |
+| O-11 | Button | MASUK | Memvalidasi input login. Jika kata sandi kosong, sistem menampilkan pesan kesalahan dan tidak melanjutkan proses login. |
+| O-12 | Label/Button | Belum punya akun? Klik di sini | Ketika bagian “Klik di sini” ditekan, sistem membuka halaman pendaftaran akun petugas. |
+
+## 6.27 Rancangan Antarmuka [I-27]
+**Antarmuka:** [I-27] 
+**Nama Layar:** *Daftar Akun/Sign Up Salah*
+
+<p align="center">
+<img alt="Daftar Akun/Sign Up Salah" src="./assets/diagram/I27.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.27. Rancangan Antarmuka I-27 - Daftar Akun/Sign Up Salah</i>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-01 | Label | Daftar Akun Petugas | Menampilkan judul halaman pendaftaran akun petugas kebersihan. |
+| O-02 | Label | Buat akun untuk mulai mengelola sampah | Menampilkan deskripsi singkat halaman pendaftaran. |
+| O-03 | Label | Nama Lengkap | Menampilkan label kolom nama lengkap. |
+| O-04 | Text Field | Masukkan nama lengkap | Menerima input nama lengkap petugas. |
+| O-05 | Label | NIK | Menampilkan label kolom NIK. |
+| O-06 | Text Field | Nomor NIK yang dimasukkan | Menampilkan NIK yang telah dimasukkan dengan penanda visual merah karena tidak valid. |
+| O-07 | Error Message | NIK tidak terdaftar sebagai petugas kebersihan | Menampilkan pesan bahwa NIK tidak terdaftar dalam data petugas kebersihan. |
+| O-08 | Label | Email | Menampilkan label kolom email. |
+| O-09 | Text Field | Masukkan Email | Menerima input alamat email calon petugas. |
+| O-10 | Label | No. Telepon | Menampilkan label kolom nomor telepon. |
+| O-11 | Text Field | Masukkan No. Telepon | Menerima input nomor telepon calon petugas. |
+| O-12 | Label | Kata Sandi | Menampilkan label kolom kata sandi. |
+| O-13 | Text Field | Masukkan kata sandi | Menerima input kata sandi untuk akun baru. |
+| O-14 | Label | Konfirmasi Kata Sandi | Menampilkan label kolom konfirmasi kata sandi. |
+| O-15 | Text Field | Ulangi kata sandi | Menerima input ulang kata sandi untuk memeriksa kesesuaian. |
+| O-16 | Button | DAFTAR | Memproses pendaftaran setelah validasi. Jika NIK tidak terdaftar, sistem menolak pendaftaran dan menampilkan pesan kesalahan pada kolom NIK. |
+
+## 6.28 Rancangan Antarmuka Keseluruhan
+
+Tabel 6.28. Rancangan Antarmuka Keseluruhan
 
 | No | Tampilan Antarmuka |
 | :--- | :--- |
-| *[I-01]* | <img src="./assets/diagram/contoh-design.png" alt="Contoh Desain" width="400"> |
-| *[I-02]* | *[Sisipkan gambar antarmuka I-02]* |
-| *[I-XX]* | *[Sisipkan gambar antarmuka berikutnya]* |
+| [I-01] | **Daftar Akun/Sign Up** <br> <img src="./assets/diagram/I01.png" alt="Daftar Akun/Sign Up" width="100"> |
+| [I-02] | **Masuk Akun/Log In** <br> <img src="./assets/diagram/I02.png" alt="Masuk Akun/Log In" width="100"> |
+| [I-03] | **Halaman Utama Daur Ulang** <br> <img src="./assets/diagram/I03.png" alt="Halaman Utama Daur Ulang" width="100"> |
+| [I-04] | **Halaman Utama Kosong Daur Ulang** <br> <img src="./assets/diagram/I04.png" alt="Halaman Utama Kosong Daur Ulang" width="100"> |
+| [I-05] | **Halaman Informasi Material Sampah** <br> <img src="./assets/diagram/I05.png" alt="Halaman Informasi Material Sampah" width="100"> |
+| [I-06] | **Pop-up Panduan Daur Ulang** <br> <img src="./assets/diagram/I06.png" alt="Pop-up Panduan Daur Ulang" width="100"> |
+| [I-07] | **Halaman Utama Jadwal Pengambilan Sampah** <br> <img src="./assets/diagram/I07.png" alt="Halaman Utama Jadwal Pengambilan Sampah" width="100"> |
+| [I-08] | **Halaman Utama Kosong Jadwal Pengambilan Sampah** <br> <img src="./assets/diagram/I08.png" alt="Halaman Utama Kosong Jadwal Pengambilan Sampah" width="100"> |
+| [I-09] | **Halaman Utama Kalender (Masyarakat Umum)** <br> <img src="./assets/diagram/I09.png" alt="Halaman Utama Kalender (Masyarakat Umum)" width="100"> |
+| [I-10] | **Halaman Utama Kalender (Petugas Kebersihan)** <br> <img src="./assets/diagram/I10.png" alt="Halaman Utama Kalender (Petugas Kebersihan)" width="100"> |
+| [I-11] | **Halaman Edit Kalender (Petugas Kebersihan)** <br> <img src="./assets/diagram/I11.png" alt="Halaman Edit Kalender (Petugas Kebersihan)" width="100"> |
+| [I-12] | **Pop-up Simpan Kalender Baru (Petugas Kebersihan)** <br> <img src="./assets/diagram/I12.png" alt="Pop-up Simpan Kalender Baru (Petugas Kebersihan)" width="100"> |
+| [I-13] | **Pop-up Kalender Baru Berhasil Tersimpan (Petugas Kebersihan)** <br> <img src="./assets/diagram/I13.png" alt="Pop-up Kalender Baru Berhasil Tersimpan (Petugas Kebersihan)" width="100"> |
+| [I-14] | **Pop-up Kalender Baru Gagal Tersimpan (Petugas Kebersihan)** <br> <img src="./assets/diagram/I14.png" alt="Pop-up Kalender Baru Gagal Tersimpan (Petugas Kebersihan)" width="100"> |
+| [I-15] | **Halaman Utama Profil Petugas Kebersihan** <br> <img src="./assets/diagram/I15.png" alt="Halaman Utama Profil Petugas Kebersihan" width="100"> |
+| [I-16] | **Halaman Edit Profil Petugas Kebersihan** <br> <img src="./assets/diagram/I16.png" alt="Halaman Edit Profil Petugas Kebersihan" width="100"> |
+| [I-17] | **Halaman Berhasil Simpan Profil Baru Petugas Kebersihan** <br> <img src="./assets/diagram/I17.png" alt="Halaman Berhasil Simpan Profil Baru Petugas Kebersihan" width="100"> |
+| [I-18] | **Halaman Gagal Simpan Profil Baru Petugas Kebersihan** <br> <img src="./assets/diagram/I18.png" alt="Halaman Gagal Simpan Profil Baru Petugas Kebersihan" width="100"> |
+| [I-19] | **Pop-up Keluar Akun Petugas** <br> <img src="./assets/diagram/I19.png" alt="Pop-up Keluar Akun Petugas" width="100"> |
+| [I-20] | **Halaman Edit Password Akun Petugas** <br> <img src="./assets/diagram/I20.png" alt="Halaman Edit Password Akun Petugas" width="100"> |
+| [I-21] | **Halaman Berhasil Edit Password Akun Petugas** <br> <img src="./assets/diagram/I21.png" alt="Halaman Berhasil Edit Password Akun Petugas" width="100"> |
+| [I-22] | **Halaman Gagal Edit Password Akun Petugas** <br> <img src="./assets/diagram/I22.png" alt="Halaman Gagal Edit Password Akun Petugas" width="100"> |
+| [I-23] | **Halaman Utama Pemindaian Sampah** <br> <img src="./assets/diagram/I23.png" alt="Halaman Utama Pemindaian Sampah" width="100"> |
+| [I-24] | **Halaman Hasil Pemindaian Sampah** <br> <img src="./assets/diagram/I24.png" alt="Halaman Hasil Pemindaian Sampah" width="100"> |
+| [I-25] | **Pop-up Material Sampah Belum Tersedia** <br> <img src="./assets/diagram/I25.png" alt="Pop-up Material Sampah Belum Tersedia" width="100"> |
 
 <br>
 

@@ -29,6 +29,7 @@
 * [Milestone 5](#milestone-5)
 * [Milestone 6](#milestone-6)
 * [Milestone 7](#milestone-7)
+* [Milestone 8](#milestone-8)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 ---
@@ -74,6 +75,13 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | ChatGPT | Mengarahkan jawaban | apa dev tools, filing system, dan bahasa pemrogramannya yak | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
 | Claude | Validasi diagram | Permisi Claude, tolong bantu cek diagram ini. | Jawaban dari AI divalidasi dengan cara berkonsultasi dengan asisten. |
 | Gemini | Memeriksa pemetaan kelas pada diagram | Apakah sekuens kelas sudah terpetakan dengan benar pada diagram ini? | Jawaban gemini dievaluasi secara menyeluruh dan didiskusikan dengan teman. |
+
+### Milestone 8
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| ChatGPT | Mengarahkan jawaban | 479377 warna hijau lainnya yang cocok sebagai pengganti ini semua | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
+| Gemini | Memeriksa kelengkapan dan kesesuaian dalam pekerjaan| Apakah semua metode/kelas sudah dimasukkan ke dalam bab 5? | Jawaban gemini menjadi patokan awal untuk pemeriksaan, tetapi tidak diterima mentah-mentah melainkan diproses dan dievaluasi sebelum diubah |
+| Claude | Memeriksa metode | showSignUp nya kok ada 2?? kok ada 1 yang punya 1 parameter sendiri??? harusnya kan konsisten. | Jawaban dari AI dievaluasi secara menyeluruh dengan mendiskusikannya dengan teman. |
 
 ---
 ### Pernyataan Integritas dan Persetujuan

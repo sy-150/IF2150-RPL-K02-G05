@@ -29,6 +29,7 @@
 * [Milestone 5](#milestone-5)
 * [Milestone 6](#milestone-6)
 * [Milestone 7](#milestone-7)
+* [Milestone 8](#milestone-8)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -118,5 +119,14 @@
 | 21-10-2026| Arla Salsabila | Mengerjakan bab 3.3 dan 3.4 | 5 | Done | Sempat bingung akan sequence diagram skenario eksepsi dan ketidak konsistenan |
 | 21-10-2026| Kelvin Sebastian Yen | Mengerjakan bab 3.1 dan 3.2 | 5 | Done | Kebingungan cara menggambar sekuens diagram dengan benar di awal, kelas yang belum diidentifikasi dengan tepat, dan alternatif yang banyak dengan langkah panjang menyebabkan pembuatan diagram semakin kompleks |
 | 21-10-2026| Muhammad Reffah | Mengerjakan bab 3.5 dan 3.6 | 3 | Done | - |
+
+### Milestone 7
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 28-10-2026| Arla Salsabila | Mengerjakan bab 5.1, 5.3, 5.5, dan membuat design halaman jadwal, login, signup, dan profil di figma | 10 | Done | Terlalu banyak hal yang harus dikerjakan |
+| 28-10-2026 | Maharani Puan Satira | Bab 5.6, Bab 6.2, 6.3, 6.5, 6.6, 6.7 | 25 | Done | Banyak banget yang dikerjain |
+| 24-10-2026| Kelvin Sebastian Yen | Mengerjakan bagian 5.10 dan 5.11 | 2 | Done | - |
+| 27-10-2026| Kelvin Sebastian Yen | Mengerjakan draft antarmuka mendaftar/masuk akun di Figma | 2| Done | Tidak bagus membuat desain antarmuka |
+| 28-10-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 5.2, merevisi bagian 5.10 dan 5.11 agar sesuai, membenarkan parameter yang tidak sesuai, membenarkan diagram kelas agar menerima parameter yang sesuai dalam metode dan menyamakan tampilan | 5 | Done | Kesulitan menemukan hubungan, kesulitan menentukan penulisan pseudocode, terlalu banyak hal yang harus dikerjakan/direvisi |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
