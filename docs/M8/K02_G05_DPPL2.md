@@ -39,18 +39,6 @@ Dipersiapkan oleh:
 | *C* | *Pembenaran dan penyesuaian diagram sekuens UC01 dan UC02* |
 
 
----
-
-<br>
-
-> **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
->
-> Dokumen ini melanjutkan **Deskripsi Perancangan Perangkat Lunak**. Gunakan nama, ID, kebutuhan, dan use case yang konsisten dengan kedua dokumen tersebut. Contoh pola ID baru di bawah dapat disesuaikan dengan kesepakatan kelompok, ID yang sudah ada tetap dipertahankan.
-
-<br>
-
----
-
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
@@ -1326,7 +1314,7 @@ ALGORITMA
 ## 5.4 Kelas Jadwal
 
 **Nama Kelas:** *Jadwal*  
-**ID Kelas:** *C07*
+**ID Kelas:** *C04*
 
 Tabel 5.4.1. Operasi Kelas Jadwal
 
