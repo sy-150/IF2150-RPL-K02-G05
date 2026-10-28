@@ -483,16 +483,16 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C01* | AkunPetugas | -usernameExist, -passwordCorrect, -status | +validasiLogin(username, password), +cekUsername(username), +cekPassword(password), +encrypt(password), +createAkunPetugas() |
-| *C02* | AkunPetugasController | -invalidLogin(), -validLogin, -status | +prosesLogin(), +prosesLogin(username, password), +clearInput(), +signup() |
-| *C03* | AkunPetugasInterface | - | +showSignup(), +openLogin(), +showLogin(), +inputKredensial(username, password), +showPesan("Username/Password salah"), +showPesan("Selamat datang"), +showTampilan(masuk tampilan profil), +showSignUp(), +showSignUp(status) |
+| *C02* | AkunPetugasController | -statusLogin | +validasiLogin(username, password), +prosesLogin(username, password), +signup(username, email, password) |
+| *C03* | AkunPetugasInterface | - | +showSignup(), +openLogin(), +showLogin(), +inputKredensial(username, password), +showPesan("Username/Password salah"), +showPesan("Selamat datang"), +clearInput(), +showTampilan(masuk tampilan profil), +showSignUp(), +showSignUp(status) |
 | *C04* | Jadwal | -idJadwal, -kecamatan, -kelurahan, -daftarTanggal, -statusSimpan | +getIdJadwal(), +getKecamatan(), +getKelurahan(), +getTanggal(), +setTanggal(daftarTanggalBaru), +simpanJadwal() |
 | *C05* | JadwalController | -daftarJadwal | +getDaftarJadwal(), +cariLokasiTPS(keyword), +getJadwal(idJadwal), +cekStatusLogin(), +editJadwal(idJadwal, daftarTanggalBaru) |
 | *C06* | JadwalInterface | - | +openJadwalPage(), +showHalamanJadwal(daftarJadwal), +inputKeywordLokasiTPS(keyword), +chooseJadwal(idJadwal), +showJadwal(jadwal, statusLogin), showErrorMessage(notFound), chooseEditJadwal(), fillFormEditJadwal(idJadwal, daftarTanggalBaru), showNotifikasi("Jadwal berhasil diperbarui"), showJadwal(jadwalDiperbarui, statusLogin) |
 | *C07* | InformasiSampah | -dataSampah, -detailData, -infoSampah | +ambilDataDetail(idSampah), +cariBarcode(barcode), +getInfoSampah(), getInfoSampah(keyword) |
 | *C08* | InformasiSampahController | -detailData, -infoSampah | +getDetailSampah(idSampah), +getMaterial(), +search(keyword) |
 | *C09* | InformasiSampahInterface | - | +bukaDetail(idSampah), +showTampilanDetail(), +showMain(), +showDetail(), +showSearch(infoSampah) |
-| *C10* | PemindaiController | -hasilIdentifikasi | +ubahMode("Barcode"), +startPemindaian(), +ambilFrame(), +prosesBarcode(frameData) |
-| *C11* | PemindaiInterface | | +openPemindai(), +showLiveFeed(), +gantiMode(), +showJenis(), +klikNotifikasi() |
+| *C10* | PemindaiController | -hasilIdentifikasi, -isMemindai | +startPemindaian(), +prosesBarcode(frameData), +prosesFrame(frameData) |
+| *C11* | PemindaiInterface | -modeSekarang, -frameBuffer | +openPemindai(), +showLiveFeed(), +gantiMode(), +showJenis(), +klikNotifikasi(), -ubahMode(), +showOpsi(opsi: String), +pilihOpsi(opsi: String), -ambilFrame(), +navigasiKembali() |
 
 ---
 
@@ -569,24 +569,107 @@ Tabel 5.2.1. Operasi Kelas AkunPetugasController
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
 | *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
-| *...* | *...* | *...* |
+| *+ prosesLogin(username: String, password: String): Boolean* | *public* | *Menerima masukan kredensial dari antarmuka dan mengoordinasikan proses autentikasi akun* |
+| *- validasiLogin(username: String, password: String): Boolean* | *private* | *Memeriksa kebenaran masukan nama dan pengguna ke entitas Akunpetugas* |
+| *+ signUp(username: String, email: String, password: String): Boolean* | *public* | *Memvalidasi dan mendaftarkan data akun petugas baru ke sistem* |
 
 Tabel 5.2.2. Atribut Kelas AkunPetugasController
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
 | *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
-| *...* | *...* | *...* |
+| *- statusLogin* | *private* | *Boolean* |
 
 ### 5.2.1 Algoritma/Query
 
 Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
 
-**Nama Kelas:** AkunPetugasController  
-**Nama Operasi:** *[Signature operasi]*  
+**Nama Kelas:** AkunPetugasController 
+**Nama Operasi:** *+prosesLogin(username: String, password: String) -> Boolean*
 **ID Algoritma:** Algo-APC-001
 
 ```text
+PROGRAM prosesLogin(username: String, password: String) -> Boolean
+DEKLARASI
+    isValid: Boolean
+ALGORITMA
+    isValid <- validasiLogin(username, password)
+    if isValid = true then
+        statusLogin <- true
+        return true
+    else
+        statusLogin <- false
+        return false
+    endif
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.2.3. Query Operasi [Nama Operasi]
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.2.2 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasController  
+**Nama Operasi:** *-validasiLogin(username: String, password: String) -> Boolean*  
+**ID Algoritma:** Algo-APC-002
+
+```text
+PROGRAM validasiLogin(username: String, password: String) -> Boolean 
+DEKLARASI
+    usernameExist : Boolean
+    passwordValid : Boolean
+ALGORITMA
+    usernameExist <- AkunPetugas.cekUsername(username)
+    if usernameExist = true then
+        passwordValid <- Akunpetugas.cekPassword(password)
+        if passwordValid = true then
+            return true
+        else
+            return false
+        endif
+    else
+        return false
+    endif
+
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.2.4. Query Operasi [Nama Operasi]
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+### 5.2.3 Algoritma/Query
+
+**Nama Kelas:** AkunPetugasController  
+**Nama Operasi:** *+signUp(username: String, password: String, email: String) -> Boolean*  
+**ID Algoritma:** Algo-APC-003
+
+```text
+PROGRAM signUp(username: String, password: String, email: String) -> Boolean
+DEKLARASI
+    isExist : Boolean
+    passwordHash : String
+    statusCreate: Boolean
+ALGORITMA
+    isExist <- AkunPetugas.cekUsername(username)
+    if isExist = true then
+        return false
+    else
+        passwordHash <- AkunPetugas.encrypt(password)
+        statusCreate <- AkunPetugas.createAkunPetugas(username, email, passwordHash)
+        return statusCreate
+    endif
 [Tuliskan pseudocode algoritma operasi di sini.]
 ```
 
@@ -599,9 +682,6 @@ Tabel 5.2.1. Query Operasi [Nama Operasi]
 | *[Q-APC-001]* | *[Tuliskan query]* | *[Fungsi query]* |
 | *...* | *...* | *...* |
 
-### 5.2.2 Algoritma/Query
-
-*[Ulangi pola 5.2.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
 
 ## 5.3 Kelas AkunPetugasInterface
 
@@ -1281,8 +1361,8 @@ Tabel 5.10.1. Operasi Kelas PemindaiController
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
 | *+ startPemindaian(): void* | *public* | *Mengaktifkan model CV untuk melakukan pemindaian* |
-| *+ prosesFrame(frameData: Byte[]): String* | *public** | *Memroses frame yang telah ditangkap dan melakukan identifikasi* |
-| *+ prosesBarcode(frameData: Byte[]): String* | *public** | *Memroses barcode yang dipindai oleh kamera dan melakukan identifikasi berdasarkan barcode* |
+| *+ prosesFrame(frameData: Byte[]): String* | *public* | *Memroses frame yang telah ditangkap dan melakukan identifikasi* |
+| *+ prosesBarcode(frameData: Byte[]): String* | *public* | *Memroses barcode yang dipindai oleh kamera dan melakukan identifikasi berdasarkan barcode* |
 
 
 Tabel 5.10.2. Atribut Kelas PemindaiController
@@ -1298,14 +1378,16 @@ Tabel 5.10.2. Atribut Kelas PemindaiController
 Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
 
 **Nama Kelas:** PemindaiController  
-**Nama Operasi:** *Memindai Frame(?)*  
+**Nama Operasi:** *prosesFrame(frameData: Byte[]): String*  
 **ID Algoritma:** Algo-PC-001
 
 ```text
+openPemindai
 startPemindaian
 if isMemindai = True then
-    dataFrame <- frame.prosesFrame
-    if dataFrame != NULL then
+    dataFrame <- PemindaiInterface.ambilFrame(frame)
+    dataProses <- prosesFrame(dataFrame)
+    if dataProses != NULL then
         dataHasil <- InformasiSampah.cariLabel(dataFrame)
         if dataHasil != NULL then
             return dataHasil.label
@@ -1334,11 +1416,13 @@ Tabel 5.10.1. Query Operasi [Nama Operasi]
 ### 5.10.2 Algoritma/Query
 
 *Nama Kelas:** *PemindaiController*  
-**Nama Operasi:** *Memindai Barcode(?)*  
+**Nama Operasi:** *prosesBarcode(frameData: Byte[]): String* 
 **ID Algoritma:** Algo-PC-002
 
 ```text
+openPemindai
 startPemindaian
+gantiMode("Barcode")
 if isMemindai = True then
     rawBarcode <- BarcodeScannerLibrary.decode
     if rawBarcode != NULL then
@@ -1367,13 +1451,15 @@ Tabel 5.11.1. Operasi Kelas PemindaiInterface
 | :--- | :--- | :--- |
 | *+ openPemindai(): void* | *public* | *Membuka layar pemindai dan mengaktifkan kamera perangkat* |
 | *+ showLiveFeed(): void* | *public* | *Menampilkan hasil tangkapan kamera pada antarmuka pemindai* |
-| *+ gantiMode(): void* | *public* | *Menerima aksi pengguna ketika tombol mengganti mode pemindaian ditekan* |
-| *+ ubahMode(mode: String): void* | *public* | *Mengubah mode pemindai untuk memeindai barcode* |
-| *+ ambilFrame(): Byte[]* | *public* | *Mengambil tangkapan frame gambar dari kamera* |
+| *+ gantiMode(): void* | *private* | *Menerima aksi pengguna ketika tombol mengganti mode pemindaian ditekan* |
+| *- ubahMode(mode: String): void* | *private* | *Mengubah mode pemindai untuk memindai barcode* |
+| *- ambilFrame(): Byte[]* | *public* | *Mengambil tangkapan frame gambar dari kamera* |
 | *+ showJenis(kategori: String): void* | *public* | *Menampilkan jenis sampah berdasarkan hasil identifikasi* |
 | *+ showOpsi(opsi: String): void* | *public* | *Menampilkan opsi bagi pengguna untuk menyetujui atau menolak penambahan data barcode * |
 | *+ pilihOpsi(opsi: String): void* | *public* | *Menerima opsi pengguna* |
 | *+ navigasiKembali(): void* | *public* | *Menerima instruksi navigasi dari antarmuka informasi sampah untuk kembali ke pemindai* |
+| *+ klikNotifikasi(): void* | *public* | *Menerima input ketika pengguna menyentuh notifikasi yang muncul* |
+
 
 Tabel 5.11.2. Atribut Kelas PemindaiInterface
 
