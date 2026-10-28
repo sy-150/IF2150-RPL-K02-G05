@@ -144,7 +144,7 @@ Tabel 2.1. Rancangan Lingkungan Implementasi
 | DBMS | Firebase |
 | *Development Tools* | GitHub, Visual Studio Code, Figma, Procreate |
 | *Filing System* | Direktori model/ menyimpan kelas entitas dan representasi data, controller/ menyimpan kelas yang menangani logika PL, ui/ menyimpan komponen antarmuka pengguna, database/ menyimpan komponen untuk mengakses dan mengelola data Firebase, serta utils/ menyimpan fungsi utilitas yang digunakan bersama. |
-| Bahasa Pemrograman | Python, Javascript |
+| Bahasa Pemrograman | Javascript |
 
 ## 2.2 Style/Pattern Arsitektur Acuan
 Struktur MVC sesuai dengan kebutuhan fungsional EcoTrack karena setiap fitur dapat memiliki interface sebagai View, controller sebagai pengolah proses, dan entity sebagai Model. Sebagai contoh, proses pengelolaan jadwal melibatkan Jadwal Interface untuk interaksi pengguna, Jadwal Controller untuk menangani proses pengelolaan, dan Jadwal untuk mengelola data jadwal. Pembagian ini juga dapat diterapkan pada fitur autentikasi, pemindaian sampah, dan informasi sampah.
@@ -1030,20 +1030,16 @@ Tabel 5.6.2. Atribut Kelas JadwalInterface
 
 ```text
 PROGRAM openJadwalPage()
-DEKLARASI
-    daftarJadwal : List of Jadwal
 ALGORITMA
-    daftarJadwal <- JadwalController.getDaftarJadwal
-    showHalamanJadwal(daftarJadwal)
+    Meminta daftar jadwal kepada JadwalController.
+    Menampilkan halaman jadwal menggunakan daftar jadwal tersebut.
 ```
 
 Tabel 5.6.1. Query Operasi openJadwalPage()
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+| *[Q-JI-001]* | getDaftarJadwal | Mengambil seluruh daftar jadwal TPS untuk ditampilkan. |
 
 ### 5.6.2 Algoritma/Query
 
@@ -1053,20 +1049,18 @@ Tabel 5.6.1. Query Operasi openJadwalPage()
 
 ```text
 PROGRAM inputKeywordLokasiTPS(keyword)
-DEKLARASI
-    daftarJadwal : List of Jadwal
 ALGORITMA
-    daftarJadwal <- JadwalController.cariLokasiTPS(keyword)
-    showHalamanJadwal(daftarJadwal)
+    Menerima keyword lokasi TPS dari pengguna.
+    Meminta JadwalController mencari jadwal berdasarkan keyword.
+    Menampilkan daftar jadwal hasil pencarian.
+    Jika hasil pencarian kosong, tampilkan pesan notFound.
 ```
 
 Tabel 5.6.2. Query Operasi inputKeywordLokasiTPS(keyword: String) 
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+| *[Q-JI-002]* | cariLokasiTPS(keyword) | Mencari jadwal TPS berdasarkan kecamatan atau kelurahan. |
 
 ### 5.6.3 Algoritma/Query
 
@@ -1075,16 +1069,21 @@ Tabel 5.6.2. Query Operasi inputKeywordLokasiTPS(keyword: String)
 **ID Algoritma:** Algo-JI-003  
 
 ```text
-chooseJadwal(idJadwal)
+PROGRAM chooseJadwal(idJadwal)
+ALGORITMA
+    Menerima pilihan jadwal dari pengguna.
+    Meminta JadwalController mengambil jadwal berdasarkan idJadwal.
+    Jika jadwal ditemukan, periksa status login pengguna.
+    Tampilkan detail jadwal beserta tanggal pengambilan sampah.
+    Jika jadwal tidak ditemukan, tampilkan pesan notFound.
 ```
 
 Tabel 5.6.3. Query Operasi chooseJadwal(idJadwal: String)
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+| *[Q-JI-003]* | getJadwal(idJadwal) | Mengambil detail jadwal berdasarkan ID jadwal. |
+| *[Q-JI-004]* | cekStatusLogin() | Memeriksa apakah pengguna sedang login untuk menentukan akses edit jadwal. |
 
 ### 5.6.4 Algoritma/Query
 
@@ -1093,17 +1092,13 @@ Tabel 5.6.3. Query Operasi chooseJadwal(idJadwal: String)
 **ID Algoritma:** Algo-JI-004  
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROGRAM chooseEditJadwal()
+ALGORITMA
+    Menerima aksi pengguna ketika menekan tombol edit jadwal.
+    Memeriksa apakah pengguna sudah login.
+    Jika sudah login, tampilkan form edit jadwal.
+    Jika belum login, tampilkan pesan bahwa akses edit memerlukan login.
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.6.4. Query Operasi chooseEditJadwal()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.6.5 Algoritma/Query
 
@@ -1112,7 +1107,13 @@ Tabel 5.6.4. Query Operasi chooseEditJadwal()
 **ID Algoritma:** Algo-JI-005  
 
 ```text
-fillFormEditJadwal(idJadwal, daftarTanggalBaru)
+PROGRAM fillFormEditJadwal(idJadwal, daftarTanggalBaru)
+ALGORITMA
+    Menerima ID jadwal dan daftar tanggal baru dari form.
+    Meminta JadwalController menyimpan perubahan jadwal.
+    Jika penyimpanan berhasil, tampilkan notifikasi keberhasilan
+    dan tampilkan kembali jadwal yang telah diperbarui.
+    Jika penyimpanan gagal, tampilkan pesan kesalahan.
 ```
 
 Tabel 5.6.5. Query Operasi fillFormEditJadwal(idJadwal: String, daftarTanggalBaru: List<Date>)
@@ -1139,13 +1140,6 @@ ALGORITMA
         showJadwal(jadwal, statusLogin)
 ```
 
-Tabel 5.6.6. Query Operasi showHalamanJadwal(daftarJadwal: List<Jadwal>)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
 ### 5.6.7 Algoritma/Query
 
 **Nama Kelas:** *AkunPetugasInterface*  
@@ -1153,15 +1147,12 @@ Tabel 5.6.6. Query Operasi showHalamanJadwal(daftarJadwal: List<Jadwal>)
 **ID Algoritma:** Algo-JI-007
 
 ```text
-showJadwal(jadwal, statusLogin)
+PROGRAM showJadwal(jadwal, statusLogin)
+ALGORITMA
+    Menampilkan lokasi TPS dan daftar tanggal pengambilan sampah.
+    Jika statusLogin bernilai true, tampilkan tombol edit jadwal.
+    Jika statusLogin bernilai false, sembunyikan tombol edit jadwal.
 ```
-
-Tabel 5.6.7. Query Operasi showJadwal(jadwal: Jadwal, statusLogin: Boolean)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.6.8 Algoritma/Query
 
@@ -1170,17 +1161,13 @@ Tabel 5.6.7. Query Operasi showJadwal(jadwal: Jadwal, statusLogin: Boolean)
 **ID Algoritma:** Algo-JI-008
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+PROGRAM showFormEditJadwal()
+ALGORITMA
+    Menampilkan form edit jadwal.
+    Menampilkan daftar tanggal jadwal saat ini.
+    Memungkinkan pengguna menambah atau menghapus tanggal.
+    Menerima perubahan tanggal untuk diteruskan ke operasi penyimpanan.
 ```
-
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.6.8. Query Operasi showFormEditJadwal()
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.6.9 Algoritma/Query
 
@@ -1189,15 +1176,11 @@ Tabel 5.6.8. Query Operasi showFormEditJadwal()
 **ID Algoritma:** Algo-JI-009
 
 ```text
-showNotifikasi("Jadwal berhasil diperbarui")
+PROGRAM showNotifikasi(pesan)
+ALGORITMA
+    Menerima pesan notifikasi dari proses penyimpanan jadwal.
+    Menampilkan notifikasi kepada pengguna.
 ```
-
-Tabel 5.6.9. Query Operasi showNotifikasi(pesan: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ### 5.6.10 Algoritma/Query
 
@@ -1206,15 +1189,13 @@ Tabel 5.6.9. Query Operasi showNotifikasi(pesan: String)
 **ID Algoritma:** Algo-JI-010  
 
 ```text
-showErrorMessage(notFound)
+PROGRAM showErrorMessage(jenisError)
+ALGORITMA
+    Menerima jenis kesalahan yang terjadi.
+    Jika jenisError adalah notFound, tampilkan pesan jadwal tidak ditemukan.
+    Jika jenisError adalah saveFailed, tampilkan pesan gagal menyimpan jadwal.
+    Jika jenisError adalah unauthorized, tampilkan pesan bahwa pengguna harus login.
 ```
-
-Tabel 5.6.10. Query Operasi showErrorMessage(jenisError: String)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
 
 ## 5.7 Kelas InformasiSampah
 
@@ -1500,7 +1481,7 @@ Tabel 5.11.1. Query Operasi [Nama Operasi]
 
 # BAB 6: Perancangan Antarmuka
 
-## 6.1 Rancangan Antarmuka [ID Layar 1]
+## 6.1 Rancangan Antarmuka [ID]
 
 Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tuliskan spesifikasi rinci objek yang ditampilkan dan reaksi sistem terhadap interaksi pengguna.
 
@@ -1514,18 +1495,326 @@ Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tu
 <i>Gambar 6.1. Rancangan Antarmuka [ID Layar] - [Nama Layar]</i>
 </p>
 
-Tabel 6.1. Spesifikasi Objek Antarmuka [ID Layar]
+## 6.1 Rancangan Antarmuka [I-01]
+**Antarmuka:** [I-01] 
+**Nama Layar:** *Daftar Akun/Sign Up*
+
+<p align="center">
+<img alt="Daftar Akun/Sign Up" src="./assets/diagram/I01.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.1. Rancangan Antarmuka I-01 - Daftar Akun/Sign Up</i>
+</p>
+
+## 6.2 Rancangan Antarmuka [I-02]
+**Antarmuka:** [I-02] 
+**Nama Layar:** *Masuk Akun/Log In*
+
+<p align="center">
+<img alt="Masuk Akun/Log In" src="./assets/diagram/I02.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.2. Rancangan Antarmuka I-01 - Masuk Akun/Log In</i>
+</p>
+
+## 6.3 Rancangan Antarmuka [I-03]
+**Antarmuka:** [I-03]
+**Nama Layar:** *Halaman Utama Daur Ulang*
+
+<p align="center">
+<img alt="Halaman Utama Daur Ulang" src="./assets/diagram/I03.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.3. Rancangan Antarmuka I-03 - Halaman Utama Daur Ulang</i>
+</p>
+
+Tabel 6.3. Spesifikasi Objek Antarmuka [ID Layar]
 
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
-| *[ID objek]* | *[Jenis objek, misalnya Button, RTF Box, dll]* | *[String yang tampil pada layar]* | *[Reaksi sistem, layar tujuan, tautan, atau ID algoritma yang dijalankan]* |
-| *[ID objek]* | *[Jenis objek]* | *[Konten yang ditampilkan]* | *[Reaksi sistem atau nama file terkait beserta deskripsi ringkasnya]* |
-| *...* | *...* | *...* | *...* |
+| O-01 | Label | Mulai Daur Ulang | Menampilkan judul halaman utama fitur daur ulang. |
+| O-02 | Button | Ikon menu | Ketika ditekan, bila belum terdaftar akan masuk page daftar/masuk akun. Jika sudah terdaftar ke profil petugas. |
+| O-03 | Text Field | Cari Material Sampah | Menerima kata kunci material sampah. Sistem menampilkan kategori yang sesuai dengan kata kunci yang dimasukkan. Jika tidak ditemukan, sistem menampilkan pesan bahwa material tidak ditemukan. |
+| O-04 | Label | Kategori Material Sampah | Menampilkan judul bagian yang berisi daftar kategori material sampah. |
+| O-05 | Card | Plastik | Menampilkan gambar dan deskripsi singkat sampah plastik. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori plastik. |
+| O-06 | Card | Kaca | Menampilkan gambar dan deskripsi singkat sampah kaca. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori kaca. |
+| O-07 | Card | Aluminium | Menampilkan gambar dan deskripsi singkat sampah aluminium. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori aluminium. |
+| O-08 | Card | Stainless Steel | Menampilkan gambar dan deskripsi singkat sampah stainless steel. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori stainless steel. |
+| O-09 | Card | Silikon | Menampilkan gambar dan deskripsi singkat sampah silikon. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori silikon. |
+| O-10 | Card | Keramik | Menampilkan gambar dan deskripsi singkat sampah keramik. Ketika dipilih, sistem membuka halaman Informasi Sampah dengan kategori keramik. |
+| O-11 | Navigation Bar | Daur Ulang | Menampilkan menu Daur Ulang sebagai navigasi aktif. Ketika ditekan, sistem membuka halaman Mulai Daur Ulang. |
+| O-12 | Button | Pindai (ikon kamera) | Ketika ditekan, sistem membuka halaman pemindai untuk mengidentifikasi jenis sampah melalui kamera. |
+| O-13 | Button | Kalender (ikon kalender) | Ketika ditekan, sistem membuka halaman Kalender untuk melihat jadwal pengambilan sampah. |
+
+## 6.4 Rancangan Antarmuka [I-04]
+**Antarmuka:** [I-04] 
+**Nama Layar:** *Halaman Utama Kosong Daur Ulang*
+
+<p align="center">
+<img alt="Halaman Utama Kosong Daur Ulang" src="./assets/diagram/I04.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.4. Rancangan Antarmuka I-04 - Halaman Utama Kosong Daur Ulang</i>
+</p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-14 | Ilustrasi | Ikon kaca pembesar | Menampilkan ilustrasi sebagai penanda bahwa hasil pencarian tidak ditemukan. |
+| O-15 | Label | Material tidak ditemukan | Menampilkan pesan bahwa tidak ada kategori material yang sesuai dengan kata kunci pencarian. |
+| O-16 | Label | Coba kata kunci lain atau periksa ejaan pencarianmu | Memberikan arahan kepada pengguna untuk mencoba kata kunci lain atau memperbaiki ejaan pencarian. |
+
+## 6.5 Rancangan Antarmuka [I-06]
+**Antarmuka:** [I-06] 
+**Nama Layar:** *Halaman Informasi Material Sampah*
+
+<p align="center">
+<img alt="Halaman Informasi Material Sampah" src="./assets/diagram/I05.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.5. Rancangan Antarmuka I-05 - Halaman Informasi Material Sampah</i>
+</p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-17 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
+| O-18 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
+| O-19 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
+| O-20 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
+| O-21 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
+| O-22 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
+| O-23 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
+| O-24 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-25 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+
+## 6.6 Rancangan Antarmuka [I-06]
+**Antarmuka:** [I-06] 
+**Nama Layar:** *Pop-up Panduan Daur Ulang*
+
+<p align="center">
+<img alt="Pop-up Panduan Daur Ulang" src="./assets/diagram/I06.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.6. Rancangan Antarmuka I-06 - Pop-up Panduan Daur Ulang</i>
+</p>
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| O-17 | Button | Kembali | Ketika ditekan, sistem kembali ke halaman Mulai Daur Ulang. |
+| O-18 | Label | Sampah Plastik | Menampilkan nama kategori material yang dipilih pengguna. Judul menyesuaikan kategori material yang sedang dibuka. |
+| O-19 | Label | Anorganik | Menampilkan jenis pengelompokan sampah berdasarkan kategori yang dipilih. |
+| O-20 | Label | Deskripsi sampah plastik | Menampilkan penjelasan mengenai karakteristik, jenis, dan pentingnya memilah sampah plastik. |
+| O-21 | Card | Botol Plastik | Menampilkan nomor urut dan nama jenis sampah plastik. |
+| O-22 | Card | Dibuang ke Sampah Anorganik | Menampilkan gambar dan pilihan untuk melihat informasi pembuangan botol plastik ke sampah anorganik. Ketika ditekan, sistem membuka informasi terkait pembuangan sampah tersebut. |
+| O-23 | Card | Kreasikan Menjadi Barang Baru | Menampilkan gambar contoh kreasi dari botol plastik. Ketika ditekan, sistem menampilkan pop-up Panduan Kreasi Daur Ulang. |
+| O-24 | Card | Kantong Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa kantong plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
+| O-25 | Card | Wadah Plastik | Menampilkan nomor urut dan nama jenis sampah plastik berupa wadah plastik, beserta pilihan pembuangan dan kreasi daur ulang. |
 
 
-## 6.X Rancangan Antarmuka [ID Layar X]
+## 6.7 Rancangan Antarmuka [I-07]
+**Antarmuka:** [I-07] 
+**Nama Layar:** *Halaman Utama Jadwal Pengambilan Sampah*
 
-*[Ulangi pola 6.1 untuk layar berikutnya sampai semua layar teridentifikasi]*
+<p align="center">
+<img alt="Halaman Utama Jadwal Pengambilan Sampah" src="./assets/diagram/I07.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.7. Rancangan Antarmuka I-07 - Halaman Utama Jadwal Pengambilan Sampah</i>
+</p>
+
+## 6.8 Rancangan Antarmuka [I-08]
+**Antarmuka:** [I-08] 
+**Nama Layar:** *Halaman Utama Kosong Jadwal Pengambilan Sampah*
+
+<p align="center">
+<img alt="Halaman Utama Kosong Jadwal Pengambilan Sampah" src="./assets/diagram/I08.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.8. Rancangan Antarmuka I-08 - Halaman Utama Kosong Jadwal Pengambilan Sampah</i>
+</p>
+
+## 6.9 Rancangan Antarmuka [I-09]
+**Antarmuka:** [I-09] 
+**Nama Layar:** *Halaman Utama Kalendar (Masyarakat Umum)*
+
+<p align="center">
+<img alt="Halaman Utama Kalendar (Masyarakat Umum)" src="./assets/diagram/I09.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.09. Rancangan Antarmuka I-09 - Halaman Utama Kalendar (Masyarakat Umum)</i>
+</p>
+
+## 6.10 Rancangan Antarmuka [I-10]
+**Antarmuka:** [I-10] 
+**Nama Layar:** *Halaman Utama Kalendar (Petugas Kebersihan)*
+
+<p align="center">
+<img alt="Halaman Utama Kalendar (Petugas Kebersihan)" src="./assets/diagram/I10.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.10. Rancangan Antarmuka I-10 - Halaman Utama Kalendar (Petugas Kebersihan)</i>
+</p>
+
+## 6.11 Rancangan Antarmuka [I-11]
+**Antarmuka:** [I-11] 
+**Nama Layar:** *Halaman Utama Kalendar (Petugas Kebersihan)*
+
+<p align="center">
+<img alt="Halaman Edit Kalendar (Petugas Kebersihan)" src="./assets/diagram/I11.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.11. Rancangan Antarmuka I-11 - Halaman Edit Kalendar (Petugas Kebersihan)</i>
+</p>
+
+## 6.12 Rancangan Antarmuka [I-12]
+**Antarmuka:** [I-12] 
+**Nama Layar:** *Pop Up Simpan Kalendar Baru (Petugas Kebersihan)*
+
+<p align="center">
+<img alt="Pop Up Simpan Kalendar Baru (Petugas Kebersihan)" src="./assets/diagram/I12.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.12. Rancangan Antarmuka I-12 - Pop Up Simpan Kalendar Baru (Petugas Kebersihan)</i>
+</p>
+
+## 6.13 Rancangan Antarmuka [I-13]
+**Antarmuka:** [I-13] 
+**Nama Layar:** *Pop Up Kalendar Baru Berhasil Tersimpan (Petugas Kebersihan)*
+
+<p align="center">
+<img alt="Pop Up Kalendar Baru Berhasil Tersimpan (Petugas Kebersihan)" src="./assets/diagram/I13.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.13. Rancangan Antarmuka I-13 - Pop Up Kalendar Baru Berhasil Tersimpan (Petugas Kebersihan)</i>
+</p>
+
+## 6.14 Rancangan Antarmuka [I-14]
+**Antarmuka:** [I-14] 
+**Nama Layar:** *Pop Up Kalendar Baru Gagal Tersimpan (Petugas Kebersihan)*
+
+<p align="center">
+<img alt="Pop Up Kalendar Baru Gagal Tersimpan (Petugas Kebersihan)" src="./assets/diagram/I14.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.14. Rancangan Antarmuka I-14 - Pop Up Kalendar Baru Gagal Tersimpan (Petugas Kebersihan)</i>
+</p>
+
+## 6.15 Rancangan Antarmuka [I-15]
+**Antarmuka:** [I-15] 
+**Nama Layar:** *Halaman Utama Profil Petugas Kebersihan*
+
+<p align="center">
+<img alt="Halaman Utama Profil Petugas Kebersihan" src="./assets/diagram/I15.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.15. Rancangan Antarmuka I-15 - Halaman Utama Profil Petugas Kebersihan</i>
+</p>
+
+## 6.16 Rancangan Antarmuka [I-16]
+**Antarmuka:** [I-16] 
+**Nama Layar:** *Halaman Edit Profil Petugas Kebersihan*
+
+<p align="center">
+<img alt="Halaman Edit Profil Petugas Kebersihan" src="./assets/diagram/I16.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.16. Rancangan Antarmuka I-16 - Halaman Edit Profil Petugas Kebersihan</i>
+</p>
+
+## 6.17 Rancangan Antarmuka [I-17]
+**Antarmuka:** [I-17] 
+**Nama Layar:** *Halaman Berhasil Simpan Profil Baru Petugas Kebersihan*
+
+<p align="center">
+<img alt="Halaman Edit Profil Petugas Kebersihan" src="./assets/diagram/I17.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.17. Rancangan Antarmuka I-17 - Halaman Edit Profil Petugas Kebersihan</i>
+</p>
+
+## 6.18 Rancangan Antarmuka [I-18]
+**Antarmuka:** [I-18] 
+**Nama Layar:** *Halaman Gagal Simpan Profil Baru Petugas Kebersihan*
+
+<p align="center">
+<img alt="Halaman Gagal Profil Petugas Kebersihan" src="./assets/diagram/I18.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.18. Rancangan Antarmuka I-18 - Halaman Gagal Profil Petugas Kebersihan</i>
+</p>
+
+## 6.19 Rancangan Antarmuka [I-19]
+**Antarmuka:** [I-19] 
+**Nama Layar:** *Pop up Keluar Akun Petugas*
+
+<p align="center">
+<img alt="Pop up Keluar Akun Petugas" src="./assets/diagram/I20.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.19. Rancangan Antarmuka I-19 - Pop up Keluar Akun Petugas</i>
+</p>
+
+
+## 6.20 Rancangan Antarmuka [I-20]
+**Antarmuka:** [I-20] 
+**Nama Layar:** *Halaman Edit Password Akun Petugas*
+
+<p align="center">
+<img alt="Halaman Edit Password Akun Petugas" src="./assets/diagram/I20.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.20. Rancangan Antarmuka I-20 - Halaman Edit Password Akun Petugas</i>
+
+## 6.25 Rancangan Antarmuka [I-21]
+**Antarmuka:** [I-21] 
+**Nama Layar:** *Halaman Berhasil Edit Password Akun Petugas*
+
+<p align="center">
+<img alt="Halaman Berhasil Edit Password Akun Petugas" src="./assets/diagram/I21.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.21. Rancangan Antarmuka I-21 - Halaman Berhasil Edit Password Akun Petugas</i>
+
+## 6.22 Rancangan Antarmuka [I-22]
+**Antarmuka:** [I-22] 
+**Nama Layar:** *Halaman Gagal Edit Password Akun Petugas*
+
+<p align="center">
+<img alt="Halaman Gagal Edit Password Akun Petugas" src="./assets/diagram/I22.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.22. Rancangan Antarmuka I-22 - Halaman Gagal Edit Password Akun Petugas</i>
+
+## 6.23 Rancangan Antarmuka [I-23]
+**Antarmuka:** [I-23] 
+**Nama Layar:** *Halaman Utama Pemindaian Sampah*
+
+<p align="center">
+<img alt="Halaman Edit Profil Petugas Kebersihan" src="./assets/diagram/I23.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.23. Rancangan Antarmuka I-23 - Halaman Utama Pemindaian Sampah</i>
+</p>
+
+## 6.24 Rancangan Antarmuka [I-24]
+**Antarmuka:** [I-24] 
+**Nama Layar:** *Halaman Hasil Pemindaian Sampah*
+
+<p align="center">
+<img alt="Halaman Hasil Pemindaian Sampah" src="./assets/diagram/I24.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.24. Rancangan Antarmuka I-24 - Halaman Hasil Pemindaian Sampah</i>
+</p>
+
+## 6.25 Rancangan Antarmuka [I-25]
+**Antarmuka:** [I-25] 
+**Nama Layar:** *Pop Up Material Sampah Belum Tersedia*
+
+<p align="center">
+<img alt="Pop Up Material Sampah Belum Tersedia" src="./assets/diagram/I25.png" width="25%">
+</p>
+<p align="center">
+<i>Gambar 6.25. Rancangan Antarmuka I-25 - Pop Up Material Sampah Belum Tersedia</i>
 
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
@@ -1560,3 +1849,6 @@ Tabel 7.1. Matriks Kerunutan Kelas terhadap Use Case
 | *C09* - InformasiSampahInterface | *UC02 - Memindai Sampah, UC05 - Mengakses Tampilan Informasi* |
 | *C10* - PemindaiController | *UC02 - Memindai Sampah* | *KF01
 | *C11* - PemindaiInterface | *UC02 - Memindai Sampah* | *KF01
+
+# Lampiran
+- https://www.figma.com/design/wpSrvFAroXTaGU1htf6erd/EcoTrack?node-id=54-492&t=5C9wQrONg0HONNk8-1
