@@ -1734,13 +1734,6 @@ ALGORITMA
     Jika penyimpanan gagal, tampilkan pesan kesalahan.
 ```
 
-Tabel 5.6.5. Query Operasi fillFormEditJadwal(idJadwal: String, daftarTanggalBaru: List<Date>)
-
-| No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *[Q-JI-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
 ### 5.6.6 Algoritma/Query
 
 **Nama Kelas:** AkunPetugasInterface  
@@ -1827,7 +1820,6 @@ Tabel 5.7.1. Operasi Kelas InformasiSampah
 | *getDetail(id)* | *public* | *Mengambil objek sampah dengan id tertentu dari database* |
 | *getMain()* | *public* | *Mengambil seluruh data objek sampah dari database* |
 | *cariInformasi(query)* | *public* | *Mengambil objek sesuai dengan query yang diberikan* |
-| *...* | *...* | *...* |
 
 Tabel 5.7.2. Atribut Kelas InformasiSampah
 
@@ -1837,7 +1829,6 @@ Tabel 5.7.2. Atribut Kelas InformasiSampah
 | *judul* | *private* | *String* |
 | *preview* | *private* | *String* |
 | *deskripsi* | *private* | *String* |
-| *...* | *...* | *...* |
 
 ### 5.7.1 Algoritma/Query
 
@@ -1859,7 +1850,6 @@ Tabel 5.7.1. Query Operasi getDetail(id)
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
 | *Q-IS-001* | *getData(id)* | *mengambil data sesuai dengan id yang dimasukkan* |
-| *...* | *...* | *...* |
 
 ### 5.7.2 Algoritma/Query
 
@@ -1881,7 +1871,6 @@ Tabel 5.7.2. Query Operasi getMain()
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
 | *Q-IS-002* | *getAll()* | *mengambil semua data informasi sampah* |
-| *...* | *...* | *...* |
 
 ### 5.7.3 Algoritma/Query
 
@@ -1908,7 +1897,6 @@ Tabel 5.7.1. Query Operasi [Nama Operasi]
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
 | *Q-IS-002* | *getAll()* | *mengambil semua data informasi sampah* |
-| *...* | *...* | *...* |
 
 ## 5.8 Kelas InformasiSampahController
 
@@ -1922,7 +1910,6 @@ Tabel 5.8.1. Operasi Kelas InformasiSampahController
 | *getMain()* | *public* | *Mengambil data informasi utama* |
 | *getDetail(id)* | *public* | *Mengambil data deskripsi sampah sesuai masukan pengguna* |
 | *cariInformasi(query)* | *public* | *Memproses pencarian informasi berdasarkan kata kunci yang dimasukkan pengguna* |
-| *...* | *...* | *...* |
 
 ### 5.8.1 Algoritma/Query
 
@@ -1983,8 +1970,6 @@ Tabel 5.9.1. Operasi Kelas InformasiSampahInterface
 | *showDetail(id)* | *public* | *Menampilkan detail page dari sampah yang dipilih (lihat bagian rancangan antarmuka dengan id .......)* |
 | *showSearch(input)* | *public* | *Menampilkan page sesuai dengan filter yang diberikan (lihat bagian rancangan antarmuka dengan id .......)* |
 | *showError(kode)* | *public* | *Menampilkan page error, ketika terjadi masalah (lihat bagian rancangan antarmuka dengan id .......)* |
-| *...* | *...* | *...* |
-
 
 ### 5.9.1 Algoritma/Query
 
@@ -2076,15 +2061,12 @@ Tabel 5.10.1. Operasi Kelas PemindaiController
 | *+ prosesFrame(frameData: Byte[]): String* | *public* | *Memroses frame yang telah ditangkap dan melakukan identifikasi* |
 | *+ prosesBarcode(frameData: Byte[]): String* | *public* | *Memroses barcode yang dipindai oleh kamera dan melakukan identifikasi berdasarkan barcode* |
 
-
 Tabel 5.10.2. Atribut Kelas PemindaiController
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
 | *- isMemindai* | *private* | *Boolean* |
 | *- hasilIdentifikasi* | *private* | *String* |
-
-| *...* | *...* | *...* |
 
 ### 5.10.1 Algoritma/Query
 
@@ -2111,7 +2093,6 @@ ALGORITMA
     return NULL
         
 ```
-
 
 ### 5.10.2 Algoritma/Query
 
