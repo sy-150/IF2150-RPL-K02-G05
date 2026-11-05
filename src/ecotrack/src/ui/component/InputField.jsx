@@ -43,7 +43,6 @@ export default function InputField({
   style,
   ...lainnya
 }) {
-  // Untuk kolom kata sandi: false = isi disembunyikan (default), true = isi terlihat.
   const [terlihat, setTerlihat] = useState(false);
   const adaError = Boolean(error) && !terkunci;
   const warnaTeks = adaError ? COLOR.redBright : COLOR.forestEmerald;
@@ -77,7 +76,6 @@ export default function InputField({
         />
         {terkunci ? <MaterialIcons name="lock" size={16} color={COLOR.oceanGreen} /> : null}
 
-        {/* Tombol mata untuk kolom kata sandi: tampilkan / sembunyikan isi */}
         {sandi && !terkunci ? (
           <Pressable
             onPress={() => setTerlihat((v) => !v)}

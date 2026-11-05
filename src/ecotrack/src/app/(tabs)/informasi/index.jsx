@@ -5,6 +5,7 @@ import { TEXT, COLOR } from '@/ui/theme';
 import Header from "@/ui/component/Header";
 import SearchBar from "@/ui/component/SearchBar";
 import Button from "@/ui/component/Button";
+import { toast } from "@/ui/component/Toast";
 
 export default function InformasiPage() {
   const [keyword, setKeyword] = useState("");
@@ -43,6 +44,12 @@ export default function InformasiPage() {
           <Button label="Detail Jadwal" varian="outline" onPress={() => router.push("/jadwal/contoh")} style={styles.lebar} />
         </View>
         <Button label="Edit jadwal" ikon="edit" onPress={() => router.push("/jadwal/contoh/edit")} />
+
+        {/* Tombol sementara untuk mencoba Toast */}
+        <View style={styles.baris}>
+          <Button label="Toast berhasil" onPress={() => toast.berhasil("Jadwal berhasil diperbarui")} style={styles.lebar} />
+          <Button label="Toast gagal" varian="bahaya" onPress={() => toast.gagal("Jadwal gagal diperbarui")} style={styles.lebar} />
+        </View>
       </View>
     </View>
   );

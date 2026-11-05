@@ -5,7 +5,7 @@ import { COLOR, TEXT } from '@/ui/theme';
 
 export const NAVBAR_TINGGI = 72;
 const UKURAN_PINDAI = NAVBAR_TINGGI;
-const TONJOLAN = 24;
+export const TONJOLAN = 24;
 
 const MENU = {
   informasi: { label: 'Daur Ulang', ikon: 'recycle' },
