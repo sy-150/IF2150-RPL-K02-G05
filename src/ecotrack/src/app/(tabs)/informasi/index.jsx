@@ -1,15 +1,22 @@
 import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { ScrollView, Text, View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from "@/ui/component/Header";
 import SearchBar from "@/ui/component/SearchBar";
 import Button from "@/ui/component/Button";
 import { toast } from "@/ui/component/Toast";
+import Dialog from "@/ui/component/Dialog";
+
+const tunggu = (ms) => new Promise((selesai) => setTimeout(selesai, ms));
 
 export default function InformasiPage() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
+
+  // Percobaan Dialog: null = tidak ada dialog, atau "simpan" | "keluar" | "info"
+  const [dialog, setDialog] = useState(null);
+  const tutupDialog = () => setDialog(null);
 
   return (
     <View style={styles.halaman}>
@@ -27,7 +34,7 @@ export default function InformasiPage() {
             keyboardShouldPersistTaps="handled"  -> satu ketukan langsung membuka kartu
                                                     walaupun keyboard search bar masih terbuka
             keyboardDismissMode="on-drag"        -> keyboard tertutup saat daftar di-scroll */}
-      <View style={styles.isi}>
+      <ScrollView contentContainerStyle={styles.isi} keyboardShouldPersistTaps="handled">
         <Text style={styles.text}>INFORMASI SAMPAH PAGE</Text>
         {keyword ? <Text>Keyword: {keyword}</Text> : null}
 
@@ -50,7 +57,55 @@ export default function InformasiPage() {
           <Button label="Toast berhasil" onPress={() => toast.berhasil("Jadwal berhasil diperbarui")} style={styles.lebar} />
           <Button label="Toast gagal" varian="bahaya" onPress={() => toast.gagal("Jadwal gagal diperbarui")} style={styles.lebar} />
         </View>
-      </View>
+
+        {/* Tombol sementara untuk mencoba Dialog */}
+        <View style={styles.baris}>
+          <Button label="Dialog Simpan" varian="outline" onPress={() => setDialog("simpan")} style={styles.lebar} />
+          <Button label="Dialog Keluar" varian="bahayaOutline" onPress={() => setDialog("keluar")} style={styles.lebar} />
+        </View>
+        <Button label="Dialog Info (I25)" varian="outline" onPress={() => setDialog("info")} />
+      </ScrollView>
+
+      {/* I12: konfirmasi simpan, dua tombol bertumpuk */}
+      <Dialog
+        terlihat={dialog === "simpan"}
+        onTutup={tutupDialog}
+        ikon="save"
+        judul="Simpan Jadwal"
+        pesan="Pastikan tanggal yang dipilih sudah benar!"
+        tombolUtama={{
+          label: "Simpan",
+          onPress: async () => {
+            await tunggu(1500); // pura-pura menyimpan
+            tutupDialog();
+            toast.berhasil("Jadwal berhasil diperbarui");
+          },
+        }}
+        tombolKedua={{ label: "Batal", onPress: tutupDialog }}
+      />
+
+      {/* I19: varian bahaya (merah) */}
+      <Dialog
+        terlihat={dialog === "keluar"}
+        onTutup={tutupDialog}
+        varian="bahaya"
+        ikon="logout"
+        judul="Keluar Akun"
+        pesan="Apakah Anda yakin hendak keluar akun ini?"
+        tombolUtama={{ label: "Keluar", onPress: tutupDialog }}
+        tombolKedua={{ label: "Batal", onPress: tutupDialog }}
+      />
+
+      {/* I25: satu tombol + tombol × di kanan atas */}
+      <Dialog
+        terlihat={dialog === "info"}
+        onTutup={tutupDialog}
+        tampilTutup
+        ikon="speaker-notes-off"
+        judul="Informasi Sampah Belum Tersedia"
+        pesan="Informasi detail tentang daur ulang belum tersedia di database kami."
+        tombolUtama={{ label: "Mengerti", onPress: tutupDialog }}
+      />
     </View>
   );
 }
@@ -63,6 +118,7 @@ const styles = StyleSheet.create({
   isi: {
     gap: 12,
     padding: 16,
+    paddingBottom: 140, // ruang supaya tombol terakhir tidak tertutup navbar
   },
   baris: {
     flexDirection: "row",

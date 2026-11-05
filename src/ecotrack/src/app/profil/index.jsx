@@ -5,7 +5,7 @@ import Header from "@/ui/component/Header";
 export default function ProfilPage() {
   return (
     <View style={styles.halaman}>
-      <Header judul="Profil Petugas" tampilProfil tampilKembali style={styles.header}/>
+      <Header judul="Profil Petugas" tampilKembali style={styles.header}/>
         <View style={styles.container}>
           <Text style={styles.text}>PROFIL PETUGAS PAGE</Text>
         </View>
