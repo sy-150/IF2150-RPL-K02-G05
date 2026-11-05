@@ -20,7 +20,7 @@ export default function Navbar({ state, descriptors, emitter, navigateToTab, ins
   return (
     <View style={[styles.root, { paddingBottom: insets.bottom }]} pointerEvents="box-none">
       <LinearGradient
-        colors={[COLOR.emeraldGreen, COLOR.deepForestGreen]} // atas → bawah
+        colors={[COLOR.forestEmerald, COLOR.deepForestGreen]} // atas → bawah
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={[styles.latar, { height: NAVBAR_TINGGI + insets.bottom }]}
