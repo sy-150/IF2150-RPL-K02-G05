@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from "@/ui/component/Header";
@@ -7,8 +7,28 @@ import SearchBar from "@/ui/component/SearchBar";
 import Button from "@/ui/component/Button";
 import { toast } from "@/ui/component/Toast";
 import Dialog from "@/ui/component/Dialog";
+import EmptyState from "@/ui/component/EmptyState";
 
 const tunggu = (ms) => new Promise((selesai) => setTimeout(selesai, ms));
+
+// TODO (F2): DATA DUMMY untuk mencoba pencarian + EmptyState.
+// Nanti diganti data dari InformasiSampahController (koleksi informasiSampah di Firestore).
+const KATEGORI_DUMMY = [
+  { idSampah: "plastik", nama: "Plastik", ringkasan: "Botol plastik, wadah plastik, kantong plastik" },
+  { idSampah: "kaca", nama: "Kaca", ringkasan: "Botol kaca, peralatan kaca, gelas kaca" },
+  { idSampah: "aluminium", nama: "Aluminium", ringkasan: "Kaleng minuman, kaleng makanan, kabel listrik" },
+  { idSampah: "stainless-steel", nama: "Stainless Steel", ringkasan: "Peralatan dapur, konstruksi, komponen otomotif" },
+  { idSampah: "silikon", nama: "Silikon", ringkasan: "Perkakas dapur, mainan anak, komponen elektronik" },
+  { idSampah: "keramik", nama: "Keramik", ringkasan: "Piring, mangkuk, ubin, pot" },
+];
+
+// Pencarian dummy: cocokkan nama kategori atau contoh barang, tidak peka huruf besar/kecil (FR2).
+function cariKategori(keyword) {
+  const kata = keyword.trim().toLowerCase();
+  return KATEGORI_DUMMY.filter(
+    (k) => k.nama.toLowerCase().includes(kata) || k.ringkasan.toLowerCase().includes(kata)
+  );
+}
 
 export default function InformasiPage() {
   const [keyword, setKeyword] = useState("");
@@ -17,6 +37,9 @@ export default function InformasiPage() {
   // Percobaan Dialog: null = tidak ada dialog, atau "simpan" | "keluar" | "info"
   const [dialog, setDialog] = useState(null);
   const tutupDialog = () => setDialog(null);
+
+  const sedangMencari = keyword.trim().length > 0;
+  const hasil = sedangMencari ? cariKategori(keyword) : [];
 
   return (
     <View style={styles.halaman}>
@@ -34,9 +57,29 @@ export default function InformasiPage() {
             keyboardShouldPersistTaps="handled"  -> satu ketukan langsung membuka kartu
                                                     walaupun keyboard search bar masih terbuka
             keyboardDismissMode="on-drag"        -> keyboard tertutup saat daftar di-scroll */}
+      {sedangMencari && hasil.length === 0 ? (
+        // I04: pencarian tanpa hasil. paddingBottom memberi ruang untuk navbar.
+        <EmptyState judul="Material tidak ditemukan" style={styles.kosong} />
+      ) : sedangMencari ? (
+        // Hasil pencarian dummy (tampilan sederhana; kartu katalog sebenarnya dibuat F2)
+        <ScrollView
+          contentContainerStyle={styles.isi}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+        >
+          {hasil.map((k) => (
+            <Pressable key={k.idSampah} style={styles.kartu} onPress={() => router.push(`/informasi/${k.idSampah}`)}>
+              <Text style={styles.namaKategori}>{k.nama}</Text>
+              <Text style={styles.ringkasan}>{k.ringkasan}</Text>
+            </Pressable>
+          ))}
+        </ScrollView>
+      ) : (
       <ScrollView contentContainerStyle={styles.isi} keyboardShouldPersistTaps="handled">
         <Text style={styles.text}>INFORMASI SAMPAH PAGE</Text>
-        {keyword ? <Text>Keyword: {keyword}</Text> : null}
+        <Text style={styles.petunjuk}>
+          Coba cari: "plastik", "BOTOL", "kaleng" (ada hasil) atau "kertas" (tidak ditemukan)
+        </Text>
 
         {/* Tombol sementara untuk mencoba navigasi ke tiap halaman.
             Alamat = path file di app/ tanpa folder berkurung (tabs)/(auth) dan tanpa index.jsx.
@@ -65,6 +108,7 @@ export default function InformasiPage() {
         </View>
         <Button label="Dialog Info (I25)" varian="outline" onPress={() => setDialog("info")} />
       </ScrollView>
+      )}
 
       {/* I12: konfirmasi simpan, dua tombol bertumpuk */}
       <Dialog
@@ -129,5 +173,27 @@ const styles = StyleSheet.create({
   },
   text: {
     ...TEXT.titleCenter, color: COLOR.forestEmerald
-  }
+  },
+  petunjuk: {
+    ...TEXT.descriptiveText,
+    color: COLOR.deepForestGreen,
+    textAlign: "center",
+  },
+  kosong: {
+    paddingBottom: 140, // supaya EmptyState tetap di tengah area yang tidak tertutup navbar
+  },
+  kartu: {
+    gap: 4,
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: COLOR.forestEmerald,
+  },
+  namaKategori: {
+    ...TEXT.bodyText,
+    color: COLOR.white,
+  },
+  ringkasan: {
+    ...TEXT.descriptiveText,
+    color: COLOR.white,
+  },
 });
