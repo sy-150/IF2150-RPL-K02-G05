@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   blokJudul: {
     alignItems: 'center',
-    gap: 4,
+    gap: 8,
     marginTop: 8,
   },
   judul: {
@@ -173,16 +173,16 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   lingkaranLogo: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 140,
+    height: 140,
+    borderRadius: 104,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLOR.white,
   },
   gambarLogo: {
-    width: 88,
-    height: 88,
+    width: 140,
+    height: 140,
   },
   judulLogo: {
     ...TEXT.titleBold,
