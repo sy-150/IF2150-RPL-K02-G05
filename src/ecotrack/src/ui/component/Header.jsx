@@ -24,12 +24,9 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLOR, TEXT } from '@/ui/theme';
 
-// Isi setelah gambar diexport dari Figma ke assets/images/, misalnya:
-//   const GAMBAR_LOGO = require('@/assets/images/logo.png');
 const GAMBAR_LOGO = require('@/assets/images/logo.png');
-const DAUN_KIRI = require('@/assets/images/leafKiri.png'); // 92x127
-const DAUN_KANAN = require('@/assets/images/leafKanan.png'); // 111x127
-const TINGGI_DAUN = 100; // ubah angka ini kalau daun ingin lebih besar/kecil
+const DAUN_KIRI = require('@/assets/images/leafKiri.png');
+const DAUN_KANAN = require('@/assets/images/leafKanan.png');
 
 export default function Header({
   judul,
@@ -85,7 +82,7 @@ export default function Header({
             accessibilityRole="button"
             accessibilityLabel="Profil"
           >
-            <MaterialIcons name="account-circle" size={28} color={COLOR.white} />
+            <MaterialIcons name="account-circle" size={32} color={COLOR.white} />
           </Pressable>
         ) : null}
       </View>
@@ -126,19 +123,19 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16
   },
-  // Tinggi kedua daun sama; lebar mengikuti rasio masing-masing gambar.
   daun: {
     position: 'absolute',
     bottom: 0,
-    height: TINGGI_DAUN,
   },
   daunKiri: {
     left: 0,
-    width: TINGGI_DAUN * (92 / 127),
+    height: 145,
+    width: 71,
   },
   daunKanan: {
     right: 0,
-    width: TINGGI_DAUN * (111 / 127),
+    height: 183,
+    width: 90,
   },
   barisAtas: {
     height: 32,

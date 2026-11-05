@@ -18,9 +18,9 @@ export const FONT = {
 
 export const TEXT = {
     titleBold:       { fontFamily: FONT.bold,    fontSize: 34 },
-    titleMedium:     { fontFamily: FONT.medium,  fontSize: 28 },
-    titleCenter:     { fontFamily: FONT.medium,  fontSize: 17, textAlign: 'center' },
-    bodyText:        { fontFamily: FONT.medium,  fontSize: 14 },
-    descriptiveText: { fontFamily: FONT.regular, fontSize: 12 },
-    smallText:       { fontFamily: FONT.regular, fontSize: 10 },
+    titleMedium:     { fontFamily: FONT.medium,  fontSize: 24 },
+    titleCenter:     { fontFamily: FONT.medium,  fontSize: 18, textAlign: 'center' },
+    bodyText:        { fontFamily: FONT.medium,  fontSize: 16 },
+    descriptiveText: { fontFamily: FONT.regular, fontSize: 16 },
+    smallText:       { fontFamily: FONT.regular, fontSize: 12 },
 }
