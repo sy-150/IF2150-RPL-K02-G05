@@ -9,7 +9,8 @@
 //   error         (opsional) pesan error. Kalau diisi: garis merah, teks merah,
 //                 dan ikon (!) + pesan merah di bawah kolom (I26, I27).
 //                 Kosongkan ('' / null) untuk menghapus error.
-//   sandi         true = isi kolom disembunyikan (kata sandi).
+//   sandi         true = isi kolom disembunyikan (kata sandi), dengan ikon mata di kanan
+//                 untuk menampilkan/menyembunyikan isinya.
 //   keyboardType  'default' | 'email-address' | 'numeric' | 'phone-pad'.
 //                 Untuk 'email-address', huruf pertama otomatis tidak dikapitalkan.
 //   terkunci      true = latar abu-abu + ikon gembok, tidak bisa diedit (Wilayah Tugas di I16).
@@ -25,8 +26,9 @@
 //     onChangeText={setNik} keyboardType="numeric" maxLength={16} />
 //   <InputField label="Wilayah Tugas" value="Lebak Siliwangi" terkunci />
 
+import { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLOR, TEXT } from '@/ui/theme';
 
 export default function InputField({
@@ -41,6 +43,8 @@ export default function InputField({
   style,
   ...lainnya
 }) {
+  // Untuk kolom kata sandi: false = isi disembunyikan (default), true = isi terlihat.
+  const [terlihat, setTerlihat] = useState(false);
   const adaError = Boolean(error) && !terkunci;
   const warnaTeks = adaError ? COLOR.redBright : COLOR.forestEmerald;
 
@@ -60,7 +64,7 @@ export default function InputField({
           onChangeText={onChangeText}
           placeholder={placeholder}
           placeholderTextColor={warnaTeks}
-          secureTextEntry={sandi}
+          secureTextEntry={sandi && !terlihat}
           keyboardType={keyboardType}
           autoCapitalize={keyboardType === 'email-address' || sandi ? 'none' : 'sentences'}
           autoCorrect={false}
@@ -72,6 +76,22 @@ export default function InputField({
           {...lainnya}
         />
         {terkunci ? <MaterialIcons name="lock" size={16} color={COLOR.oceanGreen} /> : null}
+
+        {/* Tombol mata untuk kolom kata sandi: tampilkan / sembunyikan isi */}
+        {sandi && !terkunci ? (
+          <Pressable
+            onPress={() => setTerlihat((v) => !v)}
+            hitSlop={10}
+            accessibilityRole="button"
+            accessibilityLabel={terlihat ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+          >
+            <MaterialIcons
+              name={terlihat ? 'visibility' : 'visibility-off'}
+              size={18}
+              color={warnaTeks}
+            />
+          </Pressable>
+        ) : null}
       </View>
 
       {adaError ? (

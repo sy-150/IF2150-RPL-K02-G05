@@ -5,7 +5,7 @@ import Header from "@/ui/component/Header";
 export default function ProfilPage() {
   return (
     <View style={styles.halaman}>
-      <Header judul="Profil Petugas" tampilProfil tampilKembali />
+      <Header judul="Profil Petugas" tampilProfil tampilKembali style={styles.header}/>
         <View style={styles.container}>
           <Text style={styles.text}>PROFIL PETUGAS PAGE</Text>
         </View>
@@ -14,6 +14,10 @@ export default function ProfilPage() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    paddingBottom: 67,
+  },
+
   halaman: {
     flex: 1,
     backgroundColor: COLOR.secondaryWhite,
