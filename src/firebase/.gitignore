@@ -1,0 +1,8 @@
+node_modules/
+# Kunci admin Firebase: SANGAT RAHASIA, jangan pernah di-commit
+service-account.json
+*-firebase-adminsdk-*.json
+# Log emulator
+*-debug.log
+# Data emulator yang disimpan dengan --export-on-exit
+emulator-data/

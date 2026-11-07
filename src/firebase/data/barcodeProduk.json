@@ -1,0 +1,44 @@
+[
+  {
+    "kodeBarcode": "2000000000015",
+    "namaProduk": "Contoh Botol Air Mineral 600 ml",
+    "idSampah": "plastik",
+    "idTipe": "botol-plastik",
+    "sumber": "seed"
+  },
+  {
+    "kodeBarcode": "2000000000022",
+    "namaProduk": "Contoh Kantong Belanja Plastik",
+    "idSampah": "plastik",
+    "idTipe": "kantong-plastik",
+    "sumber": "seed"
+  },
+  {
+    "kodeBarcode": "2000000000039",
+    "namaProduk": "Contoh Botol Sirup Kaca",
+    "idSampah": "kaca",
+    "idTipe": "botol-kaca",
+    "sumber": "seed"
+  },
+  {
+    "kodeBarcode": "2000000000046",
+    "namaProduk": "Contoh Kaleng Minuman Soda 330 ml",
+    "idSampah": "aluminium",
+    "idTipe": "kaleng-minuman",
+    "sumber": "seed"
+  },
+  {
+    "kodeBarcode": "2000000000053",
+    "namaProduk": "Contoh Sendok Makan Stainless",
+    "idSampah": "stainless-steel",
+    "idTipe": "perkakas-dapur",
+    "sumber": "seed"
+  },
+  {
+    "kodeBarcode": "2000000000060",
+    "namaProduk": "Contoh Spatula Silikon",
+    "idSampah": "silikon",
+    "idTipe": "peralatan-masak-silikon",
+    "sumber": "seed"
+  }
+]
