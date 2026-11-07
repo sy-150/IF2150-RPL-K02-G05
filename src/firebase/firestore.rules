@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function dataPemerintah(nik) {
+      return get(/databases/$(database)/documents/dataPemerintah/$(nik)).data;
+    }
+
+    function profilSaya() {
+      return get(/databases/$(database)/documents/akunPetugas/$(request.auth.uid)).data;
+    }
+
+    // Katalog daur ulang: boleh dibaca siapa saja, hanya diisi lewat skrip seed (admin).
+    match /informasiSampah/{idSampah} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Barcode produk: siapa saja (tanpa login, karena Pemindai terbuka untuk umum) boleh mencari
+    // satu kode, menambah kode yang belum ada, atau mengganti material/tipe kode yang salah.
+    // Isinya diperiksa ketat: kode berupa 8-14 digit, field terbatas, dan idSampah + idTipe
+    // harus benar-benar ada di informasiSampah. Mengambil seluruh daftar dan menghapus ditolak.
+    match /barcodeProduk/{kodeBarcode} {
+      allow get: if true;
+      allow create, update: if kodeBarcode.matches('^[0-9]{8,14}$')
+        && request.resource.data.keys().hasOnly(['namaProduk', 'idSampah', 'idTipe', 'sumber', 'diperbaruiPada'])
+        && request.resource.data.idSampah is string
+        && request.resource.data.idTipe is string
+        && request.resource.data.idTipe in get(/databases/$(database)/documents/informasiSampah/$(request.resource.data.idSampah)).data.daftarIdTipe
+        && (!('namaProduk' in request.resource.data)
+            || (request.resource.data.namaProduk is string && request.resource.data.namaProduk.size() <= 100))
+        && request.resource.data.sumber == 'pengguna'
+        && request.resource.data.diperbaruiPada == request.time;
+      allow list, delete: if false;
+    }
+
+    // Jadwal: boleh dibaca siapa saja. Hanya petugas yang login DAN wilayah tugasnya
+    // sama dengan jadwal ini yang boleh mengubah tanggal.
+    match /jadwal/{idJadwal} {
+      allow read: if true;
+      allow update: if request.auth != null
+        && profilSaya().wilayahTugas == idJadwal
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['daftarTanggal', 'diperbaruiPada']);
+      allow create, delete: if false;
+    }
+
+    // Tiruan database pemerintah (NIK fiktif): boleh cek satu NIK saat Sign Up (belum login),
+    // tapi tidak boleh mengambil seluruh daftar atau mengubahnya.
+    match /dataPemerintah/{nik} {
+      allow get: if true;
+      allow list, write: if false;
+    }
+
+    // Penanda "NIK ini sudah punya akun". Id dokumen = NIK, isinya uid pemilik.
+    // Dibuat sekali bersama profil (satu batch); karena tidak boleh diubah atau dihapus,
+    // percobaan Sign Up kedua dengan NIK yang sama pasti ditolak.
+    match /nikTerdaftar/{nik} {
+      allow get: if true;   // Sign Up bisa cek lebih dulu: NIK sudah dipakai atau belum
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/akunPetugas/$(request.auth.uid)).data.nik == nik;
+      allow list, update, delete: if false;
+    }
+
+    // Profil petugas: hanya pemiliknya yang boleh membaca dan mengubah.
+    // Saat dibuat: nama dan wilayah tugas wajib sama dengan data pemerintah untuk NIK itu,
+    // dan NIK itu harus ditandai di nikTerdaftar dalam batch yang sama (satu NIK = satu akun).
+    match /akunPetugas/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && exists(/databases/$(database)/documents/dataPemerintah/$(request.resource.data.nik))
+        && request.resource.data.username == dataPemerintah(request.resource.data.nik).namaLengkap
+        && request.resource.data.wilayahTugas == dataPemerintah(request.resource.data.nik).wilayahTugas
+        && !exists(/databases/$(database)/documents/nikTerdaftar/$(request.resource.data.nik))
+        && getAfter(/databases/$(database)/documents/nikTerdaftar/$(request.resource.data.nik)).data.uid == request.auth.uid;
+      // Wilayah tugas, NIK, dan nama ditetapkan pemerintah: tidak bisa diubah petugas.
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['email', 'noTelepon']);
+      allow delete: if false;
+    }
+  }
+}
