@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -28,8 +29,16 @@ const GAMBAR_KATEGORI = {
   keramik: require("../../../../assets/images/informasi-sampah/keramik.png"),
 };
 
+const HORIZONTAL_PADDING = 16;
+const COLUMN_GAP = 12;
+
 export default function InformasiPage() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
+
+  // Menghitung lebar card secara responsif
+  const cardWidth =
+    (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
   const [keyword, setKeyword] = useState("");
   const [kategori, setKategori] = useState([]);
@@ -70,6 +79,7 @@ export default function InformasiPage() {
       <Pressable
         style={({ pressed }) => [
           styles.kartu,
+          { width: cardWidth },
           pressed && styles.kartuDitekan,
         ]}
         onPress={() => bukaDetail(item.idSampah)}
@@ -84,11 +94,17 @@ export default function InformasiPage() {
 
         <View style={styles.infoKartu}>
           <View style={styles.teksKartu}>
-            <Text style={styles.namaKategori}>
+            <Text
+              style={styles.namaKategori}
+              numberOfLines={1}
+            >
               {item.nama}
             </Text>
 
-            <Text style={styles.ringkasan}>
+            <Text
+              style={styles.ringkasan}
+              numberOfLines={3}
+            >
               {item.ringkasan}
             </Text>
           </View>
@@ -187,56 +203,46 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-
-  emptyWrapper: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  emptyState: {
-    width: "100%",
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingTop: 18,
   },
 
   judulBagian: {
     ...TEXT.bodyText,
     color: COLOR.deepForestGreen,
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: 20,
   },
 
   daftar: {
     paddingBottom: 140,
-    gap: 24,
+    rowGap: 18,
   },
 
   barisKartu: {
     justifyContent: "space-between",
-    gap: 16,
+    columnGap: COLUMN_GAP,
   },
 
   kartu: {
-    width: 180,
-    height: 184,
+    height: 204,
     flexGrow: 0,
-    flexShrink: 0,
+    flexShrink: 1,
     backgroundColor: COLOR.forestEmerald,
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 8,
     overflow: "hidden",
   },
 
   kartuDitekan: {
-    opacity: 0.8,
+    opacity: 0.85,
+    transform: [{ scale: 0.98 }],
   },
 
   gambarKategori: {
     width: "100%",
-    height: 118,
-    borderRadius: 8,
+    height: 112,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: COLOR.deepForestGreen,
   },
@@ -246,33 +252,37 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 4,
+    gap: 5,
+    paddingTop: 5,
   },
 
   teksKartu: {
     flex: 1,
-    gap: 3,
+    justifyContent: "center",
+    gap: 4,
+    minWidth: 0,
   },
 
   namaKategori: {
     ...TEXT.bodyText,
     color: COLOR.white,
+    fontWeight: "600",
   },
 
   ringkasan: {
     ...TEXT.smallText,
     color: COLOR.secondaryWhite,
-    lineHeight: 14,
-    flexWrap: "wrap",
+    lineHeight: 16,
   },
 
   tombolDetail: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     backgroundColor: COLOR.emeraldGreen,
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
   },
 
   status: {
@@ -305,7 +315,13 @@ const styles = StyleSheet.create({
     color: COLOR.white,
   },
 
-  emptyState: {
+  emptyWrapper: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  emptyState: {
+    width: "100%",
   },
 });

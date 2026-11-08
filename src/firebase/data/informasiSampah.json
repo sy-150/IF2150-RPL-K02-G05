@@ -1,490 +1,215 @@
-[
-  {
-    "idSampah": "plastik",
-    "nama": "Plastik",
-    "jenisSampah": "anorganik",
-    "ringkasan": "Botol plastik, wadah plastik, kantung plastik",
-    "gambar": "plastik.png",
-    "deskripsi": "Sampah plastik terdiri dari berbagai jenis, seperti PET pada botol minuman, HDPE pada botol deterjen, LDPE pada kantong plastik, dan PP pada wadah makanan. Setiap jenis memiliki karakteristik dan tingkat kemudahan daur ulang yang berbeda, sehingga penting untuk mengenali dan memilahnya dengan tepat.",
-    "labelModel": [
-      "plastic"
-    ],
-    "tipe": [
-      {
-        "idTipe": "botol-plastik",
-        "nama": "Botol Plastik",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Kosongkan dan bilas botol",
-              "keterangan": "Buang sisa minuman lalu bilas dengan air."
-            },
-            {
-              "judul": "Lepas tutup dan label",
-              "keterangan": "Pisahkan tutup dan label karena jenis plastiknya berbeda."
-            },
-            {
-              "judul": "Pipihkan botol",
-              "keterangan": "Injak atau tekan botol supaya hemat tempat."
-            },
-            {
-              "judul": "Buang ke tempat sampah anorganik",
-              "keterangan": "Atau setor ke bank sampah terdekat."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-botol-plastik.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan botol plastik",
-              "keterangan": "Cuci botol hingga bersih dan keringkan sebelum digunakan"
-            },
-            {
-              "judul": "Lepas label dan tutup",
-              "keterangan": "Buang label plastik dan pisahkan tutup botol."
-            },
-            {
-              "judul": "Potong sesuai kebutuhan",
-              "keterangan": "Gunakan gunting atau cutter untuk memotong botol sesuai desain yang ingin dibuat."
-            },
-            {
-              "judul": "Hias dan kreasikan",
-              "keterangan": "Tambahkan cat, stiker, atau aksesoris sesuai kreativitasmu."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Pot Tanaman",
-              "gambar": "hasil-pot-tanaman.png"
-            },
-            {
-              "nama": "Celengan",
-              "gambar": "hasil-celengan.png"
-            }
-          ]
-        }
+
+{
+  "idSampah": "plastik",
+  "nama": "Plastik",
+  "jenisSampah": "anorganik",
+  "ringkasan": "Botol plastik, wadah plastik, kantung plastik",
+  "gambar": "plastik.png",
+  "deskripsi": "Sampah plastik terdiri dari berbagai jenis, seperti PET pada botol minuman, HDPE pada botol deterjen, LDPE pada kantong plastik, dan PP pada wadah makanan. Setiap jenis memiliki karakteristik dan tingkat kemudahan daur ulang yang berbeda, sehingga penting untuk mengenali dan memilahnya dengan tepat.",
+  "labelModel": [
+    "plastic"
+  ],
+  "tipe": [
+    {
+      "idTipe": "botol-plastik",
+      "nama": "Botol Plastik",
+      "dibuang": {
+        "gambar": "tempat-sampah-anorganik.png",
+        "langkah": [
+          {
+            "judul": "Kosongkan dan bilas botol",
+            "keterangan": "Buang sisa minuman lalu bilas dengan air."
+          },
+          {
+            "judul": "Lepas tutup dan label",
+            "keterangan": "Pisahkan tutup dan label karena jenis plastiknya berbeda."
+          },
+          {
+            "judul": "Pipihkan botol",
+            "keterangan": "Injak atau tekan botol supaya hemat tempat."
+          },
+          {
+            "judul": "Buang ke tempat sampah anorganik",
+            "keterangan": "Atau setor ke bank sampah terdekat."
+          }
+        ]
       },
-      {
-        "idTipe": "kantong-plastik",
-        "nama": "Kantong Plastik",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Kosongkan dan keringkan",
-              "keterangan": "Pastikan tidak ada sisa makanan atau air di dalam kantong."
-            },
-            {
-              "judul": "Kumpulkan jadi satu",
-              "keterangan": "Masukkan beberapa kantong ke dalam satu kantong lalu ikat."
-            },
-            {
-              "judul": "Buang ke tempat sampah anorganik",
-              "keterangan": "Atau setor ke bank sampah terdekat."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-kantong-plastik.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan kantong plastik",
-              "keterangan": "Cuci dan keringkan kantong sebelum digunakan."
-            },
-            {
-              "judul": "Potong menjadi lembaran atau tali",
-              "keterangan": "Potong kantong memanjang sesuai kebutuhan."
-            },
-            {
-              "judul": "Anyam atau lapis",
-              "keterangan": "Anyam tali plastik, atau tumpuk beberapa lembar supaya lebih kuat."
-            },
-            {
-              "judul": "Jahit atau rekatkan",
-              "keterangan": "Bentuk sesuai desain yang diinginkan."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Tas Anyaman",
-              "gambar": "hasil-tas-anyaman.png"
-            },
-            {
-              "nama": "Dompet",
-              "gambar": "hasil-dompet.png"
-            }
-          ]
-        }
+      "kreasi": {
+        "gambar": "kreasi-botol-plastik.png",
+        "langkah": [
+          {
+            "judul": "Bersihkan botol plastik",
+            "keterangan": "Cuci botol hingga bersih dan keringkan sebelum digunakan."
+          },
+          {
+            "judul": "Lepas label dan tutup",
+            "keterangan": "Buang label plastik dan pisahkan tutup botol."
+          },
+          {
+            "judul": "Potong sesuai kebutuhan",
+            "keterangan": "Gunakan gunting atau cutter untuk memotong botol sesuai desain yang ingin dibuat."
+          },
+          {
+            "judul": "Hias dan kreasikan",
+            "keterangan": "Tambahkan cat, stiker, atau aksesoris sesuai kreativitasmu."
+          },
+          {
+            "judul": "Barang baru siap digunakan",
+            "keterangan": "Produk dapat digunakan kembali!"
+          }
+        ],
+        "contohHasil": [
+          {
+            "nama": "Pot Tanaman",
+            "gambar": "hasil-pot-tanaman.png"
+          },
+          {
+            "nama": "Celengan",
+            "gambar": "hasil-celengan.png"
+          },
+          {
+            "nama": "Mainan",
+            "gambar": "hasil-mainan.png"
+          }
+        ]
       }
-    ]
-  },
-  {
-    "idSampah": "kaca",
-    "nama": "Kaca",
-    "jenisSampah": "anorganik",
-    "ringkasan": "Botol kaca, pecahan kaca, gelas kaca",
-    "gambar": "kaca.png",
-    "deskripsi": "Kaca dapat didaur ulang berkali-kali tanpa mengurangi kualitasnya. Botol dan toples kaca sebaiknya dipisahkan dari pecahan kaca supaya aman bagi petugas kebersihan.",
-    "labelModel": [
-      "glass"
-    ],
-    "tipe": [
-      {
-        "idTipe": "botol-kaca",
-        "nama": "Botol Kaca",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Bilas botol",
-              "keterangan": "Buang sisa isi lalu bilas dengan air."
-            },
-            {
-              "judul": "Lepas tutup",
-              "keterangan": "Pisahkan tutup logam atau plastik dari botol."
-            },
-            {
-              "judul": "Buang ke tempat sampah anorganik",
-              "keterangan": "Atau setor ke bank sampah atau pengepul kaca."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-botol-kaca.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan botol kaca",
-              "keterangan": "Rendam di air hangat supaya label mudah dilepas."
-            },
-            {
-              "judul": "Keringkan",
-              "keterangan": "Pastikan bagian dalam botol benar-benar kering."
-            },
-            {
-              "judul": "Hias botol",
-              "keterangan": "Gunakan cat kaca, tali, atau kain sesuai kreativitasmu."
-            },
-            {
-              "judul": "Isi sesuai fungsi",
-              "keterangan": "Tambahkan lampu tumbler, bunga, atau tanaman kecil."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Vas Bunga",
-              "gambar": "hasil-vas-bunga.png"
-            },
-            {
-              "nama": "Lampu Hias",
-              "gambar": "hasil-lampu-hias.png"
-            }
-          ]
-        }
+    },
+    {
+      "idTipe": "kantong-plastik",
+      "nama": "Kantong Plastik",
+      "dibuang": {
+        "gambar": "tempat-sampah-anorganik.png",
+        "langkah": [
+          {
+            "judul": "Kosongkan dan keringkan",
+            "keterangan": "Pastikan tidak ada sisa makanan atau air di dalam kantong."
+          },
+          {
+            "judul": "Kumpulkan jadi satu",
+            "keterangan": "Masukkan beberapa kantong ke dalam satu kantong lalu ikat."
+          },
+          {
+            "judul": "Buang ke tempat sampah anorganik",
+            "keterangan": "Atau setor ke bank sampah terdekat."
+          }
+        ]
       },
-      {
-        "idTipe": "pecahan-kaca",
-        "nama": "Pecahan Kaca",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Kumpulkan dengan hati-hati",
-              "keterangan": "Gunakan sarung tangan atau sapu, jangan dipungut langsung."
-            },
-            {
-              "judul": "Bungkus dengan kertas tebal",
-              "keterangan": "Bungkus pecahan dengan kardus atau koran berlapis."
-            },
-            {
-              "judul": "Beri tanda",
-              "keterangan": "Tulis \"kaca pecah\" di bungkusnya supaya petugas berhati-hati."
-            },
-            {
-              "judul": "Buang ke tempat sampah anorganik",
-              "keterangan": "Letakkan terpisah dari sampah lain."
-            }
-          ]
-        },
-        "kreasi": null
+      "kreasi": {
+        "gambar": "kreasi-kantong-plastik.png",
+        "langkah": [
+          {
+            "judul": "Bersihkan kantong plastik",
+            "keterangan": "Cuci dan keringkan kantong sebelum digunakan."
+          },
+          {
+            "judul": "Potong menjadi lembaran atau tali",
+            "keterangan": "Potong kantong memanjang sesuai kebutuhan."
+          },
+          {
+            "judul": "Anyam atau lapis",
+            "keterangan": "Anyam tali plastik, atau tumpuk beberapa lembar supaya lebih kuat."
+          },
+          {
+            "judul": "Jahit atau rekatkan",
+            "keterangan": "Bentuk sesuai desain yang diinginkan."
+          },
+          {
+            "judul": "Barang baru siap digunakan",
+            "keterangan": "Produk dapat digunakan kembali!"
+          }
+        ],
+        "contohHasil": [
+          {
+            "nama": "Tas Anyaman",
+            "gambar": "hasil-tas-anyaman.png"
+          },
+          {
+            "nama": "Dompet",
+            "gambar": "hasil-dompet.png"
+          },
+          {
+            "nama": "Bunga Plastik",
+            "gambar": "hasil-bunga-plastik.png"
+          }
+        ]
       }
-    ]
-  },
-  {
-    "idSampah": "aluminium",
-    "nama": "Aluminium",
-    "jenisSampah": "anorganik",
-    "ringkasan": "Perkakas dapur, kaleng minuman, kabel/kawat aluminium",
-    "gambar": "aluminium.png",
-    "deskripsi": "Aluminium banyak ditemukan pada kaleng minuman, perkakas dapur, dan kabel. Aluminium bernilai jual tinggi dan dapat dilebur ulang tanpa batas, sehingga sebaiknya dikumpulkan terpisah.",
-    "labelModel": [
-      "metal"
-    ],
-    "tipe": [
-      {
-        "idTipe": "kaleng-minuman",
-        "nama": "Kaleng Minuman",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Bilas kaleng",
-              "keterangan": "Buang sisa minuman lalu bilas dengan air."
-            },
-            {
-              "judul": "Pipihkan kaleng",
-              "keterangan": "Injak kaleng supaya hemat tempat."
-            },
-            {
-              "judul": "Kumpulkan terpisah",
-              "keterangan": "Jual ke pengepul logam atau setor ke bank sampah."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-kaleng-minuman.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan kaleng",
-              "keterangan": "Bilas dan keringkan kaleng sebelum digunakan."
-            },
-            {
-              "judul": "Potong dengan hati-hati",
-              "keterangan": "Gunakan gunting dan sarung tangan; tepi potongan logam tajam."
-            },
-            {
-              "judul": "Haluskan tepi",
-              "keterangan": "Lipat atau tutup tepi potongan dengan selotip supaya aman."
-            },
-            {
-              "judul": "Hias dan kreasikan",
-              "keterangan": "Tambahkan cat atau kain sesuai kreativitasmu."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Tempat Pensil",
-              "gambar": "hasil-tempat-pensil.png"
-            },
-            {
-              "nama": "Pot Kecil",
-              "gambar": "hasil-pot-kecil.png"
-            }
-          ]
-        }
+    },
+    {
+      "idTipe": "wadah-plastik",
+      "nama": "Wadah Plastik",
+      "dibuang": {
+        "gambar": "tempat-sampah-anorganik.png",
+        "langkah": [
+          {
+            "judul": "Kosongkan wadah",
+            "keterangan": "Buang sisa makanan atau minuman dari wadah."
+          },
+          {
+            "judul": "Bersihkan wadah",
+            "keterangan": "Bilas wadah hingga bersih dan keringkan."
+          },
+          {
+            "judul": "Pisahkan sampah",
+            "keterangan": "Masukkan ke tempat sampah anorganik atau setor ke bank sampah."
+          }
+        ]
+      },
+      "kreasi": {
+        "gambar": "kreasi-wadah-plastik.png",
+        "langkah": [
+          {
+            "judul": "Bersihkan wadah plastik",
+            "keterangan": "Cuci wadah hingga bersih dan keringkan."
+          },
+          {
+            "judul": "Siapkan alat dan bahan",
+            "keterangan": "Siapkan gunting, cat, atau bahan dekorasi."
+          },
+          {
+            "judul": "Hias wadah",
+            "keterangan": "Tambahkan warna dan dekorasi sesuai kreativitasmu."
+          },
+          {
+            "judul": "Barang baru siap digunakan",
+            "keterangan": "Gunakan sebagai tempat penyimpanan atau wadah alat tulis."
+          }
+        ],
+        "contohHasil": [
+          {
+            "nama": "Tempat Alat Tulis",
+            "gambar": "hasil-tempat-alat-tulis-wadah.png"
+          },
+          {
+            "nama": "Tempat Penyimpanan",
+            "gambar": "hasil-tempat-penyimpanan-wadah.png"
+          },
+          {
+            "nama": "Pot Tanaman",
+            "gambar": "hasil-pot-wadah.png"
+          }
+        ]
+      },
+      "gunakan": {
+        "gambar": "gunakan-wadah-plastik.png",
+        "langkah": [
+          {
+            "judul": "Bersihkan wadah plastik",
+            "keterangan": "Cuci wadah hingga bersih dan keringkan."
+          },
+          {
+            "judul": "Periksa kondisi wadah",
+            "keterangan": "Pastikan wadah tidak retak atau rusak."
+          },
+          {
+            "judul": "Tentukan fungsi baru",
+            "keterangan": "Pilih kegunaan baru sesuai bentuk wadah."
+          },
+          {
+            "judul": "Gunakan kembali",
+            "keterangan": "Manfaatkan sebagai tempat penyimpanan barang kecil."
+          }
+        ]
       }
-    ]
-  },
-  {
-    "idSampah": "stainless-steel",
-    "nama": "Stainless Steel",
-    "jenisSampah": "anorganik",
-    "ringkasan": "Perkakas dapur, sisa konstruksi, komponen elektronik",
-    "gambar": "stainless-steel.png",
-    "deskripsi": "Stainless steel adalah logam tahan karat yang umum dipakai pada perkakas dapur dan peralatan rumah tangga. Logam ini dapat dilebur dan dibentuk ulang menjadi produk baru.",
-    "labelModel": [
-      "metal"
-    ],
-    "tipe": [
-      {
-        "idTipe": "perkakas-dapur",
-        "nama": "Perkakas Dapur",
-        "dibuang": {
-          "gambar": "tempat-sampah-anorganik.png",
-          "langkah": [
-            {
-              "judul": "Pisahkan bagian non-logam",
-              "keterangan": "Lepas gagang kayu atau plastik bila bisa."
-            },
-            {
-              "judul": "Kumpulkan dalam satu wadah",
-              "keterangan": "Satukan sendok, garpu, dan potongan logam lainnya."
-            },
-            {
-              "judul": "Serahkan ke pengepul logam",
-              "keterangan": "Atau setor ke bank sampah terdekat."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-perkakas-dapur.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan perkakas",
-              "keterangan": "Cuci dari sisa makanan dan keringkan."
-            },
-            {
-              "judul": "Pilih bagian yang dipakai",
-              "keterangan": "Sendok dan garpu paling mudah dibentuk."
-            },
-            {
-              "judul": "Bentuk dan rangkai",
-              "keterangan": "Bengkokkan dengan tang lalu rangkai dengan kawat."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Gantungan Kunci",
-              "gambar": "hasil-gantungan-kunci.png"
-            },
-            {
-              "nama": "Hiasan Dinding",
-              "gambar": "hasil-hiasan-dinding.png"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "idSampah": "silikon",
-    "nama": "Silikon",
-    "jenisSampah": "residu",
-    "ringkasan": "Peralatan masak silikon, casing HP, karet segel",
-    "gambar": "silikon.png",
-    "deskripsi": "Silikon tahan panas dan awet, tetapi tidak semua bank sampah menerimanya. Peralatan silikon sebaiknya dipakai selama mungkin atau dimanfaatkan ulang sebelum dibuang.",
-    "labelModel": [],
-    "tipe": [
-      {
-        "idTipe": "peralatan-masak-silikon",
-        "nama": "Peralatan Masak Silikon",
-        "dibuang": {
-          "gambar": "tempat-sampah-residu.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan",
-              "keterangan": "Buang sisa makanan atau kotoran yang menempel."
-            },
-            {
-              "judul": "Tanyakan program khusus",
-              "keterangan": "Beberapa bank sampah atau produsen menerima silikon bekas."
-            },
-            {
-              "judul": "Buang ke sampah residu",
-              "keterangan": "Jika tidak ada yang menerima. Jangan dibakar."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-peralatan-silikon.png",
-          "langkah": [
-            {
-              "judul": "Bersihkan peralatan",
-              "keterangan": "Cuci dan keringkan sebelum digunakan."
-            },
-            {
-              "judul": "Potong sesuai kebutuhan",
-              "keterangan": "Gunakan gunting untuk membentuk ulang."
-            },
-            {
-              "judul": "Manfaatkan ulang",
-              "keterangan": "Gunakan sebagai alas, pegangan, atau pengganjal."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Alas Panci",
-              "gambar": "hasil-alas-panci.png"
-            },
-            {
-              "nama": "Pengganjal Pintu",
-              "gambar": "hasil-pengganjal-pintu.png"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "idSampah": "keramik",
-    "nama": "Keramik",
-    "jenisSampah": "residu",
-    "ringkasan": "Piring, mangkuk, ubin keramik",
-    "gambar": "keramik.png",
-    "deskripsi": "Keramik tidak dapat didaur ulang bersama kaca karena titik lelehnya berbeda. Pecahan keramik bisa dimanfaatkan ulang untuk dekorasi sebelum dibuang sebagai sampah residu.",
-    "labelModel": [],
-    "tipe": [
-      {
-        "idTipe": "piring-mangkuk",
-        "nama": "Piring dan Mangkuk",
-        "dibuang": {
-          "gambar": "tempat-sampah-residu.png",
-          "langkah": [
-            {
-              "judul": "Pisahkan dari kaca",
-              "keterangan": "Jangan dicampur dengan botol atau gelas kaca."
-            },
-            {
-              "judul": "Bungkus pecahan",
-              "keterangan": "Bungkus dengan kertas tebal supaya tidak melukai petugas."
-            },
-            {
-              "judul": "Buang ke sampah residu",
-              "keterangan": "Beri tanda \"pecah belah\" di bungkusnya."
-            }
-          ]
-        },
-        "kreasi": {
-          "gambar": "kreasi-keramik.png",
-          "langkah": [
-            {
-              "judul": "Kumpulkan pecahan",
-              "keterangan": "Gunakan sarung tangan saat memegang pecahan."
-            },
-            {
-              "judul": "Haluskan tepi tajam",
-              "keterangan": "Amplas tepi pecahan supaya aman."
-            },
-            {
-              "judul": "Susun pola",
-              "keterangan": "Atur pecahan di atas permukaan yang ingin dihias."
-            },
-            {
-              "judul": "Rekatkan dan isi celah",
-              "keterangan": "Gunakan lem keramik atau semen nat."
-            },
-            {
-              "judul": "Barang baru siap digunakan",
-              "keterangan": "Produk dapat digunakan kembali!"
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Mosaik Meja",
-              "gambar": "hasil-mosaik-meja.png"
-            },
-            {
-              "nama": "Dasar Pot",
-              "gambar": "hasil-dasar-pot.png"
-            }
-          ]
-        }
-      }
-    ]
-  }
-]
+    }
+  ]
+}
