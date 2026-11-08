@@ -25,9 +25,12 @@ export default function TutorialModal({
   }
 
   const tampilkanContoh =
-    ["kreasi", "gunakan"].includes(data.metode) &&
-    Array.isArray(data.konten?.contohHasil) &&
-    data.konten.contohHasil.length > 0;
+    data.metode === "kreasi" &&
+    data.konten?.contohHasil?.length > 0;
+
+  const tampilkanContohGunakan =
+    data.metode === "gunakan" &&
+    data.konten?.contohHasil?.length > 0;
 
   return (
     <Modal
@@ -37,9 +40,17 @@ export default function TutorialModal({
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>
-        <View style={styles.popup}>
-          {/* HEADER */}
 
+        {/* AREA LUAR: KETUK UNTUK MENUTUP */}
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={onClose}
+        />
+
+        {/* POPUP TUTORIAL */}
+        <View style={styles.popup}>
+
+          {/* HEADER */}
           <View style={styles.header}>
             <View style={styles.headerTeks}>
               <Text style={styles.judul}>
@@ -51,10 +62,13 @@ export default function TutorialModal({
               </Text>
             </View>
 
+            {/* TOMBOL SILANG */}
             <Pressable
               style={styles.tombolTutup}
               onPress={onClose}
               hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel="Tutup tutorial"
             >
               <MaterialCommunityIcons
                 name="close"
@@ -65,7 +79,6 @@ export default function TutorialModal({
           </View>
 
           {/* ISI TUTORIAL */}
-
           <ScrollView
             style={styles.scroll}
             contentContainerStyle={styles.isi}
@@ -86,7 +99,8 @@ export default function TutorialModal({
               )
             )}
 
-            {tampilkanContoh && (
+            {/* CONTOH HASIL KREASI */}
+            {(tampilkanContoh || tampilkanContohGunakan) && (
               <ContohHasilKreasi
                 data={data.konten.contohHasil}
                 getImage={getImage}
@@ -94,16 +108,6 @@ export default function TutorialModal({
             )}
           </ScrollView>
 
-          {/* TOMBOL SELESAI */}
-
-          <Pressable
-            style={styles.tombolSelesai}
-            onPress={onClose}
-          >
-            <Text style={styles.teksSelesai}>
-              Selesai
-            </Text>
-          </Pressable>
         </View>
       </View>
     </Modal>
@@ -173,19 +177,5 @@ const styles = StyleSheet.create({
     color: COLOR.secondaryWhite,
     fontWeight: "bold",
     marginBottom: 14,
-  },
-
-  tombolSelesai: {
-    backgroundColor: COLOR.emeraldGreen,
-    padding: 12,
-    borderRadius: 12,
-    alignItems: "center",
-    marginTop: 10,
-  },
-
-  teksSelesai: {
-    ...TEXT.bodyText,
-    color: COLOR.white,
-    fontWeight: "bold",
   },
 });

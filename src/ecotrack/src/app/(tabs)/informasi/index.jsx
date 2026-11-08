@@ -10,6 +10,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -19,7 +20,10 @@ import SearchBar from "@/ui/component/SearchBar";
 import EmptyState from "@/ui/component/EmptyState";
 import InformasiSampahController from "@/controller/InformasiSampahController";
 
-// Gambar kategori disimpan di assets/images/informasi-sampah/
+// ==========================================
+// GAMBAR KATEGORI
+// ==========================================
+
 const GAMBAR_KATEGORI = {
   plastik: require("../../../../assets/images/informasi-sampah/plastik.png"),
   kaca: require("../../../../assets/images/informasi-sampah/kaca.png"),
@@ -32,11 +36,15 @@ const GAMBAR_KATEGORI = {
 const HORIZONTAL_PADDING = 16;
 const COLUMN_GAP = 12;
 
+// ==========================================
+// HALAMAN INFORMASI SAMPAH
+// ==========================================
+
 export default function InformasiPage() {
   const router = useRouter();
   const { width } = useWindowDimensions();
 
-  // Menghitung lebar card secara responsif
+  // Menghitung lebar kartu secara responsif.
   const cardWidth =
     (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
@@ -44,6 +52,10 @@ export default function InformasiPage() {
   const [kategori, setKategori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // ========================================
+  // MEMUAT KATEGORI DARI FIRESTORE
+  // ========================================
 
   async function muatKategori(kata = "") {
     try {
@@ -67,12 +79,20 @@ export default function InformasiPage() {
     muatKategori(keyword);
   }, [keyword]);
 
+  // ========================================
+  // NAVIGASI DETAIL
+  // ========================================
+
   function bukaDetail(idSampah) {
     router.push({
       pathname: "/informasi/[idSampah]",
       params: { idSampah },
     });
   }
+
+  // ========================================
+  // RENDER KARTU KATEGORI
+  // ========================================
 
   function renderKategori({ item }) {
     return (
@@ -121,79 +141,110 @@ export default function InformasiPage() {
     );
   }
 
+  // ========================================
+  // JUDUL KATEGORI
+  // ========================================
+
+  function renderJudulKategori() {
+    return (
+      <Text style={styles.judulBagian}>
+        Kategori Material Sampah
+      </Text>
+    );
+  }
+
+  // ========================================
+  // RENDER HALAMAN
+  // ========================================
+
   return (
     <View style={styles.halaman}>
+
+      {/* HEADER TETAP DI ATAS */}
       <Header judul="Mulai Daur Ulang" tampilProfil>
         <SearchBar
           placeholder="Cari Material Sampah"
           value={keyword}
           onChangeText={setKeyword}
           onClear={() => setKeyword("")}
-          onSubmit={(teks) => muatKategori(teks)}
+          onSubmit={() => muatKategori(keyword)}
         />
       </Header>
 
-      <View style={styles.container}>
-        <Text style={styles.judulBagian}>
-          Kategori Material Sampah
-        </Text>
-
-        {loading ? (
-          <View style={styles.status}>
-            <ActivityIndicator
-              size="large"
-              color={COLOR.forestEmerald}
-            />
-            <Text style={styles.teksStatus}>
-              Memuat kategori sampah...
-            </Text>
-          </View>
-        ) : error ? (
-          <View style={styles.status}>
-            <MaterialCommunityIcons
-              name="alert-circle-outline"
-              size={42}
-              color={COLOR.red}
-            />
-
-            <Text style={styles.teksError}>
-              Gagal memuat informasi sampah.
-            </Text>
-
-            <Pressable
-              style={styles.tombolRetry}
-              onPress={() => muatKategori(keyword)}
-            >
-              <Text style={styles.teksRetry}>
-                Coba Lagi
-              </Text>
-            </Pressable>
-          </View>
-        ) : kategori.length === 0 ? (
-          <View style={styles.emptyWrapper}>
-            <EmptyState
-              judul="Material tidak ditemukan"
-              keterangan="Coba kata kunci lain atau periksa ejaan pencarianmu"
-              style={styles.emptyState}
-            />
-          </View>
-        ) : (
-          <FlatList
-            data={kategori}
-            renderItem={renderKategori}
-            keyExtractor={(item) => item.idSampah}
-            numColumns={2}
-            columnWrapperStyle={styles.barisKartu}
-            contentContainerStyle={styles.daftar}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            keyboardDismissMode="on-drag"
+      {/* LOADING */}
+      {loading ? (
+        <View style={styles.status}>
+          <ActivityIndicator
+            size="large"
+            color={COLOR.forestEmerald}
           />
-        )}
-      </View>
+
+          <Text style={styles.teksStatus}>
+            Memuat kategori sampah...
+          </Text>
+        </View>
+
+      ) : error ? (
+
+        /* ERROR */
+        <View style={styles.status}>
+          <MaterialCommunityIcons
+            name="alert-circle-outline"
+            size={42}
+            color={COLOR.red}
+          />
+
+          <Text style={styles.teksError}>
+            Gagal memuat informasi sampah.
+          </Text>
+
+          <Pressable
+            style={styles.tombolRetry}
+            onPress={() => muatKategori(keyword)}
+          >
+            <Text style={styles.teksRetry}>
+              Coba Lagi
+            </Text>
+          </Pressable>
+        </View>
+
+      ) : kategori.length === 0 ? (
+
+        /* EMPTY STATE */
+        <View style={styles.emptyWrapper}>
+          <EmptyState
+            judul="Material tidak ditemukan"
+            keterangan="Coba kata kunci lain atau periksa ejaan pencarianmu"
+            style={styles.emptyState}
+          />
+        </View>
+
+      ) : (
+
+        /* DAFTAR KATEGORI */
+        <FlatList
+          key="kategori-grid-2"
+          data={kategori}
+          renderItem={renderKategori}
+          keyExtractor={(item) => item.idSampah}
+          numColumns={2}
+          columnWrapperStyle={styles.barisKartu}
+          ListHeaderComponent={renderJudulKategori}
+          contentContainerStyle={styles.daftar}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+        />
+
+      )}
+
     </View>
   );
 }
+
+// ==========================================
+// STYLING
+// ==========================================
 
 const styles = StyleSheet.create({
   halaman: {
@@ -201,27 +252,25 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.secondaryWhite,
   },
 
-  container: {
-    flex: 1,
-    paddingHorizontal: HORIZONTAL_PADDING,
-    paddingTop: 18,
-  },
-
+  // Judul bagian
   judulBagian: {
     ...TEXT.bodyText,
     color: COLOR.deepForestGreen,
     textAlign: "center",
+    marginTop: 18,
     marginBottom: 20,
   },
 
+  // Daftar kartu
   daftar: {
+    paddingHorizontal: HORIZONTAL_PADDING,
     paddingBottom: 140,
-    rowGap: 18,
   },
 
   barisKartu: {
     justifyContent: "space-between",
     columnGap: COLUMN_GAP,
+    marginBottom: 18,
   },
 
   kartu: {
@@ -285,6 +334,7 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
 
+  // Loading dan error
   status: {
     flex: 1,
     alignItems: "center",
@@ -315,10 +365,12 @@ const styles = StyleSheet.create({
     color: COLOR.white,
   },
 
+  // Empty state
   emptyWrapper: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom: 180,
   },
 
   emptyState: {
