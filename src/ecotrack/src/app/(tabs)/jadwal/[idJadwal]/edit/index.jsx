@@ -1,6 +1,3 @@
-// app/(tabs)/jadwal/[idJadwal]/edit/index.jsx → JadwalInterface (F3): edit jadwal (I11–I14).
-// Hanya untuk petugas yang login dan wilayah tugasnya sama dengan jadwal ini.
-
 import { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -92,8 +89,6 @@ export default function EditJadwalPage() {
 
           <Kalender daftarTanggal={daftarTanggal} onUbahTanggal={setDaftarTanggal} />
 
-          <Text style={styles.jumlah}>{daftarTanggal.length} tanggal dipilih</Text>
-
           <View style={styles.baris}>
             <Button label="BATAL" varian="outline" onPress={kembaliKeDetail} style={styles.lebar} />
             <Button label="SIMPAN" onPress={() => setDialogSimpan(true)} style={styles.lebar} />
@@ -138,11 +133,6 @@ const styles = StyleSheet.create({
     gap: 16,
     paddingHorizontal: 16,
     paddingTop: 16,
-  },
-  jumlah: {
-    ...TEXT.descriptiveText,
-    color: COLOR.deepForestGreen,
-    textAlign: "center",
   },
   baris: {
     flexDirection: "row",
