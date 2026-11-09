@@ -1,33 +1,56 @@
 import { useState } from "react";
-import { ScrollView, Text, View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { ScrollView, Text, View, StyleSheet, Alert, Platform } from "react-native";
+import { Link, useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
 import InputField from '@/ui/component/InputField';
 import Button from '@/ui/component/Button';
+import { AkunPetugasController } from '../../../controller/AkunPetugasController';
+import { validateEmail } from '../../../utils/validators';
 
-// TODO (F1): halaman ini masih DUMMY untuk mencoba InputField & Button.
-// Nanti validasi dan login diganti dengan AkunPetugasController.prosesLogin(email, password),
-// dan pesan error ditampilkan lewat showErrorInput(...).
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
 
-  // Validasi sederhana sementara (I26): kolom kosong & format email.
-  function inputKredensial() {
-    const pesanEmail = !email
-      ? "Email wajib diisi"
-      : !/^\S+@\S+\.\S+$/.test(email)
-        ? "Format email tidak valid"
-        : "";
+  // Fungsi alert cross-platform untuk Web & Mobile
+  const tampilkanPesan = (judul, isi, tindakanKapanSelesai) => {
+    console.log(`[ALERT] ${judul}: ${isi}`);
+    if (Platform.OS === 'web') {
+      alert(`${judul}\n\n${isi}`);
+      if (tindakanKapanSelesai) tindakanKapanSelesai();
+    } else {
+      Alert.alert(judul, isi, [{ text: "OK", onPress: tindakanKapanSelesai }]);
+    }
+  };
+
+  async function inputKredensial() {
+    console.log("--> Tombol MASUK ditekan!");
+    const pesanEmail = validateEmail(email);
     const pesanPassword = !password ? "Kata sandi wajib diisi" : "";
 
-    setErrorEmail(pesanEmail);
+    setErrorEmail(pesanEmail || "");
     setErrorPassword(pesanPassword);
 
-    if (!pesanEmail && !pesanPassword) console.log("login (dummy):", email);
+    if (pesanEmail || pesanPassword) {
+      console.log("--> Validasi input login gagal:", { pesanEmail, pesanPassword });
+      return;
+    }
+
+    console.log("--> Mengirim kredensial ke AkunPetugasController.prosesLogin...");
+    const berhasil = await AkunPetugasController.prosesLogin(email, password);
+    console.log("--> Hasil prosesLogin:", berhasil);
+
+    if (berhasil) {
+      tampilkanPesan("Sukses", "Selamat datang kembali!", () => {
+        // Redireksi otomatis ke halaman dashboard / tab utama setelah pencet OK
+        router.replace('/(tabs)');
+      });
+    } else {
+      tampilkanPesan("Gagal Masuk", "Email atau kata sandi yang dimasukkan salah.");
+    }
   }
 
   return (
