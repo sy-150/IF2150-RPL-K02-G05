@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
@@ -9,15 +9,18 @@ import Button from "@/ui/component/Button";
 import EmptyState from "@/ui/component/EmptyState";
 import { NAVBAR_TINGGI, TONJOLAN } from "@/ui/component/NavBar";
 import Kalender from "@/ui/jadwal/Kalender";
+import KartuInfoLokasi from "@/ui/jadwal/KartuInfoLokasi";
 import JadwalController from "@/controller/JadwalController";
 
 export default function DetailJadwalPage() {
   const { idJadwal } = useLocalSearchParams();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   // Navbar menumpuk di atas halaman, jadi area ini dikurangi supaya isinya tepat di tengah area yang terlihat.
   const ruangTengah = { paddingTop: 16, paddingBottom: NAVBAR_TINGGI + TONJOLAN + insets.bottom + 16 };
   const [status, setStatus] = useState("memuat");
   const [jadwal, setJadwal] = useState(null);
+  const [bolehEdit, setBolehEdit] = useState(false);
 
   const muatJadwal = useCallback(async () => {
     try {
@@ -27,6 +30,7 @@ export default function DetailJadwalPage() {
         return;
       }
       setJadwal(hasil.jadwal);
+      setBolehEdit(hasil.bolehEdit);
       setStatus("siap");
     } catch (e) {
       console.warn("Gagal memuat jadwal:", e?.code ?? e?.message);
@@ -43,6 +47,10 @@ export default function DetailJadwalPage() {
   function cobaLagi() {
     setStatus("memuat");
     return muatJadwal();
+  }
+
+  function chooseEditJadwal() {
+    router.push(`/jadwal/${idJadwal}/edit`);
   }
 
   return (
@@ -68,18 +76,12 @@ export default function DetailJadwalPage() {
             { paddingBottom: NAVBAR_TINGGI + TONJOLAN + insets.bottom + 16 },
           ]}
         >
-          <View style={styles.kartuLokasi}>
-            <View style={styles.kotakIkon}>
-              <Ionicons name="location-outline" size={28} color={COLOR.white} />
-            </View>
-            <View style={styles.teksLokasi}>
-              <Text style={styles.labelLokasi}>LOKASI TPS</Text>
-              <Text style={styles.kelurahan}>Kelurahan {jadwal?.kelurahan}</Text>
-              <Text style={styles.labelLokasi}>Kecamatan {jadwal?.kecamatan}, Kota Bandung</Text>
-            </View>
-          </View>
+          <KartuInfoLokasi jadwal={jadwal} />
 
-          <Kalender daftarTanggal={jadwal?.daftarTanggal ?? []} />
+          <Kalender daftarTanggal={jadwal?.getTanggal() ?? []} />
+
+          {/* Hanya untuk petugas yang login dan wilayah tugasnya sama dengan jadwal ini (I10) */}
+          {bolehEdit ? <Button label="EDIT JADWAL" ikon="edit" onPress={chooseEditJadwal} /> : null}
         </ScrollView>
       )}
     </View>
@@ -112,33 +114,5 @@ const styles = StyleSheet.create({
     gap: 16,
     paddingHorizontal: 16,
     paddingTop: 16,
-  },
-  kartuLokasi: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    padding: 16,
-    borderRadius: 16,
-    backgroundColor: COLOR.white,
-  },
-  kotakIkon: {
-    width: 48,
-    height: 48,
-    borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: COLOR.forestEmerald,
-  },
-  teksLokasi: {
-    flex: 1,
-    gap: 2,
-  },
-  labelLokasi: {
-    ...TEXT.smallText,
-    color: COLOR.deepForestGreen,
-  },
-  kelurahan: {
-    ...TEXT.bodyText,
-    color: COLOR.black,
   },
 });

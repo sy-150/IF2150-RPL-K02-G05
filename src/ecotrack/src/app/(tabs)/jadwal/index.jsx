@@ -69,8 +69,8 @@ export default function JadwalPage() {
       ) : (
         <FlatList
           data={daftarJadwal}
-          keyExtractor={(jadwal) => jadwal.idJadwal}
-          renderItem={({ item }) => <KartuLokasi jadwal={item} onPress={() => chooseJadwal(item.idJadwal)} />}
+          keyExtractor={(jadwal) => jadwal.getIdJadwal()}
+          renderItem={({ item }) => <KartuLokasi jadwal={item} onPress={() => chooseJadwal(item.getIdJadwal())} />}
           ListHeaderComponent={
             daftarJadwal.length > 0 ? <Text style={styles.judulDaftar}>Lokasi TPS Kota Bandung</Text> : null
           }
