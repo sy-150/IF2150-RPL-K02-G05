@@ -102,7 +102,7 @@ export default function Kalender({ daftarTanggal, onUbahTanggal }) {
         <View style={styles.barisKeterangan}>
           <View style={[styles.bulatan, modeEdit ? styles.bulatanTersedia : styles.bulatanMerah]} />
           <Text style={styles.teksKeterangan}>
-            {modeEdit ? 'Jadwal tersedia' : `Hari ini: ${JadwalController.getTeksHariIni()}`}
+            {modeEdit ? 'Jadwal tersedia' : `Hari ini: ${JadwalController.getTeksHariIni()} (WIB)`}
           </Text>
         </View>
         <View style={styles.barisKeterangan}>

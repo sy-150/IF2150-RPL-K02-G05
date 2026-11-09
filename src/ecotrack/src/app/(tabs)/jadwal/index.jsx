@@ -15,6 +15,8 @@ import JadwalController from "@/controller/JadwalController";
 export default function JadwalPage() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  // Navbar menumpuk di atas halaman, jadi area ini dikurangi supaya posisinya sama dengan EmptyState.
+  const ruangTengah = { paddingTop: 16, paddingBottom: NAVBAR_TINGGI + TONJOLAN + insets.bottom + 16 };
   const [status, setStatus] = useState("memuat");
   const [keyword, setKeyword] = useState("");
   const [daftarJadwal, setDaftarJadwal] = useState([]);
@@ -55,11 +57,11 @@ export default function JadwalPage() {
       </Header>
 
       {status === "memuat" ? (
-        <View style={styles.tengah}>
+        <View style={[styles.tengah, ruangTengah]}>
           <ActivityIndicator size="large" color={COLOR.forestEmerald} />
         </View>
       ) : status === "gagal" ? (
-        <View style={styles.tengah}>
+        <View style={[styles.tengah, ruangTengah]}>
           <MaterialIcons name="cloud-off" size={72} color={COLOR.deepForestGreen} />
           <Text style={styles.judulGagal}>Gagal memuat jadwal</Text>
           <Button label="COBA LAGI" onPress={openJadwalPage} style={styles.lebarPenuh} />

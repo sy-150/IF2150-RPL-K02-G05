@@ -14,6 +14,8 @@ import JadwalController from "@/controller/JadwalController";
 export default function DetailJadwalPage() {
   const { idJadwal } = useLocalSearchParams();
   const insets = useSafeAreaInsets();
+  // Navbar menumpuk di atas halaman, jadi area ini dikurangi supaya isinya tepat di tengah area yang terlihat.
+  const ruangTengah = { paddingTop: 16, paddingBottom: NAVBAR_TINGGI + TONJOLAN + insets.bottom + 16 };
   const [status, setStatus] = useState("memuat");
   const [jadwal, setJadwal] = useState(null);
 
@@ -48,17 +50,17 @@ export default function DetailJadwalPage() {
       <Header judul="Jadwal Pengambilan Sampah" tampilKembali tampilProfil />
 
       {status === "memuat" ? (
-        <View style={styles.tengah}>
+        <View style={[styles.tengah, ruangTengah]}>
           <ActivityIndicator size="large" color={COLOR.forestEmerald} />
         </View>
       ) : status === "gagal" ? (
-        <View style={styles.tengah}>
+        <View style={[styles.tengah, ruangTengah]}>
           <MaterialIcons name="cloud-off" size={72} color={COLOR.deepForestGreen} />
           <Text style={styles.judulGagal}>Gagal memuat jadwal</Text>
           <Button label="COBA LAGI" onPress={cobaLagi} style={styles.lebarPenuh} />
         </View>
       ) : status === "tidakAda" ? (
-        <EmptyState judul="Lokasi TPS tidak ditemukan" keterangan="Lokasi ini tidak ada di daftar jadwal" style={styles.kosong} />
+        <EmptyState judul="Lokasi TPS tidak ditemukan" keterangan="Lokasi ini tidak ada di daftar jadwal" style={[styles.kosong, ruangTengah]} />
       ) : (
         <ScrollView
           contentContainerStyle={[
