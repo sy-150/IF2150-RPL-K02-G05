@@ -24,6 +24,7 @@ export default function Kalender({ daftarTanggal, onUbahTanggal }) {
   const modeEdit = onUbahTanggal !== undefined;
   const [bulanTampil, setBulanTampil] = useState(() => JadwalController.getBulanIni());
   const sel = JadwalController.susunKalender(bulanTampil, daftarTanggal);
+  const daftarMinggu = Array.from({ length: sel.length / 7 }, (_, i) => sel.slice(i * 7, (i + 1) * 7));
   const bisaMundur = JadwalController.bisaGeserBulan(bulanTampil, -1);
   const bisaMaju = JadwalController.bisaGeserBulan(bulanTampil, 1);
 
@@ -58,44 +59,50 @@ export default function Kalender({ daftarTanggal, onUbahTanggal }) {
       </View>
 
       <View style={styles.grid}>
-        {NAMA_KOLOM.map((nama, i) => (
-          <View key={i} style={styles.sel}>
-            <Text style={styles.namaKolom}>{nama}</Text>
+        <View style={styles.baris}>
+          {NAMA_KOLOM.map((nama, i) => (
+            <View key={i} style={styles.sel}>
+              <Text style={styles.namaKolom}>{nama}</Text>
+            </View>
+          ))}
+        </View>
+        {daftarMinggu.map((minggu) => (
+          <View key={minggu[0].kunci} style={styles.baris}>
+            {minggu.map((hari) => {
+              const bisaDitekan = modeEdit && hari.bulanIni;
+              return (
+                <Pressable
+                  key={hari.kunci}
+                  style={styles.sel}
+                  disabled={!bisaDitekan}
+                  onPress={() => onUbahTanggal(JadwalController.toggleTanggal(daftarTanggal, hari.kunci))}
+                  accessibilityRole={bisaDitekan ? 'button' : undefined}
+                  accessibilityState={bisaDitekan ? { selected: hari.pengambilan } : undefined}
+                >
+                  <View
+                    style={[
+                      styles.lingkaran,
+                      bisaDitekan && styles.lingkaranTersedia,
+                      hari.pengambilan && styles.lingkaranHijau,
+                      hari.pengambilan && !hari.bulanIni && styles.pudar,
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.angka,
+                        !hari.bulanIni && styles.angkaLuarBulan,
+                        hari.pengambilan && styles.angkaPengambilan,
+                      ]}
+                    >
+                      {hari.tanggal}
+                    </Text>
+                  </View>
+                  {hari.hariIni && !modeEdit ? <View style={styles.titikHariIni} /> : null}
+                </Pressable>
+              );
+            })}
           </View>
         ))}
-        {sel.map((hari) => {
-          const bisaDitekan = modeEdit && hari.bulanIni;
-          return (
-          <Pressable
-            key={hari.kunci}
-            style={styles.sel}
-            disabled={!bisaDitekan}
-            onPress={() => onUbahTanggal(JadwalController.toggleTanggal(daftarTanggal, hari.kunci))}
-            accessibilityRole={bisaDitekan ? 'button' : undefined}
-            accessibilityState={bisaDitekan ? { selected: hari.pengambilan } : undefined}
-          >
-            <View
-              style={[
-                styles.lingkaran,
-                bisaDitekan && styles.lingkaranTersedia,
-                hari.pengambilan && styles.lingkaranHijau,
-                hari.pengambilan && !hari.bulanIni && styles.pudar,
-              ]}
-            >
-              <Text
-                style={[
-                  styles.angka,
-                  !hari.bulanIni && styles.angkaLuarBulan,
-                  hari.pengambilan && styles.angkaPengambilan,
-                ]}
-              >
-                {hari.tanggal}
-              </Text>
-            </View>
-            {hari.hariIni && !modeEdit ? <View style={styles.titikHariIni} /> : null}
-          </Pressable>
-          );
-        })}
       </View>
 
       <View style={styles.keterangan}>
@@ -141,12 +148,15 @@ const styles = StyleSheet.create({
     opacity: 0.3,
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     padding: 12,
   },
+  // Satu baris per minggu dengan kolom flex: 1. Jangan pakai width persen + flexWrap: di sebagian
+  // HP Android pembulatan piksel membuat 7 kolom tidak muat, sehingga tanggal turun ke baris bawah.
+  baris: {
+    flexDirection: 'row',
+  },
   sel: {
-    width: `${100 / 7}%`,
+    flex: 1,
     height: 46,
     alignItems: 'center',
     justifyContent: 'center',
