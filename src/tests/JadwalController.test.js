@@ -238,6 +238,24 @@ describe('kalender WIB', () => {
     expect(awal).toHaveLength(2); // list asli tidak diubah
   });
 
+  it('apakahBerubah false kalau harinya sama walaupun urutan dan jam beda', () => {
+    const awal = [wib('2026-11-02'), wib('2026-11-09')];
+    const baru = [new Date('2026-11-09T10:00:00+07:00'), wib('2026-11-02'), wib('2026-11-02')];
+    expect(JadwalController.apakahBerubah(awal, baru)).toBe(false);
+  });
+
+  it('apakahBerubah true kalau ada tanggal ditambah atau dihapus', () => {
+    const awal = [wib('2026-11-02'), wib('2026-11-09')];
+    expect(JadwalController.apakahBerubah(awal, [wib('2026-11-02')])).toBe(true);
+    expect(JadwalController.apakahBerubah(awal, [...awal, wib('2026-11-12')])).toBe(true);
+  });
+
+  it('apakahBerubah false kalau tanggal dipilih lalu dibatalkan lagi', () => {
+    const awal = [wib('2026-11-02')];
+    const pilih = JadwalController.toggleTanggal(awal, '2026-11-05');
+    expect(JadwalController.apakahBerubah(awal, JadwalController.toggleTanggal(pilih, '2026-11-05'))).toBe(false);
+  });
+
   it('toggleTanggal menghapus tanggal yang sudah ada', () => {
     const awal = [wib('2026-11-02'), wib('2026-11-09')];
     expect(JadwalController.toggleTanggal(awal, '2026-11-02')).toEqual([wib('2026-11-09')]);

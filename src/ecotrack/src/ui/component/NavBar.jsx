@@ -2,6 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { COLOR, TEXT } from '@/ui/theme';
+import { tahanPindahTab } from '@/utils/penjagaNavigasi';
 
 export const NAVBAR_TINGGI = 72;
 const UKURAN_PINDAI = NAVBAR_TINGGI;
@@ -10,7 +11,7 @@ export const TONJOLAN = 24;
 const MENU = {
   informasi: { label: 'Daur Ulang', ikon: 'recycle' },
   'pemindai/index': { label: 'Pindai', ikon: 'camera-outline', tengah: true },
-  jadwal: { label: 'Kalendar', ikon: 'calendar-blank-outline' },
+  jadwal: { label: 'Jadwal', ikon: 'calendar-blank-outline' },
 };
 
 export default function Navbar({ state, descriptors, emitter, navigateToTab, insets }) {
@@ -32,13 +33,20 @@ export default function Navbar({ state, descriptors, emitter, navigateToTab, ins
           if (!menu) return null;
           const aktif = state.index === index;
 
-          function tekan() {
+          function pindah() {
             const event = emitter.emit({
               type: 'tabPress',
               target: route.key,
               canPreventDefault: true,
             });
             if (!aktif && !event.defaultPrevented) navigateToTab(route.key);
+          }
+
+          function tekan() {
+            // Halaman dengan perubahan belum disimpan bisa menahan pindah ke tab lain
+            // (lihat utils/penjagaNavigasi.js). Tab yang sedang aktif ditangani usePreventRemove.
+            if (!aktif && tahanPindahTab(pindah)) return;
+            pindah();
           }
 
           if (menu.tengah) {

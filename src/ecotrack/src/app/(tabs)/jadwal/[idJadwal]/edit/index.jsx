@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useNavigation, usePreventRemove, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
@@ -13,17 +13,61 @@ import { NAVBAR_TINGGI, TONJOLAN } from "@/ui/component/NavBar";
 import Kalender from "@/ui/jadwal/Kalender";
 import KartuInfoLokasi from "@/ui/jadwal/KartuInfoLokasi";
 import JadwalController from "@/controller/JadwalController";
+import { pasangPenjagaPindahTab } from "@/utils/penjagaNavigasi";
 
 export default function EditJadwalPage() {
   const { idJadwal } = useLocalSearchParams();
   const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const ruangBawah = NAVBAR_TINGGI + TONJOLAN + insets.bottom + 16;
 
   const [status, setStatus] = useState("memuat"); // "memuat" | "siap" | "tidakBoleh" | "gagal"
   const [jadwal, setJadwal] = useState(null);
+  const [tanggalAwal, setTanggalAwal] = useState([]); // tanggal saat halaman dibuka
   const [daftarTanggal, setDaftarTanggal] = useState([]);
   const [dialogSimpan, setDialogSimpan] = useState(false);
+  const [ulangiKeluar, setUlangiKeluar] = useState(null); // diisi saat keluar ditahan
+
+  // Selama ada perubahan yang belum disimpan, setiap cara meninggalkan halaman ini memunculkan
+  // dialog konfirmasi dulu:
+  //   - BATAL, Back Android, dan menekan ulang tab Kalender → usePreventRemove
+  //   - pindah ke tab lain                                  → penjaga di NavBar
+  //   - swipe back iOS dimatikan, karena gesture native sudah berjalan sebelum bisa ditahan
+  //     (halaman sempat mundur lalu kembali lagi). Petugas tetap bisa keluar lewat BATAL.
+  const adaPerubahan = status === "siap" && JadwalController.apakahBerubah(tanggalAwal, daftarTanggal);
+  const lepasPenahan = usePreventRemove(adaPerubahan, ({ repeat }) => {
+    setUlangiKeluar(() => repeat);
+  });
+
+  useEffect(() => {
+    navigation.setOptions({ gestureEnabled: !adaPerubahan });
+  }, [navigation, adaPerubahan]);
+
+  useEffect(() => {
+    if (!adaPerubahan) return;
+    return pasangPenjagaPindahTab((pindahTab) => {
+      // Kalau dibuang: tutup halaman edit (kembali ke detail) lalu pindah tab. Saat tab
+      // Kalender dibuka lagi, yang tampil detail jadwal dengan tanggal semula.
+      setUlangiKeluar(() => () => {
+        lepasPenahan();
+        kembaliKeDetail();
+        pindahTab();
+      });
+      return true;
+    });
+  }, [adaPerubahan]);
+
+  function lanjutEdit() {
+    setUlangiKeluar(null);
+  }
+
+  function buangPerubahan() {
+    const ulangi = ulangiKeluar;
+    setUlangiKeluar(null);
+    setDaftarTanggal(tanggalAwal);
+    ulangi?.(); // menjalankan lagi navigasi yang tadi ditahan
+  }
 
   async function showFormEditJadwal() {
     setStatus("memuat");
@@ -34,6 +78,7 @@ export default function EditJadwalPage() {
         return;
       }
       setJadwal(hasil.jadwal);
+      setTanggalAwal(hasil.jadwal.getTanggal());
       setDaftarTanggal(hasil.jadwal.getTanggal());
       setStatus("siap");
     } catch (e) {
@@ -60,12 +105,14 @@ export default function EditJadwalPage() {
       return;
     }
     toast.berhasil("Jadwal berhasil diperbarui"); // I13
+    setTanggalAwal(daftarTanggal);
+    lepasPenahan(); // sudah tersimpan, jadi boleh keluar tanpa konfirmasi
     kembaliKeDetail(); // Detail memuat ulang datanya saat terbuka lagi
   }
 
   return (
     <View style={styles.halaman}>
-      <Header judul={"Edit Jadwal\nPengambilan Sampah"} />
+      <Header judul={"Edit Jadwal\nPengambilan Sampah"} style={styles.header} />
 
       {status === "memuat" ? (
         <View style={[styles.tengah, { paddingBottom: ruangBawah }]}>
@@ -106,6 +153,17 @@ export default function EditJadwalPage() {
         tombolUtama={{ label: "Simpan", onPress: fillFormEditJadwal }}
         tombolKedua={{ label: "Batal", onPress: () => setDialogSimpan(false) }}
       />
+
+      {/* Konfirmasi keluar saat masih ada perubahan yang belum disimpan */}
+      <Dialog
+        terlihat={ulangiKeluar !== null}
+        onTutup={lanjutEdit}
+        ikon="warning-amber"
+        judul="Perubahan Belum Disimpan"
+        pesan="Tanggal yang sudah kamu pilih akan hilang kalau keluar sekarang."
+        tombolUtama={{ label: "Lanjut Edit", onPress: lanjutEdit }}
+        tombolKedua={{ label: "Buang Perubahan", onPress: buangPerubahan }}
+      />
     </View>
   );
 }
@@ -114,6 +172,9 @@ const styles = StyleSheet.create({
   halaman: {
     flex: 1,
     backgroundColor: COLOR.secondaryWhite,
+  },
+ header: {
+    paddingTop: 32
   },
   tengah: {
     flex: 1,

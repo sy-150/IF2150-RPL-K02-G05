@@ -105,6 +105,13 @@ class JadwalController {
 
   // ===== Bantuan kalender (I09, I11), semuanya menurut WIB =====
 
+  // true kalau kedua list berisi hari yang berbeda (urutan, duplikat, dan jam diabaikan).
+  // Dipakai halaman edit untuk tahu apakah ada perubahan yang belum disimpan.
+  static apakahBerubah(daftarAwal, daftarBaru) {
+    const ringkas = (daftar) => [...new Set(daftar.map(kunciWIB))].sort().join();
+    return ringkas(daftarAwal) !== ringkas(daftarBaru);
+  }
+
   // Mode edit: menambah tanggal (kunci "YYYY-MM-DD") kalau belum ada, menghapusnya kalau sudah ada.
   // Tanggal baru disimpan sebagai 00:00 WIB seperti data seed. Mengembalikan list baru yang terurut.
   static toggleTanggal(daftarTanggal, kunci) {
