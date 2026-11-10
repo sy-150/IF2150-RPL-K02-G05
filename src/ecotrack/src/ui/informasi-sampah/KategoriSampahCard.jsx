@@ -12,7 +12,7 @@ import MetodeSolusiCard from "./MetodeSolusiCard";
 const DAFTAR_METODE = [
   {
     id: "dibuang",
-    judul: "Dibuang ke Sampah Anorganik",
+    judul: "Dibuang ke Tempat Sampah",
   },
   {
     id: "kreasi",
@@ -70,7 +70,19 @@ export default function KategoriSampahCard({
           return (
             <MetodeSolusiCard
               key={metode.id}
-              judul={metode.judul}
+              judul={
+                metode.id === "dibuang"
+                  ? `Dibuang ke Sampah ${
+                      tipe.jenisSampah === "organik"
+                        ? "Organik"
+                        : tipe.jenisSampah === "anorganik"
+                          ? "Anorganik"
+                          : tipe.jenisSampah === "residu"
+                            ? "Residu"
+                            : "Campuran"
+                    }`
+                  : metode.judul
+              }
               gambar={gambarMetode(
                 tipe.idTipe,
                 metode.id

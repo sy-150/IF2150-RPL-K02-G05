@@ -32,6 +32,9 @@ const GAMBAR_KATEGORI = {
   organik: require("../../../../assets/images/informasi-sampah/material/organik.png"),
   elektronik: require("../../../../assets/images/informasi-sampah/material/elektronik.png"),
   lainnya: require("../../../../assets/images/informasi-sampah/material/lainnya.png"),
+  "keramik-porselen": require("../../../../assets/images/informasi-sampah/material/keramik-porselen.png"),
+  "minyak-jelantah": require("../../../../assets/images/informasi-sampah/material/minyak-jelantah.png"),
+  "tekstil-kain": require("../../../../assets/images/informasi-sampah/material/tekstil-kain.png"),
 };
 
 const HORIZONTAL_PADDING = 16;

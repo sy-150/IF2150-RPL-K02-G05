@@ -33,8 +33,16 @@ export function gambarSampah(namaFile) {
 
   const hasil = DAFTAR_GAMBAR[namaBersih];
 
+  console.log(
+    "[DEBUG] Semua gambar terdaftar:",
+    Object.keys(DAFTAR_GAMBAR)
+  );
+
   console.log("[DEBUG] Nama setelah dibersihkan:", namaBersih);
   console.log("[DEBUG] Gambar ditemukan:", Boolean(hasil));
+
+  console.log("[DEBUG] Dicari:", namaBersih);
+  console.log("[DEBUG] Hasil:", hasil);
 
   return hasil ?? null;
 }
