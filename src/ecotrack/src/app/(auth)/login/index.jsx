@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, Text, View, StyleSheet, Alert, Platform } from "react-native";
+import { ScrollView, Text, View, StyleSheet, ToastAndroid, Platform } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
@@ -15,41 +15,37 @@ export default function LoginPage() {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
 
-  // Fungsi alert cross-platform untuk Web & Mobile
-  const tampilkanPesan = (judul, isi, tindakanKapanSelesai) => {
-    console.log(`[ALERT] ${judul}: ${isi}`);
-    if (Platform.OS === 'web') {
-      alert(`${judul}\n\n${isi}`);
-      if (tindakanKapanSelesai) tindakanKapanSelesai();
+  function showToast(pesan) {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show(pesan, ToastAndroid.SHORT);
     } else {
-      Alert.alert(judul, isi, [{ text: "OK", onPress: tindakanKapanSelesai }]);
+      alert(pesan); // Fallback untuk Web jika komponen Toast tim belum diatur
     }
-  };
+  }
+
+  function showErrorInput(kolom, pesan) {
+    if (kolom === "email") setErrorEmail(pesan);
+    else setErrorPassword(pesan);
+  }
 
   async function inputKredensial() {
-    console.log("--> Tombol MASUK ditekan!");
     const pesanEmail = validateEmail(email);
     const pesanPassword = !password ? "Kata sandi wajib diisi" : "";
 
     setErrorEmail(pesanEmail || "");
     setErrorPassword(pesanPassword);
 
-    if (pesanEmail || pesanPassword) {
-      console.log("--> Validasi input login gagal:", { pesanEmail, pesanPassword });
-      return;
-    }
+    if (pesanEmail || pesanPassword) return;
 
-    console.log("--> Mengirim kredensial ke AkunPetugasController.prosesLogin...");
-    const berhasil = await AkunPetugasController.prosesLogin(email, password);
-    console.log("--> Hasil prosesLogin:", berhasil);
+    const status = await AkunPetugasController.prosesLogin(email, password);
 
-    if (berhasil) {
-      tampilkanPesan("Sukses", "Selamat datang kembali!", () => {
-        // Redireksi otomatis ke halaman dashboard / tab utama setelah pencet OK
-        router.replace('/(tabs)');
-      });
+    if (status === 'BERHASIL') {
+      showToast("Selamat datang kembali!");
+      router.replace('/profil');
+    } else if (status === 'KREDENSIAL_SALAH') {
+      showErrorInput("password", "Email/Kata sandi salah");
     } else {
-      tampilkanPesan("Gagal Masuk", "Email atau kata sandi yang dimasukkan salah.");
+      showToast("Gagal terhubung ke server. Periksa koneksi internet Anda.");
     }
   }
 
@@ -107,51 +103,14 @@ export default function LoginPage() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    paddingBottom: 49,
-  },
-  halaman: {
-    flex: 1,
-    backgroundColor: COLOR.forestEmerald,
-  },
-  kartu: {
-    flex: 1,
-    marginTop: -24,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    backgroundColor: COLOR.white,
-  },
-  isiKartu: {
-    gap: 14,
-    padding: 24,
-  },
-  blokJudul: {
-    alignItems: "center",
-    gap: 4,
-    marginBottom: 8,
-  },
-  judul: {
-    ...TEXT.titleMedium,
-    color: COLOR.black,
-  },
-  subjudul: {
-    ...TEXT.descriptiveText,
-    color: COLOR.black,
-  },
-  lupa: {
-    ...TEXT.descriptiveText,
-    color: COLOR.forestEmerald,
-    alignSelf: "flex-end",
-  },
-  teksBawah: {
-    ...TEXT.descriptiveText,
-    color: COLOR.black,
-    textAlign: "center",
-  },
-  tautan: {
-    fontFamily: TEXT.bodyText.fontFamily,
-    color: COLOR.forestEmerald,
-  },
+  header: { borderBottomLeftRadius: 0, borderBottomRightRadius: 0, paddingBottom: 49 },
+  halaman: { flex: 1, backgroundColor: COLOR.forestEmerald },
+  kartu: { flex: 1, marginTop: -24, borderTopLeftRadius: 24, borderTopRightRadius: 24, backgroundColor: COLOR.white },
+  isiKartu: { gap: 14, padding: 24 },
+  blokJudul: { alignItems: "center", gap: 4, marginBottom: 8 },
+  judul: { ...TEXT.titleMedium, color: COLOR.black },
+  subjudul: { ...TEXT.descriptiveText, color: COLOR.black },
+  lupa: { ...TEXT.descriptiveText, color: COLOR.forestEmerald, alignSelf: "flex-end" },
+  teksBawah: { ...TEXT.descriptiveText, color: COLOR.black, textAlign: "center" },
+  tautan: { fontFamily: TEXT.bodyText.fontFamily, color: COLOR.forestEmerald },
 });

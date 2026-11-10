@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Text, View, StyleSheet, Alert, Platform } from "react-native";
+import { ScrollView, Text, View, StyleSheet, ToastAndroid, Platform } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
@@ -25,21 +25,34 @@ export default function SignUpPage() {
   const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  // Fungsi alert cross-platform (Web & Mobile)
-  const tampilkanPesan = (judul, isi, tindakanKapanSelesai) => {
-    console.log(`[ALERT] ${judul}: ${isi}`);
-    if (Platform.OS === 'web') {
-      alert(`${judul}\n\n${isi}`);
-      if (tindakanKapanSelesai) tindakanKapanSelesai();
+  function showToast(pesan) {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show(pesan, ToastAndroid.SHORT);
     } else {
-      Alert.alert(judul, isi, [{ text: "OK", onPress: tindakanKapanSelesai }]);
+      alert(pesan);
     }
-  };
+  }
+
+  function showSignUp(statusCreate) {
+    if (statusCreate === 'BERHASIL') {
+      showToast("Akun berhasil dibuat! Silakan masuk.");
+      router.push('/(auth)/login');
+    } else if (statusCreate === 'EMAIL_TERDAFTAR') {
+      setErrors((prev) => ({ ...prev, email: "Email sudah terdaftar" }));
+    } else if (statusCreate === 'NIK_TIDAK_TERDAFTAR') {
+      setErrors((prev) => ({ ...prev, nik: "NIK tidak terdaftar sebagai petugas kebersihan" }));
+    } else if (statusCreate === 'NAMA_TIDAK_SESUAI') {
+      setErrors((prev) => ({ ...prev, namaLengkap: "Nama lengkap tidak sesuai dengan data NIK" }));
+    } else if (statusCreate === 'NIK_SUDAH_TERDAFTAR') {
+      setErrors((prev) => ({ ...prev, nik: "NIK ini sudah mendaftarkan akun" }));
+    } else if (statusCreate === 'KONFIRMASI_SANDI_BEDA') {
+      setErrors((prev) => ({ ...prev, konfirmasiPassword: "Konfirmasi kata sandi tidak sesuai" }));
+    } else {
+      showToast("Gagal menghubungi server. Periksa koneksi internet Anda.");
+    }
+  }
 
   const handleSignUp = async () => {
-    console.log("--> Tombol DAFTAR SEKARANG ditekan!");
-
-    // 1. Validasi Input Format
     const errNama = !namaLengkap.trim() ? "Nama lengkap wajib diisi" : null;
     const errNik = validateNIK(nik);
     const errEmail = validateEmail(email);
@@ -48,7 +61,6 @@ export default function SignUpPage() {
     const errConf = validatePasswordConfirmation(password, konfirmasiPassword);
 
     if (errNama || errNik || errEmail || errPhone || errPass || errConf) {
-      console.log("--> Validasi form gagal:", { errNama, errNik, errEmail, errPhone, errPass, errConf });
       setErrors({
         namaLengkap: errNama,
         nik: errNik,
@@ -61,36 +73,12 @@ export default function SignUpPage() {
     }
 
     setErrors({});
-    console.log("--> Form valid! Mengirim data ke AkunPetugasController...");
 
-    try {
-      const hasil = await AkunPetugasController.signUp(
-        namaLengkap, nik, email, noTelepon, password, konfirmasiPassword
-      );
+    const statusCreate = await AkunPetugasController.signUp(
+      namaLengkap, nik, email, noTelepon, password, konfirmasiPassword
+    );
 
-      console.log("--> Hasil dari Controller:", hasil);
-
-      if (hasil.status === true) {
-        tampilkanPesan("Sukses", "Akun berhasil dibuat! Silakan masuk.", () => {
-          router.push('/(auth)/login');
-        });
-      } else {
-        if (hasil.pesan === 'EMAIL_TERDAFTAR') {
-          setErrors((prev) => ({ ...prev, email: "Email sudah terdaftar" }));
-        } else if (hasil.pesan === 'NIK_TIDAK_TERDAFTAR') {
-          setErrors((prev) => ({ ...prev, nik: "NIK tidak terdaftar sebagai petugas kebersihan" }));
-        } else if (hasil.pesan === 'NAMA_TIDAK_SESUAI') {
-          setErrors((prev) => ({ ...prev, namaLengkap: "Nama lengkap tidak sesuai dengan data NIK" }));
-        } else if (hasil.pesan === 'NIK_SUDAH_TERDAFTAR') {
-          setErrors((prev) => ({ ...prev, nik: "NIK ini sudah mendaftarkan akun" }));
-        } else {
-          tampilkanPesan("Pendaftaran Gagal", hasil.pesan);
-        }
-      }
-    } catch (err) {
-      console.error("--> Exception error saat Sign Up:", err);
-      tampilkanPesan("Error", err.message || "Terjadi kesalahan sistem");
-    }
+    showSignUp(statusCreate);
   };
 
   const clearError = (field) => {
@@ -124,6 +112,7 @@ export default function SignUpPage() {
           label="NIK (16 Digit)"
           placeholder="3204xxxxxxxxxxxx"
           value={nik}
+          maxLength={16}
           onChangeText={(teks) => { setNik(teks); clearError('nik'); }}
           keyboardType="numeric"
           error={errors.nik}
@@ -167,7 +156,7 @@ export default function SignUpPage() {
         />
 
         <View style={{ marginTop: 10 }}>
-          <Button label="DAFTAR SEKARANG" onPress={handleSignUp} />
+          <Button label="DAFTAR" onPress={handleSignUp} />
         </View>
 
         <Text style={styles.teksBawah}>

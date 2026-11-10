@@ -1,7 +1,14 @@
-import SHA256 from 'crypto-js/sha256';
 import { doc, getDoc, writeBatch } from 'firebase/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser } from 'firebase/auth';
 import { db, auth } from '../database/firebase';
+
+const KODE_KREDENSIAL_SALAH = [
+  "auth/invalid-credential",
+  "auth/invalid-login-credentials",
+  "auth/wrong-password",
+  "auth/user-not-found",
+  "auth/invalid-email",
+];
 
 export function cekStatusLogin() {
   return (auth && auth.currentUser !== null) || AkunPetugas.statusLogin;
@@ -13,70 +20,51 @@ export const AkunPetugas = {
   nik: '',
   email: '',
   noTelepon: '',
-  kataSandi: '',
   wilayahTugas: '',
   statusLogin: false,
 
-  encrypt(password) {
-    if (!password) return '';
-    return SHA256(password).toString();
-  },
-
-  // 1. Cek Data Pemerintah berdasarkan Document ID (NIK)
   async cekDataPemerintah(nik) {
-    try {
-      const docRef = doc(db, 'dataPemerintah', nik);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        return { ada: true, data: docSnap.data() };
-      }
-      return { ada: false };
-    } catch (error) {
-      console.error('Error cekDataPemerintah:', error);
-      return { ada: false };
-    }
+    const docSnap = await getDoc(doc(db, 'dataPemerintah', nik));
+    return docSnap.exists() ? { ada: true, data: docSnap.data() } : { ada: false };
   },
 
-  // 2. Cek apakah NIK sudah terdaftar akun
   async cekNikTerdaftar(nik) {
-    try {
-      const docRef = doc(db, 'nikTerdaftar', nik);
-      const docSnap = await getDoc(docRef);
-      return docSnap.exists();
-    } catch (error) {
-      console.error('Error cekNikTerdaftar:', error);
-      return false;
-    }
+    const docSnap = await getDoc(doc(db, 'nikTerdaftar', nik));
+    return docSnap.exists();
   },
 
-  // 3. Registrasi Firebase Auth & Firestore Batch
+  async verifikasiPetugas(nik, username) {
+    const govData = await this.cekDataPemerintah(nik);
+    if (!govData.ada) return "NIK_TIDAK_TERDAFTAR";
+    
+    if (govData.data.namaLengkap.toLowerCase() !== username.trim().toLowerCase()) {
+      return "NAMA_TIDAK_SESUAI";
+    }
+
+    const nikSudahPakai = await this.cekNikTerdaftar(nik);
+    if (nikSudahPakai) return "NIK_SUDAH_TERDAFTAR";
+    
+    return "VALID";
+  },
+
   async createAkunPetugas(username, nik, email, noTelepon, password, wilayahTugas) {
+    let userBaru = null;
     try {
-      // Step A: Buat akun di Firebase Auth (Otomatis cek duplikasi email)
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const uid = userCredential.user.uid;
-      const passwordHash = this.encrypt(password);
+      userBaru = userCredential.user;
+      const uid = userBaru.uid;
 
-      // Step B: Batch write ke akunPetugas/{uid} dan nikTerdaftar/{nik}
       const batch = writeBatch(db);
-
-      const refAkun = doc(db, 'akunPetugas', uid);
-      batch.set(refAkun, {
+      batch.set(doc(db, 'akunPetugas', uid), {
         username: username,
         nik: nik,
         email: email,
         noTelepon: noTelepon,
-        kataSandi: passwordHash,
         wilayahTugas: wilayahTugas,
       });
-
-      const refNik = doc(db, 'nikTerdaftar', nik);
-      batch.set(refNik, {
+      batch.set(doc(db, 'nikTerdaftar', nik), {
         uid: uid,
       });
-
-      // Commit secara atomic agar lolos aturan security rules getAfter()
       await batch.commit();
 
       this.idPetugas = uid;
@@ -84,27 +72,25 @@ export const AkunPetugas = {
       this.nik = nik;
       this.email = email;
       this.noTelepon = noTelepon;
-      this.kataSandi = passwordHash;
       this.wilayahTugas = wilayahTugas;
       this.statusLogin = true;
 
-      return { sukses: true };
+      return "BERHASIL";
     } catch (error) {
-      console.error('Error createAkunPetugas:', error);
+      if (userBaru) await deleteUser(userBaru).catch(() => {});
+      
       if (error.code === 'auth/email-already-in-use') {
-        return { sukses: false, pesan: 'EMAIL_TERDAFTAR' };
+        return "EMAIL_TERDAFTAR";
       }
-      return { sukses: false, pesan: error.message };
+      throw error; 
     }
   },
 
-  // 4. Proses Login menggunakan Firebase Auth & Fetch Profil
   async loginAuth(email, password) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
-      // Ambil data profil milik sendiri (diizinkan oleh rules: auth.uid == uid)
       const docRef = doc(db, 'akunPetugas', uid);
       const docSnap = await getDoc(docRef);
 
@@ -115,15 +101,16 @@ export const AkunPetugas = {
         this.nik = docData.nik;
         this.email = docData.email;
         this.noTelepon = docData.noTelepon;
-        this.kataSandi = docData.kataSandi;
         this.wilayahTugas = docData.wilayahTugas;
         this.statusLogin = true;
         return true;
+      } else {
+        await signOut(auth);
+        return false;
       }
-      return false;
     } catch (error) {
-      console.error('Error loginAuth:', error);
-      return false;
+      if (KODE_KREDENSIAL_SALAH.includes(error.code)) return false;
+      throw error;
     }
   },
 
@@ -131,6 +118,11 @@ export const AkunPetugas = {
     await signOut(auth);
     this.statusLogin = false;
     this.idPetugas = '';
+    this.username = '';
+    this.nik = '';
+    this.email = '';
+    this.noTelepon = '';
+    this.wilayahTugas = '';
     return true;
   },
 };
