@@ -29,11 +29,25 @@ export default function MetodeSolusiCard({
       accessibilityLabel={judul}
     >
       {/* Gambar metode */}
-      <Image
-        source={gambar}
-        style={styles.gambar}
-        resizeMode="cover"
-      />
+      {gambar ? (
+        <Image
+          source={gambar}
+          style={styles.gambar}
+          resizeMode="cover"
+        />
+      ) : (
+        <View style={styles.placeholder}>
+          <MaterialCommunityIcons
+            name="image-off-outline"
+            size={32}
+            color={COLOR.forestEmerald}
+          />
+
+          <Text style={styles.teksPlaceholder}>
+            Gambar belum tersedia
+          </Text>
+        </View>
+      )}
 
       {/* Footer kartu */}
       <View style={styles.footer}>
@@ -81,6 +95,21 @@ const styles = StyleSheet.create({
   gambar: {
     width: "100%",
     height: 108,
+  },
+
+  placeholder: {
+    width: "100%",
+    height: 108,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLOR.secondaryWhite,
+    gap: 4,
+  },
+
+  teksPlaceholder: {
+    ...TEXT.smallText,
+    color: COLOR.forestEmerald,
+    textAlign: "center",
   },
 
   footer: {

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+
 import {
   View,
   Text,
@@ -9,79 +10,23 @@ import {
   Pressable,
 } from "react-native";
 
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { COLOR, TEXT } from "@/ui/theme";
+
 import Header from "@/ui/component/Header";
+import EmptyState from "@/ui/component/EmptyState";
 
 import InformasiSampahController from "@/controller/InformasiSampahController";
 
 import KategoriSampahCard from "@/ui/informasi-sampah/KategoriSampahCard";
 import TutorialModal from "@/ui/informasi-sampah/TutorialModal";
 
-// ==========================================
-// GAMBAR LOKAL
-// ==========================================
-
-const GAMBAR_ANORGANIK = require("../../../../../assets/images/informasi-sampah/solusi-plastik/solusi-plastik-1.png");
-
-const GAMBAR_KREASI = {
-  pot: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-1.png"),
-  celengan: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-2.png"),
-  mainan: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-3.png"),
-  tasAnyaman: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-4.png"),
-  dompet: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-5.png"),
-  bunga: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-6.png"),
-  tempatAlatTulis: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-7.png"),
-  potWadah: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-8.png"),
-  penyimpanan: require("../../../../../assets/images/informasi-sampah/solusi-plastik/contoh-hasil-2/contoh-9.png"),
-};
+import { gambarSampah } from "@/ui/informasi-sampah/gambarSampah";
 
 // ==========================================
-// GAMBAR KARTU METODE
-// ==========================================
-
-const GAMBAR_METODE_PLASTIK = {
-  "botol-plastik": {
-    dibuang: GAMBAR_ANORGANIK,
-    kreasi: GAMBAR_KREASI.pot,
-  },
-
-  "kantong-plastik": {
-    dibuang: GAMBAR_ANORGANIK,
-    kreasi: require("../../../../../assets/images/informasi-sampah/solusi-plastik/solusi-plastik-3.png"),
-  },
-
-  "wadah-plastik": {
-    dibuang: GAMBAR_ANORGANIK,
-    kreasi: require("../../../../../assets/images/informasi-sampah/solusi-plastik/solusi-plastik-4.png"),
-    gunakan: require("../../../../../assets/images/informasi-sampah/solusi-plastik/solusi-plastik-5.png"),
-  },
-};
-
-// ==========================================
-// GAMBAR CONTOH HASIL KREASI
-// ==========================================
-
-const GAMBAR_CONTOH_HASIL = {
-  // Botol Plastik
-  "hasil-pot-tanaman.png": GAMBAR_KREASI.pot,
-  "hasil-celengan.png": GAMBAR_KREASI.celengan,
-  "hasil-mainan.png": GAMBAR_KREASI.mainan,
-
-  // Kantong Plastik
-  "hasil-tas-anyaman.png": GAMBAR_KREASI.tasAnyaman,
-  "hasil-dompet.png": GAMBAR_KREASI.dompet,
-  "hasil-bunga-plastik.png": GAMBAR_KREASI.bunga,
-
-  // Wadah Plastik
-  "hasil-tempat-alat-tulis-wadah.png": GAMBAR_KREASI.tempatAlatTulis,
-  "hasil-tempat-penyimpanan-wadah.png": GAMBAR_KREASI.penyimpanan,
-};
-
-// ==========================================
-// HELPER
+// KONSTANTA
 // ==========================================
 
 const NAMA_METODE = {
@@ -90,49 +35,32 @@ const NAMA_METODE = {
   gunakan: "Gunakan Ulang untuk Tujuan Lain",
 };
 
-// Mengambil gambar untuk kartu metode.
-function gambarMetode(idSampah, idTipe, metode) {
-  if (idSampah === "plastik") {
-    return (
-      GAMBAR_METODE_PLASTIK[idTipe]?.[metode] ??
-      (metode === "dibuang"
-        ? GAMBAR_ANORGANIK
-        : GAMBAR_KREASI.pot)
-    );
-  }
-
-  return metode === "dibuang"
-    ? GAMBAR_ANORGANIK
-    : GAMBAR_KREASI.pot;
-}
-
-// Mengambil gambar contoh hasil berdasarkan nama file dari Firestore.
-function cariGambarContoh(item) {
-  if (typeof item.gambar === "number") {
-    return item.gambar;
-  }
-
-  return GAMBAR_CONTOH_HASIL[item.gambar] ?? null;
-}
-
 // ==========================================
 // HALAMAN DETAIL INFORMASI SAMPAH
 // ==========================================
 
 export default function DetailInformasiPage() {
-  const router = useRouter();
   const { idSampah } = useLocalSearchParams();
 
   const idKategori = Array.isArray(idSampah)
     ? idSampah[0]
     : idSampah;
 
+  // ========================================
+  // STATE
+  // ========================================
+
   const [data, setData] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const [popupTerbuka, setPopupTerbuka] = useState(false);
   const [metodeTerpilih, setMetodeTerpilih] = useState(null);
+
+  // Digunakan untuk mengulang pengambilan data.
+  const [percobaan, setPercobaan] = useState(0);
 
   // ========================================
   // AMBIL DATA FIRESTORE
@@ -145,20 +73,33 @@ export default function DetailInformasiPage() {
       try {
         setLoading(true);
         setError(false);
+        setNotFound(false);
 
-        const hasil =
-          await InformasiSampahController.getById(idKategori);
+        setData(null);
 
-        if (!masihAktif) return;
-
-        if (!hasil) {
-          setData(null);
-          setError(true);
+        if (!idKategori) {
+          setNotFound(true);
           return;
         }
 
-        // Seluruh data tipe sampah berasal dari Firestore.
+        const hasil =
+          await InformasiSampahController.getDetail(
+            idKategori
+          );
+
+        // Mencegah perubahan state jika halaman sudah ditinggalkan.
+        if (!masihAktif) return;
+
+        // Dokumen tidak ditemukan.
+        if (!hasil) {
+          setData(null);
+          setNotFound(true);
+          return;
+        }
+
+        // Data berhasil diperoleh.
         setData(hasil);
+
       } catch (err) {
         console.error(
           "Gagal mengambil detail sampah:",
@@ -168,6 +109,7 @@ export default function DetailInformasiPage() {
         if (masihAktif) {
           setError(true);
         }
+
       } finally {
         if (masihAktif) {
           setLoading(false);
@@ -175,22 +117,21 @@ export default function DetailInformasiPage() {
       }
     }
 
-    if (idKategori) {
-      muatDetail();
-    }
+    muatDetail();
 
     return () => {
       masihAktif = false;
     };
-  }, [idKategori]);
+  }, [idKategori, percobaan]);
 
   // ========================================
-  // PILIH METODE
+  // PILIH METODE DAUR ULANG
   // ========================================
 
   function pilihMetode(tipe, metode) {
     const konten = tipe[metode];
 
+    // Pastikan metode memiliki langkah tutorial.
     if (!konten || !Array.isArray(konten.langkah)) {
       return;
     }
@@ -215,7 +156,15 @@ export default function DetailInformasiPage() {
   }
 
   // ========================================
-  // LOADING
+  // COBA LAGI
+  // ========================================
+
+  function cobaLagi() {
+    setPercobaan((sebelumnya) => sebelumnya + 1);
+  }
+
+  // ========================================
+  // LOADING STATE
   // ========================================
 
   if (loading) {
@@ -225,7 +174,6 @@ export default function DetailInformasiPage() {
           judul="Informasi Sampah"
           tampilKembali
           tampilProfil
-          onKembali={() => router.replace("/informasi")}
         />
 
         <View style={styles.status}>
@@ -243,17 +191,16 @@ export default function DetailInformasiPage() {
   }
 
   // ========================================
-  // ERROR
+  // ERROR STATE
   // ========================================
 
-  if (error || !data) {
+  if (error) {
     return (
       <View style={styles.halaman}>
         <Header
           judul="Informasi Sampah"
           tampilKembali
           tampilProfil
-          onKembali={() => router.replace("/informasi")}
         />
 
         <View style={styles.status}>
@@ -265,14 +212,16 @@ export default function DetailInformasiPage() {
 
           <Text style={styles.teksError}>
             Gagal memuat informasi sampah.
+            Periksa koneksi internetmu.
           </Text>
 
           <Pressable
             style={styles.tombolRetry}
-            onPress={() => router.replace("/informasi")}
+            onPress={cobaLagi}
+            accessibilityRole="button"
           >
             <Text style={styles.teksRetry}>
-              Kembali
+              Coba Lagi
             </Text>
           </Pressable>
         </View>
@@ -281,16 +230,43 @@ export default function DetailInformasiPage() {
   }
 
   // ========================================
-  // RENDER
+  // EMPTY STATE
+  // Dokumen tidak ditemukan.
+  // ========================================
+
+  if (notFound || !data) {
+    return (
+      <View style={styles.halaman}>
+        <Header
+          judul="Informasi Sampah"
+          tampilKembali
+          tampilProfil
+        />
+
+        <View style={styles.emptyWrapper}>
+          <EmptyState
+            judul="Informasi tidak ditemukan"
+            keterangan="Data material sampah yang kamu cari tidak tersedia."
+            style={styles.emptyState}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  // ========================================
+  // RENDER DETAIL
   // ========================================
 
   return (
     <View style={styles.halaman}>
+
+      {/* HEADER */}
+
       <Header
         judul={`Sampah ${data.nama}`}
         tampilKembali
         tampilProfil
-        onKembali={() => router.replace("/informasi")}
       />
 
       <ScrollView
@@ -298,6 +274,7 @@ export default function DetailInformasiPage() {
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
       >
+
         {/* INFORMASI KATEGORI */}
 
         <View style={styles.kartuInformasi}>
@@ -320,9 +297,18 @@ export default function DetailInformasiPage() {
               key={tipe.idTipe}
               tipe={tipe}
               nomor={index + 1}
-              gambarMetode={(idTipe, metode) =>
-                gambarMetode(idKategori, idTipe, metode)
-              }
+
+              // Gambar metode diambil dari Firestore.
+              gambarMetode={(idTipe, metode) => {
+                const tipeTerpilih = data.tipe?.find(
+                  (item) => item.idTipe === idTipe
+                );
+
+                return gambarSampah(
+                  tipeTerpilih?.[metode]?.gambar
+                );
+              }}
+
               onPilihMetode={pilihMetode}
             />
           ))}
@@ -335,8 +321,11 @@ export default function DetailInformasiPage() {
         visible={popupTerbuka}
         data={metodeTerpilih}
         onClose={tutupPopup}
-        getImage={cariGambarContoh}
+
+        // Mengambil gambar contoh berdasarkan nama file.
+        getImage={(item) => gambarSampah(item.gambar)}
       />
+
     </View>
   );
 }
@@ -346,10 +335,15 @@ export default function DetailInformasiPage() {
 // ==========================================
 
 const styles = StyleSheet.create({
+
   halaman: {
     flex: 1,
     backgroundColor: COLOR.secondaryWhite,
   },
+
+  // ========================================
+  // SCROLL VIEW
+  // ========================================
 
   scroll: {
     flex: 1,
@@ -360,6 +354,10 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 130,
   },
+
+  // ========================================
+  // KARTU INFORMASI KATEGORI
+  // ========================================
 
   kartuInformasi: {
     backgroundColor: COLOR.forestEmerald,
@@ -382,15 +380,24 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 
+  // ========================================
+  // DAFTAR TIPE SAMPAH
+  // ========================================
+
   daftarKategori: {
     gap: 12,
   },
+
+  // ========================================
+  // LOADING DAN ERROR
+  // ========================================
 
   status: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     gap: 12,
+    paddingHorizontal: 24,
   },
 
   teksStatus: {
@@ -415,4 +422,20 @@ const styles = StyleSheet.create({
     ...TEXT.bodyText,
     color: COLOR.white,
   },
+
+  // ========================================
+  // EMPTY STATE
+  // ========================================
+
+  emptyWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+
+  emptyState: {
+    width: "100%",
+  },
+
 });

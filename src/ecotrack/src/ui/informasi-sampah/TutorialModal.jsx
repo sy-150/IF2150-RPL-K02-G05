@@ -24,13 +24,11 @@ export default function TutorialModal({
     return null;
   }
 
+  // Ilustrasi ditampilkan untuk kreasi dan gunakan ulang.
   const tampilkanContoh =
-    data.metode === "kreasi" &&
-    data.konten?.contohHasil?.length > 0;
-
-  const tampilkanContohGunakan =
-    data.metode === "gunakan" &&
-    data.konten?.contohHasil?.length > 0;
+    ["kreasi", "gunakan"].includes(data.metode) &&
+    Array.isArray(data.konten?.contohHasil) &&
+    data.konten.contohHasil.length > 0;
 
   return (
     <Modal
@@ -40,17 +38,12 @@ export default function TutorialModal({
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>
-
-        {/* AREA LUAR: KETUK UNTUK MENUTUP */}
         <Pressable
           style={StyleSheet.absoluteFill}
           onPress={onClose}
         />
 
-        {/* POPUP TUTORIAL */}
         <View style={styles.popup}>
-
-          {/* HEADER */}
           <View style={styles.header}>
             <View style={styles.headerTeks}>
               <Text style={styles.judul}>
@@ -62,7 +55,6 @@ export default function TutorialModal({
               </Text>
             </View>
 
-            {/* TOMBOL SILANG */}
             <Pressable
               style={styles.tombolTutup}
               onPress={onClose}
@@ -78,7 +70,6 @@ export default function TutorialModal({
             </Pressable>
           </View>
 
-          {/* ISI TUTORIAL */}
           <ScrollView
             style={styles.scroll}
             contentContainerStyle={styles.isi}
@@ -99,15 +90,13 @@ export default function TutorialModal({
               )
             )}
 
-            {/* CONTOH HASIL KREASI */}
-            {(tampilkanContoh || tampilkanContohGunakan) && (
+            {tampilkanContoh && (
               <ContohHasilKreasi
-                data={data.konten.contohHasil}
+                data={data.konten.contohHasil.slice(0, 3)}
                 getImage={getImage}
               />
             )}
           </ScrollView>
-
         </View>
       </View>
     </Modal>

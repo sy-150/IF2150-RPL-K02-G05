@@ -10,12 +10,22 @@ import { db } from "@/database/firebase";
 
 class InformasiSampah {
   static collectionName = "informasiSampah";
+  static barcodeCollectionName = "barcodeProduk";
 
-  // Mengambil seluruh data informasi sampah
-  static async getAll() {
+  // ==========================================
+  // C07 - MENGAMBIL SELURUH INFORMASI SAMPAH
+  // DPPL: getMain()
+  // ==========================================
+
+  static async getMain() {
     const snapshot = await getDocs(
       collection(db, this.collectionName)
     );
+
+    // Memastikan data diperoleh dari server.
+    if (snapshot.metadata.fromCache) {
+      throw new Error("Tidak bisa terhubung ke server");
+    }
 
     return snapshot.docs.map((item) => ({
       idSampah: item.id,
@@ -23,10 +33,27 @@ class InformasiSampah {
     }));
   }
 
-  // Mengambil detail berdasarkan document ID
-  static async getById(idSampah) {
-    const docRef = doc(db, this.collectionName, idSampah);
+  // ==========================================
+  // C07 - MENGAMBIL DETAIL INFORMASI SAMPAH
+  // DPPL: getDetail(id)
+  // ==========================================
+
+  static async getDetail(id) {
+    if (!id) {
+      return null;
+    }
+
+    const docRef = doc(
+      db,
+      this.collectionName,
+      id
+    );
+
     const snapshot = await getDoc(docRef);
+
+    if (snapshot.metadata.fromCache) {
+      throw new Error("Tidak bisa terhubung ke server");
+    }
 
     if (!snapshot.exists()) {
       return null;
@@ -38,42 +65,81 @@ class InformasiSampah {
     };
   }
 
-  // Pencarian berdasarkan nama dan ringkasan
-  static async search(keyword) {
-    const kata = keyword.trim().toLowerCase();
+  // ==========================================
+  // C07 - PENCARIAN INFORMASI SAMPAH
+  // DPPL: cariInformasi(query)
+  // ==========================================
 
-    const data = await this.getAll();
+  static async cariInformasi(query) {
+    const kataKunci = String(query ?? "")
+      .trim()
+      .toLowerCase();
 
-    if (!kata) {
+    // Mengambil seluruh data informasi.
+    const data = await this.getMain();
+
+    // Jika query kosong, tampilkan seluruh data.
+    if (!kataKunci) {
       return data;
     }
 
+    // Mencari berdasarkan nama, ringkasan,
+    // deskripsi, dan nama tipe sampah.
     return data.filter((item) => {
-      const cocokNama = item.nama
-        ?.toLowerCase()
-        .includes(kata);
+      const cocokNama =
+        item.nama?.toLowerCase().includes(kataKunci);
 
-      const cocokRingkasan = item.ringkasan
-        ?.toLowerCase()
-        .includes(kata);
+      const cocokRingkasan =
+        item.ringkasan?.toLowerCase().includes(kataKunci);
+
+      const cocokDeskripsi =
+        item.deskripsi?.toLowerCase().includes(kataKunci);
 
       const cocokTipe = item.tipe?.some((tipe) =>
-        tipe.nama?.toLowerCase().includes(kata)
+        tipe.nama?.toLowerCase().includes(kataKunci)
       );
 
-      return cocokNama || cocokRingkasan || cocokTipe;
+      return (
+        cocokNama ||
+        cocokRingkasan ||
+        cocokDeskripsi ||
+        cocokTipe
+      );
     });
   }
 
-  // Pencarian berdasarkan barcode
-  static async cariBarcode(barcode) {
-    const data = await this.getAll();
+  // ==========================================
+  // TAMBAHAN - PENCARIAN BERDASARKAN BARCODE
+  // Digunakan oleh fitur Pemindai UC02.
+  // ==========================================
 
-    return (
-      data.find((item) =>
-        item.barcode?.includes(barcode)
-      ) ?? null
+  static async cariBarcode(barcode) {
+    const kodeBarcode = String(barcode ?? "").trim();
+
+    if (!kodeBarcode) {
+      return null;
+    }
+
+    const docRef = doc(
+      db,
+      this.barcodeCollectionName,
+      kodeBarcode
     );
+
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.metadata.fromCache) {
+      throw new Error("Tidak bisa terhubung ke server");
+    }
+
+    if (!snapshot.exists()) {
+      return null;
+    }
+
+    return {
+      kodeBarcode: snapshot.id,
+      ...snapshot.data(),
+    };
   }
 }
 

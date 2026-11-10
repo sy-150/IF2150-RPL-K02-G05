@@ -14,18 +14,23 @@ export default function ContohHasilKreasi({
   data = [],
   getImage,
 }) {
-  if (!data.length) {
+  // Ambil maksimal 3 contoh ilustrasi.
+  const daftarContoh = Array.isArray(data)
+    ? data.slice(0, 3)
+    : [];
+
+  if (daftarContoh.length === 0) {
     return null;
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.judul}>
-        Contoh Hasil Kreasi
+        Contoh Hasil
       </Text>
 
       <Text style={styles.deskripsi}>
-        Inspirasi barang baru dari material bekas.
+        Inspirasi pemanfaatan material bekas.
       </Text>
 
       <ScrollView
@@ -33,8 +38,8 @@ export default function ContohHasilKreasi({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.daftar}
       >
-        {data.map((item, index) => {
-          const gambar = getImage(item);
+        {daftarContoh.map((item, index) => {
+          const gambar = getImage?.(item);
 
           return (
             <View
