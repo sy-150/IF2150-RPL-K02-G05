@@ -1,5 +1,5 @@
-import { doc, getDoc, writeBatch } from 'firebase/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser } from 'firebase/auth';
+import { doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, updatePassword } from 'firebase/auth';
 import { db, auth } from '../database/firebase';
 
 const KODE_KREDENSIAL_SALAH = [
@@ -44,6 +44,9 @@ export const AkunPetugas = {
     const nikSudahPakai = await this.cekNikTerdaftar(nik);
     if (nikSudahPakai) return "NIK_SUDAH_TERDAFTAR";
     
+    // Kesepakatan Baru: Simpan data resmi langsung ke kelas agar tidak perlu getDoc lagi
+    this.username = govData.data.namaLengkap;
+    this.wilayahTugas = govData.data.wilayahTugas;
     return "VALID";
   },
 
@@ -62,9 +65,7 @@ export const AkunPetugas = {
         noTelepon: noTelepon,
         wilayahTugas: wilayahTugas,
       });
-      batch.set(doc(db, 'nikTerdaftar', nik), {
-        uid: uid,
-      });
+      batch.set(doc(db, 'nikTerdaftar', nik), { uid: uid });
       await batch.commit();
 
       this.idPetugas = uid;
@@ -78,10 +79,7 @@ export const AkunPetugas = {
       return "BERHASIL";
     } catch (error) {
       if (userBaru) await deleteUser(userBaru).catch(() => {});
-      
-      if (error.code === 'auth/email-already-in-use') {
-        return "EMAIL_TERDAFTAR";
-      }
+      if (error.code === 'auth/email-already-in-use') return "EMAIL_TERDAFTAR";
       throw error; 
     }
   },
@@ -114,6 +112,43 @@ export const AkunPetugas = {
     }
   },
 
+  // DPPL Algo-AP-006: Mengambil data profil petugas
+  getProfil() {
+    return {
+      username: this.username,
+      email: this.email,
+      noTelepon: this.noTelepon,
+      wilayahTugas: this.wilayahTugas
+    };
+  },
+
+  // DPPL Algo-AP-007: Memperbarui kontak profil (email & noTelepon) ke Firestore
+  async editProfil(emailBaru, noTeleponBaru) {
+    try {
+      const docRef = doc(db, 'akunPetugas', this.idPetugas);
+      await updateDoc(docRef, { email: emailBaru, noTelepon: noTeleponBaru });
+      this.email = emailBaru;
+      this.noTelepon = noTeleponBaru;
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // DPPL Algo-AP-008: Mengganti kata sandi disesuaikan dengan standar Firebase Auth
+  async changePassword(passwordBaru) {
+    try {
+      if (auth.currentUser) {
+        await updatePassword(auth.currentUser, passwordBaru);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // DPPL Algo-AP-009: Keluar akun dan menghapus data memori lokal
   async logout() {
     await signOut(auth);
     this.statusLogin = false;

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ScrollView, Text, View, StyleSheet, ToastAndroid, Platform } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { useRouter, useNavigation } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
 import InputField from '@/ui/component/InputField';
@@ -8,24 +8,26 @@ import Button from '@/ui/component/Button';
 import { AkunPetugasController } from '../../../controller/AkunPetugasController';
 import { validateEmail } from '../../../utils/validators';
 
+import { toast } from "@/ui/component/Toast";
+import { bukaHalamanAuth } from '../../../utils/navigasiAuth';
+
 export default function LoginPage() {
   const router = useRouter();
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
-
-  function showToast(pesan) {
-    if (Platform.OS === 'android') {
-      ToastAndroid.show(pesan, ToastAndroid.SHORT);
-    } else {
-      alert(pesan); // Fallback untuk Web jika komponen Toast tim belum diatur
-    }
-  }
 
   function showErrorInput(kolom, pesan) {
     if (kolom === "email") setErrorEmail(pesan);
     else setErrorPassword(pesan);
+  }
+
+  function bersihkanErrorKredensial() {
+    if (errorEmail) setErrorEmail("");
+    if (errorPassword) setErrorPassword("");
   }
 
   async function inputKredensial() {
@@ -40,12 +42,14 @@ export default function LoginPage() {
     const status = await AkunPetugasController.prosesLogin(email, password);
 
     if (status === 'BERHASIL') {
-      showToast("Selamat datang kembali!");
-      router.replace('/profil');
+      toast.berhasil("Selamat datang kembali!");
+      router.dismissTo("/informasi");
     } else if (status === 'KREDENSIAL_SALAH') {
+      // Kesepakatan Baru: Garis merah tanpa pesan di email, garis merah dgn pesan di password
+      showErrorInput("email", true);
       showErrorInput("password", "Email/Kata sandi salah");
     } else {
-      showToast("Gagal terhubung ke server. Periksa koneksi internet Anda.");
+      toast.gagal("Gagal terhubung ke server. Periksa koneksi internet Anda.");
     }
   }
 
@@ -53,49 +57,30 @@ export default function LoginPage() {
     <View style={styles.halaman}>
       <Header judul="EcoTrack" logo tampilKembali style={styles.header} />
 
-      <ScrollView
-        style={styles.kartu}
-        contentContainerStyle={styles.isiKartu}
-        keyboardShouldPersistTaps="handled"
-        automaticallyAdjustKeyboardInsets
-      >
+      <ScrollView style={styles.kartu} contentContainerStyle={styles.isiKartu} keyboardShouldPersistTaps="handled" automaticallyAdjustKeyboardInsets>
         <View style={styles.blokJudul}>
           <Text style={styles.judul}>Masuk Akun</Text>
           <Text style={styles.subjudul}>Masuk untuk mengakses akun petugas</Text>
         </View>
 
-        <InputField
-          label="Email"
-          placeholder="Masukkan Email"
-          value={email}
-          onChangeText={(teks) => {
-            setEmail(teks);
-            if (errorEmail) setErrorEmail("");
-          }}
-          keyboardType="email-address"
-          error={errorEmail}
+        <InputField 
+          label="Email" placeholder="Masukkan Email" value={email} keyboardType="email-address" error={errorEmail}
+          onChangeText={(teks) => { setEmail(teks); bersihkanErrorKredensial(); }} 
         />
 
-        <InputField
-          label="Kata Sandi"
-          placeholder="Masukkan kata sandi"
-          value={password}
-          onChangeText={(teks) => {
-            setPassword(teks);
-            if (errorPassword) setErrorPassword("");
-          }}
-          sandi
-          error={errorPassword}
-          onSubmitEditing={inputKredensial}
+        <InputField 
+          label="Kata Sandi" placeholder="Masukkan kata sandi" value={password} sandi error={errorPassword} onSubmitEditing={inputKredensial}
+          onChangeText={(teks) => { setPassword(teks); bersihkanErrorKredensial(); }} 
         />
 
         <Text style={styles.lupa}>Lupa kata sandi?</Text>
-
         <Button label="MASUK" onPress={inputKredensial} />
 
         <Text style={styles.teksBawah}>
           Belum punya akun?{" "}
-          <Link href="/signup" style={styles.tautan}>Klik di sini</Link>
+          <Text style={styles.tautan} onPress={() => bukaHalamanAuth(navigation, router, "(auth)/signup/index", "/signup")}>
+            Klik di sini
+          </Text>
         </Text>
       </ScrollView>
     </View>

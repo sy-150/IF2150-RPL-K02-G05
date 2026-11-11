@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import { ScrollView, Text, View, StyleSheet, ToastAndroid, Platform } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { useRouter, useNavigation } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
 import InputField from '@/ui/component/InputField';
 import Button from '@/ui/component/Button';
 import { AkunPetugasController } from '../../../controller/AkunPetugasController';
-import {
-  validateEmail,
-  validateNIK,
-  validatePhoneNumber,
-  validatePassword,
-  validatePasswordConfirmation,
-} from '../../../utils/validators';
+import { validateEmail, validateNIK, validatePhoneNumber, validatePassword, validatePasswordConfirmation } from '../../../utils/validators';
 
-export default function SignUpPage() {
+import { toast } from "@/ui/component/Toast";
+import { bukaHalamanAuth } from '../../../utils/navigasiAuth';
+
+export default function ShowSignUp() {
   const router = useRouter();
+  const navigation = useNavigation();
 
   const [namaLengkap, setNamaLengkap] = useState("");
   const [nik, setNik] = useState("");
@@ -25,18 +23,10 @@ export default function SignUpPage() {
   const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  function showToast(pesan) {
-    if (Platform.OS === 'android') {
-      ToastAndroid.show(pesan, ToastAndroid.SHORT);
-    } else {
-      alert(pesan);
-    }
-  }
-
   function showSignUp(statusCreate) {
     if (statusCreate === 'BERHASIL') {
-      showToast("Akun berhasil dibuat! Silakan masuk.");
-      router.push('/(auth)/login');
+      toast.berhasil("Akun berhasil dibuat");
+      router.dismissTo("/informasi");
     } else if (statusCreate === 'EMAIL_TERDAFTAR') {
       setErrors((prev) => ({ ...prev, email: "Email sudah terdaftar" }));
     } else if (statusCreate === 'NIK_TIDAK_TERDAFTAR') {
@@ -48,7 +38,7 @@ export default function SignUpPage() {
     } else if (statusCreate === 'KONFIRMASI_SANDI_BEDA') {
       setErrors((prev) => ({ ...prev, konfirmasiPassword: "Konfirmasi kata sandi tidak sesuai" }));
     } else {
-      showToast("Gagal menghubungi server. Periksa koneksi internet Anda.");
+      toast.gagal("Gagal menghubungi server. Periksa koneksi internet Anda.");
     }
   }
 
@@ -61,14 +51,7 @@ export default function SignUpPage() {
     const errConf = validatePasswordConfirmation(password, konfirmasiPassword);
 
     if (errNama || errNik || errEmail || errPhone || errPass || errConf) {
-      setErrors({
-        namaLengkap: errNama,
-        nik: errNik,
-        email: errEmail,
-        noTelepon: errPhone,
-        password: errPass,
-        konfirmasiPassword: errConf,
-      });
+      setErrors({ namaLengkap: errNama, nik: errNik, email: errEmail, noTelepon: errPhone, password: errPass, konfirmasiPassword: errConf });
       return;
     }
 
@@ -87,81 +70,25 @@ export default function SignUpPage() {
 
   return (
     <View style={styles.halaman}>
-      <Header
-        judul="Daftar Akun Petugas"
-        subjudul={"Buat akun untuk\nmulai mengelola sampah"}
-        tampilKembali
-        style={styles.header}
-      />
-
-      <ScrollView
-        style={styles.kartu}
-        contentContainerStyle={styles.isiKartu}
-        keyboardShouldPersistTaps="handled"
-        automaticallyAdjustKeyboardInsets
-      >
-        <InputField
-          label="Nama Lengkap"
-          placeholder="Masukkan nama sesuai KTP"
-          value={namaLengkap}
-          onChangeText={(teks) => { setNamaLengkap(teks); clearError('namaLengkap'); }}
-          error={errors.namaLengkap}
-        />
-
-        <InputField
-          label="NIK (16 Digit)"
-          placeholder="3204xxxxxxxxxxxx"
-          value={nik}
-          maxLength={16}
-          onChangeText={(teks) => { setNik(teks); clearError('nik'); }}
-          keyboardType="numeric"
-          error={errors.nik}
-        />
-
-        <InputField
-          label="Email"
-          placeholder="contoh@ecotrack.id"
-          value={email}
-          onChangeText={(teks) => { setEmail(teks); clearError('email'); }}
-          keyboardType="email-address"
-          error={errors.email}
-        />
-
-        <InputField
-          label="Nomor Telepon"
-          placeholder="0812xxxxxxxx"
-          value={noTelepon}
-          onChangeText={(teks) => { setNoTelepon(teks); clearError('noTelepon'); }}
-          keyboardType="phone-pad"
-          error={errors.noTelepon}
-        />
-
-        <InputField
-          label="Kata Sandi"
-          placeholder="Minimal 6 karakter"
-          value={password}
-          onChangeText={(teks) => { setPassword(teks); clearError('password'); }}
-          sandi
-          error={errors.password}
-        />
-
-        <InputField
-          label="Konfirmasi Kata Sandi"
-          placeholder="Ulangi kata sandi"
-          value={konfirmasiPassword}
-          onChangeText={(teks) => { setKonfirmasiPassword(teks); clearError('konfirmasiPassword'); }}
-          sandi
-          error={errors.konfirmasiPassword}
-          onSubmitEditing={handleSignUp}
-        />
-
+      <Header judul="Daftar Akun Petugas" subjudul={"Buat akun untuk\nmulai mengelola sampah"} tampilKembali style={styles.header} />
+      
+      <ScrollView style={styles.kartu} contentContainerStyle={styles.isiKartu} keyboardShouldPersistTaps="handled" automaticallyAdjustKeyboardInsets>
+        <InputField label="Nama Lengkap" placeholder="Masukkan nama sesuai KTP" value={namaLengkap} error={errors.namaLengkap} onChangeText={(teks) => { setNamaLengkap(teks); clearError('namaLengkap'); }} />
+        <InputField label="NIK (16 Digit)" placeholder="3204xxxxxxxxxxxx" value={nik} maxLength={16} keyboardType="numeric" error={errors.nik} onChangeText={(teks) => { setNik(teks); clearError('nik'); }} />
+        <InputField label="Email" placeholder="contoh@ecotrack.id" value={email} keyboardType="email-address" error={errors.email} onChangeText={(teks) => { setEmail(teks); clearError('email'); }} />
+        <InputField label="Nomor Telepon" placeholder="0812xxxxxxxx" value={noTelepon} keyboardType="phone-pad" error={errors.noTelepon} onChangeText={(teks) => { setNoTelepon(teks); clearError('noTelepon'); }} />
+        <InputField label="Kata Sandi" placeholder="Minimal 6 karakter" value={password} sandi error={errors.password} onChangeText={(teks) => { setPassword(teks); clearError('password'); }} />
+        <InputField label="Konfirmasi Kata Sandi" placeholder="Ulangi kata sandi" value={konfirmasiPassword} sandi error={errors.konfirmasiPassword} onSubmitEditing={handleSignUp} onChangeText={(teks) => { setKonfirmasiPassword(teks); clearError('konfirmasiPassword'); }} />
+        
         <View style={{ marginTop: 10 }}>
           <Button label="DAFTAR" onPress={handleSignUp} />
         </View>
 
         <Text style={styles.teksBawah}>
           Sudah punya akun?{" "}
-          <Link href="/login" style={styles.tautan}>Masuk di sini</Link>
+          <Text style={styles.tautan} onPress={() => bukaHalamanAuth(navigation, router, "(auth)/login/index", "/login")}>
+            Masuk di sini
+          </Text>
         </Text>
       </ScrollView>
     </View>
