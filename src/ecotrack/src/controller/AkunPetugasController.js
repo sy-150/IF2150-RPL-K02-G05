@@ -29,6 +29,21 @@ export const AkunPetugasController = {
     }
   },
 
+  // Lupa kata sandi. Hasil untuk email terdaftar dan tidak terdaftar sengaja disamakan ("TERKIRIM"),
+  // supaya orang lain tidak bisa mengetahui email mana yang punya akun.
+  // "TERKIRIM" | "EMAIL_TIDAK_VALID" | "TERLALU_SERING" | "NETWORK_ERROR"
+  async lupaKataSandi(email) {
+    try {
+      await AkunPetugas.kirimResetKataSandi(email);
+      return 'TERKIRIM';
+    } catch (error) {
+      if (error.code === 'auth/user-not-found') return 'TERKIRIM';
+      if (error.code === 'auth/invalid-email' || error.code === 'auth/missing-email') return 'EMAIL_TIDAK_VALID';
+      if (error.code === 'auth/too-many-requests') return 'TERLALU_SERING';
+      return 'NETWORK_ERROR';
+    }
+  },
+
   // DPPL Algo-APC-004: Mengeluarkan sesi akun
   async logout() {
     return await AkunPetugas.logout();

@@ -17,6 +17,7 @@ export default function LoginPage() {
   
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [mengirimReset, setMengirimReset] = useState(false);
 
   function showErrorInput(kolom, pesan) {
     if (kolom === "email") setErrorEmail(pesan);
@@ -51,6 +52,32 @@ export default function LoginPage() {
     }
   }
 
+  // Lupa kata sandi: memakai email yang sedang diisi di kolom Email.
+  async function lupaKataSandi() {
+    if (mengirimReset) return; // cegah terkirim dua kali
+
+    const pesanEmail = validateEmail(email);
+    if (pesanEmail) {
+      setErrorPassword("");
+      showErrorInput("email", email.trim() ? pesanEmail : "Isi email untuk mengatur ulang kata sandi");
+      return;
+    }
+
+    setMengirimReset(true);
+    const status = await AkunPetugasController.lupaKataSandi(email);
+    setMengirimReset(false);
+
+    if (status === 'TERKIRIM') {
+      toast.berhasil("Tautan atur ulang kata sandi telah dikirim jika email terdaftar.");
+    } else if (status === 'EMAIL_TIDAK_VALID') {
+      showErrorInput("email", "Format email tidak valid");
+    } else if (status === 'TERLALU_SERING') {
+      toast.gagal("Terlalu banyak percobaan. Coba lagi beberapa saat lagi.");
+    } else {
+      toast.gagal("Gagal terhubung ke server. Periksa koneksi internet Anda.");
+    }
+  }
+
   return (
     <View style={styles.halaman}>
       <Header judul="EcoTrack" logo tampilKembali style={styles.header} />
@@ -71,7 +98,14 @@ export default function LoginPage() {
           onChangeText={(teks) => { setPassword(teks); bersihkanErrorKredensial(); }} 
         />
 
-        <Text style={styles.lupa}>Lupa kata sandi?</Text>
+        <Text
+          style={[styles.lupa, mengirimReset && styles.lupaNonaktif]}
+          onPress={lupaKataSandi}
+          disabled={mengirimReset}
+          accessibilityRole="button"
+        >
+          {mengirimReset ? "Mengirim..." : "Lupa kata sandi?"}
+        </Text>
         <Button label="MASUK" onPress={inputKredensial} />
 
         <Text style={styles.teksBawah}>
@@ -94,6 +128,7 @@ const styles = StyleSheet.create({
   judul: { ...TEXT.titleMedium, color: COLOR.black },
   subjudul: { ...TEXT.descriptiveText, color: COLOR.black },
   lupa: { ...TEXT.descriptiveText, color: COLOR.forestEmerald, alignSelf: "flex-end" },
+  lupaNonaktif: { opacity: 0.5 },
   teksBawah: { ...TEXT.descriptiveText, color: COLOR.black, textAlign: "center" },
   tautan: { fontFamily: TEXT.bodyText.fontFamily, color: COLOR.forestEmerald },
 });

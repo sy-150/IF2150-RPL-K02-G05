@@ -1,5 +1,5 @@
 import { doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, updatePassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, updatePassword, sendPasswordResetEmail } from 'firebase/auth';
 import { db, auth } from '../database/firebase';
 
 const KODE_KREDENSIAL_SALAH = [
@@ -110,6 +110,14 @@ export const AkunPetugas = {
       if (KODE_KREDENSIAL_SALAH.includes(error.code)) return false;
       throw error;
     }
+  },
+
+  // Tambahan di luar DPPL (tombol "Lupa kata sandi?" I01/I26): mengirim email berisi tautan untuk
+  // membuat kata sandi baru. Halaman pengaturan ulangnya disediakan Firebase, jadi tidak ada
+  // halaman tambahan di aplikasi. Error dilempar ke controller.
+  async kirimResetKataSandi(email) {
+    auth.languageCode = 'id'; // isi email dalam bahasa Indonesia
+    await sendPasswordResetEmail(auth, email.trim());
   },
 
   // DPPL Algo-AP-006: Mengambil data profil petugas
