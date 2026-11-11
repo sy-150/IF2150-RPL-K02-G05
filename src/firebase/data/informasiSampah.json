@@ -350,40 +350,6 @@
               "gambar": "hasil-lantern-botol-kaca.png"
             }
           ]
-        },
-        "gunakan": {
-          "gambar": "contoh-1.png",
-          "langkah": [
-            {
-              "judul": "Pastikan botol aman",
-              "keterangan": "Gunakan botol yang utuh, tidak retak, dan tidak memiliki tepian tajam."
-            },
-            {
-              "judul": "Cuci hingga bersih",
-              "keterangan": "Bersihkan botol dan keringkan."
-            },
-            {
-              "judul": "Gunakan kembali",
-              "keterangan": "Manfaatkan sebagai vas atau wadah dekorasi; untuk makanan dan minuman, pastikan botol memang layak untuk penggunaan tersebut."
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Vas Bunga",
-              "gambar": "contoh-1.png",
-              "deskripsi": "Gunakan botol utuh dan bersih sebagai vas."
-            },
-            {
-              "nama": "Wadah Dekorasi",
-              "gambar": "contoh-2.png",
-              "deskripsi": "Manfaatkan botol utuh sebagai dekorasi."
-            },
-            {
-              "nama": "Tempat Aksesori",
-              "gambar": "contoh-3.png",
-              "deskripsi": "Gunakan untuk menyimpan aksesori jika mulut botol dan permukaannya aman."
-            }
-          ]
         }
       },
       {
@@ -488,7 +454,7 @@
         "idTipe": "pecahan-kaca",
         "nama": "Pecahan Kaca",
         "dibuang": {
-          "gambar": "penanganan-pecahan-kaca.png",
+          "gambar": "tempat-sampah.png",
           "langkah": [
             {
               "judul": "Jangan sentuh langsung",

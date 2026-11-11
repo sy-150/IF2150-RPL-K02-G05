@@ -1,9 +1,11 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 import {
   ActivityIndicator,
   FlatList,
   Image,
+  Keyboard,
   Pressable,
   StyleSheet,
   Text,
@@ -19,23 +21,7 @@ import Header from "@/ui/component/Header";
 import SearchBar from "@/ui/component/SearchBar";
 import EmptyState from "@/ui/component/EmptyState";
 import InformasiSampahController from "@/controller/InformasiSampahController";
-
-// ==========================================
-// GAMBAR KATEGORI
-// ==========================================
-
-const GAMBAR_KATEGORI = {
-  plastik: require("../../../../assets/images/informasi-sampah/material/plastik.png"),
-  kaca: require("../../../../assets/images/informasi-sampah/material/kaca.png"),
-  logam: require("../../../../assets/images/informasi-sampah/material/logam.png"),
-  "kertas-karton": require("../../../../assets/images/informasi-sampah/material/kertas-karton.png"),
-  organik: require("../../../../assets/images/informasi-sampah/material/organik.png"),
-  elektronik: require("../../../../assets/images/informasi-sampah/material/elektronik.png"),
-  lainnya: require("../../../../assets/images/informasi-sampah/material/lainnya.png"),
-  "keramik-porselen": require("../../../../assets/images/informasi-sampah/material/keramik-porselen.png"),
-  "minyak-jelantah": require("../../../../assets/images/informasi-sampah/material/minyak-jelantah.png"),
-  "tekstil-kain": require("../../../../assets/images/informasi-sampah/material/tekstil-kain.png"),
-};
+import { gambarSampah } from "@/utils/gambarSampah";
 
 const HORIZONTAL_PADDING = 16;
 const COLUMN_GAP = 12;
@@ -52,13 +38,14 @@ export default function InformasiPage() {
     (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
   const [keyword, setKeyword] = useState("");
-  const [kategori, setKategori] = useState([]);
+  const [semuaKategori, setSemuaKategori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [percobaan, setPercobaan] = useState(0);
 
   // ========================================
-  // MEMUAT DAN MENCARI INFORMASI
+  // MEMUAT SELURUH INFORMASI SAMPAH
+  // Fetch hanya ketika halaman dibuka atau retry.
   // ========================================
 
   useEffect(() => {
@@ -69,13 +56,11 @@ export default function InformasiPage() {
         setLoading(true);
         setError(false);
 
-        const hasil = keyword.trim()
-          ? await InformasiSampahController.cariInformasi(keyword)
-          : await InformasiSampahController.getMain();
+        const hasil = await InformasiSampahController.getMain();
 
         if (!masihAktif) return;
 
-        setKategori(Array.isArray(hasil) ? hasil : []);
+        setSemuaKategori(Array.isArray(hasil) ? hasil : []);
       } catch (err) {
         console.error("Gagal memuat informasi sampah:", err);
 
@@ -94,13 +79,53 @@ export default function InformasiPage() {
     return () => {
       masihAktif = false;
     };
-  }, [keyword, percobaan]);
+  }, [percobaan]);
+
+  // ========================================
+  // PENCARIAN LOKAL
+  // Tidak melakukan request Firestore.
+  // ========================================
+
+  const kategori = useMemo(() => {
+    const kataKunci = keyword.trim().toLowerCase();
+
+    if (!kataKunci) {
+      return semuaKategori;
+    }
+
+    return semuaKategori.filter((item) => {
+      const cocokNama = item.nama
+        ?.toLowerCase()
+        .includes(kataKunci);
+
+      const cocokRingkasan = item.ringkasan
+        ?.toLowerCase()
+        .includes(kataKunci);
+
+      const cocokDeskripsi = item.deskripsi
+        ?.toLowerCase()
+        .includes(kataKunci);
+
+      const cocokTipe = item.tipe?.some((tipe) =>
+        tipe.nama?.toLowerCase().includes(kataKunci)
+      );
+
+      return (
+        cocokNama ||
+        cocokRingkasan ||
+        cocokDeskripsi ||
+        cocokTipe
+      );
+    });
+  }, [semuaKategori, keyword]);
 
   // ========================================
   // NAVIGASI KE DETAIL
   // ========================================
 
   function bukaDetail(idSampah) {
+    Keyboard.dismiss();
+
     router.push({
       pathname: "/informasi/[idSampah]",
       params: { idSampah },
@@ -124,7 +149,7 @@ export default function InformasiPage() {
         accessibilityLabel={`Lihat informasi ${item.nama}`}
       >
         <Image
-          source={GAMBAR_KATEGORI[item.idSampah]}
+          source={gambarSampah(item.gambar)}
           style={styles.gambarKategori}
           resizeMode="cover"
         />

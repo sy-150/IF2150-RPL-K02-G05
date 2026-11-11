@@ -23,17 +23,37 @@ import InformasiSampahController from "@/controller/InformasiSampahController";
 import KategoriSampahCard from "@/ui/informasi-sampah/KategoriSampahCard";
 import TutorialModal from "@/ui/informasi-sampah/TutorialModal";
 
-import { gambarSampah } from "@/ui/informasi-sampah/gambarSampah";
+import { gambarSampah } from "@/utils/gambarSampah";
 
 // ==========================================
 // KONSTANTA
 // ==========================================
 
+const LABEL_JENIS = {
+  anorganik: "Anorganik",
+  organik: "Organik",
+  residu: "Residu",
+  campuran: "Campuran",
+  "limbah-cair": "Limbah Cair",
+};
+
 const NAMA_METODE = {
-  dibuang: "Dibuang ke Sampah Anorganik",
   kreasi: "Kreasikan Menjadi Barang Baru",
   gunakan: "Gunakan Ulang untuk Tujuan Lain",
 };
+
+function buatNamaMetode(metode, jenisSampah) {
+  if (metode !== "dibuang") {
+    return NAMA_METODE[metode] ?? metode;
+  }
+
+  if (jenisSampah === "limbah-cair") {
+    return "Kelola sebagai Limbah Cair";
+  }
+
+  const label = LABEL_JENIS[jenisSampah] ?? "Lainnya";
+  return `Dibuang ke Sampah ${label}`;
+}
 
 // ==========================================
 // HALAMAN DETAIL INFORMASI SAMPAH
@@ -138,7 +158,7 @@ export default function DetailInformasiPage() {
 
     setMetodeTerpilih({
       namaTipe: tipe.nama,
-      namaMetode: NAMA_METODE[metode],
+      namaMetode: buatNamaMetode(metode, data?.jenisSampah),
       metode,
       konten,
     });
@@ -279,9 +299,7 @@ export default function DetailInformasiPage() {
 
         <View style={styles.kartuInformasi}>
           <Text style={styles.labelKategori}>
-            {data.jenisSampah === "anorganik"
-              ? "Anorganik"
-              : "Residu"}
+            {LABEL_JENIS[data.jenisSampah] ?? "Lainnya"}
           </Text>
 
           <Text style={styles.deskripsiKategori}>
@@ -297,8 +315,7 @@ export default function DetailInformasiPage() {
               key={tipe.idTipe}
               tipe={tipe}
               nomor={index + 1}
-
-              // Gambar metode diambil dari Firestore.
+              jenisSampah={data.jenisSampah}
               gambarMetode={(idTipe, metode) => {
                 const tipeTerpilih = data.tipe?.find(
                   (item) => item.idTipe === idTipe
@@ -308,7 +325,6 @@ export default function DetailInformasiPage() {
                   tipeTerpilih?.[metode]?.gambar
                 );
               }}
-
               onPilihMetode={pilihMetode}
             />
           ))}

@@ -24,22 +24,46 @@ const DAFTAR_METODE = [
   },
 ];
 
+const LABEL_JENIS = {
+  anorganik: "Anorganik",
+  organik: "Organik",
+  residu: "Residu",
+  campuran: "Campuran",
+  "limbah-cair": "Limbah Cair",
+};
+
 export default function KategoriSampahCard({
   tipe,
   nomor,
+  jenisSampah,
   gambarMetode,
   onPilihMetode,
 }) {
-  // Ambil metode yang tersedia pada masing-masing tipe sampah.
   const metodeTersedia = DAFTAR_METODE.filter(
     (metode) =>
       tipe[metode.id] !== undefined &&
       tipe[metode.id] !== null
   );
 
+  const labelJenis =
+    LABEL_JENIS[jenisSampah] ?? "Lainnya";
+
+  function buatJudulMetode(metode) {
+    if (metode.id !== "dibuang") {
+      return metode.judul;
+    }
+
+    // Minyak jelantah perlu penanganan khusus,
+    // bukan dibuang ke tempat sampah biasa.
+    if (jenisSampah === "limbah-cair") {
+      return "Kelola sebagai Limbah Cair";
+    }
+
+    return `Dibuang ke Sampah ${labelJenis}`;
+  }
+
   return (
     <View style={styles.kartuKategori}>
-      {/* Header kategori */}
       <View style={styles.header}>
         <View style={styles.nomor}>
           <Text style={styles.teksNomor}>
@@ -52,7 +76,6 @@ export default function KategoriSampahCard({
         </Text>
       </View>
 
-      {/* Daftar metode solusi */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -62,7 +85,6 @@ export default function KategoriSampahCard({
         {metodeTersedia.map((metode) => {
           const konten = tipe[metode.id];
 
-          // Metode aktif jika memiliki minimal satu langkah.
           const tersedia =
             Array.isArray(konten.langkah) &&
             konten.langkah.length > 0;
@@ -70,19 +92,7 @@ export default function KategoriSampahCard({
           return (
             <MetodeSolusiCard
               key={metode.id}
-              judul={
-                metode.id === "dibuang"
-                  ? `Dibuang ke Sampah ${
-                      tipe.jenisSampah === "organik"
-                        ? "Organik"
-                        : tipe.jenisSampah === "anorganik"
-                          ? "Anorganik"
-                          : tipe.jenisSampah === "residu"
-                            ? "Residu"
-                            : "Campuran"
-                    }`
-                  : metode.judul
-              }
+              judul={buatJudulMetode(metode)}
               gambar={gambarMetode(
                 tipe.idTipe,
                 metode.id

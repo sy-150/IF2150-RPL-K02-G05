@@ -28,18 +28,11 @@ export default function MetodeSolusiCard({
       accessibilityRole="button"
       accessibilityLabel={judul}
     >
-      {/* Gambar metode */}
       {gambar ? (
         <Image
           source={gambar}
           style={styles.gambar}
           resizeMode="cover"
-          onLoad={() => {
-            console.log("[IMAGE LOADED]", judul, gambar);
-          }}
-          onError={(error) => {
-            console.log("[IMAGE ERROR]", judul, error.nativeEvent);
-          }}
         />
       ) : (
         <View style={styles.placeholder}>
@@ -55,7 +48,6 @@ export default function MetodeSolusiCard({
         </View>
       )}
 
-      {/* Footer kartu */}
       <View style={styles.footer}>
         <Text
           style={styles.judul}
