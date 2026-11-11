@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ScrollView, Text, View, StyleSheet } from "react-native";
-import { useRouter, useNavigation } from "expo-router";
+import { useRouter } from "expo-router";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from '@/ui/component/Header';
 import InputField from '@/ui/component/InputField';
@@ -9,11 +9,9 @@ import { AkunPetugasController } from '../../../controller/AkunPetugasController
 import { validateEmail } from '../../../utils/validators';
 
 import { toast } from "@/ui/component/Toast";
-import { bukaHalamanAuth } from '../../../utils/navigasiAuth';
 
 export default function LoginPage() {
   const router = useRouter();
-  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -78,7 +76,7 @@ export default function LoginPage() {
 
         <Text style={styles.teksBawah}>
           Belum punya akun?{" "}
-          <Text style={styles.tautan} onPress={() => bukaHalamanAuth(navigation, router, "(auth)/signup/index", "/signup")}>
+          <Text style={styles.tautan} onPress={() => router.push("/signup")}>
             Klik di sini
           </Text>
         </Text>
