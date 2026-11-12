@@ -38,7 +38,6 @@ export default function InformasiPage() {
     (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
   const [keyword, setKeyword] = useState("");
-  const [semuaKategori, setSemuaKategori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [percobaan, setPercobaan] = useState(0);
@@ -56,11 +55,10 @@ export default function InformasiPage() {
         setLoading(true);
         setError(false);
 
-        const hasil = await InformasiSampahController.getMain();
+        await InformasiSampahController.getMain();
 
         if (!masihAktif) return;
 
-        setSemuaKategori(Array.isArray(hasil) ? hasil : []);
       } catch (err) {
         console.error("Gagal memuat informasi sampah:", err);
 
@@ -87,37 +85,8 @@ export default function InformasiPage() {
   // ========================================
 
   const kategori = useMemo(() => {
-    const kataKunci = keyword.trim().toLowerCase();
-
-    if (!kataKunci) {
-      return semuaKategori;
-    }
-
-    return semuaKategori.filter((item) => {
-      const cocokNama = item.nama
-        ?.toLowerCase()
-        .includes(kataKunci);
-
-      const cocokRingkasan = item.ringkasan
-        ?.toLowerCase()
-        .includes(kataKunci);
-
-      const cocokDeskripsi = item.deskripsi
-        ?.toLowerCase()
-        .includes(kataKunci);
-
-      const cocokTipe = item.tipe?.some((tipe) =>
-        tipe.nama?.toLowerCase().includes(kataKunci)
-      );
-
-      return (
-        cocokNama ||
-        cocokRingkasan ||
-        cocokDeskripsi ||
-        cocokTipe
-      );
-    });
-  }, [semuaKategori, keyword]);
+    return InformasiSampahController.cariInformasi(keyword);
+  }, [keyword, loading, percobaan]);
 
   // ========================================
   // NAVIGASI KE DETAIL

@@ -70,43 +70,43 @@ class InformasiSampah {
   // DPPL: cariInformasi(query)
   // ==========================================
 
-  static async cariInformasi(query) {
-    const kataKunci = String(query ?? "")
-      .trim()
-      .toLowerCase();
+  // static async cariInformasi(query) {
+  //   const kataKunci = String(query ?? "")
+  //     .trim()
+  //     .toLowerCase();
 
-    // Mengambil seluruh data informasi.
-    const data = await this.getMain();
+  //   // Mengambil seluruh data informasi.
+  //   const data = await this.getMain();
 
-    // Jika query kosong, tampilkan seluruh data.
-    if (!kataKunci) {
-      return data;
-    }
+  //   // Jika query kosong, tampilkan seluruh data.
+  //   if (!kataKunci) {
+  //     return data;
+  //   }
 
-    // Mencari berdasarkan nama, ringkasan,
-    // deskripsi, dan nama tipe sampah.
-    return data.filter((item) => {
-      const cocokNama =
-        item.nama?.toLowerCase().includes(kataKunci);
+  //   // Mencari berdasarkan nama, ringkasan,
+  //   // deskripsi, dan nama tipe sampah.
+  //   return data.filter((item) => {
+  //     const cocokNama =
+  //       item.nama?.toLowerCase().includes(kataKunci);
 
-      const cocokRingkasan =
-        item.ringkasan?.toLowerCase().includes(kataKunci);
+  //     const cocokRingkasan =
+  //       item.ringkasan?.toLowerCase().includes(kataKunci);
 
-      const cocokDeskripsi =
-        item.deskripsi?.toLowerCase().includes(kataKunci);
+  //     const cocokDeskripsi =
+  //       item.deskripsi?.toLowerCase().includes(kataKunci);
 
-      const cocokTipe = item.tipe?.some((tipe) =>
-        tipe.nama?.toLowerCase().includes(kataKunci)
-      );
+  //     const cocokTipe = item.tipe?.some((tipe) =>
+  //       tipe.nama?.toLowerCase().includes(kataKunci)
+  //     );
 
-      return (
-        cocokNama ||
-        cocokRingkasan ||
-        cocokDeskripsi ||
-        cocokTipe
-      );
-    });
-  }
+  //     return (
+  //       cocokNama ||
+  //       cocokRingkasan ||
+  //       cocokDeskripsi ||
+  //       cocokTipe
+  //     );
+  //   });
+  // }
 
   // ==========================================
   // TAMBAHAN - PENCARIAN BERDASARKAN BARCODE

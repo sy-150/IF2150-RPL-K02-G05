@@ -143,7 +143,7 @@
           ]
         },
         "gunakan": {
-          "gambar": "contoh-4.png",
+          "gambar": "contoh-wadah-plastik-4.png",
           "langkah": [
             {
               "judul": "Bersihkan wadah",
@@ -161,17 +161,17 @@
           "contohHasil": [
             {
               "nama": "Wadah Perlengkapan",
-              "gambar": "contoh-4.png",
+              "gambar": "contoh-wadah-plastik-4.png",
               "deskripsi": "Gunakan wadah yang bersih dan masih kokoh untuk menyimpan perlengkapan."
             },
             {
               "nama": "Organizer Meja",
-              "gambar": "contoh-5.png",
+              "gambar": "contoh-wadah-plastik-5.png",
               "deskripsi": "Pisahkan alat tulis atau benda kecil di dalam wadah."
             },
             {
               "nama": "Tempat Komponen Kecil",
-              "gambar": "contoh-6.png",
+              "gambar": "contoh-wadah-plastik-6.png",
               "deskripsi": "Simpan komponen kecil selama wadah tidak retak atau rapuh."
             }
           ]
@@ -416,7 +416,7 @@
           ]
         },
         "gunakan": {
-          "gambar": "contoh-4.png",
+          "gambar": "contoh-stoples-1.png",
           "langkah": [
             {
               "judul": "Periksa stoples",
@@ -434,17 +434,17 @@
           "contohHasil": [
             {
               "nama": "Wadah Bumbu Kering",
-              "gambar": "contoh-4.png",
+              "gambar": "contoh-stoples-1.png",
               "deskripsi": "Gunakan stoples bersih untuk menyimpan bumbu kering."
             },
             {
               "nama": "Tempat Aksesori",
-              "gambar": "contoh-5.png",
+              "gambar": "contoh-stoples-2.png",
               "deskripsi": "Manfaatkan stoples utuh untuk menyimpan aksesori."
             },
             {
               "nama": "Wadah Alat Jahit",
-              "gambar": "contoh-6.png",
+              "gambar": "contoh-stoples-3.png",
               "deskripsi": "Simpan perlengkapan jahit dalam stoples yang bersih dan tidak retak."
             }
           ]
@@ -1646,7 +1646,7 @@
           "contohHasil": [
             {
               "nama": "Ubin Pengganti",
-              "gambar": "contoh-ubin-pengganti.png",
+              "gambar": "contoh-ubin-keramik.png",
               "deskripsi": "Ubin bekas yang utuh dapat digunakan sebagai pengganti pada area yang sesuai."
             }
           ]
