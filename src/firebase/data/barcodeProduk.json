@@ -23,22 +23,22 @@
   {
     "kodeBarcode": "2000000000046",
     "namaProduk": "Contoh Kaleng Minuman Soda 330 ml",
-    "idSampah": "aluminium",
-    "idTipe": "kaleng-minuman",
+    "idSampah": "logam",
+    "idTipe": "kaleng-aluminium",
     "sumber": "seed"
   },
   {
     "kodeBarcode": "2000000000053",
     "namaProduk": "Contoh Sendok Makan Stainless",
-    "idSampah": "stainless-steel",
-    "idTipe": "perkakas-dapur",
+    "idSampah": "logam",
+    "idTipe": "stainless-steel",
     "sumber": "seed"
   },
   {
     "kodeBarcode": "2000000000060",
     "namaProduk": "Contoh Spatula Silikon",
-    "idSampah": "silikon",
-    "idTipe": "peralatan-masak-silikon",
+    "idSampah": "lainnya",
+    "idTipe": "sampah-tidak-teridentifikasi",
     "sumber": "seed"
   }
 ]

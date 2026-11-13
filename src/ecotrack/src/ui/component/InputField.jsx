@@ -6,9 +6,10 @@
 //   value         isi kolom (disimpan di state halaman).
 //   onChangeText  dipanggil setiap teks berubah, menerima teks terbaru.
 //   placeholder   teks petunjuk, misalnya "Masukkan Email".
-//   error         (opsional) pesan error. Kalau diisi: garis merah, teks merah,
-//                 dan ikon (!) + pesan merah di bawah kolom (I26, I27).
-//                 Kosongkan ('' / null) untuk menghapus error.
+//   error         (opsional) pesan error (string) atau true. Kalau diisi string:
+//                 garis merah, teks merah, dan ikon (!) + pesan merah di bawah kolom (I26, I27).
+//                 Kalau diisi true: hanya garis merah dan teks merah tanpa pesan di bawah.
+//                 Kosongkan ('' / null / false) untuk menghapus error.
 //   sandi         true = isi kolom disembunyikan (kata sandi), dengan ikon mata di kanan
 //                 untuk menampilkan/menyembunyikan isinya.
 //   keyboardType  'default' | 'email-address' | 'numeric' | 'phone-pad'.
@@ -16,15 +17,6 @@
 //   terkunci      true = latar abu-abu + ikon gembok, tidak bisa diedit (Wilayah Tugas di I16).
 //   style         style tambahan untuk pembungkus (label + kolom + pesan).
 //   ...lainnya    prop TextInput lain diteruskan, misalnya maxLength={16} untuk NIK.
-//
-// Contoh:
-//   <InputField label="Email" placeholder="Masukkan Email" value={email}
-//     onChangeText={setEmail} keyboardType="email-address" error={errorEmail} />
-//   <InputField label="Kata Sandi" placeholder="Masukkan kata sandi" value={password}
-//     onChangeText={setPassword} sandi error="Kata sandi wajib diisi" />
-//   <InputField label="NIK" placeholder="Masukkan NIK" value={nik}
-//     onChangeText={setNik} keyboardType="numeric" maxLength={16} />
-//   <InputField label="Wilayah Tugas" value="Lebak Siliwangi" terkunci />
 
 import { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -45,6 +37,7 @@ export default function InputField({
 }) {
   const [terlihat, setTerlihat] = useState(false);
   const adaError = Boolean(error) && !terkunci;
+  const adaPesanError = adaError && typeof error === 'string';
   const warnaTeks = adaError ? COLOR.redBright : COLOR.forestEmerald;
 
   return (
@@ -71,7 +64,7 @@ export default function InputField({
           style={[styles.input, { color: terkunci ? COLOR.oceanGreen : warnaTeks }]}
           accessibilityLabel={label ?? placeholder}
           accessibilityState={{ disabled: terkunci }}
-          accessibilityHint={adaError ? error : undefined}
+          accessibilityHint={adaPesanError ? error : undefined}
           {...lainnya}
         />
         {terkunci ? <MaterialIcons name="lock" size={16} color={COLOR.oceanGreen} /> : null}
@@ -92,7 +85,7 @@ export default function InputField({
         ) : null}
       </View>
 
-      {adaError ? (
+      {adaPesanError ? (
         <View style={styles.barisError} accessibilityLiveRegion="polite">
           <MaterialIcons name="error-outline" size={14} color={COLOR.redBright} />
           <Text style={styles.pesanError}>{error}</Text>
