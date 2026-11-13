@@ -1,6 +1,5 @@
 import { AkunPetugas } from '../model/AkunPetugas';
 import { auth } from '../database/firebase';
-import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 
 export const AkunPetugasController = {
   async signUp(namalengkap, nik, email, nomortelepon, password, konfirmasi) {
@@ -71,27 +70,18 @@ export const AkunPetugasController = {
     }
   },
 
-  // DPPL Tabel 5.2.1: Ganti Kata Sandi menggunakan re-autentikasi wajib Firebase.
-  // Email untuk re-autentikasi diambil dari sesi Firebase, bukan atribut memori yang bisa kosong.
-  // "BERHASIL" | "KREDENSIAL_LAMA_SALAH" | "SANDI_LEMAH" | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
-  async changePassword(passwordLama, passwordBaru) {
-    const user = auth.currentUser;
-    if (!user?.email) return 'BELUM_LOGIN';
+  // DPPL changePassword(passwordBaru), sesuai desain I20 (hanya kata sandi baru + konfirmasi).
+  // Firebase menolak ganti kata sandi kalau login terakhir sudah lama (auth/requires-recent-login);
+  // dalam hal itu petugas diminta keluar lalu masuk lagi.
+  // "BERHASIL" | "PERLU_LOGIN_ULANG" | "SANDI_LEMAH" | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
+  async changePassword(passwordBaru) {
+    if (!auth.currentUser) return 'BELUM_LOGIN';
 
     try {
-      const credential = EmailAuthProvider.credential(user.email, passwordLama);
-      await reauthenticateWithCredential(user, credential);
-
       const berhasil = await AkunPetugas.changePassword(passwordBaru);
       return berhasil ? 'BERHASIL' : 'BELUM_LOGIN';
     } catch (error) {
-      if (
-        error.code === 'auth/wrong-password' ||
-        error.code === 'auth/invalid-credential' ||
-        error.code === 'auth/invalid-login-credentials'
-      ) {
-        return 'KREDENSIAL_LAMA_SALAH';
-      }
+      if (error.code === 'auth/requires-recent-login') return 'PERLU_LOGIN_ULANG';
       if (error.code === 'auth/weak-password') return 'SANDI_LEMAH';
       if (error.code === 'auth/too-many-requests') return 'TERLALU_SERING';
       console.warn('Ganti kata sandi gagal:', error?.code ?? error?.message);

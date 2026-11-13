@@ -2,7 +2,17 @@
 // Tanpa login, halaman ini langsung mengarahkan ke Log In.
 
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  AppState,
+  KeyboardAvoidingView,
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+} from "react-native";
 import { Redirect, useRouter } from "expo-router";
 import { MaterialIcons } from '@expo/vector-icons';
 import { TEXT, COLOR } from '@/ui/theme';
@@ -28,10 +38,11 @@ export default function ProfilPage() {
 
   // State untuk Dialog
   const [modalLogout, setModalLogout] = useState(false);
+  // Isi pesan dialog "Masuk Ulang Diperlukan"; null = dialog tertutup.
+  const [pesanLoginUlang, setPesanLoginUlang] = useState(null);
   const [modalPassword, setModalPassword] = useState(false);
 
   // State untuk Ubah Kata Sandi (I20)
-  const [passLama, setPassLama] = useState('');
   const [passBaru, setPassBaru] = useState('');
   const [passKonfirm, setPassKonfirm] = useState('');
   const [errorPass, setErrorPass] = useState({});
@@ -53,8 +64,30 @@ export default function ProfilPage() {
     }
   }
 
+  // Memperbarui profil tanpa menampilkan loading, misalnya setelah petugas kembali dari aplikasi
+  // email setelah membuka tautan verifikasi email baru. Kalau gagal, tampilan lama dibiarkan.
+  async function segarkanProfil() {
+    try {
+      const data = await AkunPetugasController.getProfil();
+      if (!data) {
+        // Sesi dibatalkan Firebase, misalnya setelah email login diganti lewat tautan verifikasi.
+        toast.gagal("Sesi berakhir. Silakan masuk lagi");
+        setStatus("belumLogin");
+        return;
+      }
+      setProfil(data);
+      setStatus("siap");
+    } catch (e) {
+      console.warn("Gagal memperbarui profil:", e?.code ?? e?.message);
+    }
+  }
+
   useEffect(() => {
     muatProfil();
+    const langganan = AppState.addEventListener("change", (keadaan) => {
+      if (keadaan === "active") segarkanProfil();
+    });
+    return () => langganan.remove();
   }, []);
 
   // PENTING: pakai profil?.xxx di dalam fungsi. React Compiler membaca nilai yang dipakai fungsi
@@ -90,14 +123,14 @@ export default function ProfilPage() {
       if (hasil === 'BERHASIL') {
         toast.berhasil("Profil berhasil diperbarui");
       } else {
-        toast.berhasil("Cek email baru untuk verifikasi. Email login berganti setelah tautan dibuka");
+        toast.berhasil("Tautan verifikasi dikirim ke email baru. Email berganti setelah tautan dibuka");
       }
     } else if (hasil === 'EMAIL_TERDAFTAR') {
       setErrorEdit({ email: "Email sudah terdaftar" });
     } else if (hasil === 'EMAIL_TIDAK_VALID') {
       setErrorEdit({ email: "Format email tidak valid" });
     } else if (hasil === 'PERLU_LOGIN_ULANG') {
-      toast.gagal("Untuk mengganti email, keluar lalu masuk lagi");
+      setPesanLoginUlang("Demi keamanan, email hanya bisa diganti tidak lama setelah masuk. Keluar lalu masuk lagi, kemudian ganti email.");
     } else if (hasil === 'TERLALU_SERING') {
       toast.gagal("Terlalu banyak percobaan. Coba lagi beberapa saat lagi.");
     } else if (hasil === 'BELUM_LOGIN') {
@@ -119,37 +152,48 @@ export default function ProfilPage() {
     }
   }
 
+  // Firebase hanya mengizinkan ganti kata sandi/email tidak lama setelah login. Kalau sudah lama,
+  // petugas keluar lalu diarahkan ke Log In untuk masuk lagi.
+  async function keluarUntukLoginUlang() {
+    try {
+      await AkunPetugasController.logout();
+      setPesanLoginUlang(null);
+      router.replace("/login");
+    } catch (e) {
+      console.warn("Logout gagal:", e?.code ?? e?.message);
+      toast.gagal("Gagal keluar akun");
+    }
+  }
+
   function tutupModalPassword() {
     setModalPassword(false);
-    setPassLama('');
     setPassBaru('');
     setPassKonfirm('');
     setErrorPass({});
   }
 
-  // Handler Ganti Kata Sandi (I20)
+  // Handler Ganti Kata Sandi (I20: kata sandi baru + konfirmasi)
   async function handleGantiPassword() {
-    const errLama = !passLama ? "Kata sandi lama wajib diisi" : null;
-    let errBaru = validatePassword(passBaru);
-    if (!errBaru && passBaru === passLama) errBaru = "Kata sandi baru harus berbeda dari yang lama";
+    const errBaru = validatePassword(passBaru);
     const errKonfirm = !passKonfirm
       ? "Konfirmasi kata sandi wajib diisi"
       : passKonfirm !== passBaru
         ? "Konfirmasi kata sandi tidak sama"
         : null;
 
-    if (errLama || errBaru || errKonfirm) {
-      setErrorPass({ lama: errLama, baru: errBaru, konfirm: errKonfirm });
+    if (errBaru || errKonfirm) {
+      setErrorPass({ baru: errBaru, konfirm: errKonfirm });
       return;
     }
 
-    const hasil = await AkunPetugasController.changePassword(passLama, passBaru);
+    const hasil = await AkunPetugasController.changePassword(passBaru);
 
     if (hasil === 'BERHASIL') {
       toast.berhasil("Kata sandi berhasil diperbarui");
       tutupModalPassword();
-    } else if (hasil === 'KREDENSIAL_LAMA_SALAH') {
-      setErrorPass({ lama: "Kata sandi lama salah" });
+    } else if (hasil === 'PERLU_LOGIN_ULANG') {
+      tutupModalPassword();
+      setPesanLoginUlang("Demi keamanan, kata sandi hanya bisa diganti tidak lama setelah masuk. Keluar lalu masuk lagi, kemudian ganti kata sandi.");
     } else if (hasil === 'SANDI_LEMAH') {
       setErrorPass({ baru: "Kata sandi terlalu lemah" });
     } else if (hasil === 'TERLALU_SERING') {
@@ -252,7 +296,14 @@ export default function ProfilPage() {
         statusBarTranslucent
         onRequestClose={tutupModalPassword} // tombol Back Android
       >
-        <View style={styles.modalOverlay}>
+        {/* Popup naik saat keyboard muncul, dan bisa di-scroll di layar kecil,
+            supaya kolom kata sandi tidak tertutup keyboard */}
+        <KeyboardAvoidingView style={styles.modalOverlay} behavior="padding">
+          <ScrollView
+            contentContainerStyle={styles.modalScroll}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
           <View style={styles.modalCard}>
             <View style={styles.modalIconBox}>
               <MaterialIcons name="lock" size={24} color={COLOR.forestEmerald} />
@@ -262,15 +313,11 @@ export default function ProfilPage() {
 
             <View style={styles.formPassword}>
               <InputField
-                label="Kata Sandi Lama" placeholder="Masukkan kata sandi lama" value={passLama} sandi
-                error={errorPass.lama} onChangeText={setPassLama}
-              />
-              <InputField
-                label="Kata Sandi Baru" placeholder="Minimal 6 karakter" value={passBaru} sandi
+                label="Kata Sandi Baru" placeholder="Masukkan kata sandi baru" value={passBaru} sandi
                 error={errorPass.baru} onChangeText={setPassBaru}
               />
               <InputField
-                label="Konfirmasi Kata Sandi Baru" placeholder="Ulangi kata sandi baru" value={passKonfirm} sandi
+                label="Konfirmasi Kata Sandi Baru" placeholder="Masukkan kata sandi baru" value={passKonfirm} sandi
                 error={errorPass.konfirm} onChangeText={setPassKonfirm}
               />
             </View>
@@ -280,8 +327,20 @@ export default function ProfilPage() {
               <Button label="SIMPAN" onPress={handleGantiPassword} style={styles.lebar} />
             </View>
           </View>
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </Modal>
+
+      {/* POP UP MASUK ULANG (sesi login sudah lama untuk ganti kata sandi/email) */}
+      <Dialog
+        terlihat={pesanLoginUlang !== null}
+        onTutup={() => setPesanLoginUlang(null)}
+        ikon="lock-clock"
+        judul="Masuk Ulang Diperlukan"
+        pesan={pesanLoginUlang ?? ""}
+        tombolUtama={{ label: "Keluar Sekarang", onPress: keluarUntukLoginUlang }}
+        tombolKedua={{ label: "Nanti", onPress: () => setPesanLoginUlang(null) }}
+      />
 
       {/* POP UP KELUAR AKUN (I19) */}
       <Dialog
@@ -383,6 +442,9 @@ const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
+  },
+  modalScroll: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,

@@ -152,6 +152,18 @@ export const AkunPetugas = {
     const user = await this.tungguSesiLogin();
     if (!user) return null;
 
+    // Ambil data akun terbaru dari Firebase Auth, misalnya email yang baru diverifikasi lewat
+    // editProfil(). Kalau sesinya sudah tidak berlaku, keluarkan supaya petugas login ulang.
+    try {
+      await user.reload();
+    } catch (error) {
+      if (['auth/user-token-expired', 'auth/user-disabled', 'auth/user-not-found'].includes(error.code)) {
+        await signOut(auth);
+        return null;
+      }
+      // Error lain (misalnya offline) dibiarkan; pembacaan Firestore di bawah yang menentukan.
+    }
+
     const dokumen = doc(db, 'akunPetugas', user.uid);
     const hasil = await getDoc(dokumen);
     if (hasil.metadata.fromCache) throw new Error('Tidak bisa terhubung ke server');
