@@ -16,8 +16,8 @@ Istilah: di Firestore, "tabel" = **koleksi**, "baris" = **dokumen**, "kolom/atri
 
 | Koleksi | Id dokumen | Isi | File data |
 | --- | --- | --- | --- |
-| `informasiSampah` | `plastik`, `kaca`, `aluminium`, `stainless-steel`, `silikon`, `keramik` | `nama`, `jenisSampah` (`anorganik`/`organik`/`residu`), `ringkasan`, `gambar`, `deskripsi`, `labelModel` (array), `daftarIdTipe` (dihitung otomatis oleh seed dari `tipe`, dipakai rules; jangan ditulis di JSON), `tipe` (array: `idTipe`, `nama`, `dibuang` {`gambar`, `langkah`}, `kreasi` {`gambar`, `langkah`, `contohHasil`} atau `null`; `langkah` = array {`judul`, `keterangan`}, `contohHasil` = array {`nama`, `gambar`}) | `informasiSampah.json` |
-| `jadwal` | `lebak-siliwangi`, `pasteur`, `sukarasa`, `tamansari`, `kopo`, `hegarmanah` | `kecamatan`, `kelurahan`, `daftarTanggal` (di JSON `"YYYY-MM-DD"`, disimpan sebagai timestamp 00:00 WIB), `diperbaruiPada` | `jadwal.json` |
+| `informasiSampah` | slug material (10 material): `plastik`, `kaca`, `logam`, `kertas-karton`, `organik`, `elektronik`, `lainnya`, `keramik-porselen`, `tekstil-kain`, `minyak-jelantah` | `nama`, `jenisSampah` (`anorganik`/`organik`/`campuran`/`limbah-cair`), `ringkasan`, `gambar`, `deskripsi`, `labelModel` (array), `daftarIdTipe` (dihitung otomatis oleh seed dari `tipe`, dipakai rules; jangan ditulis di JSON), `tipe` (array: `idTipe`, `nama`, `dibuang` {`gambar`, `langkah`}, `kreasi` dan `gunakan` {`gambar`, `langkah`, `contohHasil`} (keduanya opsional); `langkah` = array {`judul`, `keterangan`}, `contohHasil` = array {`nama`, `gambar`}) | `informasiSampah.json` |
+| `jadwal` | slug kelurahan; 151 kelurahan di 30 kecamatan Kota Bandung (1 kelurahan = 1 lokasi TPS), misalnya `lebak-siliwangi`, `pasteur` | `kecamatan`, `kelurahan`, `daftarTanggal` (di JSON `"YYYY-MM-DD"`, disimpan sebagai timestamp 00:00 WIB; data contoh Januari 2026 – Februari 2027), `diperbaruiPada` | `jadwal.json` |
 | `barcodeProduk` | kode barcode (8-14 digit) | `namaProduk` (opsional), `idSampah`, `idTipe`, `sumber` (`seed` atau `pengguna`), `diperbaruiPada`. Dipakai mode barcode Pemindai. Pengguna aplikasi (tanpa login) boleh menambah kode baru dan mengganti kode yang salah | `barcodeProduk.json` (data awal) |
 | `dataPemerintah` | NIK (16 digit) | `namaLengkap`, `wilayahTugas` (= id dokumen `jadwal`). Tiruan database pemerintah untuk verifikasi NIK saat Sign Up; nama dan wilayah tugas akun baru disalin dari sini | `dataPemerintah.json` |
 | `akunPetugas` | uid dari Firebase Authentication | `username` (nama lengkap), `nik`, `email`, `noTelepon`, `wilayahTugas` (= id dokumen `jadwal`), `dibuatPada` (tanpa kata sandi) | `akunPetugas.json` (akun uji saja) |
@@ -91,50 +91,49 @@ Cara kerja seed:
 
 1. Tambahkan satu objek ke file JSON koleksinya. Id dokumen diambil dari field id di objek itu (`idSampah`, `idJadwal`, `kodeBarcode`, `nik`, `uid`), jadi harus unik.
 2. Jalankan seed untuk koleksi itu, ke cloud dan (kalau sedang jalan) ke emulator.
-3. Commit file JSON-nya, misalnya `feat(data): add kardus category`.
+3. Commit file JSON-nya, misalnya `feat(data): add styrofoam material`.
 
 Contoh per koleksi:
 
 ```jsonc
 // informasiSampah.json: material baru. Ikuti bentuk material lain, termasuk tipe-nya.
 {
-  "idSampah": "kardus",
-  "nama": "Kardus",
+  "idSampah": "styrofoam",
+  "nama": "Styrofoam",
   "jenisSampah": "anorganik",
-  "ringkasan": "Kardus kemasan, karton, kotak sepatu",
-  "gambar": "kardus.png",
-  "deskripsi": "Kardus terbuat dari serat kertas yang mudah didaur ulang selama tetap kering dan bersih.",
-  "labelModel": ["cardboard"],
+  "ringkasan": "Wadah makanan, bantalan kemasan elektronik",
+  "gambar": "styrofoam.png",
+  "deskripsi": "Styrofoam ringan dan sulit terurai, jadi sebaiknya dipakai ulang sebelum dibuang.",
+  "labelModel": ["styrofoam"],
   "tipe": [
     {
-      "idTipe": "kardus-kemasan",
-      "nama": "Kardus Kemasan",
-      "dibuang": { "gambar": "tempat-sampah-anorganik.png", "langkah": [{ "judul": "Lepas selotip", "keterangan": "Buang selotip dan label plastik." }] },
-      "kreasi": null
+      "idTipe": "wadah-styrofoam",
+      "nama": "Wadah Styrofoam",
+      "dibuang": { "gambar": "tempat-sampah.png", "langkah": [{ "judul": "Bersihkan sisa makanan", "keterangan": "Bilas lalu keringkan sebelum dibuang." }] }
     }
   ]
 }
 
-// jadwal.json: kelurahan baru. Id = slug kelurahan, huruf kecil dan tanda hubung.
-{ "idJadwal": "dago", "kecamatan": "Coblong", "kelurahan": "Dago", "daftarTanggal": ["2026-11-03", "2026-11-06"] }
+// jadwal.json: kelurahan baru (semua kelurahan Kota Bandung sudah ada). Id = slug kelurahan, huruf kecil dan tanda hubung.
+{ "idJadwal": "cibabat", "kecamatan": "Cimahi Utara", "kelurahan": "Cibabat", "daftarTanggal": ["2026-11-03", "2026-11-06"] }
 
 // barcodeProduk.json: produk baru. idSampah dan idTipe harus ada di informasiSampah.json.
 { "kodeBarcode": "8991234567890", "namaProduk": "Botol Teh 350 ml", "idSampah": "plastik", "idTipe": "botol-plastik" }
 
 // dataPemerintah.json: petugas baru yang boleh Sign Up. wilayahTugas harus ada di jadwal.json.
-{ "nik": "9999061108910007", "namaLengkap": "Rina Wulandari", "wilayahTugas": "dago" }
+{ "nik": "9999061108910007", "namaLengkap": "Rina Wulandari", "wilayahTugas": "cibabat" }
 
 // akunPetugas.json: akun uji baru (seed juga membuat akun login-nya dan penanda nikTerdaftar).
 // NIK dan nama harus sama dengan salah satu isi dataPemerintah.json.
 { "uid": "petugas-uji-002", "email": "petugas2@ecotrack.test", "kataSandi": "Petugas123!",
-  "username": "Rina Wulandari", "nik": "9999061108910007", "noTelepon": "081200000002", "wilayahTugas": "dago" }
+  "username": "Rina Wulandari", "nik": "9999061108910007", "noTelepon": "081200000002", "wilayahTugas": "cibabat" }
 ```
 
 Perhatikan hubungan antarkoleksi:
 
 - Kelurahan baru di `jadwal.json` belum punya petugas. Tambahkan NIK dengan `wilayahTugas` kelurahan itu ke `dataPemerintah.json` supaya ada yang bisa mengeditnya.
 - Barcode baru harus menunjuk ke `idSampah` dan `idTipe` yang sudah ada.
-- Nama file `gambar` baru harus ditambahkan ke aplikasi (`assets/images/` dan peta di `ui/gambarSampah.js`), kecuali isinya link `https://`.
+- File gambar baru cukup ditaruh di `src/ecotrack/assets/images/informasi-sampah/` (boleh di subfolder) dengan **nama file yang unik** di seluruh folder itu. `utils/gambarSampah.js` memuat semua gambar di folder tersebut secara otomatis dan mencarinya berdasarkan nama file, jadi tidak perlu menulis `require` baru. Gambar baru muncul setelah aplikasi di-bundle ulang. Isi `gambar` juga boleh berupa link `https://`.
 
 Menghapus baris: hapus objeknya dari JSON **tidak** menghapus dokumennya di database, karena seed hanya menulis. Hapus juga dokumennya lewat Firebase Console (cloud) atau UI emulator di http://localhost:4000.
 
@@ -253,10 +252,12 @@ await batch.commit();
 
 Catatan:
 
+- Saat offline, `getDocs`/`getDoc` tidak selalu gagal: bisa mengembalikan isi cache (`metadata.fromCache === true`), yang mungkin kosong. Model di aplikasi menganggap itu gagal supaya halaman menampilkan pesan "Gagal memuat".
+- Saat offline, `updateDoc`/`setDoc` juga tidak gagal: tulisannya mengantre dan baru terkirim saat online. Karena itu penyimpanan jadwal (`Jadwal.simpanJadwal`) dan profil (`AkunPetugas.editProfil`) memakai `runTransaction(db, async (t) => t.update(ref, isi))`, yang langsung gagal saat offline sehingga aplikasi bisa menampilkan pesan gagal.
 - `setDoc` **menimpa seluruh dokumen**; field yang tidak ditulis ikut hilang. Untuk mengubah sebagian, pakai `updateDoc`, atau `setDoc(ref, isi, { merge: true })`.
 - `updateDoc` gagal kalau dokumennya belum ada. `setDoc` membuat dokumen baru kalau belum ada.
 - Untuk menambah satu isi ke array tanpa menimpa yang lain: `updateDoc(ref, { daftarTanggal: arrayUnion(tanggal) })`; menghapus satu isi: `arrayRemove(tanggal)`.
-- Login, daftar, dan keluar bukan lewat Firestore, tapi lewat `firebase/auth`: `signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signOut`, `updatePassword`.
+- Login, daftar, keluar, dan pengelolaan akun bukan lewat Firestore, tapi lewat `firebase/auth`: `signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signOut`, `updatePassword`, `sendPasswordResetEmail` (lupa kata sandi), dan `verifyBeforeUpdateEmail` (ganti email; email login berganti setelah tautan verifikasi dibuka, lalu email di `akunPetugas` disamakan saat login atau saat profil dibuka).
 - Pemindai kamera memanggil Cloudflare Worker dengan `fetch` biasa (HTTP POST), bukan lewat Firestore.
 
 ### Siapa boleh apa (ringkasan rules)
