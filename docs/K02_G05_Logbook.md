@@ -30,6 +30,7 @@
 * [Milestone 6](#milestone-6)
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
+* [Milestone 9](#milestone-9)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -120,7 +121,7 @@
 | 21-10-2026| Kelvin Sebastian Yen | Mengerjakan bab 3.1 dan 3.2 | 5 | Done | Kebingungan cara menggambar sekuens diagram dengan benar di awal, kelas yang belum diidentifikasi dengan tepat, dan alternatif yang banyak dengan langkah panjang menyebabkan pembuatan diagram semakin kompleks |
 | 21-10-2026| Muhammad Reffah | Mengerjakan bab 3.5 dan 3.6 | 3 | Done | - |
 
-### Milestone 7
+### Milestone 8
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 28-10-2026| Arla Salsabila | Mengerjakan bab 5.1, 5.3, 5.5, dan membuat design halaman jadwal, login, signup, dan profil di figma | 10 | Done | Terlalu banyak hal yang harus dikerjakan |
@@ -130,5 +131,13 @@
 | 28-10-2026 | Kelvin Sebastian Yen | Mengerjakan bagian 5.2, merevisi bagian 5.10 dan 5.11 agar sesuai, membenarkan parameter yang tidak sesuai, membenarkan diagram kelas agar menerima parameter yang sesuai dalam metode dan menyamakan tampilan | 5 | Done | Kesulitan menemukan hubungan, kesulitan menentukan penulisan pseudocode, terlalu banyak hal yang harus dikerjakan/direvisi |
 | 28-10-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bab 5.4, 5.7, 5.8, 5.9 | 2 | Done | - |
 
+### Milestone 9
+| 12-11-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian pemindai | 12 | Done | claude kena limit |
+| 13-11-2026 | Maharani Puan Satira | Mengerjakan bagian informasi-sampah, jadi reviewer untuk PR, dan lengkapin laporan | 30 | Baru pertama kali belajar + Banyak |
+| 13-11-2026 | Arla Salsabila | Mengerjakan bagian jadwal sampah, edit jadwal sampah, profil, menjadi reviewer untuk PR, setup struktur kode dan expo, serta setup firebase | 30 | kenapa aku if... |
+| 11-11-2026 | Kelvin Sebastian Yen | Implementasi awal fitur autentikasi (Log In & Sign Up) | 2 | Done | Ada bagian dari dppl  yang terlewat |
+| 12-11-2026 | Kelvin Sebastian Yen | Melakukan revisi pada enkripsi sandi dengan crypto-js dan mengubah alur navigasi halaman pasca melakukan sign up | 1 | Done | Tidak Ada |
+| 12-11-2026 | Kelvin Sebastian Yen | Penambahan fungsionalitas manajemen akun/profil milik petugas sesuai DPPL | 2 | Done | Lingkup pengerjaan pada DPPL cukup besar sehingga ada kemungkinan beberapa bagian terlewat/tidak sesuai |
+| 12-11-2026 | Kelvin Sebastian Yen | Mengimplementasikan antarmuka dari profil petugas dan menyambungkannya dengan kode back-end | 2 | Done | udah dong |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``

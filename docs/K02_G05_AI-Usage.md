@@ -30,6 +30,7 @@
 * [Milestone 6](#milestone-6)
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
+* [Milestone 9](#milestone-9)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 ---
@@ -82,6 +83,17 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | ChatGPT | Mengarahkan jawaban | 479377 warna hijau lainnya yang cocok sebagai pengganti ini semua | AI hanya untuk meluruskan pemahaman, jawaban akhir diperbaiki dengan asistensi dan berdiskusi di grup. |
 | Gemini | Memeriksa kelengkapan dan kesesuaian dalam pekerjaan| Apakah semua metode/kelas sudah dimasukkan ke dalam bab 5? | Jawaban gemini menjadi patokan awal untuk pemeriksaan, tetapi tidak diterima mentah-mentah melainkan diproses dan dievaluasi sebelum diubah |
 | Claude | Memeriksa metode | showSignUp nya kok ada 2?? kok ada 1 yang punya 1 parameter sendiri??? harusnya kan konsisten. | Jawaban dari AI dievaluasi secara menyeluruh dengan mendiskusikannya dengan teman. |
+
+### Milestone 9
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| Claude | membuat kerangka kode | buatkan kerangka kode dari kelas dan atribut diatas | merealisasikan kode dan melakukan pengecekan pada kerangka |
+| Claude | membuat kode untuk melakukan tes pada model roboflow | buatkan kode untuk mengetes akurasi model dengan hasil sebenarnya | melakukan pengecekan manual pada sebagian model untuk memastikan akurasi |
+| Gemini | Membuat kode untuk logika dan antarmuka perangkat lunak | tolong buatkan fitur log in/sign up sesuai dengan dppl/skpl. jika ada yang perlu diubah, beritahu terlebih dulu | Jawaban dari AI dievaluasi dan diuji secara menyeluruh bahwa dapat bekerja, sesuai skpl/dppl, dan terintegrasi dengan baik dengan komponen lain |
+| Gemini | Membuatkan kasus uji dan membandingkan output dengan ekspektasi | buatkan kasus uji untuk kode dari fitur yang baru saja dibuat, termasuk input dan expected outputnya | Jawaban dari AI diperiksa kembali dengan kode dan fungsionalitas berdasarkan DPPL|
+| Claude | Menanyakan cara setup firebase tanpa harus memberikan akses api key di github. | Hey Claude, gimana cara setup firebase sesuai dengan ketentuan ini. | Mengecek tutorial di youtube |
+| Claude | Membuat kode untuk membuat logika dan antarmuka jadwal, edit jadwal, dan profil page. | Hey Claude, tolong buatkan fitur ini. | Mengecek ulang kode dari AI dan penerapannya. |
+| ChatGPT | Meminta guide untuk memulai mengerjakan fitur informasi-sampah | ada komponen yang reuseable gak di page ini? | Bertanya ke Arla dan liat tutorial online |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
