@@ -9,7 +9,7 @@ IMPLEMENTASI PERANGKAT LUNAK
 
 ## EcoTrack
 ### <p align="center">
-<img alt="logo EcoTrack" src="./assets/diagram/logo-EcoTrack.PNG" width="25%">
+<img alt="logo EcoTrack" src="./assets/logo-EcoTrack.PNG" width="25%">
 </p>
 <p align="center">
 
@@ -30,171 +30,34 @@ Dipersiapkan oleh:
 
 ---
 
-> **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
->
-> Dokumen ini adalah **spesifikasi sekaligus template laporan singkat** Tugas 9. Bagian **Ketentuan Implementasi** (Bagian A) adalah aturan yang harus kalian ikuti, boleh dihapus dari laporan akhir. Bagian **Laporan Implementasi** (Bagian B) adalah yang **wajib kalian isi**. Gunakan nama, ID, kebutuhan, use case, dan kelas yang konsisten dengan SKPL, APL, dan DPPL.
-
----
-
-**Deadline:** Rabu, 11 November 2026, 21.50 WIB
-**Asistensi akbar:** *[Hari, DD Bulan YYYY, HH.MM WIB, lokasi/link]*
-
----
-
-# BAGIAN A: Ketentuan Implementasi
-
-## A.1 Deskripsi Tugas
-
-Pada tugas ini, kalian mengimplementasikan perangkat lunak yang telah dirancang pada tugas-tugas sebelumnya (SKPL, APL, DPPL) menjadi aplikasi yang **dapat dijalankan**. Platform bebas (web, desktop, atau mobile) selama aplikasi dapat dijalankan ulang oleh asisten mengikuti petunjuk kalian.
-
-Ketentuan umum:
-- Setiap anggota bertanggung jawab atas **minimal satu fitur atau modul** dan harus terlihat jelas di riwayat commit/PR.
-- Implementasi harus **mengacu pada DPPL**. Jika ada yang berubah (kelas, layar, basis data, dsb.), catat di Bagian B.1. Perubahan itu wajar, tetapi harus tercatat dan beralasan.
-- Implementasi **tidak harus berupa kelas** (misalnya fungsi, komponen, *route/handler*, *stored procedure*, atau skrip). Namun, setiap kelas perancangan pada DPPL **wajib dapat ditelusuri** ke implementasinya, dan penelusuran ini dicatat di Bagian B.5.
-- Seluruh use case pada SKPL **diprioritaskan** untuk diimplementasikan. Status tiap use case akan dilaporkan pada HIUPL (Tugas 10).
-- Seluruh mahasiswa **wajib** mengikuti asistensi akbar.
-
-## A.2 Platform, Bahasa, dan Teknologi
-
-Kalian **bebas** memilih bahasa, framework, library, dan basis data, dengan syarat:
-
-1. **Dapat dijalankan ulang** oleh asisten pada mesin biasa dengan mengikuti README. Versi bahasa/runtime dan seluruh dependensi harus tertulis jelas.
-2. **Dependensi dikelola lewat file standar**, misalnya `package.json` + lockfile, `requirements.txt`/`pyproject.toml`, `pom.xml`/`build.gradle`, `composer.json`, `pubspec.yaml`, dan sejenisnya. Jangan meng-commit folder hasil instalasi (`node_modules/`, `venv/`, `build/`, dll.).
-3. **Jika memakai layanan eksternal** (basis data cloud, API pihak ketiga, auth, dll.), sediakan cara menjalankan tanpa akun pribadi kalian, atau sediakan data/akun uji pada README. Basis data **sangat disarankan** dapat dijalankan lokal (SQLite, atau Docker Compose untuk PostgreSQL/MySQL/MongoDB).
-4. **Arsitektur sesuai DPPL.** Pola arsitektur yang kalian pilih di APL/DPPL (MVC, layered, client-server, dll.) harus terlihat pada struktur kode.
-
-Ketentuan tambahan per platform:
-
-| Platform | Ketentuan |
-| :--- | :--- |
-| **Web** | Berjalan lokal lewat satu-dua perintah yang terdokumentasi. Boleh juga di-*deploy*; jika ya, cantumkan URL, tetapi **tetap wajib bisa dijalankan lokal** (URL deploy bisa mati). |
-| **Desktop** | Berjalan dari source lewat perintah yang terdokumentasi. Build/installer opsional. |
-| **Mobile** | Berjalan di emulator/simulator atau perangkat. Sertakan langkah menjalankan, dan **sangat disarankan** melampirkan APK/build di Release. |
-
-## A.3 Keamanan Repository
-
-Repo fork kelompok bersifat **public**, sehingga:
-
-- **Dilarang** meng-commit password, API key, token, `.env` asli, sertifikat/private key, atau data pribadi. Hal ini dapat mengurangi nilai.
-- Sediakan `.env.example` berisi nama variabel tanpa nilai rahasia, dan masukkan `.env` ke `.gitignore`.
-- Jika sudah terlanjur ter-commit, **cabut/ganti** kredensial tersebut. Menghapus commit saja tidak cukup.
-- Data uji/seed harus berupa data fiktif.
-
-## A.4 Struktur Folder
-
-Seluruh kode ditempatkan di `src/` pada repo fork. Jangan mengubah folder milestone lama.
-
-```
-src/                              # SELURUH kode implementasi
-	README.md                     # dokumentasi utama aplikasi (lihat A.5)
-	.env.example                  # jika memakai environment variable
-	<struktur kode kalian>        # bebas, mengikuti pola arsitektur DPPL
-	tests/                        # test case (jika ada)
-docs/
-	M9/
-		KXX_GYY_Implementasi.md   # laporan ini (Bagian B)
-		KXX_GYY_Form-Asistensi.md
-```
-
-Catatan:
-- `README.md` aplikasi diletakkan di **`src/README.md`**, bukan di root repo.
-- Jika kerangka kerja kalian mewajibkan struktur tertentu (misalnya Maven `src/main/java`, Flutter `lib/`, monorepo `frontend/` dan `backend/`), letakkan semuanya **di dalam `src/`**.
-- Nama file dan folder pada `docs/M9/` mengikuti aturan penamaan milestone sebelumnya (`KXX_GYY_...`).
-
-## A.5 Isi Minimal `src/README.md`
-
-README harus cukup bagi orang yang belum pernah melihat proyek kalian untuk menjalankan aplikasi dari nol. Minimal berisi:
-
-1. **Deskripsi singkat** aplikasi.
-2. **Teknologi yang digunakan** beserta versi (bahasa, framework, basis data).
-3. **Prasyarat dan instalasi** (software yang harus ada, perintah instalasi dependensi).
-4. **Konfigurasi** (environment variable, setup basis data, migrasi/seed) dan langkah demi langkah menjalankannya.
-5. **Cara menjalankan aplikasi** (dan cara menjalankan test, jika ada).
-6. **Akun/data uji** untuk mencoba tiap peran pengguna (jika ada login).
-7. **Daftar modul/fitur yang diimplementasi** beserta pembagian anggota.
-8. **Daftar tabel/koleksi basis data** beserta atributnya (atau tautan ke skema/ERD).
-
-## A.6 Best Practices
-
-Kalian dianjurkan menerapkan praktik berikut. Bukti penerapannya dirangkum pada Bagian B.2.
-
-### 1. Branching
-Sesuai aturan umum di README repository, `main` fork kelompok dijaga agar tetap bisa menerima sync dari asisten. Pada tugas ini **sangat disarankan** memakai branch per fitur dengan format `<tipe>/<nama-fitur>` (contoh: `feat/login-page`, `fix/null-cart`), lalu digabungkan ke `main` melalui Pull Request. Skema Gitflow penuh (dengan `develop`) boleh dipakai, tetapi tidak diwajibkan.
-
-### 2. Semantic Commit
-Gunakan format `<tipe>(<scope>): <deskripsi>`, misalnya `feat(auth): tambah validasi email`.
-
-| Tipe | Kegunaan |
-| :--- | :--- |
-| `feat` | Menambahkan fitur baru |
-| `fix` | Memperbaiki bug |
-| `docs` | Mengubah dokumentasi |
-| `style` | Perubahan format/spasi, tanpa mengubah logika |
-| `refactor` | Perubahan kode yang tidak menambah fitur atau memperbaiki bug |
-| `test` | Menambah/memperbaiki pengujian |
-| `chore` | Tugas rutin (build, dependensi, konfigurasi) |
-
-### 3. Track Tasks
-Gunakan **GitHub Issues** (dan opsional GitHub Projects) untuk membagi tugas dan melacak progres.
-- Pecah fitur besar menjadi issue yang lebih kecil dan tetapkan penanggung jawabnya.
-- Hubungkan PR dengan issue (`Closes #12`) dan tutup issue ketika selesai.
-
-### 4. Pull Request dan Code Review
-- Setiap PR berisi penjelasan deskriptif tentang apa yang dikerjakan, beserta bukti (tangkapan layar/rekaman/hasil test).
-- Setiap PR di-*review* minimal **1 anggota lain**, dengan komentar konstruktif atau approval.
-
-### 5. Pengujian dan Optimasi Performa
-- Tulis pengujian untuk logika inti (unit test dan/atau pengujian alur utama). Cakupan penuh tidak diwajibkan, tetapi pengujian pada logika utama dinilai.
-- Lakukan **profiling** pada setidaknya satu fitur yang berat (query besar, proses pengolahan data, render list panjang, dsb.), lalu catat temuan dan perbaikannya. Contoh alat:
-
-| Platform | Contoh alat |
-| :--- | :--- |
-| Web (frontend) | Chrome DevTools (Performance/Network), Lighthouse |
-| Web (backend) | Profiler bawaan bahasa, `EXPLAIN` pada query basis data, logging waktu respons |
-| Python | `cProfile`, `PyInstrument` |
-| Java | VisualVM, JProfiler |
-| Mobile | Android Studio Profiler, Flutter DevTools, Xcode Instruments |
-
-### 6. Penggunaan AI
-Penggunaan AI **tetap harus dicatat** pada `docs/KXX_GYY_AI-Usage.md` sesuai ketentuan yang sudah berlaku.
-
-## A.7 Pengumpulan
-
-Pengumpulan dinilai dari **tag release**, bukan commit terakhir.
-
-1. Pastikan seluruh pekerjaan sudah di-*commit* dan di-*push* ke `main` fork kelompok.
-2. Buat release dengan tag **`v9.0`** (revisi berikutnya `v9.1`, `v9.2`, dst.) dengan target branch `main`.
-3. Yang dinilai adalah **tag terakhir yang dibuat sebelum deadline**.
-
-## A.8 Aturan Tanya Jawab
-
-Agar semua kelompok mendapat jawaban yang sama, pertanyaan dibagi menjadi dua jalur:
-
-| Jenis Pertanyaan | Jalur |
-| :--- | :--- |
-| **Ketentuan tugas**, misalnya teknologi yang diperbolehkan, struktur folder, format pengumpulan, dan penilaian | **Sheets QnA:** *[tautan sheets QnA]* |
-| **Kendala teknis kelompok sendiri**, misalnya error, setup, dan penggunaan git | Grup kelompok bersama asisten masing-masing |
-
-Ketentuan:
-1. Pertanyaan tentang ketentuan tugas **wajib** diajukan melalui Sheets QnA. Periksa terlebih dahulu apakah pertanyaan serupa sudah dijawab.
-2. Jika pertanyaan tentang ketentuan tugas tetap diajukan langsung kepada asisten kelompok, asisten **berhak menolak menjawab** dan meminta kelompok memasukkan pertanyaannya ke Sheets QnA.
-3. Jika pertanyaan di Sheets QnA **belum dijawab dalam 24 jam**, kelompok boleh menghubungi asisten kelompok masing-masing. Cantumkan pertanyaan yang sudah diajukan di sheets tersebut.
-4. Jawaban pada Sheets QnA berlaku untuk **seluruh kelompok** dan menjadi acuan jika terjadi perbedaan pemahaman.
-
----
-
 # BAGIAN B: Laporan Implementasi
 
 ## B.1 Perubahan dari DPPL
 
 Tabel B.1. Perubahan dari DPPL
-
 | No | Bagian DPPL | Rancangan Awal | Implementasi Akhir | Alasan |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | C08 – InformasiSampahController (`cariInformasi()`) | Mengambil data Firestore setiap pencarian. | Data diambil sekali melalui `getMain()`, kemudian pencarian dilakukan secara lokal. | Mengurangi request Firestore. |
-| 2 | C09 – InformasiSampahInterface | Gambar kategori menggunakan pemetaan ID kategori secara manual. | Gambar diambil berdasarkan atribut `gambar` menggunakan `gambarSampah()`. | Mempermudah pengelolaan gambar. |
-| 3 | C09 – InformasiSampahInterface | Label jenis sampah terbatas pada Anorganik dan Residu. | Mendukung Anorganik, Organik, Residu, Campuran, dan Limbah Cair. | Menyesuaikan klasifikasi data. |
-| 4 | C09 – InformasiSampahInterface | Judul metode pembuangan bersifat umum. | Judul disesuaikan dengan jenis sampah, termasuk Limbah Cair. | Memperjelas informasi pengelolaan sampah. |
+| 1 | Kelas C10 PemindaiController, Algo-PC-001 (`prosesFrame`) | PemindaiController memanggil `CVModel.proses(frame)` secara langsung. Tidak ada kelas model tersendiri untuk akses CV. | Ditambahkan `sampahModel.js` yang mengirim foto ke layanan CV (Cloudflare Worker) dan menerima hasil deteksi. | Akses ke layanan CV dipisahkan dari controller sesuai pola MVC. Controller hanya mengatur alur proses. |
+| 2 | Kelas C07 InformasiSampah dan C10 PemindaiController, Algo-PC-002 (`prosesBarcode`) | Data barcode diakses melalui `InformasiSampah.cariBarcode()` tanpa model khusus barcode. | Ditambahkan `barcodeModel.js` untuk mengakses data barcode produk (koleksi `barcodeProduk`) dan informasi jenis sampahnya. | Akses data barcode dipisahkan dari kelas InformasiSampah agar tanggung jawab tiap model lebih jelas. |
+| 3 | Kelas C10 PemindaiController, Tabel 5.10.2 (Atribut) | Atribut hanya `isMemindai` dan `hasilIdentifikasi`. | Ditambahkan atribut untuk menyimpan kondisi dan hasil fungsi, yaitu mode pemindaian, status memuat, hasil deteksi, kotak yang dipilih, hasil barcode, kode barcode yang tidak terdaftar, dan status senter. | Antarmuka perlu mengetahui kondisi dan hasil setiap proses untuk menampilkan tampilan yang sesuai. |
+| 4 | Kelas C11 PemindaiInterface | Satu kelas antarmuka untuk seluruh tampilan pemindaian. | Dipecah menjadi dua file, yaitu `KameraView.js` untuk tampilan kamera dan `FotoDeteksi.js` untuk menggambar kotak deteksi pada hasil foto. | Pembagian tanggung jawab antarkomponen lebih jelas sehingga kode lebih mudah dirawat. |
+| 5 | Kelas C01 AkunPetugas, Algo-AP-003 (`encrypt`) dan Algo-APC-003 (`signUp`) | Kata sandi dienkripsi dengan SHA-256 (`crypto-js`) sebelum disimpan ke database. | Tidak menggunakan `crypto-js`. Kata sandi dikelola oleh Firebase Authentication. | Pengelolaan autentikasi dan kredensial diserahkan kepada Firebase Authentication sehingga tidak memerlukan enkripsi manual di sisi aplikasi. |
+| 6 | Kelas C03 AkunPetugasInterface, Algo-API-009 (`showSignUp`), UC06 | Setelah Sign Up berhasil, petugas diarahkan ke halaman Log In dan harus masuk menggunakan akun yang baru dibuat. | Setelah Sign Up berhasil, petugas langsung diarahkan ke halaman utama. | Petugas tidak perlu mengulang proses Log In setelah mendaftar. |
+| 7 | Kelas C01 AkunPetugas dan C02 AkunPetugasController, UC01 (`cekEmail`, `cekPassword`, `validasiLogin`) | Log In menggunakan fungsi validasi buatan sendiri yang mencocokkan email dan kata sandi dengan data di database. | Log In menggunakan fitur autentikasi dari SDK Firebase Authentication. | Sistem memanfaatkan fitur autentikasi yang sudah tersedia dibandingkan membuat fitur sendiri yang berpotensi menimbulkan kekeliruan. |
+| 8 | Kelas C04 Jadwal, Tabel 5.4.2 (Atribut), Algo-J-001 s.d. Algo-J-005 dan `simpanJadwal` | Data diambil per atribut (`getData()`, `getDataTanggal()`, dan sebagainya). `setTanggal` menghapus lalu menulis ulang tanggal ke database dan memanggil `simpanJadwal()`. Hasil penyimpanan dicatat pada atribut `statusSimpan`. | Data diambil melalui `getSemuaJadwal()` dan `getJadwalById()`. `setTanggal` hanya mengubah daftar tanggal pada objek, sedangkan `simpanJadwal()` yang menulis ke Firestore dan melempar error jika gagal. Atribut `statusSimpan` dihapus dan `daftarTanggal` berupa list Date. | Tanggung jawab tiap operasi lebih jelas, dan kegagalan dapat ditangkap controller untuk ditampilkan kepada pengguna. |
+| 9 | Kelas C05 JadwalController, Q-JC-002 | Perubahan jadwal disimpan menggunakan `updateDoc`. | Perubahan disimpan menggunakan `runTransaction`, sekaligus memperbarui `diperbaruiPada`. Data yang terbaca dari cache (saat offline) dianggap gagal dimuat. | Saat offline, `updateDoc` tidak langsung gagal, tetapi mengantre dan terkirim belakangan, sehingga aplikasi tidak bisa langsung memberi tahu bahwa penyimpanan gagal. |
+| 10 | Kelas C05 JadwalController, Algo-JC-003 (`getJadwal`) dan Algo-JC-004 (`editJadwal`) | Jadwal dicari dari atribut `daftarJadwal` yang sudah diambil sebelumnya. | Satu dokumen jadwal dibaca langsung dari database. Tanggal baru dirapikan sebelum disimpan (tanpa duplikat, terurut, dan pukul 00:00 WIB). | Jadwal yang ditampilkan dan diedit selalu menggunakan data terbaru, cukup dengan membaca satu dokumen. |
+| 11 | Kelas C05 JadwalController (`getJadwal`) dan C06 JadwalInterface, Algo-JI-004, Algo-JI-006, Algo-JI-007 | Tombol edit ditampilkan jika `statusLogin = true`. Jika belum login, `chooseEditJadwal` menampilkan pesan bahwa edit memerlukan login. | Tombol edit hanya ditampilkan jika petugas sudah login dan wilayah tugasnya sama dengan lokasi jadwal (`bolehEdit`). Pengguna tanpa hak tidak melihat tombol edit, dan status login hanya diperiksa di halaman detail jadwal. | Petugas hanya boleh mengubah jadwal di wilayah tugasnya. Aturan ini juga ditegakkan melalui Firestore Security Rules. |
+| 12 | Kelas C05 JadwalController dan C06 JadwalInterface (penambahan) | Tampilan kalender, aturan pencarian, dan perilaku form edit tidak dirinci. | Ditambahkan fungsi bantuan kalender di controller (`susunKalender`, `toggleTanggal`, `apakahBerubah`, dan sebagainya). Kalender dibatasi pada tahun berjalan, pencarian tidak peka huruf besar/kecil, dan terdapat konfirmasi sebelum meninggalkan form edit yang belum disimpan. | Perhitungan tanggal (WIB) tetap berada di controller, dan perubahan yang belum disimpan tidak hilang tanpa sengaja. |
+| 13 | Kelas C01 AkunPetugas (Algo-AP-004, Algo-AP-007, Algo-AP-010) dan Kelas C03 AkunPetugasInterface (Algo-API-011) | Atribut `wilayahTugas` dikosongkan saat Sign Up dan diisi atau diubah melalui Edit Profil. Verifikasi pendaftaran hanya mengecek data pemerintah. | Saat Sign Up (`verifikasiPetugas`), sistem juga mengecek duplikasi NIK pada koleksi `nikTerdaftar`, lalu langsung mengisi nama resmi dan `wilayahTugas` dari data pemerintah. Kolom `wilayahTugas` dikunci di halaman Edit Profil. | Mencegah satu NIK digunakan untuk mendaftar lebih dari satu akun serta menjaga nama dan wilayah tugas tetap sesuai data resmi pemerintah. |
+| 14 | Kelas C01 AkunPetugas, Algo-AP-007 (`editProfil`) dan Q-AP-003 | Perubahan email langsung menimpa data email pada dokumen `akunPetugas` di database. | Perubahan email menggunakan `verifyBeforeUpdateEmail` dari Firebase Authentication. Email baru baru aktif dan disinkronkan ke Firestore setelah petugas membuka tautan verifikasi. | Memastikan alamat email baru valid dan benar-benar dimiliki petugas sebelum mengganti kredensial login. |
+| 15 | Kelas C01 AkunPetugas (Algo-AP-007, Algo-AP-008), Kelas C03 AkunPetugasInterface (Algo-API-011, Algo-API-014), dan Layar I-02 | Belum ada penanganan sesi kedaluwarsa saat mengganti email atau kata sandi, serta belum ada algoritma untuk tombol "Lupa kata sandi?". | Ditambahkan dialog masuk ulang (`PERLU_LOGIN_ULANG`) jika sesi login sudah terlalu lama saat mengubah email atau kata sandi, serta fitur `sendPasswordResetEmail` pada tombol "Lupa kata sandi?". | Firebase Authentication mewajibkan sesi login yang masih baru sebelum mengubah kredensial, dan fitur reset membantu petugas memulihkan akun yang lupa kata sandi. |
+| 16 | Kelas C01 AkunPetugas, Algo-AP-006 (`getProfil`) | Operasi `getProfil()` hanya mengambil data profil dari atribut lokal di memori kelas. | Operasi `getProfil()` memeriksa sesi aktif Firebase (`onAuthStateChanged`) dan membaca dokumen terbaru langsung dari Firestore. | Atribut di memori kosong saat aplikasi ditutup dan dibuka kembali, sehingga data harus dibaca dari sesi Firebase dan Firestore. |
+| 17 | Kelas C03 AkunPetugasInterface, Algo-API-002, Algo-API-003 (`inputKredensial`), Algo-API-005 (`clearInput`), dan Algo-API-007 | Jika Log In gagal, sistem menampilkan pesan notifikasi umum (`showPesan`) dan mengosongkan kolom input (`clearInput`). Perpindahan halaman Log In dan Sign Up menumpuk halaman baru. | Kesalahan kredensial ditandai garis merah pada kedua kolom dan pesan error di bawah kolom kata sandi tanpa menghapus isian, pemisahan pesan gangguan koneksi, serta pengaturan stack navigasi Log In dan Sign Up. | Memudahkan petugas memperbaiki isian tanpa mengetik ulang, membedakan gangguan jaringan dari salah kata sandi, dan mencegah tombol kembali melewati halaman berulang. |
+| 18 | Kelas C08 InformasiSampahController (`cariInformasi()`) | Mengambil data Firestore setiap pencarian. | Data diambil sekali melalui `getMain()`, kemudian pencarian dilakukan secara lokal. | Mengurangi request Firestore. |
+| 19 | Kelas C09 InformasiSampahInterface | Gambar kategori menggunakan pemetaan ID kategori secara manual. | Gambar diambil berdasarkan atribut `gambar` menggunakan `gambarSampah()`. | Mempermudah pengelolaan gambar. |
+| 20 | Kelas C09 InformasiSampahInterface | Label jenis sampah terbatas pada Anorganik dan Residu. | Mendukung Anorganik, Organik, Residu, Campuran, dan Limbah Cair. | Menyesuaikan klasifikasi data. |
+| 21 | Kelas C09 InformasiSampahInterface | Judul metode pembuangan bersifat umum. | Judul disesuaikan dengan jenis sampah, termasuk Limbah Cair. | Memperjelas informasi pengelolaan sampah. |
 
 ## B.2 Bukti Penerapan Best Practices
 
@@ -206,7 +69,7 @@ Tabel B.2. Bukti Best Practices
 | Semantic commit | [Semantic Commits](https://github.com/sy-150/IF2150-RPL-K02-G05/commits/main/) | Menggunakan konvensi **Conventional Commits** dengan tipe seperti `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, dan `ci` untuk mengategorikan perubahan kode dan dokumentasi agar riwayat commit lebih terstruktur dan mudah dipahami. |
 | Track tasks | [Issues](https://github.com/sy-150/IF2150-RPL-K02-G05/issues), [Projects](https://github.com/users/Rani-design-art/projects/3/views/1) | Jumlah issue 9 dengan pembagian: (13523038) mengerjakan [FEAT] Pemindai sampah (kamera dan barcode), (13525068) [CHORE] Setup Firebase cloud + emulator, seed, dan security rules, [FEAT] Komponen UI bersama, [FEAT] Melihat jadwal pengambilan sampah, [CHORE] Setup project Expo & struktur folder src/, dan [FEAT] Mengatur jadwal (khusus petugas),  |
 | Pull request dan review | [Pull Request & Review](https://github.com/sy-150/IF2150-RPL-K02-G05/pulls) | Rani (13525137) review bagian Arla (13525086), Arla review bagian Kelvin (13525068) |
-| Pengujian | [Source Code]() dan [Hasil Uji]() | Pengujian otomatis dilakukan terhadap fungsi Controller untuk memeriksa kesesuaian hasil pemrosesan data. Pengujian dijalankan menggunakan perintah npm test. Hasil pengujian didokumentasikan melalui laporan hasil test. |
+| Pengujian | [Source Code](https://github.com/sy-150/IF2150-RPL-K02-G05/tree/tests/src/tests) dan [Hasil Uji](https://drive.google.com/drive/folders/1K1TIDUfPYCG6huXDXTIInf4nblEk3RJk) | Pengujian otomatis dilakukan terhadap fungsi Controller untuk memeriksa kesesuaian hasil pemrosesan data. Pengujian dijalankan menggunakan perintah npm test. Hasil pengujian didokumentasikan melalui laporan hasil test. |
 
 ### B.2.1 Profiling dan Optimasi
 
@@ -232,7 +95,9 @@ Tabel B.2. Bukti Best Practices
 | --- | --- | --- |
 | 1 | informasi-sampah | data barcode masih berupa data dummy dan terbatas. |
 | 2 | auth | Halaman login dan signup untuk petugas masih menggunakan data dummy. |
-| 3 | auth | Saat ganti email/password, halaman akan otomatis logout dan harus autentikasi ulang. |
+| 3 | auth | Saat ganti email, halaman akan otomatis logout dan harus autentikasi ulang. |
+| 4 | auth | Jika mau ganti password, harus langsung setelah login. Bila lama, maka harus logout lagi. |
+| 5 | pemindai | Bila datanya belum ada, pengguna tidak dapat menambah/melaporkan data yang belum lengkap. |
 
 ### B.3.3 Hal yang perlu diketahui asisten
 
