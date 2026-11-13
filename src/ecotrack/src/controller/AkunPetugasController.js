@@ -1,8 +1,10 @@
 import { AkunPetugas } from '../model/AkunPetugas';
 import { auth } from '../database/firebase';
 
-export const AkunPetugasController = {
-  async signUp(namalengkap, nik, email, nomortelepon, password, konfirmasi) {
+// C02 AkunPetugasController: kelas dengan method static, karena cukup satu controller di aplikasi.
+// Cara memanggilnya tetap AkunPetugasController.namaMethod(...).
+class AkunPetugasController {
+  static async signUp(namalengkap, nik, email, nomortelepon, password, konfirmasi) {
     if (!password || password !== konfirmasi) return 'KONFIRMASI_SANDI_BEDA';
 
     try {
@@ -17,21 +19,21 @@ export const AkunPetugasController = {
     } catch (error) {
       return 'NETWORK_ERROR';
     }
-  },
+  }
 
-  async prosesLogin(email, password) {
+  static async prosesLogin(email, password) {
     try {
       const berhasil = await AkunPetugas.loginAuth(email, password);
       return berhasil ? 'BERHASIL' : 'KREDENSIAL_SALAH';
     } catch (error) {
       return 'NETWORK_ERROR';
     }
-  },
+  }
 
   // Lupa kata sandi. Hasil untuk email terdaftar dan tidak terdaftar sengaja disamakan ("TERKIRIM"),
   // supaya orang lain tidak bisa mengetahui email mana yang punya akun.
   // "TERKIRIM" | "EMAIL_TIDAK_VALID" | "TERLALU_SERING" | "NETWORK_ERROR"
-  async lupaKataSandi(email) {
+  static async lupaKataSandi(email) {
     try {
       await AkunPetugas.kirimResetKataSandi(email);
       return 'TERKIRIM';
@@ -41,23 +43,23 @@ export const AkunPetugasController = {
       if (error.code === 'auth/too-many-requests') return 'TERLALU_SERING';
       return 'NETWORK_ERROR';
     }
-  },
+  }
 
   // DPPL Algo-APC-004: Mengeluarkan sesi akun
-  async logout() {
+  static async logout() {
     return await AkunPetugas.logout();
-  },
+  }
 
   // Profil petugas yang sedang login, atau null kalau belum login. Error (misalnya offline) dilempar
   // ke halaman supaya bisa menampilkan pesan gagal memuat.
-  async getProfil() {
+  static async getProfil() {
     return await AkunPetugas.getProfil();
-  },
+  }
 
   // DPPL Tabel 5.2.1: Menjembatani permintaan pengeditan profil.
   // "BERHASIL" | "VERIFIKASI_EMAIL" | "EMAIL_TERDAFTAR" | "EMAIL_TIDAK_VALID" | "PERLU_LOGIN_ULANG"
   // | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
-  async editProfil(emailBaru, nomorteleponBaru) {
+  static async editProfil(emailBaru, nomorteleponBaru) {
     try {
       return await AkunPetugas.editProfil(emailBaru, nomorteleponBaru);
     } catch (error) {
@@ -68,13 +70,13 @@ export const AkunPetugasController = {
       console.warn('Edit profil gagal:', error?.code ?? error?.message);
       return 'NETWORK_ERROR';
     }
-  },
+  }
 
   // DPPL changePassword(passwordBaru), sesuai desain I20 (hanya kata sandi baru + konfirmasi).
   // Firebase menolak ganti kata sandi kalau login terakhir sudah lama (auth/requires-recent-login);
   // dalam hal itu petugas diminta keluar lalu masuk lagi.
   // "BERHASIL" | "PERLU_LOGIN_ULANG" | "SANDI_LEMAH" | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
-  async changePassword(passwordBaru) {
+  static async changePassword(passwordBaru) {
     if (!auth.currentUser) return 'BELUM_LOGIN';
 
     try {
@@ -88,4 +90,7 @@ export const AkunPetugasController = {
       return 'NETWORK_ERROR';
     }
   }
-};
+}
+
+export { AkunPetugasController };
+export default AkunPetugasController;
