@@ -97,12 +97,28 @@ export const AkunPetugas = {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
+      const emailLogin = userCredential.user.email;
 
       const docRef = doc(db, 'akunPetugas', uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         const docData = docSnap.data();
+
+        // Setelah petugas memverifikasi email baru (lihat editProfil), Firebase mengakhiri sesi
+        // sehingga petugas login lagi dengan email baru. Samakan email di Firestore saat itu juga.
+        // Kalau gagal, login tetap berhasil; getProfil() akan mencoba lagi saat profil dibuka.
+        if (emailLogin && docData.email !== emailLogin) {
+          try {
+            await runTransaction(db, async (transaksi) => {
+              transaksi.update(docRef, { email: emailLogin });
+            });
+            docData.email = emailLogin;
+          } catch (errorSinkron) {
+            console.warn('Gagal menyamakan email profil:', errorSinkron?.code ?? errorSinkron?.message);
+          }
+        }
+
         this.idPetugas = uid;
         this.username = docData.username;
         this.nik = docData.nik;
