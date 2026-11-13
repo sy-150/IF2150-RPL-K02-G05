@@ -91,13 +91,14 @@ Tabel B.2. Bukti Best Practices
 | 1 | Banyak sekali yang harus dikerjakan. |
 
 ### B.3.2 Fitur yang belum sempurna
-| Nomor | Fitur yang belum sempurna | Penjelasan |  
+| Nomor | Fitur yang belum sempurna | Penjelasan |
 | --- | --- | --- |
-| 1 | informasi-sampah | data barcode masih berupa data dummy dan terbatas. |
+| 1 | informasi-sampah | Data barcode masih berupa data dummy dan terbatas. |
 | 2 | auth | Halaman login dan signup untuk petugas masih menggunakan data dummy. |
-| 3 | auth | Saat ganti email, halaman akan otomatis logout dan harus autentikasi ulang. |
-| 4 | auth | Jika mau ganti password, harus langsung setelah login. Bila lama, maka harus logout lagi. |
-| 5 | pemindai | Bila datanya belum ada, pengguna tidak dapat menambah/melaporkan data yang belum lengkap. |
+| 3 | auth | Saat mengganti email, sistem akan otomatis melakukan logout sehingga petugas harus melakukan autentikasi ulang. |
+| 4 | auth | Penggantian password harus dilakukan segera setelah login. Jika sesi login sudah berlangsung terlalu lama, petugas harus login kembali sebelum mengganti password. |
+| 5 | pemindai | Jika data produk belum tersedia, pengguna belum dapat menambahkan atau melaporkan data barcode yang belum dikenali. |
+
 
 ### B.3.3 Hal yang perlu diketahui asisten
 
