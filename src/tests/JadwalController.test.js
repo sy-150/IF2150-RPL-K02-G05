@@ -1,30 +1,140 @@
 import JadwalController from '@/controller/JadwalController';
-import { getSemuaJadwal } from '@/model/Jadwal';
-import { cekStatusLogin } from '@/model/AkunPetugas';
+import Jadwal from '@/model/Jadwal';
+import AkunPetugas from '@/model/AkunPetugas';
 
-jest.mock('@/model/Jadwal', () => ({ getSemuaJadwal: jest.fn() }));
-jest.mock('@/model/AkunPetugas', () => ({ cekStatusLogin: jest.fn() }));
+jest.mock('@/model/Jadwal', () => ({
+  __esModule: true,
+  default: { getJadwalById: jest.fn(), getSemuaJadwal: jest.fn() },
+}));
+jest.mock('@/model/AkunPetugas', () => ({
+  __esModule: true,
+  default: { cekStatusLogin: jest.fn(), getWilayahTugas: jest.fn() },
+}));
+
+const { getJadwalById, getSemuaJadwal } = Jadwal;
+const { cekStatusLogin, getWilayahTugas } = AkunPetugas;
+
+// Dipanggil setiap jadwal.simpanJadwal(), dengan id dan tanggal yang sedang tersimpan di objeknya.
+const simpanJadwal = jest.fn();
 
 // 00:00 WIB = 17:00 UTC hari sebelumnya, sama seperti yang ditulis seed.js.
 const wib = (tanggal) => new Date(`${tanggal}T00:00:00+07:00`);
 
+// Tiruan kelas Jadwal, dengan getter dan setter yang sama.
+function buatJadwal(idJadwal, kecamatan, kelurahan, daftarTanggal) {
+  let tanggal = daftarTanggal;
+  return {
+    getIdJadwal: () => idJadwal,
+    getKecamatan: () => kecamatan,
+    getKelurahan: () => kelurahan,
+    getTanggal: () => tanggal,
+    setTanggal: (baru) => {
+      tanggal = baru;
+    },
+    simpanJadwal: () => simpanJadwal(idJadwal, tanggal),
+  };
+}
+
+const salinan = (j) => buatJadwal(j.getIdJadwal(), j.getKecamatan(), j.getKelurahan(), j.getTanggal());
+
 const DATA = [
-  { idJadwal: 'lebak-siliwangi', kecamatan: 'Coblong', kelurahan: 'Lebak Siliwangi', daftarTanggal: [wib('2026-11-02')] },
-  { idJadwal: 'pasteur', kecamatan: 'Sukajadi', kelurahan: 'Pasteur', daftarTanggal: [] },
-  { idJadwal: 'tamansari', kecamatan: 'Bandung Wetan', kelurahan: 'Tamansari', daftarTanggal: [] },
-  { idJadwal: 'dago', kecamatan: 'Coblong', kelurahan: 'Dago', daftarTanggal: [] },
+  buatJadwal('lebak-siliwangi', 'Coblong', 'Lebak Siliwangi', [wib('2026-11-02')]),
+  buatJadwal('pasteur', 'Sukajadi', 'Pasteur', []),
+  buatJadwal('tamansari', 'Bandung Wetan', 'Tamansari', []),
+  buatJadwal('dago', 'Coblong', 'Dago', []),
 ];
 
 beforeEach(async () => {
-  getSemuaJadwal.mockReset().mockResolvedValue(DATA);
-  cekStatusLogin.mockReset().mockReturnValue(false);
+  getSemuaJadwal.mockReset().mockImplementation(async () => DATA.map(salinan));
+  getJadwalById.mockReset().mockImplementation(async (id) => {
+    const jadwal = DATA.find((j) => j.getIdJadwal() === id);
+    return jadwal ? salinan(jadwal) : null;
+  });
+  simpanJadwal.mockReset().mockResolvedValue(undefined);
+  cekStatusLogin.mockReset().mockResolvedValue(false);
+  getWilayahTugas.mockReset().mockResolvedValue(null);
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
   await JadwalController.getDaftarJadwal();
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+describe('bolehEdit', () => {
+  it('true kalau petugas login di wilayah jadwal itu', async () => {
+    cekStatusLogin.mockResolvedValue(true);
+    getWilayahTugas.mockResolvedValue('lebak-siliwangi');
+    const hasil = await JadwalController.getJadwal('lebak-siliwangi');
+    expect(hasil).toMatchObject({ statusLogin: true, bolehEdit: true });
+  });
+
+  it('false untuk petugas wilayah lain', async () => {
+    cekStatusLogin.mockResolvedValue(true);
+    getWilayahTugas.mockResolvedValue('lebak-siliwangi');
+    const hasil = await JadwalController.getJadwal('pasteur');
+    expect(hasil).toMatchObject({ statusLogin: true, bolehEdit: false });
+  });
+
+  it('false kalau belum login', async () => {
+    const hasil = await JadwalController.getJadwal('lebak-siliwangi');
+    expect(hasil).toMatchObject({ statusLogin: false, bolehEdit: false });
+    expect(getWilayahTugas).not.toHaveBeenCalled();
+  });
+
+  it('detail tetap tampil kalau wilayah tugas gagal dibaca', async () => {
+    cekStatusLogin.mockResolvedValue(true);
+    getWilayahTugas.mockRejectedValue(new Error('offline'));
+    const hasil = await JadwalController.getJadwal('lebak-siliwangi');
+    expect(hasil.jadwal.getKelurahan()).toBe('Lebak Siliwangi');
+    expect(hasil.bolehEdit).toBe(false);
+  });
+});
+
+describe('editJadwal', () => {
+  it('menyimpan tanggal tanpa duplikat, terurut, pukul 00:00 WIB', async () => {
+    const tanggal = [
+      wib('2026-11-09'),
+      new Date('2026-11-02T10:30:00+07:00'), // jam bukan 00:00
+      wib('2026-11-02'), // hari yang sama
+    ];
+    await JadwalController.editJadwal('pasteur', tanggal);
+    expect(simpanJadwal).toHaveBeenCalledWith('pasteur', [wib('2026-11-02'), wib('2026-11-09')]);
+  });
+
+  it('mengembalikan jadwal yang sudah diperbarui', async () => {
+    const hasil = await JadwalController.editJadwal('pasteur', [wib('2026-11-05')]);
+    expect(hasil.getIdJadwal()).toBe('pasteur');
+    expect(hasil.getKelurahan()).toBe('Pasteur');
+    expect(hasil.getTanggal()).toEqual([wib('2026-11-05')]);
+  });
+
+  it('memperbarui cache setelah berhasil', async () => {
+    await JadwalController.editJadwal('pasteur', [wib('2026-11-05')]);
+    expect(JadwalController.cariLokasiTPS('pasteur')[0].getTanggal()).toEqual([wib('2026-11-05')]);
+  });
+
+  it('bisa menghapus semua tanggal', async () => {
+    await JadwalController.editJadwal('lebak-siliwangi', []);
+    expect(simpanJadwal).toHaveBeenCalledWith('lebak-siliwangi', []);
+  });
+
+  it('mengembalikan null dan tidak mengubah cache kalau penyimpanan gagal', async () => {
+    simpanJadwal.mockRejectedValue(new Error('permission-denied'));
+    await expect(JadwalController.editJadwal('lebak-siliwangi', [wib('2026-12-25')])).resolves.toBeNull();
+    expect(JadwalController.cariLokasiTPS('lebak')[0].getTanggal()).toEqual([wib('2026-11-02')]);
+  });
+
+  it('mengembalikan null tanpa menyimpan kalau id tidak ada', async () => {
+    await expect(JadwalController.editJadwal('tidak-ada', [])).resolves.toBeNull();
+    expect(simpanJadwal).not.toHaveBeenCalled();
+  });
 });
 
 describe('getDaftarJadwal', () => {
   it('mengurutkan per kecamatan lalu kelurahan', async () => {
     const hasil = await JadwalController.getDaftarJadwal();
-    expect(hasil.map((j) => j.idJadwal)).toEqual(['tamansari', 'dago', 'lebak-siliwangi', 'pasteur']);
+    expect(hasil.map((j) => j.getIdJadwal())).toEqual(['tamansari', 'dago', 'lebak-siliwangi', 'pasteur']);
   });
 
   it('melempar error kalau model gagal', async () => {
@@ -35,15 +145,15 @@ describe('getDaftarJadwal', () => {
 
 describe('cariLokasiTPS', () => {
   it('mencari berdasarkan kecamatan', () => {
-    expect(JadwalController.cariLokasiTPS('coblong').map((j) => j.idJadwal)).toEqual(['dago', 'lebak-siliwangi']);
+    expect(JadwalController.cariLokasiTPS('coblong').map((j) => j.getIdJadwal())).toEqual(['dago', 'lebak-siliwangi']);
   });
 
   it('mencari kelurahan tanpa peka huruf besar/kecil', () => {
-    expect(JadwalController.cariLokasiTPS('PASTEUR').map((j) => j.idJadwal)).toEqual(['pasteur']);
+    expect(JadwalController.cariLokasiTPS('PASTEUR').map((j) => j.getIdJadwal())).toEqual(['pasteur']);
   });
 
   it('mengabaikan spasi di awal dan akhir', () => {
-    expect(JadwalController.cariLokasiTPS('  dago ').map((j) => j.idJadwal)).toEqual(['dago']);
+    expect(JadwalController.cariLokasiTPS('  dago ').map((j) => j.getIdJadwal())).toEqual(['dago']);
   });
 
   it('mengembalikan list kosong kalau tidak cocok', () => {
@@ -57,9 +167,9 @@ describe('cariLokasiTPS', () => {
 
 describe('getJadwal', () => {
   it('mengembalikan jadwal dan statusLogin', async () => {
-    cekStatusLogin.mockReturnValue(true);
+    cekStatusLogin.mockResolvedValue(true);
     const hasil = await JadwalController.getJadwal('pasteur');
-    expect(hasil.jadwal.kelurahan).toBe('Pasteur');
+    expect(hasil.jadwal.getKelurahan()).toBe('Pasteur');
     expect(hasil.statusLogin).toBe(true);
   });
 
@@ -67,12 +177,18 @@ describe('getJadwal', () => {
     await expect(JadwalController.getJadwal('tidak-ada')).resolves.toBeNull();
   });
 
-  it('selalu mengambil data terbaru dari database', async () => {
+  it('selalu mengambil data terbaru, cukup satu dokumen', async () => {
     getSemuaJadwal.mockClear();
-    getSemuaJadwal.mockResolvedValue([{ ...DATA[1], daftarTanggal: [wib('2026-12-25')] }]);
+    getJadwalById.mockResolvedValue(buatJadwal('pasteur', 'Sukajadi', 'Pasteur', [wib('2026-12-25')]));
     const hasil = await JadwalController.getJadwal('pasteur');
-    expect(getSemuaJadwal).toHaveBeenCalledTimes(1);
-    expect(hasil.jadwal.daftarTanggal).toEqual([wib('2026-12-25')]);
+    expect(getJadwalById).toHaveBeenCalledWith('pasteur');
+    expect(getSemuaJadwal).not.toHaveBeenCalled();
+    expect(hasil.jadwal.getTanggal()).toEqual([wib('2026-12-25')]);
+  });
+
+  it('melempar error kalau model gagal', async () => {
+    getJadwalById.mockRejectedValue(new Error('offline'));
+    await expect(JadwalController.getJadwal('pasteur')).rejects.toThrow('offline');
   });
 });
 
@@ -120,6 +236,24 @@ describe('kalender WIB', () => {
       wib('2026-11-09'),
     ]);
     expect(awal).toHaveLength(2); // list asli tidak diubah
+  });
+
+  it('apakahBerubah false kalau harinya sama walaupun urutan dan jam beda', () => {
+    const awal = [wib('2026-11-02'), wib('2026-11-09')];
+    const baru = [new Date('2026-11-09T10:00:00+07:00'), wib('2026-11-02'), wib('2026-11-02')];
+    expect(JadwalController.apakahBerubah(awal, baru)).toBe(false);
+  });
+
+  it('apakahBerubah true kalau ada tanggal ditambah atau dihapus', () => {
+    const awal = [wib('2026-11-02'), wib('2026-11-09')];
+    expect(JadwalController.apakahBerubah(awal, [wib('2026-11-02')])).toBe(true);
+    expect(JadwalController.apakahBerubah(awal, [...awal, wib('2026-11-12')])).toBe(true);
+  });
+
+  it('apakahBerubah false kalau tanggal dipilih lalu dibatalkan lagi', () => {
+    const awal = [wib('2026-11-02')];
+    const pilih = JadwalController.toggleTanggal(awal, '2026-11-05');
+    expect(JadwalController.apakahBerubah(awal, JadwalController.toggleTanggal(pilih, '2026-11-05'))).toBe(false);
   });
 
   it('toggleTanggal menghapus tanggal yang sudah ada', () => {
