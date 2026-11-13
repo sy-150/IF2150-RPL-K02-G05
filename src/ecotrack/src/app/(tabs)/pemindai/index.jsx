@@ -1,22 +1,13 @@
-import { Text, View, StyleSheet } from "react-native";
-import { TEXT, COLOR } from '@/ui/theme';
+import { router } from "expo-router";
+import KameraView from "@/ui/pemindai/KameraView";
 
 export default function PemindaiPage() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>PEMINDAI PAGE</Text>
-    </View>
+    <KameraView
+      onTutup={() => router.back()}
+      onBukaDetail={(idSampah) =>
+        router.push({ pathname: "/informasi/[idSampah]", params: { idSampah } })
+      }
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  text: {
-    ...TEXT.titleCenter, color: COLOR.forestEmerald
-  }
-});
