@@ -10,11 +10,17 @@ import {
   View,
 } from "react-native";
 import usePemindaiController from "@/controller/PemindaiController";
-import { infoKelas } from "@/model/sampahModel";
 import { COLOR } from "@/ui/theme";
 import FotoDeteksi from "./FotoDeteksi";
 
 const HIJAU = COLOR.forestEmerald;
+
+const LABEL_JENIS = {
+  anorganik: "Anorganik",
+  organik: "Organik",
+  campuran: "Campuran",
+  "limbah-cair": "Limbah Cair",
+};
 
 const tombolBulat = {
   width: 36,
@@ -85,7 +91,6 @@ export default function KameraView({ onTutup, onBukaDetail }) {
   // Tampilan hasil: foto beku dengan kotak yang bisa diketuk
   if (hasil) {
     const dipilih = terpilih !== null ? hasil.deteksi[terpilih] : null;
-    const info = dipilih ? infoKelas(dipilih.kelas) : null;
     return (
       <View style={{ flex: 1, backgroundColor: "#000" }}>
         <FotoDeteksi
@@ -102,14 +107,43 @@ export default function KameraView({ onTutup, onBukaDetail }) {
           ) : dipilih ? (
             <>
               <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
-                {dipilih.kelas} ({dipilih.keyakinan}%)
+                {dipilih.nama}
               </Text>
-              <Text style={{ color: "#ddd", marginTop: 6 }}>
-                Kategori: {info.kategori}
-              </Text>
-              <Text style={{ color: "#ddd", marginTop: 2 }}>
-                Cara membuang: {info.cara}
-              </Text>
+              <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 10 }}>
+                {[
+                  dipilih.namaSampah,
+                  dipilih.namaTipe,
+                  LABEL_JENIS[dipilih.jenisSampah],
+                ]
+                  .filter(Boolean)
+                  .map((t, i) => (
+                    <View
+                      key={t}
+                      style={{
+                        paddingHorizontal: 10,
+                        paddingVertical: 4,
+                        borderRadius: 12,
+                        backgroundColor: i === 0 ? HIJAU : "#2a2a2a",
+                      }}
+                    >
+                      <Text style={{ color: "#fff", fontSize: 12 }}>{t}</Text>
+                    </View>
+                  ))}
+              </View>
+              <Pressable
+                onPress={() => onBukaDetail?.(dipilih.idSampah)}
+                style={{
+                  backgroundColor: HIJAU,
+                  padding: 14,
+                  borderRadius: 10,
+                  marginTop: 14,
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "#fff", fontWeight: "bold" }}>
+                  Lihat Cara Daur Ulang
+                </Text>
+              </Pressable>
             </>
           ) : (
             <Text style={{ color: "#fff", fontSize: 16 }}>
@@ -237,7 +271,7 @@ export default function KameraView({ onTutup, onBukaDetail }) {
         <View
           style={{
             position: "absolute",
-            bottom: 200,
+            bottom: modeBarcode ? 190 : 170,
             alignSelf: "center",
             paddingHorizontal: 14,
             height: 34,

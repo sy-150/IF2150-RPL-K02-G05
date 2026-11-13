@@ -9,6 +9,8 @@ function warnaKelas(kelas) {
   return WARNA[h % WARNA.length];
 }
 
+// Setiap deteksi dari Worker: { nama, idSampah, idTipe, namaSampah, namaTipe, jenisSampah,
+//   kotak: [ymin, xmin, ymax, xmax] } dengan koordinat dinormalisasi 0 sampai 1000.
 export default function FotoDeteksi({
   dataUri,
   lebar,
@@ -23,6 +25,8 @@ export default function FotoDeteksi({
   const skala = area.w && area.h ? Math.min(area.w / lebar, area.h / tinggi) : 0;
   const offsetX = (area.w - lebar * skala) / 2;
   const offsetY = (area.h - tinggi * skala) / 2;
+  const fotoW = lebar * skala;
+  const fotoH = tinggi * skala;
 
   return (
     <View
@@ -41,7 +45,8 @@ export default function FotoDeteksi({
       />
       {skala > 0 &&
         deteksi.map((d, i) => {
-          const warna = warnaKelas(d.kelas);
+          const [y0, x0, y1, x1] = d.kotak;
+          const warna = warnaKelas(d.idSampah);
           const aktif = terpilih === i;
           return (
             <Pressable
@@ -49,10 +54,10 @@ export default function FotoDeteksi({
               onPress={() => onPilih(i)}
               style={{
                 position: "absolute",
-                left: offsetX + (d.x - d.lebar / 2) * skala,
-                top: offsetY + (d.y - d.tinggi / 2) * skala,
-                width: d.lebar * skala,
-                height: d.tinggi * skala,
+                left: offsetX + (x0 / 1000) * fotoW,
+                top: offsetY + (y0 / 1000) * fotoH,
+                width: ((x1 - x0) / 1000) * fotoW,
+                height: ((y1 - y0) / 1000) * fotoH,
                 borderWidth: aktif ? 4 : 2,
                 borderColor: warna,
                 backgroundColor: aktif ? warna + "55" : "transparent",
@@ -68,7 +73,7 @@ export default function FotoDeteksi({
                 }}
               >
                 <Text style={{ color: "#fff", fontSize: 12, fontWeight: "bold" }}>
-                  {d.kelas} {d.keyakinan}%
+                  {d.nama}
                 </Text>
               </View>
             </Pressable>
