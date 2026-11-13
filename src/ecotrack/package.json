@@ -56,13 +56,6 @@
     "moduleNameMapper": {
       "^@/assets/(.*)$": "<rootDir>/assets/$1",
       "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "roots": [
-      "<rootDir>",
-      "<rootDir>/../tests"
-    ],
-    "modulePaths": [
-      "<rootDir>/node_modules"
-    ]
+    }
   }
 }
