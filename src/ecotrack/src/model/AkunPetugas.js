@@ -19,30 +19,30 @@ const KODE_KREDENSIAL_SALAH = [
   "auth/invalid-email",
 ];
 
-export function cekStatusLogin() {
-  return (auth && auth.currentUser !== null) || AkunPetugas.statusLogin;
-}
+// C01 AkunPetugas: kelas dengan atribut dan method static, karena hanya ada satu petugas yang login.
+// Diekspor dua cara supaya pemanggil lama tetap jalan:
+//   import { AkunPetugas } from '@/model/AkunPetugas';  (login, sign up, profil, AkunPetugasController)
+//   import AkunPetugas from '@/model/AkunPetugas';      (JadwalController)
+class AkunPetugas {
+  static idPetugas = '';
+  static username = '';
+  static nik = '';
+  static email = '';
+  static noTelepon = '';
+  static wilayahTugas = '';
+  static statusLogin = false;
 
-export const AkunPetugas = {
-  idPetugas: '',
-  username: '',
-  nik: '',
-  email: '',
-  noTelepon: '',
-  wilayahTugas: '',
-  statusLogin: false,
-
-  async cekDataPemerintah(nik) {
+  static async cekDataPemerintah(nik) {
     const docSnap = await getDoc(doc(db, 'dataPemerintah', nik));
     return docSnap.exists() ? { ada: true, data: docSnap.data() } : { ada: false };
-  },
+  }
 
-  async cekNikTerdaftar(nik) {
+  static async cekNikTerdaftar(nik) {
     const docSnap = await getDoc(doc(db, 'nikTerdaftar', nik));
     return docSnap.exists();
-  },
+  }
 
-  async verifikasiPetugas(nik, username) {
+  static async verifikasiPetugas(nik, username) {
     const govData = await this.cekDataPemerintah(nik);
     if (!govData.ada) return "NIK_TIDAK_TERDAFTAR";
     
@@ -57,9 +57,9 @@ export const AkunPetugas = {
     this.username = govData.data.namaLengkap;
     this.wilayahTugas = govData.data.wilayahTugas;
     return "VALID";
-  },
+  }
 
-  async createAkunPetugas(username, nik, email, noTelepon, password, wilayahTugas) {
+  static async createAkunPetugas(username, nik, email, noTelepon, password, wilayahTugas) {
     let userBaru = null;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -91,18 +91,34 @@ export const AkunPetugas = {
       if (error.code === 'auth/email-already-in-use') return "EMAIL_TERDAFTAR";
       throw error; 
     }
-  },
+  }
 
-  async loginAuth(email, password) {
+  static async loginAuth(email, password) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
+      const emailLogin = userCredential.user.email;
 
       const docRef = doc(db, 'akunPetugas', uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         const docData = docSnap.data();
+
+        // Setelah petugas memverifikasi email baru (lihat editProfil), Firebase mengakhiri sesi
+        // sehingga petugas login lagi dengan email baru. Samakan email di Firestore saat itu juga.
+        // Kalau gagal, login tetap berhasil; getProfil() akan mencoba lagi saat profil dibuka.
+        if (emailLogin && docData.email !== emailLogin) {
+          try {
+            await runTransaction(db, async (transaksi) => {
+              transaksi.update(docRef, { email: emailLogin });
+            });
+            docData.email = emailLogin;
+          } catch (errorSinkron) {
+            console.warn('Gagal menyamakan email profil:', errorSinkron?.code ?? errorSinkron?.message);
+          }
+        }
+
         this.idPetugas = uid;
         this.username = docData.username;
         this.nik = docData.nik;
@@ -119,19 +135,19 @@ export const AkunPetugas = {
       if (KODE_KREDENSIAL_SALAH.includes(error.code)) return false;
       throw error;
     }
-  },
+  }
 
   // Tambahan di luar DPPL (tombol "Lupa kata sandi?" I01/I26): mengirim email berisi tautan untuk
   // membuat kata sandi baru. Halaman pengaturan ulangnya disediakan Firebase, jadi tidak ada
   // halaman tambahan di aplikasi. Error dilempar ke controller.
-  async kirimResetKataSandi(email) {
+  static async kirimResetKataSandi(email) {
     auth.languageCode = 'id'; // isi email dalam bahasa Indonesia
     await sendPasswordResetEmail(auth, email.trim());
-  },
+  }
 
   // Menunggu Firebase selesai membaca sesi login yang tersimpan di HP, lalu mengembalikan user-nya
   // (null kalau belum login). auth.currentUser saja masih null sesaat setelah aplikasi dibuka.
-  tungguSesiLogin() {
+  static tungguSesiLogin() {
     return new Promise((selesai, gagal) => {
       const berhenti = onAuthStateChanged(
         auth,
@@ -142,13 +158,13 @@ export const AkunPetugas = {
         gagal
       );
     });
-  },
+  }
 
   // DPPL Algo-AP-006: Mengambil data profil petugas yang sedang login.
   // Dibaca dari sesi Firebase + dokumen akunPetugas/{uid}, BUKAN dari atribut memori, karena
   // atribut memori kosong lagi setiap aplikasi dibuka ulang (sesi login tetap tersimpan di HP).
   // Mengembalikan null kalau belum login. Error (misalnya offline) dilempar ke controller.
-  async getProfil() {
+  static async getProfil() {
     const user = await this.tungguSesiLogin();
     if (!user) return null;
 
@@ -194,12 +210,12 @@ export const AkunPetugas = {
       noTelepon: data.noTelepon,
       wilayahTugas: await this.getNamaWilayah(data.wilayahTugas),
     };
-  },
+  }
 
   // wilayahTugas disimpan sebagai id dokumen jadwal (misalnya "lebak-siliwangi"). Untuk ditampilkan,
   // ambil nama kelurahan dari jadwal/{id} (misalnya "Lebak Siliwangi"). Kalau gagal dibaca,
   // pakai id-nya yang dirapikan supaya profil tetap tampil.
-  async getNamaWilayah(idWilayah) {
+  static async getNamaWilayah(idWilayah) {
     if (!idWilayah) return '';
     try {
       const jadwal = await getDoc(doc(db, 'jadwal', idWilayah));
@@ -212,7 +228,7 @@ export const AkunPetugas = {
       .split('-')
       .map((kata) => kata.charAt(0).toUpperCase() + kata.slice(1))
       .join(' ');
-  },
+  }
 
   // DPPL Algo-AP-007: Memperbarui kontak profil. Wilayah tugas, nama, dan NIK tidak bisa diubah
   // (ditetapkan data pemerintah dan dijaga firestore.rules).
@@ -221,7 +237,7 @@ export const AkunPetugas = {
   //   tautan verifikasi yang dikirim ke email baru (verifyBeforeUpdateEmail). Firestore ikut
   //   disamakan oleh getProfil() setelah itu.
   // Mengembalikan "BERHASIL" | "VERIFIKASI_EMAIL" | "BELUM_LOGIN". Error dilempar ke controller.
-  async editProfil(emailBaru, noTeleponBaru) {
+  static async editProfil(emailBaru, noTeleponBaru) {
     const user = auth.currentUser;
     if (!user) return 'BELUM_LOGIN';
 
@@ -241,18 +257,18 @@ export const AkunPetugas = {
     this.noTelepon = noTelepon;
 
     return gantiEmail ? 'VERIFIKASI_EMAIL' : 'BERHASIL';
-  },
+  }
 
   // DPPL Algo-AP-008: Mengganti kata sandi lewat Firebase Authentication.
   // Petugas harus sudah di-autentikasi ulang (lihat AkunPetugasController.changePassword).
-  async changePassword(passwordBaru) {
+  static async changePassword(passwordBaru) {
     if (!auth.currentUser) return false;
     await updatePassword(auth.currentUser, passwordBaru);
     return true;
-  },
+  }
 
   // DPPL Algo-AP-009: Keluar akun dan menghapus data memori lokal
-  async logout() {
+  static async logout() {
     await signOut(auth);
     this.statusLogin = false;
     this.idPetugas = '';
@@ -262,5 +278,22 @@ export const AkunPetugas = {
     this.noTelepon = '';
     this.wilayahTugas = '';
     return true;
-  },
-};
+  }
+
+  // Dipakai JadwalController (fitur edit jadwal): menunggu sesi Firebase selesai dimuat, supaya
+  // tombol Edit Jadwal tidak hilang sesaat setelah aplikasi dibuka.
+  static async cekStatusLogin() {
+    return (await AkunPetugas.tungguSesiLogin()) !== null;
+  }
+
+  // Wilayah tugas petugas yang sedang login (= id dokumen jadwal), atau null kalau belum login.
+  static async getWilayahTugas() {
+    const user = await AkunPetugas.tungguSesiLogin();
+    if (!user) return null;
+    const profil = await getDoc(doc(db, 'akunPetugas', user.uid));
+    return profil.exists() ? profil.data().wilayahTugas ?? null : null;
+  }
+}
+
+export { AkunPetugas };
+export default AkunPetugas;

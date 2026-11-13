@@ -1,7 +1,7 @@
 // Kartu satu lokasi TPS di daftar Jadwal (I07): ikon lokasi, kelurahan, kecamatan, dan panah.
 //
 // Props:
-//   jadwal   objek jadwal, yang dipakai { kelurahan, kecamatan }.
+//   jadwal   objek Jadwal.
 //   onPress  dipanggil saat kartu ditekan.
 
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
@@ -15,8 +15,8 @@ export default function KartuLokasi({ jadwal, onPress }) {
         <Ionicons name="location-outline" size={28} color={COLOR.white} />
       </View>
       <View style={styles.teksKartu}>
-        <Text style={styles.kelurahan}>Kelurahan {jadwal.kelurahan}</Text>
-        <Text style={styles.kecamatan}>Kecamatan {jadwal.kecamatan}</Text>
+        <Text style={styles.kelurahan}>Kelurahan {jadwal.getKelurahan()}</Text>
+        <Text style={styles.kecamatan}>Kecamatan {jadwal.getKecamatan()}</Text>
       </View>
       <View style={styles.panah}>
         <MaterialIcons name="chevron-right" size={20} color={COLOR.white} />
