@@ -144,14 +144,22 @@ Aplikasi terbuka di halaman **Daur Ulang** (Informasi Sampah). Halaman lain dapa
 
 ### Menjalankan test
 
-Unit test `JadwalController` (urutan dan pencarian lokasi, detail jadwal, hak edit, penyimpanan jadwal, dan perhitungan kalender WIB) tidak butuh emulator maupun internet:
+Unit test menguji logika Controller. Model (akses Firebase) diganti tiruan (*mock*), jadi test tidak butuh emulator maupun internet:
 
 ```bash
 cd src/ecotrack
 npm test
 ```
 
-File test berada di `src/tests/`.
+File test berada di branch `tests` `src/ecotrack/src/tests/`:
+
+| File | Yang diuji |
+| --- | --- |
+| `JadwalController.test.js` | Urutan dan pencarian lokasi TPS, detail jadwal, hak edit petugas, penyimpanan jadwal, dan perhitungan kalender WIB |
+| `AkunPetugasController.test.js` | Sign Up, Log In, lupa kata sandi, Log Out, ambil dan ubah profil, serta ubah kata sandi, termasuk pesan kesalahannya |
+| `InformasiSampahController.test.js` | Pengecekan dasar bahwa Controller dapat diuji |
+
+Untuk menjalankan satu file saja, misalnya `npm test -- JadwalController`.
 
 ## 6. Akun dan data uji
 
@@ -248,13 +256,13 @@ src/
 │       ├── model/            # AkunPetugas, InformasiSampah, Jadwal (satu-satunya akses ke Firebase)
 │       ├── database/         # inisialisasi Firebase (emulator atau cloud)
 │       ├── ui/               # tema, komponen bersama, dan komponen per fitur
-│       └── utils/            # validasi input, pemetaan gambar, penjaga navigasi
-├── firebase/                 # basis data sebagai kode
-│   ├── data/*.json           # data awal semua koleksi
-│   ├── seed.js               # mengisi emulator/cloud dari data/*.json
-│   ├── firestore.rules       # security rules
-│   └── firebase.json         # konfigurasi emulator
-└── tests/                    # unit test (Jest)
+│       ├── utils/            # validasi input, pemetaan gambar, penjaga navigasi
+│       └── tests/            # unit test Controller (Jest)
+└── firebase/                 # basis data sebagai kode
+    ├── data/*.json           # data awal semua koleksi
+    ├── seed.js               # mengisi emulator/cloud dari data/*.json
+    ├── firestore.rules       # security rules
+    └── firebase.json         # konfigurasi emulator
 ```
 
 ## 10. Kendala umum
