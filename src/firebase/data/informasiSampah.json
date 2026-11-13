@@ -414,40 +414,6 @@
               "gambar": "hasil-wadah-aksesori-stoples-kaca.png"
             }
           ]
-        },
-        "gunakan": {
-          "gambar": "contoh-stoples-1.png",
-          "langkah": [
-            {
-              "judul": "Periksa stoples",
-              "keterangan": "Pastikan tidak retak atau gompal."
-            },
-            {
-              "judul": "Cuci dan keringkan",
-              "keterangan": "Pastikan stoples bersih sebelum dipakai."
-            },
-            {
-              "judul": "Gunakan sebagai penyimpanan",
-              "keterangan": "Simpan benda kering seperti kancing, alat jahit, atau aksesori."
-            }
-          ],
-          "contohHasil": [
-            {
-              "nama": "Wadah Bumbu Kering",
-              "gambar": "contoh-stoples-1.png",
-              "deskripsi": "Gunakan stoples bersih untuk menyimpan bumbu kering."
-            },
-            {
-              "nama": "Tempat Aksesori",
-              "gambar": "contoh-stoples-2.png",
-              "deskripsi": "Manfaatkan stoples utuh untuk menyimpan aksesori."
-            },
-            {
-              "nama": "Wadah Alat Jahit",
-              "gambar": "contoh-stoples-3.png",
-              "deskripsi": "Simpan perlengkapan jahit dalam stoples yang bersih dan tidak retak."
-            }
-          ]
         }
       },
       {
