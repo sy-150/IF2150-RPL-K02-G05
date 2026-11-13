@@ -1,199 +1,419 @@
-import { useState } from "react";
-import { Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
+
+import { useEffect, useState } from "react";
+
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Keyboard,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
+
 import { useRouter } from "expo-router";
-import { TEXT, COLOR } from '@/ui/theme';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { COLOR, TEXT } from "@/ui/theme";
 import Header from "@/ui/component/Header";
 import SearchBar from "@/ui/component/SearchBar";
-import Button from "@/ui/component/Button";
-import { toast } from "@/ui/component/Toast";
-import Dialog from "@/ui/component/Dialog";
 import EmptyState from "@/ui/component/EmptyState";
+import InformasiSampahController from "@/controller/InformasiSampahController";
+import { gambarSampah } from "@/utils/gambarSampah";
 
-const tunggu = (ms) => new Promise((selesai) => setTimeout(selesai, ms));
+const HORIZONTAL_PADDING = 16;
+const COLUMN_GAP = 12;
 
-// TODO (F2): DATA DUMMY untuk mencoba pencarian + EmptyState.
-// Nanti diganti data dari InformasiSampahController (koleksi informasiSampah di Firestore).
-const KATEGORI_DUMMY = [
-  { idSampah: "plastik", nama: "Plastik", ringkasan: "Botol plastik, wadah plastik, kantong plastik" },
-  { idSampah: "kaca", nama: "Kaca", ringkasan: "Botol kaca, peralatan kaca, gelas kaca" },
-  { idSampah: "aluminium", nama: "Aluminium", ringkasan: "Kaleng minuman, kaleng makanan, kabel listrik" },
-  { idSampah: "stainless-steel", nama: "Stainless Steel", ringkasan: "Peralatan dapur, konstruksi, komponen otomotif" },
-  { idSampah: "silikon", nama: "Silikon", ringkasan: "Perkakas dapur, mainan anak, komponen elektronik" },
-  { idSampah: "keramik", nama: "Keramik", ringkasan: "Piring, mangkuk, ubin, pot" },
-];
-
-// Pencarian dummy: cocokkan nama kategori atau contoh barang, tidak peka huruf besar/kecil (FR2).
-function cariKategori(keyword) {
-  const kata = keyword.trim().toLowerCase();
-  return KATEGORI_DUMMY.filter(
-    (k) => k.nama.toLowerCase().includes(kata) || k.ringkasan.toLowerCase().includes(kata)
-  );
-}
+// ==========================================
+// HALAMAN INFORMASI SAMPAH
+// ==========================================
 
 export default function InformasiPage() {
-  const [keyword, setKeyword] = useState("");
   const router = useRouter();
+  const { width } = useWindowDimensions();
 
-  // Percobaan Dialog: null = tidak ada dialog, atau "simpan" | "keluar" | "info"
-  const [dialog, setDialog] = useState(null);
-  const tutupDialog = () => setDialog(null);
+  const cardWidth =
+    (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
-  const sedangMencari = keyword.trim().length > 0;
-  const hasil = sedangMencari ? cariKategori(keyword) : [];
+  const [keyword, setKeyword] = useState("");
+  const [kategori, setKategori] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [percobaan, setPercobaan] = useState(0);
 
-  return (
-    <View style={styles.halaman}>
+  // ========================================
+  // MEMUAT SELURUH INFORMASI SAMPAH
+  // Fetch hanya ketika halaman dibuka atau retry.
+  // ========================================
+
+  useEffect(() => {
+    let masihAktif = true;
+
+    async function muatKategori() {
+      try {
+        setLoading(true);
+        setError(false);
+
+        await InformasiSampahController.getMain();
+
+        if (!masihAktif) return;
+
+        // Tampilkan sesuai kata kunci yang sedang diketik (kosong = semua material).
+        setKategori(InformasiSampahController.cariInformasi(keyword));
+      } catch (err) {
+        console.warn("Gagal memuat informasi sampah:", err?.code ?? err?.message);
+
+        if (masihAktif) {
+          setError(true);
+        }
+      } finally {
+        if (masihAktif) {
+          setLoading(false);
+        }
+      }
+    }
+
+    muatKategori();
+
+    return () => {
+      masihAktif = false;
+    };
+  }, [percobaan]);
+
+  // ========================================
+  // PENCARIAN
+  // Menyaring data yang sudah dimuat, tanpa request Firestore.
+  // ========================================
+
+  function cariKategori(teks) {
+    setKeyword(teks);
+    setKategori(InformasiSampahController.cariInformasi(teks));
+  }
+
+  // ========================================
+  // NAVIGASI KE DETAIL
+  // ========================================
+
+  function bukaDetail(idSampah) {
+    Keyboard.dismiss();
+
+    router.push({
+      pathname: "/informasi/[idSampah]",
+      params: { idSampah },
+    });
+  }
+
+  // ========================================
+  // RENDER KARTU KATEGORI
+  // ========================================
+
+  function renderKategori({ item }) {
+    return (
+      <Pressable
+        style={({ pressed }) => [
+          styles.kartu,
+          { width: cardWidth },
+          pressed && styles.kartuDitekan,
+        ]}
+        onPress={() => bukaDetail(item.idSampah)}
+        accessibilityRole="button"
+        accessibilityLabel={`Lihat informasi ${item.nama}`}
+      >
+        <Image
+          source={gambarSampah(item.gambar)}
+          style={styles.gambarKategori}
+          resizeMode="cover"
+        />
+
+        <View style={styles.infoKartu}>
+          <View style={styles.teksKartu}>
+            <Text
+              style={styles.namaKategori}
+              numberOfLines={1}
+            >
+              {item.nama}
+            </Text>
+
+            <Text
+              style={styles.ringkasan}
+              numberOfLines={3}
+            >
+              {item.ringkasan}
+            </Text>
+          </View>
+
+          <View style={styles.tombolDetail}>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={24}
+              color={COLOR.forestEmerald}
+            />
+          </View>
+        </View>
+      </Pressable>
+    );
+  }
+
+  // ========================================
+  // JUDUL KATEGORI
+  // ========================================
+
+  function renderJudulKategori() {
+    return (
+      <Text style={styles.judulBagian}>
+        Kategori Material Sampah
+      </Text>
+    );
+  }
+
+  // ========================================
+  // HEADER
+  // ========================================
+
+  function renderHeader() {
+    return (
       <Header judul="Mulai Daur Ulang" tampilProfil>
         <SearchBar
           placeholder="Cari Material Sampah"
           value={keyword}
-          onChangeText={setKeyword}
-          // TODO (F2): panggil InformasiSampahController untuk mencari kategori
-          onSubmit={(teks) => console.log("cari:", teks)}
+          onChangeText={cariKategori}
         />
       </Header>
+    );
+  }
 
-      {/* TODO (F2): ganti View ini dengan FlatList katalog kategori sampah, dan beri prop:
-            keyboardShouldPersistTaps="handled"  -> satu ketukan langsung membuka kartu
-                                                    walaupun keyboard search bar masih terbuka
-            keyboardDismissMode="on-drag"        -> keyboard tertutup saat daftar di-scroll */}
-      {sedangMencari && hasil.length === 0 ? (
-        // I04: pencarian tanpa hasil. paddingBottom memberi ruang untuk navbar.
-        <EmptyState judul="Material tidak ditemukan" style={styles.kosong} />
-      ) : sedangMencari ? (
-        // Hasil pencarian dummy (tampilan sederhana; kartu katalog sebenarnya dibuat F2)
-        <ScrollView
-          contentContainerStyle={styles.isi}
-          keyboardShouldPersistTaps="handled"
-          keyboardDismissMode="on-drag"
-        >
-          {hasil.map((k) => (
-            <Pressable key={k.idSampah} style={styles.kartu} onPress={() => router.push(`/informasi/${k.idSampah}`)}>
-              <Text style={styles.namaKategori}>{k.nama}</Text>
-              <Text style={styles.ringkasan}>{k.ringkasan}</Text>
-            </Pressable>
-          ))}
-        </ScrollView>
-      ) : (
-      <ScrollView contentContainerStyle={styles.isi} keyboardShouldPersistTaps="handled">
-        <Text style={styles.text}>INFORMASI SAMPAH PAGE</Text>
-        <Text style={styles.petunjuk}>
-          Coba cari: "plastik", "BOTOL", "kaleng" (ada hasil) atau "kertas" (tidak ditemukan)
-        </Text>
+  // ========================================
+  // LOADING
+  // ========================================
 
-        {/* Tombol sementara untuk mencoba navigasi ke tiap halaman.
-            Alamat = path file di app/ tanpa folder berkurung (tabs)/(auth) dan tanpa index.jsx.
-            Halaman [idSampah]/[idJadwal] butuh id; "contoh" di bawah hanya id percobaan. */}
-        <Button label="Detail informasi" onPress={() => router.push("/informasi/contoh")} />
-        <View style={styles.baris}>
-          <Button label="Profil" varian="outline" onPress={() => router.push("/profil")} style={styles.lebar} />
-          <Button label="Log In" onPress={() => router.push("/login")} style={styles.lebar} />
+  if (loading) {
+    return (
+      <View style={styles.halaman}>
+        {renderHeader()}
+
+        <View style={styles.status}>
+          <ActivityIndicator
+            size="large"
+            color={COLOR.forestEmerald}
+          />
+
+          <Text style={styles.teksStatus}>
+            Memuat kategori sampah...
+          </Text>
         </View>
-        <View style={styles.baris}>
-          <Button label="Sign Up" onPress={() => router.push("/signup")} style={styles.lebar} />
-          <Button label="Detail Jadwal" varian="outline" onPress={() => router.push("/jadwal/contoh")} style={styles.lebar} />
+      </View>
+    );
+  }
+
+  // ========================================
+  // ERROR
+  // ========================================
+
+  if (error) {
+    return (
+      <View style={styles.halaman}>
+        {renderHeader()}
+
+        <View style={styles.status}>
+          <MaterialCommunityIcons
+            name="alert-circle-outline"
+            size={42}
+            color={COLOR.red}
+          />
+
+          <Text style={styles.teksError}>
+            Gagal memuat informasi sampah.
+          </Text>
+
+          <Pressable
+            style={styles.tombolRetry}
+            onPress={() => setPercobaan((nilai) => nilai + 1)}
+          >
+            <Text style={styles.teksRetry}>
+              Coba Lagi
+            </Text>
+          </Pressable>
         </View>
-        <Button label="Edit jadwal" ikon="edit" onPress={() => router.push("/jadwal/contoh/edit")} />
+      </View>
+    );
+  }
 
-        {/* Tombol sementara untuk mencoba Toast */}
-        <View style={styles.baris}>
-          <Button label="Toast berhasil" onPress={() => toast.berhasil("Jadwal berhasil diperbarui")} style={styles.lebar} />
-          <Button label="Toast gagal" varian="bahaya" onPress={() => toast.gagal("Jadwal gagal diperbarui")} style={styles.lebar} />
+  // ========================================
+  // EMPTY STATE
+  // ========================================
+
+  if (kategori.length === 0) {
+    return (
+      <View style={styles.halaman}>
+        {renderHeader()}
+
+        <View style={styles.emptyWrapper}>
+          <EmptyState
+            judul="Material tidak ditemukan"
+            keterangan="Coba kata kunci lain atau periksa ejaan pencarianmu"
+            style={styles.emptyState}
+          />
         </View>
+      </View>
+    );
+  }
 
-        {/* Tombol sementara untuk mencoba Dialog */}
-        <View style={styles.baris}>
-          <Button label="Dialog Simpan" varian="outline" onPress={() => setDialog("simpan")} style={styles.lebar} />
-          <Button label="Dialog Keluar" varian="bahayaOutline" onPress={() => setDialog("keluar")} style={styles.lebar} />
-        </View>
-        <Button label="Dialog Info (I25)" varian="outline" onPress={() => setDialog("info")} />
-      </ScrollView>
-      )}
+  // ========================================
+  // RENDER HALAMAN UTAMA
+  // ========================================
 
-      {/* I12: konfirmasi simpan, dua tombol bertumpuk */}
-      <Dialog
-        terlihat={dialog === "simpan"}
-        onTutup={tutupDialog}
-        ikon="save"
-        judul="Simpan Jadwal"
-        pesan="Pastikan tanggal yang dipilih sudah benar!"
-        tombolUtama={{
-          label: "Simpan",
-          onPress: async () => {
-            await tunggu(1500); // pura-pura menyimpan
-            tutupDialog();
-            toast.berhasil("Jadwal berhasil diperbarui");
-          },
-        }}
-        tombolKedua={{ label: "Batal", onPress: tutupDialog }}
-      />
+  return (
+    <View style={styles.halaman}>
+      {renderHeader()}
 
-      {/* I19: varian bahaya (merah) */}
-      <Dialog
-        terlihat={dialog === "keluar"}
-        onTutup={tutupDialog}
-        varian="bahaya"
-        ikon="logout"
-        judul="Keluar Akun"
-        pesan="Apakah Anda yakin hendak keluar akun ini?"
-        tombolUtama={{ label: "Keluar", onPress: tutupDialog }}
-        tombolKedua={{ label: "Batal", onPress: tutupDialog }}
-      />
-
-      {/* I25: satu tombol + tombol × di kanan atas */}
-      <Dialog
-        terlihat={dialog === "info"}
-        onTutup={tutupDialog}
-        tampilTutup
-        ikon="speaker-notes-off"
-        judul="Informasi Sampah Belum Tersedia"
-        pesan="Informasi detail tentang daur ulang belum tersedia di database kami."
-        tombolUtama={{ label: "Mengerti", onPress: tutupDialog }}
+      <FlatList
+        key="kategori-grid-2"
+        data={kategori}
+        renderItem={renderKategori}
+        keyExtractor={(item) => item.idSampah}
+        numColumns={2}
+        columnWrapperStyle={styles.barisKartu}
+        ListHeaderComponent={renderJudulKategori}
+        contentContainerStyle={styles.daftar}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
       />
     </View>
   );
 }
+
+// ==========================================
+// STYLING
+// ==========================================
 
 const styles = StyleSheet.create({
   halaman: {
     flex: 1,
     backgroundColor: COLOR.secondaryWhite,
   },
-  isi: {
-    gap: 12,
-    padding: 16,
-    paddingBottom: 140, // ruang supaya tombol terakhir tidak tertutup navbar
-  },
-  baris: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  lebar: {
-    flex: 1,
-  },
-  text: {
-    ...TEXT.titleCenter, color: COLOR.forestEmerald
-  },
-  petunjuk: {
-    ...TEXT.descriptiveText,
+
+  judulBagian: {
+    ...TEXT.bodyText,
     color: COLOR.deepForestGreen,
     textAlign: "center",
+    marginTop: 18,
+    marginBottom: 20,
   },
-  kosong: {
-    paddingBottom: 140, // supaya EmptyState tetap di tengah area yang tidak tertutup navbar
+
+  daftar: {
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingBottom: 140,
   },
+
+  barisKartu: {
+    justifyContent: "space-between",
+    columnGap: COLUMN_GAP,
+    marginBottom: 18,
+  },
+
   kartu: {
-    gap: 4,
-    padding: 16,
-    borderRadius: 16,
+    height: 204,
+    flexGrow: 0,
+    flexShrink: 1,
     backgroundColor: COLOR.forestEmerald,
+    borderRadius: 16,
+    padding: 8,
+    overflow: "hidden",
   },
+
+  kartuDitekan: {
+    opacity: 0.85,
+    transform: [{ scale: 0.98 }],
+  },
+
+  gambarKategori: {
+    width: "100%",
+    height: 112,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLOR.deepForestGreen,
+  },
+
+  infoKartu: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 5,
+    paddingTop: 5,
+  },
+
+  teksKartu: {
+    flex: 1,
+    justifyContent: "center",
+    gap: 4,
+    minWidth: 0,
+  },
+
   namaKategori: {
     ...TEXT.bodyText,
     color: COLOR.white,
+    fontWeight: "600",
   },
+
   ringkasan: {
+    ...TEXT.smallText,
+    color: COLOR.secondaryWhite,
+    lineHeight: 16,
+  },
+
+  tombolDetail: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: COLOR.emeraldGreen,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+
+  status: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+
+  teksStatus: {
     ...TEXT.descriptiveText,
+    color: COLOR.deepForestGreen,
+  },
+
+  teksError: {
+    ...TEXT.bodyText,
+    color: COLOR.red,
+    textAlign: "center",
+  },
+
+  tombolRetry: {
+    backgroundColor: COLOR.forestEmerald,
+    paddingHorizontal: 24,
+    paddingVertical: 10,
+    borderRadius: 12,
+  },
+
+  teksRetry: {
+    ...TEXT.bodyText,
     color: COLOR.white,
+  },
+
+  emptyWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingBottom: 100,
+  },
+
+  emptyState: {
+    width: "100%",
   },
 });
