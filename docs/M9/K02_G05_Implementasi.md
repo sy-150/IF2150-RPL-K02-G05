@@ -7,24 +7,27 @@ IMPLEMENTASI PERANGKAT LUNAK
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
-### *[Logo Perangkat Lunak]*
+## EcoTrack
+### <p align="center">
+<img alt="logo EcoTrack" src="./assets/diagram/logo-EcoTrack.PNG" width="25%">
+</p>
+<p align="center">
 
-### Untuk: *[Nama Asisten]*
+### Untuk: Agatha Tatianingseto
 
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
+| Kelas | K2 |
+| Kelompok | 5 |
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| 13525038 | Mochammad Adhitya Nur Rohman |
+| 13525068 | Kelvin Sebastian Yen |
+| 13525086 | Arla Salsabila |
+| 13525137 | Maharani Puan Satira |
+
 ---
 
 > **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
@@ -184,14 +187,14 @@ Ketentuan:
 
 ## B.1 Perubahan dari DPPL
 
-Catat semua perbedaan antara perancangan (DPPL) dan implementasi akhir. Jika tidak ada perubahan, tuliskan "Tidak ada perubahan".
-
 Tabel B.1. Perubahan dari DPPL
 
 | No | Bagian DPPL | Rancangan Awal | Implementasi Akhir | Alasan |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | *[mis. Kelas C05, layar I-03, tabel `orders`]* | *[Yang direncanakan]* | *[Yang dibuat]* | *[Alasan perubahan]* |
-| *...* | *...* | *...* | *...* | *...* |
+| 1 | C08 – InformasiSampahController (`cariInformasi()`) | Mengambil data Firestore setiap pencarian. | Data diambil sekali melalui `getMain()`, kemudian pencarian dilakukan secara lokal. | Mengurangi request Firestore. |
+| 2 | C09 – InformasiSampahInterface | Gambar kategori menggunakan pemetaan ID kategori secara manual. | Gambar diambil berdasarkan atribut `gambar` menggunakan `gambarSampah()`. | Mempermudah pengelolaan gambar. |
+| 3 | C09 – InformasiSampahInterface | Label jenis sampah terbatas pada Anorganik dan Residu. | Mendukung Anorganik, Organik, Residu, Campuran, dan Limbah Cair. | Menyesuaikan klasifikasi data. |
+| 4 | C09 – InformasiSampahInterface | Judul metode pembuangan bersifat umum. | Judul disesuaikan dengan jenis sampah, termasuk Limbah Cair. | Memperjelas informasi pengelolaan sampah. |
 
 ## B.2 Bukti Penerapan Best Practices
 
@@ -199,29 +202,62 @@ Tabel B.2. Bukti Best Practices
 
 | Praktik | Bukti | Keterangan |
 | :--- | :--- | :--- |
-| Branching | *[Tautan ke daftar branch / graph commit]* | *[Skema yang dipakai]* |
-| Semantic commit | *[Tautan ke riwayat commit]* | *[Ringkasan]* |
-| Track tasks | *[Tautan ke Issues/Projects]* | *[Jumlah issue, pembagian]* |
-| Pull request dan review | *[Tautan ke 2-3 PR representatif]* | *[Siapa me-review siapa]* |
-| Pengujian | *[Tautan ke `src/tests/` dan hasil test]* | *[Apa yang diuji, cara menjalankan]* |
+| Branching | [Daftar Branch](https://github.com/sy-150/IF2150-RPL-K02-G05/branches) | Menggunakan Modified Gitflow Workflow, dengan `main` sebagai production branch, `develop` sebagai integration branch, serta branch `feature/*`, `fix/*`, . Perubahan digabungkan ke `develop` melalui Pull Request dan code review. |
+| Semantic commit | [Semantic Commits](https://github.com/sy-150/IF2150-RPL-K02-G05/commits/main/) | Menggunakan konvensi **Conventional Commits** dengan tipe seperti `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, dan `ci` untuk mengategorikan perubahan kode dan dokumentasi agar riwayat commit lebih terstruktur dan mudah dipahami. |
+| Track tasks | [Issues](https://github.com/sy-150/IF2150-RPL-K02-G05/issues), [Projects](https://github.com/users/Rani-design-art/projects/3/views/1) | Jumlah issue 9 dengan pembagian: (13523038) mengerjakan [FEAT] Pemindai sampah (kamera dan barcode), (13525068) [CHORE] Setup Firebase cloud + emulator, seed, dan security rules, [FEAT] Komponen UI bersama, [FEAT] Melihat jadwal pengambilan sampah, [CHORE] Setup project Expo & struktur folder src/, dan [FEAT] Mengatur jadwal (khusus petugas),  |
+| Pull request dan review | [Pull Request & Review](https://github.com/sy-150/IF2150-RPL-K02-G05/pulls) | Rani (13525137) review bagian Arla (13525086), Arla review bagian Kelvin (13525068) |
+| Pengujian | [Source Code]() dan [Hasil Uji]() | Pengujian otomatis dilakukan terhadap fungsi Controller untuk memeriksa kesesuaian hasil pemrosesan data. Pengujian dijalankan menggunakan perintah npm test. Hasil pengujian didokumentasikan melalui laporan hasil test. |
 
 ### B.2.1 Profiling dan Optimasi
 
-Pilih minimal satu fitur yang diprofil.
+## B.2.1 Profiling dan Optimasi
 
 | Informasi | Keterangan |
 | :--- | :--- |
-| Fitur / proses yang diprofil | *[Nama fitur]* |
-| Alat | *[mis. Chrome DevTools, cProfile, EXPLAIN]* |
-| Temuan (sebelum) | *[Bottleneck yang ditemukan, sertakan angka/tangkapan layar]* |
-| Perbaikan | *[Yang diubah]* |
-| Hasil (sesudah) | *[Perbandingan dengan sebelumnya]* |
-
-Jika tidak ada perbaikan yang perlu dilakukan, jelaskan hasil profiling dan alasan kenapa fitur tersebut sudah memadai.
+| **Fitur / proses yang diprofil** | Pemuatan daftar kategori dan pencarian informasi sampah. |
+| **Alat** | Android Studio Profiler untuk mengamati penggunaan CPU dan Memory, serta pengukuran waktu proses menggunakan `console.time()` dan `console.timeEnd()`. |
+| **Temuan (sebelum)** | Proses pencarian memanggil model untuk mengambil data dari Firestore setiap kali pengguna memasukkan kata kunci. Hal ini berpotensi menyebabkan pembacaan database berulang dan meningkatkan waktu respons yang bergantung pada koneksi internet. |
+| **Perbaikan** | Menerapkan caching pada fungsi `getMain()` di `InformasiSampahController`. Data kategori disimpan setelah berhasil dimuat pertama kali. Selanjutnya, pencarian dilakukan secara lokal menggunakan `filter()` berdasarkan nama, ringkasan, deskripsi, dan tipe sampah. |
+| **Hasil (sesudah)** | Pencarian berikutnya tidak lagi memerlukan pengambilan data dari Firestore karena menggunakan data yang tersimpan di cache. Dengan demikian, jumlah request Firestore untuk proses pencarian berkurang dan pencarian tidak lagi bergantung pada koneksi internet selama data sudah berhasil dimuat. |
 
 ## B.3 Kendala dan Catatan Penting
 
-Tuliskan kendala yang ditemui, fitur yang belum sempurna (*known issues*), serta hal yang perlu diketahui asisten saat menjalankan atau menilai aplikasi (misalnya akun uji khusus, urutan menjalankan, atau batasan).
+### B.3.1 Kendala yang dialami
+| Nomor | Kendala | 
+| --- | --- | 
+| 1 | Banyak sekali yang harus dikerjakan. |
+
+### B.3.2 Fitur yang belum sempurna
+| Nomor | Fitur yang belum sempurna | Penjelasan |  
+| --- | --- | --- |
+| 1 | informasi-sampah | data barcode masih berupa data dummy dan terbatas. |
+| 2 | auth | Halaman login dan signup untuk petugas masih menggunakan data dummy. |
+| 3 | auth | Saat ganti email/password, halaman akan otomatis logout dan harus autentikasi ulang. |
+
+### B.3.3 Hal yang perlu diketahui asisten
+
+Urutan Menjalankan:
+
+1. Buka folder `src/ecotrack` 
+2. Jalankan perintah `npm install` bila belum
+3. Instal Android Studio melalui situs resminya. Setelah instalasi selesai, buka Android Studio dan jalankan Android Emulator melalui Device Manager
+4. Jalankan perintah `adb devices`
+5. Jalnkan perintah `npx expo start` untuk memulai aplikasi
+6. Setelah Metro Bundler berjalan, tekan tombol `a` pada terminal untuk membuka aplikasi di Android Emulator.
+
+Skenario Pengujian Aplikasi:
+
+1. Halaman utama (informasi-sampah): Memastikan aplikasi berhasil dibuka dan navigasi utama dapat digunakan lalu membuka halaman Informasi Sampah, melihat daftar kategori, mencoba pencarian berdasarkan nama material, serta membuka halaman detail informasi sampah.
+2. Pemindai Sampah: Membuka fitur pemindai dan mencoba pemindaian barcode menggunakan data barcode yang telah disediakan.
+3. Jadwal Pengambilan Sampah: Membuka daftar jadwal, melihat detail jadwal, dan mencoba fitur pengubahan jadwal apabila tersedia.
+4. Login dan Sign Up: Mencoba halaman login dan pendaftaran menggunakan data dummy yang disediakan untuk pengujian antarmuka.
+
+Catatan dan Batasan:
+
+1. Pastikan Node.js, npm, Android Studio, dan Android SDK sudah terinstal pada perangkat.
+2. Jika file .env belum tersedia, salin .env.example menjadi .env, kemudian isi konfigurasi Firebase Client sesuai panduan yang disediakan tim.
+3. Pastikan Android Emulator sudah dijalankan melalui Android Studio sebelum menjalankan adb devices.
+4. Pastikan koneksi internet tersedia karena aplikasi membutuhkan akses ke Firebase Cloud Firestore atau gunakan hotspot pribadi.
 
 ## B.4 Kontribusi Anggota
 
@@ -229,22 +265,24 @@ Tabel B.4. Kontribusi Anggota
 
 | NIM | Nama | Modul / Fitur yang Dikerjakan | Persentase Kontribusi |
 | :--- | :--- | :--- | :--- |
-| *[NIM 1]* | *[Nama]* | *[Modul/fitur]* | *[%]* |
-| *...* | *...* | *...* | *...* |
+| 13525038 | Mochammad Adhitya Nur Rohman | Pemindai sampah (kamera dan barcode) | 25% |
+| 13525068 | Kelvin Sebastian Yen | Log In & Sign Up petugas serta Profil, ubah profil, ubah kata sandi, dan Log Out | 25% |
+| 13525086 | Arla Salsabila | Setup Firebase cloud + emulator, seed, dan security rules, Setup project Expo & struktur folder src/, Komponen UI bersama, Melihat jadwal pengambilan sampah, dan Mengatur Jadwal | 25% |
+| 13525137 | Maharani Puan Satira | Informasi sampah dan cara daur ulang | 25% |
+| 13525146 | Muhammad Reffah | - | 0% |
 
 ## B.5 Traceability Kelas Perancangan ke Implementasi
 
-Pemetaan dari **setiap kelas perancangan** pada DPPL (Tabel 4.1) ke wujud implementasinya. Bentuk implementasi bebas (kelas, fungsi, komponen, *route/handler*, *stored procedure*, skrip, dsb.), tetapi tiap kelas perancangan harus muncul pada tabel ini. Jika implementasi berupa kelas dengan nama yang sama, tetap dicantumkan.
-
-Tabel B.5. Traceability Kelas Perancangan ke Implementasi
-
 | ID Kelas | Nama Kelas Perancangan | Bentuk Implementasi | Lokasi (File dan Nama) | Keterangan |
 | :--- | :--- | :--- | :--- | :--- |
-| *[C01]* | *[Nama kelas pada DPPL]* | *[mis. Kelas / Fungsi / Komponen / Route / Tabel]* | *[mis. `src/models/user.py` - `User`]* | *[Cara atribut dan operasi kelas diwujudkan; "-" jika tidak ada penjelasan tambahan]* |
-| *[C02]* | *[Nama kelas pada DPPL]* | *[Bentuk implementasi]* | *[mis. `src/components/LoginForm.tsx` - `LoginForm`]* | *[mis. atribut menjadi *state*, operasi menjadi *handler*]* |
-| *[C03]* | *[Nama kelas pada DPPL]* | *[Bentuk implementasi]* | *[mis. `src/routes/auth.js` - `POST /login`]* | *[Keterangan]* |
-| *...* | *...* | *...* | *...* | *...* |
-
-Catatan:
-- Satu kelas perancangan boleh diwujudkan oleh beberapa file/unit, dan satu file/unit boleh mewujudkan beberapa kelas perancangan. Tuliskan semuanya.
-- Kelas perancangan yang **tidak diimplementasikan** atau **digabung/dipecah** tetap dicantumkan, dan alasannya dicatat di Bagian B.1.
+| C01 | AkunPetugas | Model | `src/ecotrack/src/model/AkunPetugas.js` | Mengelola data akun petugas serta operasi validasi dan pengelolaan akun. |
+| C02 | AkunPetugasController | Controller | `src/ecotrack/src/controller/AkunPetugasController.js` | Mengimplementasikan proses login, validasi kredensial, dan pendaftaran akun petugas. |
+| C03 | AkunPetugasInterface | Komponen / Halaman | `src/ecotrack/src/app/(auth)/login/index.jsx`, `src/ecotrack/src/app/(auth)/signup/index.jsx`, dan `src/ecotrack/src/app/profil/index.jsx` | Mewujudkan antarmuka login dan pendaftaran petugas melalui komponen React Native. |
+| C04 | Jadwal | Model | `src/ecotrack/src/model/Jadwal.js` | Mengelola data jadwal pengambilan sampah, lokasi, tanggal, dan status penyimpanan. |
+| C05 | JadwalController | Controller | `src/ecotrack/src/controller/JadwalController.js` | Mengimplementasikan pengambilan jadwal, pencarian lokasi TPS, pemeriksaan status login, dan pengubahan jadwal. |
+| C06 | JadwalInterface | Komponen / Halaman | `src/ecotrack/src/app/(tabs)/jadwal/index.jsx` dan `src/ecotrack/src/app/(tabs)/[idJadwal]/index.jsx` dan `src/ecotrack/src/app/(tabs)/[idJadwal]/edit/index.jsx` | Mewujudkan antarmuka untuk melihat dan mengatur jadwal pengambilan sampah. |
+| C07 | InformasiSampah | Model | `src/ecotrack/src/model/InformasiSampah.js` | Mengimplementasikan pengambilan seluruh informasi sampah, pengambilan detail, dan pencarian barcode melalui Firestore. |
+| C08 | InformasiSampahController | Controller | `src/ecotrack/src/controller/InformasiSampahController.js` | Mengelola pengambilan data informasi sampah, pencarian informasi, pengelolaan cache, dan pencarian barcode. |
+| C09 | InformasiSampahInterface | Komponen / Halaman | `src/ecotrack/src/app/(tabs)/informasi/index.jsx` dan `src/ecotrack/src/app/(tabs)/informasi/[idSampah]/index.jsx` | Mewujudkan halaman daftar kategori informasi sampah dan halaman detail informasi sampah. |
+| C10 | PemindaiController | Controller | `src/ecotrack/src/controller/PemindaiController.js` | Mengelola proses pemindaian, pengenalan barcode, dan pengolahan hasil pemindaian. |
+| C11 | PemindaiInterface | Komponen / Halaman | `src/ecotrack/src/app/(tabs)/pemindai/index.jsx` | Mewujudkan antarmuka pemindaian sampah menggunakan kamera dan barcode. |
