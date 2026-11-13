@@ -1,5 +1,14 @@
-import { doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, updatePassword, sendPasswordResetEmail } from 'firebase/auth';
+import { doc, getDoc, runTransaction, writeBatch } from 'firebase/firestore';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  deleteUser,
+  updatePassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  verifyBeforeUpdateEmail,
+} from 'firebase/auth';
 import { db, auth } from '../database/firebase';
 
 const KODE_KREDENSIAL_SALAH = [
@@ -120,40 +129,114 @@ export const AkunPetugas = {
     await sendPasswordResetEmail(auth, email.trim());
   },
 
-  // DPPL Algo-AP-006: Mengambil data profil petugas
-  getProfil() {
+  // Menunggu Firebase selesai membaca sesi login yang tersimpan di HP, lalu mengembalikan user-nya
+  // (null kalau belum login). auth.currentUser saja masih null sesaat setelah aplikasi dibuka.
+  tungguSesiLogin() {
+    return new Promise((selesai, gagal) => {
+      const berhenti = onAuthStateChanged(
+        auth,
+        (user) => {
+          berhenti();
+          selesai(user);
+        },
+        gagal
+      );
+    });
+  },
+
+  // DPPL Algo-AP-006: Mengambil data profil petugas yang sedang login.
+  // Dibaca dari sesi Firebase + dokumen akunPetugas/{uid}, BUKAN dari atribut memori, karena
+  // atribut memori kosong lagi setiap aplikasi dibuka ulang (sesi login tetap tersimpan di HP).
+  // Mengembalikan null kalau belum login. Error (misalnya offline) dilempar ke controller.
+  async getProfil() {
+    const user = await this.tungguSesiLogin();
+    if (!user) return null;
+
+    const dokumen = doc(db, 'akunPetugas', user.uid);
+    const hasil = await getDoc(dokumen);
+    if (hasil.metadata.fromCache) throw new Error('Tidak bisa terhubung ke server');
+    if (!hasil.exists()) return null;
+
+    const data = hasil.data();
+
+    // Setelah petugas memverifikasi email baru (lihat editProfil), email login di Auth sudah
+    // berganti tapi Firestore belum. Samakan di sini.
+    if (user.email && data.email !== user.email) {
+      await runTransaction(db, async (transaksi) => {
+        transaksi.update(dokumen, { email: user.email });
+      });
+      data.email = user.email;
+    }
+
+    this.idPetugas = user.uid;
+    this.username = data.username;
+    this.nik = data.nik;
+    this.email = data.email;
+    this.noTelepon = data.noTelepon;
+    this.wilayahTugas = data.wilayahTugas;
+    this.statusLogin = true;
+
     return {
-      username: this.username,
-      email: this.email,
-      noTelepon: this.noTelepon,
-      wilayahTugas: this.wilayahTugas
+      username: data.username,
+      email: data.email,
+      noTelepon: data.noTelepon,
+      wilayahTugas: await this.getNamaWilayah(data.wilayahTugas),
     };
   },
 
-  // DPPL Algo-AP-007: Memperbarui kontak profil (email & noTelepon) ke Firestore
-  async editProfil(emailBaru, noTeleponBaru) {
+  // wilayahTugas disimpan sebagai id dokumen jadwal (misalnya "lebak-siliwangi"). Untuk ditampilkan,
+  // ambil nama kelurahan dari jadwal/{id} (misalnya "Lebak Siliwangi"). Kalau gagal dibaca,
+  // pakai id-nya yang dirapikan supaya profil tetap tampil.
+  async getNamaWilayah(idWilayah) {
+    if (!idWilayah) return '';
     try {
-      const docRef = doc(db, 'akunPetugas', this.idPetugas);
-      await updateDoc(docRef, { email: emailBaru, noTelepon: noTeleponBaru });
-      this.email = emailBaru;
-      this.noTelepon = noTeleponBaru;
-      return true;
+      const jadwal = await getDoc(doc(db, 'jadwal', idWilayah));
+      const kelurahan = jadwal.exists() ? jadwal.data().kelurahan : null;
+      if (kelurahan) return kelurahan;
     } catch (error) {
-      throw error;
+      console.warn('Gagal membaca nama wilayah:', error?.code ?? error?.message);
     }
+    return idWilayah
+      .split('-')
+      .map((kata) => kata.charAt(0).toUpperCase() + kata.slice(1))
+      .join(' ');
   },
 
-  // DPPL Algo-AP-008: Mengganti kata sandi disesuaikan dengan standar Firebase Auth
-  async changePassword(passwordBaru) {
-    try {
-      if (auth.currentUser) {
-        await updatePassword(auth.currentUser, passwordBaru);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      throw error;
+  // DPPL Algo-AP-007: Memperbarui kontak profil. Wilayah tugas, nama, dan NIK tidak bisa diubah
+  // (ditetapkan data pemerintah dan dijaga firestore.rules).
+  // - No. telepon langsung disimpan ke Firestore.
+  // - Email login dikelola Firebase Auth, jadi email baru baru berlaku setelah petugas membuka
+  //   tautan verifikasi yang dikirim ke email baru (verifyBeforeUpdateEmail). Firestore ikut
+  //   disamakan oleh getProfil() setelah itu.
+  // Mengembalikan "BERHASIL" | "VERIFIKASI_EMAIL" | "BELUM_LOGIN". Error dilempar ke controller.
+  async editProfil(emailBaru, noTeleponBaru) {
+    const user = auth.currentUser;
+    if (!user) return 'BELUM_LOGIN';
+
+    const email = emailBaru.trim();
+    const noTelepon = noTeleponBaru.trim();
+    const gantiEmail = email !== user.email;
+
+    if (gantiEmail) {
+      auth.languageCode = 'id';
+      await verifyBeforeUpdateEmail(user, email);
     }
+
+    // Transaction (bukan updateDoc) supaya langsung gagal saat offline, tidak mengantre diam-diam.
+    await runTransaction(db, async (transaksi) => {
+      transaksi.update(doc(db, 'akunPetugas', user.uid), { noTelepon });
+    });
+    this.noTelepon = noTelepon;
+
+    return gantiEmail ? 'VERIFIKASI_EMAIL' : 'BERHASIL';
+  },
+
+  // DPPL Algo-AP-008: Mengganti kata sandi lewat Firebase Authentication.
+  // Petugas harus sudah di-autentikasi ulang (lihat AkunPetugasController.changePassword).
+  async changePassword(passwordBaru) {
+    if (!auth.currentUser) return false;
+    await updatePassword(auth.currentUser, passwordBaru);
+    return true;
   },
 
   // DPPL Algo-AP-009: Keluar akun dan menghapus data memori lokal

@@ -49,28 +49,52 @@ export const AkunPetugasController = {
     return await AkunPetugas.logout();
   },
 
-  // DPPL Tabel 5.2.1: Menjembatani permintaan pengeditan profil
+  // Profil petugas yang sedang login, atau null kalau belum login. Error (misalnya offline) dilempar
+  // ke halaman supaya bisa menampilkan pesan gagal memuat.
+  async getProfil() {
+    return await AkunPetugas.getProfil();
+  },
+
+  // DPPL Tabel 5.2.1: Menjembatani permintaan pengeditan profil.
+  // "BERHASIL" | "VERIFIKASI_EMAIL" | "EMAIL_TERDAFTAR" | "EMAIL_TIDAK_VALID" | "PERLU_LOGIN_ULANG"
+  // | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
   async editProfil(emailBaru, nomorteleponBaru) {
     try {
-      const berhasil = await AkunPetugas.editProfil(emailBaru, nomorteleponBaru);
-      return berhasil ? 'BERHASIL' : 'GAGAL';
+      return await AkunPetugas.editProfil(emailBaru, nomorteleponBaru);
     } catch (error) {
+      if (error.code === 'auth/email-already-in-use') return 'EMAIL_TERDAFTAR';
+      if (error.code === 'auth/invalid-email' || error.code === 'auth/invalid-new-email') return 'EMAIL_TIDAK_VALID';
+      if (error.code === 'auth/requires-recent-login') return 'PERLU_LOGIN_ULANG';
+      if (error.code === 'auth/too-many-requests') return 'TERLALU_SERING';
+      console.warn('Edit profil gagal:', error?.code ?? error?.message);
       return 'NETWORK_ERROR';
     }
   },
 
-  // DPPL Tabel 5.2.1: Ganti Kata Sandi menggunakan re-autentikasi wajib Firebase
+  // DPPL Tabel 5.2.1: Ganti Kata Sandi menggunakan re-autentikasi wajib Firebase.
+  // Email untuk re-autentikasi diambil dari sesi Firebase, bukan atribut memori yang bisa kosong.
+  // "BERHASIL" | "KREDENSIAL_LAMA_SALAH" | "SANDI_LEMAH" | "TERLALU_SERING" | "BELUM_LOGIN" | "NETWORK_ERROR"
   async changePassword(passwordLama, passwordBaru) {
+    const user = auth.currentUser;
+    if (!user?.email) return 'BELUM_LOGIN';
+
     try {
-      const credential = EmailAuthProvider.credential(AkunPetugas.email, passwordLama);
-      await reauthenticateWithCredential(auth.currentUser, credential);
-      
+      const credential = EmailAuthProvider.credential(user.email, passwordLama);
+      await reauthenticateWithCredential(user, credential);
+
       const berhasil = await AkunPetugas.changePassword(passwordBaru);
-      return berhasil ? 'BERHASIL' : 'GAGAL';
+      return berhasil ? 'BERHASIL' : 'BELUM_LOGIN';
     } catch (error) {
-      if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+      if (
+        error.code === 'auth/wrong-password' ||
+        error.code === 'auth/invalid-credential' ||
+        error.code === 'auth/invalid-login-credentials'
+      ) {
         return 'KREDENSIAL_LAMA_SALAH';
       }
+      if (error.code === 'auth/weak-password') return 'SANDI_LEMAH';
+      if (error.code === 'auth/too-many-requests') return 'TERLALU_SERING';
+      console.warn('Ganti kata sandi gagal:', error?.code ?? error?.message);
       return 'NETWORK_ERROR';
     }
   }
