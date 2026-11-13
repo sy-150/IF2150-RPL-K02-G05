@@ -9,7 +9,7 @@
 //                  yang baru setiap ada tanggal ditekan; halaman yang menyimpan state-nya.
 //
 // Contoh mode edit:
-//   const [tanggal, setTanggal] = useState(jadwal.daftarTanggal);
+//   const [tanggal, setTanggal] = useState(jadwal.getTanggal());
 //   <Kalender daftarTanggal={tanggal} onUbahTanggal={setTanggal} />
 
 import { useState } from 'react';

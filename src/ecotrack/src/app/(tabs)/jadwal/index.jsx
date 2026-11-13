@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, Keyboard, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useNavigation, useRouter, useScrollToTop } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TEXT, COLOR } from '@/ui/theme';
 import Header from "@/ui/component/Header";
@@ -42,7 +42,28 @@ export default function JadwalPage() {
     setDaftarJadwal(JadwalController.cariLokasiTPS(teks));
   }
 
+  // Menekan tab Kalender saat sudah berada di tab ini mengosongkan pencarian dan menampilkan
+  // semua lokasi lagi. Kalau sedang di detail/edit, stack otomatis kembali ke halaman ini dulu.
+  // Datang dari tab lain tidak mengosongkan pencarian.
+  const navigation = useNavigation();
+  useEffect(() => {
+    const tab = navigation.getParent();
+    if (!tab) return;
+    return tab.addListener("tabPress", () => {
+      if (!tab.isFocused()) return;
+      Keyboard.dismiss();
+      inputKeywordLokasiTPS("");
+    });
+  }, [navigation]);
+
+  // Sekaligus menggulir daftar kembali ke paling atas.
+  const refDaftar = useRef(null);
+  useScrollToTop(refDaftar);
+
   function chooseJadwal(idJadwal) {
+    // Kartu tetap bisa ditekan walaupun keyboard pencarian masih terbuka (keyboardShouldPersistTaps),
+    // jadi keyboard ditutup dulu supaya tidak masih terbuka saat kembali dari detail.
+    Keyboard.dismiss();
     router.push(`/jadwal/${idJadwal}`);
   }
 
@@ -68,9 +89,10 @@ export default function JadwalPage() {
         </View>
       ) : (
         <FlatList
+          ref={refDaftar}
           data={daftarJadwal}
-          keyExtractor={(jadwal) => jadwal.idJadwal}
-          renderItem={({ item }) => <KartuLokasi jadwal={item} onPress={() => chooseJadwal(item.idJadwal)} />}
+          keyExtractor={(jadwal) => jadwal.getIdJadwal()}
+          renderItem={({ item }) => <KartuLokasi jadwal={item} onPress={() => chooseJadwal(item.getIdJadwal())} />}
           ListHeaderComponent={
             daftarJadwal.length > 0 ? <Text style={styles.judulDaftar}>Lokasi TPS Kota Bandung</Text> : null
           }
