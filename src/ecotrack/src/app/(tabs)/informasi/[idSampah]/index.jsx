@@ -121,10 +121,7 @@ export default function DetailInformasiPage() {
         setData(hasil);
 
       } catch (err) {
-        console.error(
-          "Gagal mengambil detail sampah:",
-          err
-        );
+        console.warn("Gagal mengambil detail sampah:", err?.code ?? err?.message);
 
         if (masihAktif) {
           setError(true);

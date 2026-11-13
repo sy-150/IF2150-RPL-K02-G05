@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ActivityIndicator,
@@ -38,6 +38,7 @@ export default function InformasiPage() {
     (width - HORIZONTAL_PADDING * 2 - COLUMN_GAP) / 2;
 
   const [keyword, setKeyword] = useState("");
+  const [kategori, setKategori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [percobaan, setPercobaan] = useState(0);
@@ -59,8 +60,10 @@ export default function InformasiPage() {
 
         if (!masihAktif) return;
 
+        // Tampilkan sesuai kata kunci yang sedang diketik (kosong = semua material).
+        setKategori(InformasiSampahController.cariInformasi(keyword));
       } catch (err) {
-        console.error("Gagal memuat informasi sampah:", err);
+        console.warn("Gagal memuat informasi sampah:", err?.code ?? err?.message);
 
         if (masihAktif) {
           setError(true);
@@ -80,13 +83,14 @@ export default function InformasiPage() {
   }, [percobaan]);
 
   // ========================================
-  // PENCARIAN LOKAL
-  // Tidak melakukan request Firestore.
+  // PENCARIAN
+  // Menyaring data yang sudah dimuat, tanpa request Firestore.
   // ========================================
 
-  const kategori = useMemo(() => {
-    return InformasiSampahController.cariInformasi(keyword);
-  }, [keyword, loading, percobaan]);
+  function cariKategori(teks) {
+    setKeyword(teks);
+    setKategori(InformasiSampahController.cariInformasi(teks));
+  }
 
   // ========================================
   // NAVIGASI KE DETAIL
@@ -174,9 +178,7 @@ export default function InformasiPage() {
         <SearchBar
           placeholder="Cari Material Sampah"
           value={keyword}
-          onChangeText={setKeyword}
-          onClear={() => setKeyword("")}
-          onSubmit={(teks) => setKeyword(teks)}
+          onChangeText={cariKategori}
         />
       </Header>
     );
