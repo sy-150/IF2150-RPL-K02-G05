@@ -224,7 +224,7 @@ Setiap NIK hanya dapat dipakai untuk satu akun. Di emulator, semua NIK kembali b
 | UC04 | Melihat jadwal pengambilan sampah | `(tabs)/jadwal`, `(tabs)/jadwal/[idJadwal]` | Selesai | Arla Salsabila |
 | UC03 | Mengatur jadwal (khusus petugas) | `(tabs)/jadwal/[idJadwal]/edit` | Selesai | Arla Salsabila |
 | UC05 | Mengakses informasi sampah | `(tabs)/informasi`, `(tabs)/informasi/[idSampah]` | Selesai | Maharani Puan Satira |
-| UC02 | Memindai sampah | `(tabs)/pemindai` | Belum selesai | Mochammad Adhitya Nur Rohman |
+| UC02 | Memindai sampah | `(tabs)/pemindai` | Selesai | Mochammad Adhitya Nur Rohman |
 
 ## 8. Koleksi basis data
 
