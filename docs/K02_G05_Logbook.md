@@ -31,6 +31,7 @@
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
 * [Milestone 9](#milestone-9)
+* [Milestone 10](#milestone-10)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -132,6 +133,8 @@
 | 28-10-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bab 5.4, 5.7, 5.8, 5.9 | 2 | Done | - |
 
 ### Milestone 9
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
 | 12-11-2026 | Mochammad Adhitya Nur Rohman | Mengerjakan bagian pemindai | 12 | Done | claude kena limit |
 | 13-11-2026 | Maharani Puan Satira | Mengerjakan bagian informasi-sampah, jadi reviewer untuk PR, dan lengkapin laporan | 30 | Baru pertama kali belajar + Banyak |
 | 13-11-2026 | Arla Salsabila | Mengerjakan bagian jadwal sampah, edit jadwal sampah, profil, menjadi reviewer untuk PR, setup struktur kode dan expo, serta setup firebase | 30 | kenapa aku if... |
@@ -139,5 +142,11 @@
 | 12-11-2026 | Kelvin Sebastian Yen | Melakukan revisi pada enkripsi sandi dengan crypto-js dan mengubah alur navigasi halaman pasca melakukan sign up | 1 | Done | Tidak Ada |
 | 12-11-2026 | Kelvin Sebastian Yen | Penambahan fungsionalitas manajemen akun/profil milik petugas sesuai DPPL | 2 | Done | Lingkup pengerjaan pada DPPL cukup besar sehingga ada kemungkinan beberapa bagian terlewat/tidak sesuai |
 | 12-11-2026 | Kelvin Sebastian Yen | Mengimplementasikan antarmuka dari profil petugas dan menyambungkannya dengan kode back-end | 2 | Done | udah dong |
+
+### Milestone 10
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| 20-11-2026 | Arla Salsabila | Mengerjakan bagian 3, bab 4 (yang mengandung fitur lihat dan edit jadwal), serta membuat test untuk fitur lihat dan edit jadwal | 5 | Done | Bingung bagian 4.3 itu menggunakan ID antarmuka yang mana. |
+| 20-11-2026 | Kelvin Sebastian Yen | Membuat kasus uji untuk C01, C02, UC01, UC06, I-01, I-02, I-15 sampai I-22, dan KNF06 | 7 | Done | g kuat men |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
