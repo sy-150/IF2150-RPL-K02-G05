@@ -279,34 +279,101 @@ Tabel 4.2.1b. Ringkasan Cakupan Kelas [C02]
 | ID Algoritma yang tercakup | *[Algo-001, ...]* |
 | Coverage (wajib ≥ 70%) | *[% baris / % cabang, alat dan bukti pada 4.6]* |
 
-### 4.2.2 Kelas [Nama Kelas 2]
+### 4.2.7 Kelas InformasiSampah
 
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+**ID Kelas:** *[C07]*  
+**Nama Kelas:** *[InformasiSampah]*  
+**Tingkat:** *[Mendalam]*
+
+Tabel 4.2.7. Hasil Pengujian Unit Kelas [C07]
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C07-UT01 | `getMain()` | Normal | Firestore (mock) mengembalikan 4 dokumen: plastik, kaca, logam, organik | List berisi 4 objek berurutan, masing-masing memiliki `idSampah` | List berisi 4 objek dengan `idSampah` plastik, kaca, logam, organik | Pass |
+| C07-UT02 | `getMain()` | Batas | Koleksi `informasiSampah` kosong | Mengembalikan list kosong dan `cariInformasi("")` juga list kosong | Mengembalikan `[]` | Pass |
+| C07-UT03 | `getMain()` | Negatif | Snapshot berasal dari cache (`fromCache = true`, simulasi offline) | Melempar error "Tidak bisa terhubung ke server" | Error "Tidak bisa terhubung ke server" dilempar | Pass |
+| C07-UT04 | `getDetail(id)` | Normal | id = "plastik", dokumen ada | Objek `{ idSampah: "plastik", nama: "Plastik", jenisSampah: "anorganik" }` | Objek sesuai harapan dikembalikan | Pass |
+| C07-UT05 | `getDetail(id)` | Batas | id = "" dan id = undefined | Mengembalikan `null` tanpa memanggil Firestore | `null`, `getDoc` tidak dipanggil | Pass |
+| C07-UT06 | `getDetail(id)` | Negatif | id = "styrofoam", dokumen tidak ada | Mengembalikan `null` | `null` | Pass |
+| C07-UT07 | `getDetail(id)` | Negatif | Snapshot dari cache (offline) | Melempar error "Tidak bisa terhubung ke server" | Error dilempar | Pass |
+| C07-UT08 | `cariInformasi(query)` | Normal | query = "Plastik" | Hanya kategori plastik | `["plastik"]` | Pass |
+| C07-UT09 | `cariInformasi(query)` | Normal | query = "aluminium" (hanya cocok dengan nama tipe "Kaleng Aluminium") | Hanya kategori logam | `["logam"]` | Pass |
+| C07-UT10 | `cariInformasi(query)` | Batas | query = "  BOTOL  " (huruf besar dan spasi) | Kategori plastik dan kaca | `["plastik", "kaca"]` | Pass |
+| C07-UT11 | `cariInformasi(query)` | Batas | query = "" dan query = null | Seluruh data (4 kategori) | 4 kategori dikembalikan | Pass |
+| C07-UT12 | `cariInformasi(query)` | Negatif | query = "styrofoam" (termasuk data organik tanpa atribut `tipe`) | List kosong tanpa error | `[]` | Pass |
+| C07-UT13 | `cariBarcode(barcode)` | Normal | barcode = "2000000000015" (terdaftar) | Objek produk dengan `idSampah: "plastik"`, `idTipe: "botol-plastik"` | Objek produk sesuai harapan | Pass |
+| C07-UT14 | `cariBarcode(barcode)` | Batas | barcode = "   " | Mengembalikan `null` tanpa memanggil Firestore | `null`, `getDoc` tidak dipanggil | Pass |
+| C07-UT15 | `cariBarcode(barcode)` | Negatif | barcode = "9999999999999" (tidak terdaftar) | Mengembalikan `null` | `null` | Pass |
+| C07-UT16 | `cariBarcode(barcode)` | Negatif | Snapshot dari cache (offline) | Melempar error "Tidak bisa terhubung ke server" | Error dilempar | Pass |
+
+Tabel 4.2.7b. Ringkasan Cakupan Kelas [C07]
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | `getDetail(id)`, `getMain()`, `cariInformasi(query)` (ditambah `cariBarcode(barcode)` pada implementasi) |
+| Operasi yang diuji | `getDetail(id)`, `getMain()`, `cariInformasi(query)`, `cariBarcode(barcode)` |
+| ID Algoritma yang tercakup | Algo-IS-001, Algo-IS-002, Algo-IS-003 |
+| Coverage (wajib ≥ 70%) | [... % baris / ... % cabang], Jest `--coverage`, bukti pada 4.6 |
+
+### 4.2.8 Kelas InformasiSampahController
+
+**ID Kelas:** *[C08]*  
+**Nama Kelas:** *[InformasiSampahController]*  
+**Tingkat:** *[Sedang]*
+
+Tabel 4.2.1. Hasil Pengujian Unit Kelas [C08]
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C08-UT01 | `getMain()` | Normal | Model (mock) mengembalikan `[Plastik]` | Controller mengembalikan `[Plastik]` | `[Plastik]` | Pass |
+| C08-UT02 | `getMain()` | Gagal | Model melempar error "Tidak bisa terhubung ke server" | Error diteruskan ke pemanggil | Error diteruskan | Pass |
+| C08-UT03 | `getDetail(id)` | Normal | id = "plastik" | Model dipanggil dengan "plastik", hasil diteruskan | Model dipanggil dengan "plastik", objek Plastik dikembalikan | Pass |
+| C08-UT04 | `getDetail(id)` | Gagal | id = "styrofoam", model mengembalikan `null` | Mengembalikan `null` | `null` | Pass |
+| C08-UT05 | `cariInformasi(query)` | Normal | query = "plastik" | Model dipanggil dengan "plastik", hasil diteruskan | `[Plastik]` | Pass |
+| C08-UT06 | `cariInformasi(query)` | Gagal | query = "styrofoam", model mengembalikan `[]` | Mengembalikan list kosong | `[]` | Pass |
+| C08-UT07 | `cariBarcode(barcode)` | Normal | barcode = "2000000000015" | Data produk dari model diteruskan | Objek dengan `idSampah: "plastik"` | Pass |
+| C08-UT08 | `cariBarcode(barcode)` | Gagal | Model melempar error | Error diteruskan ke pemanggil | Error diteruskan | Pass |
+
+### 4.2.9 Kelas InformasiSampahInterface
+
+**ID Kelas:** *[C09]*  
+**Nama Kelas:** *[InformasiSampahInterface]*  
+**Tingkat:** *[Tidak perlu]*
 
 <br>
 
 ## 4.3 Pengujian Integrasi
 
-Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada dokumen DPPL, dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*. Apabila ada antarmuka tambahan yang belum didaftarkan pada dokumen DPPL, cantumkan juga.
-
 Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 
 | ID Antarmuka | Komponen Asal | Komponen Tujuan | Jenis Batas | Test Case |
 | :--- | :--- | :--- | :--- | :--- |
-| *I-01* | *KeranjangController* | *Keranjang (Model)* | *Controller - Model* | *INT-TC01, INT-TC02* |
-| *I-02* | *Pesanan (Model)* | *Database* | *Aplikasi - Basis data* | *INT-TC03* |
-| *I-03* | *PaymentGatewayAdapter* | *Payment Gateway (dummy)* | *Aplikasi - Sistem eksternal* | *INT-TC04, INT-TC05* |
-| *[I-XX]* | *[Komponen asal]* | *[Komponen tujuan]* | *[Jenis batas]* | *[ID test case]* |
-| *...* | *...* | *...* | *...* | *...* |
+| I-03 | InformasiSampahInterface (`informasi/index.jsx`) → InformasiSampahController | InformasiSampah (Model) → Firestore koleksi `informasiSampah` | View - Controller - Model; Aplikasi - Basis data | INT-I03-TC01, INT-I03-TC02, INT-I03-TC03 |
+| I-04 | InformasiSampahInterface (`informasi/index.jsx`) → InformasiSampahController | InformasiSampah (Model) | View - Controller - Model | INT-I04-TC01, INT-I04-TC02 |
+| I-05 | InformasiSampahInterface (`informasi/[idSampah]/index.jsx`) → InformasiSampahController | InformasiSampah (Model) → Firestore dokumen `informasiSampah/{id}` | View - Controller - Model; Aplikasi - Basis data | INT-I05-TC01, INT-I05-TC02, INT-I05-TC03 |
+| I-06 | InformasiSampahInterface (`TutorialModal.jsx`) | Data tipe sampah dari InformasiSampah (Model) | View - Model | INT-I06-TC01, INT-I06-TC02 |
+| I-07 | JadwalInterface (`jadwal/index.jsx`) → JadwalController | Jadwal (Model) → Firestore koleksi `jadwal` | View - Controller - Model; Aplikasi - Basis data | INT-I07-TC01, INT-I07-TC02, INT-I07-TC03 |
+| I-08 | JadwalInterface (`jadwal/index.jsx`) → JadwalController | Jadwal (Model) | View - Controller - Model | INT-I08-TC01 |
 
 Tabel 4.3.2. Hasil Pengujian Integrasi
 
 | ID Pengujian | ID Antarmuka | Skenario | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *INT-TC01* | *I-01* | *Normal: tambah item ke keranjang* | *Panggil `tambahItem()` melalui KeranjangController dengan produk valid* | *Item tersimpan pada Keranjang dan tampil pada daftar item* | *[Hasil aktual]* | *Pass/Fail* |
-| *INT-TC03* | *I-02* | *Normal: simpan pesanan* | *Buat pesanan, lalu baca ulang langsung dari basis data* | *Baris pesanan ada dengan nilai total dan status yang sama* | *[...]* | *Pass/Fail* |
-| *INT-TC05* | *I-03* | *Gagal: gateway mengembalikan status gagal* | *Kirim otorisasi dengan saldo dummy tidak cukup* | *Status pesanan tidak berubah menjadi "Lunas", pesan gagal diteruskan ke pengguna* | *[...]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| INT-I03-TC01 | I-03 | Normal: memuat daftar kategori | Jalankan aplikasi dengan koneksi internet, buka tab Daur Ulang | Tampil 10 kartu kategori sesuai koleksi `informasiSampah` (Plastik, Kaca, Logam, Kertas & Karton, Organik, Elektronik, Lainnya, Keramik & Porselen, Tekstil & Kain, Minyak Jelantah) | 10 kartu kategori tampil dengan gambar, nama, dan ringkasan sesuai data Firestore | Pass |
+| INT-I03-TC02 | I-03 | Normal: pencarian material | Ketik "botol" pada kolom Cari Material Sampah | Hanya kartu Plastik dan Kaca yang tampil, tanpa request Firestore baru | Kartu Plastik dan Kaca tampil | Pass |
+| INT-I03-TC03 | I-03 | Gagal: database tidak dapat diakses | Aktifkan mode pesawat, buka ulang tab Daur Ulang; lalu matikan mode pesawat dan tekan "Coba Lagi" | Tampil pesan "Gagal memuat informasi sampah." dan tombol "Coba Lagi"; setelah koneksi pulih, kartu kategori tampil kembali | Pesan gagal dan tombol "Coba Lagi" tampil; setelah ditekan, kartu kategori kembali tampil | Pass |
+| INT-I04-TC01 | I-04 | Gagal: material tidak ditemukan | Ketik "styrofoam" pada kolom pencarian | Tampil "Material tidak ditemukan" dan "Coba kata kunci lain atau periksa ejaan pencarianmu" | Tampilan kosong dengan kedua pesan muncul | Pass |
+| INT-I04-TC02 | I-04 | Batas: menghapus kata kunci | Dari kondisi INT-I04-TC01, hapus seluruh kata kunci | Seluruh 10 kartu kategori tampil kembali | 10 kartu kategori tampil kembali | Pass |
+| INT-I05-TC01 | I-05 | Normal: membuka detail kategori | Tekan kartu Plastik | Judul "Sampah Plastik", label "Anorganik", deskripsi, serta kartu tipe Botol Plastik, Wadah Plastik, dan Kantong Plastik dengan pilihan "Dibuang ke Sampah Anorganik" dan "Kreasikan Menjadi Barang Baru" | Detail Plastik tampil sesuai dokumen `informasiSampah/plastik` | Pass |
+| INT-I05-TC02 | I-05 | Normal: jenis sampah limbah cair | Tekan kartu Minyak Jelantah | Label "Limbah Cair" dan pilihan metode "Kelola sebagai Limbah Cair" | Label dan judul metode sesuai | Pass |
+| INT-I05-TC03 | I-05 | Gagal: database tidak dapat diakses | Aktifkan mode pesawat, lalu buka detail kategori | Tampil "Gagal memuat informasi sampah. Periksa koneksi internetmu." dan tombol "Coba Lagi" | Pesan gagal dan tombol "Coba Lagi" tampil | Pass |
+| INT-I06-TC01 | I-06 | Normal: panduan kreasi | Pada detail Plastik, tekan "Kreasikan Menjadi Barang Baru" pada Botol Plastik, lalu tekan tombol tutup | Pop-up berjudul "Kreasikan Menjadi Barang Baru", subjudul "Botol Plastik", langkah-langkah, dan contoh hasil kreasi; pop-up tertutup saat tombol tutup ditekan | Pop-up tampil dengan langkah dan contoh hasil, lalu tertutup | Pass |
+| INT-I06-TC02 | I-06 | Normal: panduan pembuangan | Tekan "Dibuang ke Sampah Anorganik" pada Botol Plastik | Pop-up berisi langkah pembuangan tanpa bagian contoh hasil kreasi | Pop-up tampil dengan 4 langkah pembuangan tanpa contoh hasil | Pass |
+| INT-I07-TC01 | I-07 | Normal: memuat daftar lokasi TPS | Buka tab Kalender dengan koneksi internet | Tampil judul "Lokasi TPS Kota Bandung" dan 151 kartu lokasi, terurut per kecamatan lalu kelurahan | Daftar lokasi TPS tampil terurut sesuai koleksi `jadwal` | Pass |
+| INT-I07-TC02 | I-07 | Normal: pencarian lokasi | Ketik "coblong" pada kolom Cari Kecamatan/Kelurahan | Tampil 6 lokasi di Kecamatan Coblong (Cipaganti, Dago, Lebakgede, Lebak Siliwangi, Sadangserang, Sekeloa) | 6 kartu lokasi Kecamatan Coblong tampil | Pass |
+| INT-I07-TC03 | I-07 | Gagal: database tidak dapat diakses | Aktifkan mode pesawat, buka tab Kalender | Tampil "Gagal memuat jadwal" dan tombol "COBA LAGI" | Pesan gagal dan tombol "COBA LAGI" tampil | Pass |
+| INT-I08-TC01 | I-08 | Gagal: lokasi tidak ditemukan | Ketik "Bekasi" pada kolom pencarian | Tampil "Lokasi TPS tidak ditemukan" | Tampilan kosong dengan pesan "Lokasi TPS tidak ditemukan" | Pass |
+
 
 <br>
 
@@ -327,42 +394,50 @@ Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
 | *UC01-TC02* | *KF01* | *Alternatif 1: [Nama skenario]* | *[Langkah-langkah pengujian]* | *[Data masukan]* | *[Hasil yang diharapkan]* | *[Hasil aktual]* | *[Pass/Fail. Jika Fail: penjelasan dan solusi]* |
 | *...* | *...* | *...* | *...* | *...* | *...* | *...* | *...* |
 
-### 4.4.2 Use Case [Nama Use Case 2]
+### 4.4.5 Use Case Mengakses Tampilan Informasi
 
-*[Lanjutkan untuk seluruh use case dengan pola yang sama, hingga 4.4.N.]*
+**ID Use Case:** UC05  
+**Nama Use Case:** Mengakses Tampilan Informasi
+
+Tabel 4.4.5. Hasil Pengujian Use Case UC05
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC05-TC01 | KF06, KF07 | Normal | 1. Buka aplikasi dan pilih menu Daur Ulang.<br>2. Tekan kartu Plastik.<br>3. Tekan "Kreasikan Menjadi Barang Baru" pada Botol Plastik. | Kategori: Plastik | Halaman informasi tampil; detail Sampah Plastik (Anorganik) tampil beserta tipe dan cara pembuangan/daur ulangnya; pop-up panduan tampil. | Halaman informasi, detail Sampah Plastik, dan pop-up panduan tampil sesuai hasil yang diharapkan. | Pass |
+| UC05-TC02 | KF07 | Alternatif 1: Masyarakat menggunakan fitur pencarian | 1. Buka menu Daur Ulang.<br>2. Ketik kata kunci pada kolom Cari Material Sampah.<br>3. Tekan kartu Kaca pada hasil pencarian. | Kata kunci: "botol" | Hanya kartu Plastik dan Kaca yang tampil; detail Sampah Kaca beserta cara daur ulangnya tampil setelah dipilih. | Kartu Plastik dan Kaca tampil, dan detail Sampah Kaca tampil sesuai hasil yang diharapkan. | Pass |
+| UC05-TC03 | KF07 | Alternatif 1: Kata kunci pencarian tidak ditemukan | 1. Buka menu Daur Ulang.<br>2. Ketik kata kunci yang tidak ada di database. | Kata kunci: "styrofoam" | Tampil pesan "Material tidak ditemukan" beserta arahan mencoba kata kunci lain. | Pesan "Material tidak ditemukan" tampil sesuai hasil yang diharapkan. | Pass |
+| UC05-TC04 | KF06, KF07 | Alternatif 2: Sistem gagal mengambil informasi dari database | 1. Aktifkan mode pesawat.<br>2. Buka menu Daur Ulang.<br>3. Matikan mode pesawat, tekan "Coba Lagi". | Koneksi internet terputus | Sistem menampilkan notifikasi error 504 dan tombol refresh. | Sistem menampilkan pesan "Gagal memuat informasi sampah." dan tombol "Coba Lagi" (bukan kode "error 504"); data tampil kembali setelah koneksi pulih. | Pass. Perilaku sesuai maksud skenario, tetapi pesan tidak menampilkan kode 504 dan tidak menunggu batas 20 detik. Usulan: SKPL disesuaikan atau ditambahkan batas waktu 20 detik pada pemanggilan `getMain()`. |
 
 <br>
 
 ## 4.5 Pengujian Kebutuhan Non-Fungsional (KNF)
 
-Setiap KNF pada Tabel 3.2 SKPL diuji secara terukur berdasarkan parameter yang telah didefinisikan. Setiap pengujian memuat target terukur, metode dan alat yang sesuai dengan parameter (misalnya Chrome DevTools untuk *response time* dan inspeksi basis data untuk *security*), serta hasil aktual berupa angka atau data. KNF yang belum dipenuhi atau tidak diimplementasikan dicantumkan beserta alasan dan rencana perbaikan.
-
 Tabel 4.5. Hasil Pengujian KNF
 
 | ID Pengujian | ID KNF | Parameter | Target Terukur | Metode dan Alat | Hasil Aktual | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *KNF01-TC01* | *KNF01* | *Reliability* | *Tidak ada data hilang/ganda saat jaringan putus di tengah transaksi* | *Simulasi putus koneksi saat bayar, lalu cek status di DB* | *[Hasil aktual]* | *Pass/Fail* |
-| *KNF02-TC01* | *KNF02* | *Security* | *Password tersimpan sebagai hash, bukan plain-text* | *Inspeksi tabel pengguna di DB* | *[...]* | *Pass/Fail* |
-| *KNFXX-TC01* | *KNFXX* | *Response time* | *Halaman tampil ≤ 4 detik* | *Chrome DevTools, 5 kali ukur, ambil rata-rata* | *[Rata-rata ... detik, maks ... detik]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| KNF03-TC01 | KNF03 | Response time | Hasil pencarian cara mendaur ulang tampil < 5 detik | Ketik 5 kata kunci berbeda ("plastik", "botol", "kaca", "minyak", "styrofoam") pada halaman Daur Ulang di Android Emulator; waktu diukur dengan `console.time()`/`console.timeEnd()` dari input hingga hasil disaring, 5 kali ukur, ambil rata-rata | Rata-rata 15,80 ms, maksimum 21,03 ms. | Pass |
 
 <br>
 
 ## 4.6 Tangkapan Layar dan Bukti Hasil Pengujian
 
-Bukti pengujian dilampirkan sesuai ID Pengujian pada Subbab 4.2 sampai 4.5, berupa tangkapan layar aplikasi, keluaran *test runner*, laporan *coverage* untuk setiap kelas Mendalam, atau hasil alat ukur.
-
 Tabel 4.6. Bukti Hasil Pengujian
 
 | ID Pengujian | Bukti Hasil Pengujian |
 | :--- | :--- |
-| *C02-UT01 – C02-UT08* | *[Sisipkan hasil keluaran unit test]* |
-| *C02 (coverage)* | *[Sisipkan laporan coverage kelas C02]* |
-| *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
-| *UC01-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC01-TC02* | *[Sisipkan tangkapan layar UC01-TC02 sesuai prosedur pengujian]* |
-| *KNF01-TC01* | *[Sisipkan bukti pengukuran parameter KNF01-TC01]* |
-| *...* | *...* |
+| C07-UT01 – C07-UT16 | <img src="./assets/C07-UT01–C07-UT16 (1).png" width="50%"> |
+| C07 (coverage) | <img src="./assets/C07-UT01–C07-UT16 (2).png" width="50%"> |
+| C08-UT01 – C08-UT08 | <img src="./assets/C08-UT01–C08-UT08 (1).png" width="50%"> |
+| C08 (coverage) | <img src="./assets/C08-UT01–C08-UT08 (2).png" width="50%"> |
+| INT-I03-TC01 – INT-I03-TC03 | <img src="./assets/INT-I03-TC01–INT-I03-TC03 (1).jpeg" alt="Hasil unit test I03" width="25%"> <img src="./assets/INT-I03-TC01–INT-I03-TC03 (2).jpeg" alt="Hasil unit test I03" width="25%"> <img src="./assets/INT-I03-TC01–INT-I03-TC03 (3).jpeg" alt="Hasil unit test I03" width="25%"> |
+| INT-I04-TC01 – INT-I04-TC02 | <img src="./assets/INT-I04-TC01–INT-I04-TC02 (1).jpeg" alt="Hasil unit test I04" width="25%"> <img src="./assets/INT-I04-TC01–INT-I04-TC02 (2).jpeg" alt="Hasil unit test I04" width="25%"> |
+| INT-I05-TC01 – INT-I05-TC03 | <img src="./assets/INT-I05-TC01–INT-I05-TC03 (1).jpeg" alt="Hasil unit test I05" width="25%"> <img src="./assets/INT-I05-TC01–INT-I05-TC03 (2).jpeg" alt="Hasil unit test I05" width="25%"> <img src="./assets/INT-I05-TC01–INT-I05-TC03 (3).jpeg" alt="Hasil unit test I05" width="25%"> |
+| INT-I06-TC01 – INT-I06-TC02 | <img src="./assets/INT-I06-TC01–INT-I06-TC02 (1).jpeg" alt="Hasil unit test I06" width="25%"> <img src="./assets/INT-I06-TC01–INT-I06-TC02 (2).jpeg" alt="Hasil unit test I06" width="25%"> |
+| INT-I07-TC01 – INT-I07-TC03 | <img src="./assets/INT-I07-TC01–INT-I07-TC03 (1).jpeg" alt="Hasil unit test I07" width="25%"> <img src="./assets/INT-I07-TC01–INT-I07-TC03 (2).jpeg" alt="Hasil unit test I07" width="25%"> <img src="./assets/INT-I07-TC01–INT-I07-TC03 (3).jpeg" alt="Hasil unit test I07" width="25%"> |
+| INT-I08-TC01 | <img src="./assets/INT-I08-TC01.jpeg" alt="Hasil unit test C07" width="25%"> |
+| UC05-TC01 – UC05-TC04 | <img src="./assets/UC05 (1).jpeg" alt="Hasil unit test case UC05" width="25%"> <img src="./assets/UC05 (2).jpeg" alt="Hasil unit test case UC05" width="25%"> <img src="./assets/UC05 (3).jpeg" alt="Hasil unit test case UC05" width="25%"> |
+| KNF03-TC01 – KNF03-TC02 | <img src="./assets/KNF03-TC01 – KNF03-TC02 (1).png" alt="Hasil log.console TC01" width="50%"> <img src="./assets/KNF03-TC01 – KNF03-TC02 (2).png" alt="Hasil log.console TC02" width="50%"> |
 
 <br>
 
