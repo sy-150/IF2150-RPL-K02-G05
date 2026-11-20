@@ -102,6 +102,8 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | Claude | Menanyakan cara melakukan test | Bro, apa itu coverage di test? | Validasi jawaban dari Claude dengan bertanya kepada teman. |
 | Gemini | Memverifikasi bahwa kasus uji yang dibuat sesuai dengan SKPL, DPPL, dan implementasi yang ada | Tolong periksa dengan detail dan menyeluruh apakah kasus uji ini benar | Jawaban dari AI dievaluasi secara menyeluruh bahwa tetap mengacu pada spesifikasi. |
 | Gemini | Membuatkan kode untuk kasus uji dan membandingkan hasil uij dengan ekspektasi uji | Tolong buatkan kode kasus uji untuk kelas AkunPetugas dan AkunPetugasController sesuai dengan kasus uji yang ada | Jawaban dari AI diperiksa kembali dan diperbaiki jika kurang tepat. |
+| ChatGPT | Apa yang perlu kulakukan untuk dapat buktinya | Awalnya melihat jawaban AI, tetapi setelah pertimbangan hasil diskusi dengan anggota kelompok, ada beberapa poin yang jawaban manusia, AI hanya memperbaiki struktur kalimat. |
+| Gemini | membuat kode untuk melakukan tes pada mkode aplikasi | buatkan kode untuk mengetes kode | melakukan pengecekan manual untuk memastikan akurasi |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
