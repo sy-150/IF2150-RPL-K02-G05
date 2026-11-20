@@ -49,3 +49,5 @@ example
 .claude/
 build/
 service-account.json
+
+coverage
