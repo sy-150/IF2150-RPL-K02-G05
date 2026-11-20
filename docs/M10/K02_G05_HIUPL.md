@@ -290,11 +290,7 @@ Tabel 3.4. File Lain
 
 # BAB 4: Hasil Pengujian
 
-Bab ini melaporkan hasil pengujian P/L pada level unit, integrasi, dan sistem. Pengujian dilakukan pada tag release terakhir Tugas 9. Hasil aktual diisi berdasarkan pengamatan saat pengujian. Kesimpulan diisi `Pass` atau `Fail`, dan untuk `Fail` dilengkapi penyebab serta usulan perbaikan.
-
 ## 4.1 Strategi dan Kedalaman Pengujian Kelas
-
-Setiap kelas perancangan pada Tabel 4.1 DPPL diklasifikasikan ke dalam tiga tingkat kedalaman pengujian. Tingkat **Mendalam** diberikan pada kelas yang memuat logika bisnis, perhitungan, validasi, aturan status, algoritma, integrasi eksternal, atau keamanan. Tingkat **Sedang** diberikan pada kelas yang hanya mengoordinasikan atau mendelegasikan proses. Tingkat **Tidak perlu** diberikan pada kelas tanpa logika, seperti *entity/DTO* dan kelas konfigurasi, yang teruji secara tidak langsung melalui test case use case. Seluruh kelas wajib dicantumkan beserta alasan penentuan tingkatnya.
 
 Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 
@@ -716,8 +712,6 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 
 ## 4.4 Pengujian Use Case
 
-Pengujian use case dilakukan pada seluruh skenario normal dan alternatif sesuai Subbab 4.4 SKPL, dengan minimal satu test case untuk setiap skenario. Kolom ID KF menunjukkan KF yang diverifikasi oleh test case tersebut.
-
 ### 4.4.1 Use Case Melakukan Log In
 
 **ID Use Case:** UC01  
@@ -886,8 +880,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 ---
 
 # BAB 5: Traceability
-
-Petakan setiap KF ke KNF, use case, kelas perancangan, file implementasi, dan test case. Tabel traceability berikut akan menjadi sarana verifikasi KF. Setiap KF memiliki minimal satu test case dan dinyatakan terpenuhi apabila **seluruh** test case terkaitnya berkesimpulan `Pass`. KF yang tidak diimplementasikan tetap dicantumkan beserta alasannya.
 
 Tabel 5.1. Matriks Kerunutan KF terhadap Implementasi dan Pengujian
 
