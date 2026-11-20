@@ -281,7 +281,7 @@ Tabel 3.4. File Lain
 | 22 | `src/firebase/README.md` | Panduan basis data (emulator, *seed*, *cloud*, dan *rules*). |
 | 23 | `src/tests/JadwalController.test.js` | *Unit test* kelas C05 JadwalController (C05-UT01 s.d. C05-UT36). |
 | 24 | `src/tests/Jadwal.test.js` | *Unit test* kelas C04 Jadwal (C04-UT01 s.d. C04-UT17). |
-| 25 | `src/tests/JadwalIntegrasi.test.js` | *Integration test* antarmuka I-09 s.d. I-14 terhadap Firebase Emulator (INT-I09-TC01 s.d. INT-I14-TC02). |
+| 25 | `src/tests/JadwalIntegrasi.test.js` | *Integration test* antarmuka I-07 s.d. I-14 terhadap Firebase Emulator (INT-I07-TC01 s.d. INT-I14-TC02). |
 | 26 | `src/tests/KNF05Akurasi.test.js` | Pengujian KNF05 (akurasi jadwal, informasi daur ulang, dan kategori barcode) terhadap Firebase Emulator. |
 
 <br>
@@ -447,25 +447,22 @@ Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 
 | ID Antarmuka | Komponen Asal | Komponen Tujuan | Jenis Batas | Test Case |
 | :--- | :--- | :--- | :--- | :--- |
-| *I-01* | *KeranjangController* | *Keranjang (Model)* | *Controller - Model* | *INT-TC01, INT-TC02* |
-| *I-02* | *Pesanan (Model)* | *Database* | *Aplikasi - Basis data* | *INT-TC03* |
-| *I-03* | *PaymentGatewayAdapter* | *Payment Gateway (dummy)* | *Aplikasi - Sistem eksternal* | *INT-TC04, INT-TC05* |
-| *[I-XX]* | *[Komponen asal]* | *[Komponen tujuan]* | *[Jenis batas]* | *[ID test case]* |
+| I-07 | JadwalController (`getDaftarJadwal`, `cariLokasiTPS`) | Jadwal (Model, `getSemuaJadwal`) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I07-TC01, INT-I07-TC02 |
+| I-08 | JadwalController (`cariLokasiTPS`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I08-TC01 |
 | I-09 | JadwalController (`getJadwal`, `susunKalender`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I09-TC01, INT-I09-TC02, INT-I09-TC03 |
 | I-10 | JadwalController (`getJadwal`, `cekStatusLogin`) | AkunPetugas (Model) → Firebase Authentication dan Cloud Firestore (`akunPetugas`) | Controller - Model, Aplikasi - Sistem eksternal | INT-I10-TC01, INT-I10-TC02 |
 | I-11 | JadwalController (`getJadwal`, `toggleTanggal`, `apakahBerubah`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I11-TC01 |
 | I-12 | JadwalController (`editJadwal`) | Jadwal (Model, `simpanJadwal`) → Cloud Firestore (`jadwal`, *transaction*) | Controller - Model, Aplikasi - Basis data | INT-I12-TC01 |
 | I-13 | JadwalController (`getJadwal` setelah `editJadwal`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I13-TC01 |
 | I-14 | JadwalController (`editJadwal`) | Jadwal (Model) → Cloud Firestore dan *Security Rules* (`firestore.rules`) | Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I14-TC01, INT-I14-TC02 |
-| *...* | *...* | *...* | *...* | *...* |
 
 Tabel 4.3.2. Hasil Pengujian Integrasi
 
 | ID Pengujian | ID Antarmuka | Skenario | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *INT-TC01* | *I-01* | *Normal: tambah item ke keranjang* | *Panggil `tambahItem()` melalui KeranjangController dengan produk valid* | *Item tersimpan pada Keranjang dan tampil pada daftar item* | *[Hasil aktual]* | *Pass/Fail* |
-| *INT-TC03* | *I-02* | *Normal: simpan pesanan* | *Buat pesanan, lalu baca ulang langsung dari basis data* | *Baris pesanan ada dengan nilai total dan status yang sama* | *[...]* | *Pass/Fail* |
-| *INT-TC05* | *I-03* | *Gagal: gateway mengembalikan status gagal* | *Kirim otorisasi dengan saldo dummy tidak cukup* | *Status pesanan tidak berubah menjadi "Lunas", pesan gagal diteruskan ke pengguna* | *[...]* | *Pass/Fail* |
+| INT-I07-TC01 | I-07 | Normal: menampilkan daftar lokasi TPS | Panggil `JadwalController.getDaftarJadwal()`, lalu bandingkan dengan koleksi `jadwal` yang dibaca langsung dari server | Jumlah dan ID lokasi sama dengan database (151 lokasi), terurut per kecamatan lalu kelurahan | 151 lokasi sama dengan database dan terurut per kecamatan lalu kelurahan (378 ms) | Pass |
+| INT-I07-TC02 | I-07 | Normal: mencari lokasi TPS | Setelah INT-I07-TC01, `cariLokasiTPS('coblong')`, lalu bandingkan dengan dokumen di database yang kecamatan/kelurahannya memuat "coblong" | Hasil tidak kosong dan ID lokasi sama dengan hasil penyaringan dari database | 6 lokasi Kecamatan Coblong, sama dengan database (160 ms) | Pass |
+| INT-I08-TC01 | I-08 | Gagal: lokasi yang dicari tidak terdata | `cariLokasiTPS('Bekasi')` | Mengembalikan daftar kosong (halaman menampilkan "Lokasi TPS tidak ditemukan") | Daftar kosong (< 1 ms) | Pass |
 | INT-I09-TC01 | I-09 | Normal: masyarakat (belum login) membuka kalender lokasi TPS | Tanpa login, panggil `JadwalController.getJadwal('lebak-siliwangi')`, lalu bandingkan dengan dokumen `jadwal/lebak-siliwangi` yang dibaca langsung dari server | Kecamatan, kelurahan, dan seluruh tanggal sama dengan database; `statusLogin = false`, `bolehEdit = false` | Data sama dengan database, `statusLogin = false`, `bolehEdit = false` (21 ms) | Pass |
 | INT-I09-TC02 | I-09 | Gagal: lokasi tidak ada di database | `getJadwal('kelurahan-tidak-ada')` | Mengembalikan `null` (halaman menampilkan "Lokasi TPS tidak ditemukan") | `null` (6 ms) | Pass |
 | INT-I09-TC03 | I-09 | Normal: penanda kalender sesuai data database | Ambil jadwal Lebak Siliwangi, susun kalender bulan tanggal pertamanya dengan `susunKalender()` | Sel yang ditandai pengambilan pada bulan itu sama persis dengan tanggal di database | Sel yang ditandai sama dengan tanggal di database (7 ms) | Pass |
@@ -476,7 +473,6 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 | INT-I13-TC01 | I-13 | Normal: detail menampilkan data yang baru disimpan | Setelah INT-I12-TC01, panggil `getJadwal('lebak-siliwangi')` | Tanggal = [21 Des 2026, 24 Des 2026] | Sesuai harapan (11 ms) | Pass |
 | INT-I14-TC01 | I-14 | Gagal: *security rules* menolak perubahan jadwal wilayah lain | Masih login sebagai petugas Lebak Siliwangi, `editJadwal('pasteur', [25 Des 2026])` | Firestore menolak (`permission-denied`), `editJadwal` mengembalikan `null` (halaman menampilkan "Jadwal gagal diperbarui"), dokumen Pasteur tidak berubah | `null`, log `permission-denied`, dokumen Pasteur tetap (38 ms) | Pass |
 | INT-I14-TC02 | I-14 | Gagal: pengguna belum login mencoba menyimpan | Logout, `editJadwal('lebak-siliwangi', [25 Des 2026])` | Firestore menolak (`permission-denied`), mengembalikan `null`, dokumen tidak berubah | `null`, log `permission-denied`, dokumen tetap [21 Des, 24 Des] (18 ms) | Pass |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
 
 <br>
 
@@ -542,14 +538,10 @@ Tabel 4.5. Hasil Pengujian KNF
 
 | ID Pengujian | ID KNF | Parameter | Target Terukur | Metode dan Alat | Hasil Aktual | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *KNF01-TC01* | *KNF01* | *Reliability* | *Tidak ada data hilang/ganda saat jaringan putus di tengah transaksi* | *Simulasi putus koneksi saat bayar, lalu cek status di DB* | *[Hasil aktual]* | *Pass/Fail* |
-| *KNF02-TC01* | *KNF02* | *Security* | *Password tersimpan sebagai hash, bukan plain-text* | *Inspeksi tabel pengguna di DB* | *[...]* | *Pass/Fail* |
-| *KNFXX-TC01* | *KNFXX* | *Response time* | *Halaman tampil ≤ 4 detik* | *Chrome DevTools, 5 kali ukur, ambil rata-rata* | *[Rata-rata ... detik, maks ... detik]* | *Pass/Fail* |
 | KNF05-TC01 | KNF05 | Reliability (akurasi jadwal pembuangan sampah) | Akurasi ≥ 90% jadwal yang ditampilkan (kecamatan, kelurahan, dan seluruh tanggal pengambilan) sama dengan data acuan | Jest (`src/tests/KNF05Akurasi.test.js`) terhadap Firebase Emulator yang di-*seed*. Untuk setiap lokasi pada `src/firebase/data/jadwal.json`, panggil `JadwalController.getJadwal(id)` (Controller → Model → Firestore) dan bandingkan hasilnya dengan data acuan. Akurasi = lokasi cocok / seluruh lokasi. | 151/151 lokasi cocok, **akurasi 100,00%** (903 ms untuk 151 pembacaan) | Pass |
 | KNF05-TC02 | KNF05 | Reliability (akurasi informasi cara mendaur ulang) | Akurasi ≥ 90% informasi material (nama, jenis sampah, deskripsi, serta seluruh tipe beserta langkah dibuang/kreasi/gunakan ulang) sama dengan data acuan | Jest terhadap emulator. Untuk setiap material pada `informasiSampah.json`, bandingkan hasil `InformasiSampahController.getMain()` dan `getDetail(id)` dengan data acuan. | 10/10 material cocok pada halaman daftar dan detail, **akurasi 100,00%** | Pass |
 | KNF05-TC03 | KNF05 | Reliability (akurasi kategori sampah melalui barcode) | Akurasi ≥ 90% kategori (`idSampah`) dan tipe (`idTipe`) hasil pencarian barcode sesuai data acuan dan tipe tersebut ada pada informasi material | Jest terhadap emulator. Untuk setiap kode pada `barcodeProduk.json`, panggil `InformasiSampahController.cariBarcode(kode)` dan bandingkan dengan data acuan. | 6/6 barcode cocok, **akurasi 100,00%** | Pass |
 | KNF05-TC04 | KNF05 | Reliability (akurasi kategori sampah melalui *computer vision*) | Akurasi ≥ 90% kategori sampah hasil deteksi model *computer vision* terhadap foto sampah berlabel | Jest (`src/tests/KNF05ComputerVision.test.js`). Sepuluh foto material pada `src/ecotrack/assets/images/informasi-sampah/material/` (satu foto per material, label = nama file) dikirim ke layanan pemindai (Cloudflare Worker, `EXPO_PUBLIC_PEMINDAI_URL`) melalui `sampahModel.kirimFoto()` yang dipanggil `PemindaiController.identifikasi()`. `idSampah` deteksi pertama dibandingkan dengan label foto. Akurasi = deteksi benar / total foto. | 9/10 foto benar, **akurasi 90,00%**. Foto yang salah: `lainnya.png` (tumpukan barang campuran) terdeteksi sebagai plastik. | Pass |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
 
 <br>
 
@@ -561,15 +553,9 @@ Tabel 4.6. Bukti Hasil Pengujian
 
 | ID Pengujian | Bukti Hasil Pengujian |
 | :--- | :--- |
-| *C02-UT01 – C02-UT08* | *[Sisipkan hasil keluaran unit test]* |
-| *C02 (coverage)* | *[Sisipkan laporan coverage kelas C02]* |
-| *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
-| *UC01-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC01-TC02* | *[Sisipkan tangkapan layar UC01-TC02 sesuai prosedur pengujian]* |
-| *KNF01-TC01* | *[Sisipkan bukti pengukuran parameter KNF01-TC01]* |
 | C04-UT01 – C04-UT17, C05-UT01 – C05-UT36 | <img src="./assets/unit-test-C04-C05-1.png" alt="unit-test-C04-C05-1.png" width="600"><br><img src="./assets/unit-test-C04-C05-2.png" alt="unit-test-C04-C05-2.png" width="600"><br><img src="./assets/unit-test-C04-C05-3.png" alt="unit-test-C04-C05-3.png" width="600"> |
 | C04, C05 (coverage) | <img src="./assets/coverage-C04-C05.png" alt="coverage-C04-C05.png" width="600"> |
-| INT-I09-TC01 – INT-I14-TC02 | <img src="./assets/integrasi-I09-I14.png" alt="integrasi-I09-I14.png" width="600"> |
+| INT-I07-TC01 – INT-I14-TC02 | <img src="./assets/integrasi-I07-I14.png" alt="integrasi-I09-I14.png" width="600"> |
 | UC03-TC01 | <img src="./assets/UC03-TC01-a.png" alt="UC03-TC01-a.png" width="180"><br><img src="./assets/UC03-TC01-b.jpeg" alt="UC03-TC01-b.jpeg" width="180"> <img src="./assets/UC03-TC01-c.jpeg" alt="UC03-TC01-c.jpeg" width="180"> <img src="./assets/UC03-TC01-d.jpeg" alt="UC03-TC01-d.jpeg" width="180"><br><img src="./assets/UC03-TC01-e.jpeg" alt="UC03-TC01-e.jpeg" width="180"> <img src="./assets/UC03-TC01-f.jpeg" alt="UC03-TC01-f.jpeg" width="180"><br><img src="./assets/UC03-TC01-g.png" alt="UC03-TC01-g.png" width="180"> |
 | UC03-TC02 | <img src="./assets/UC03-TC02.jpeg" alt="UC03-TC02.jpeg" width="180"> |
 | UC03-TC03 | <img src="./assets/UC03-TC03.jpeg" alt="UC03-TC03.jpeg" width="180"> |
@@ -583,7 +569,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 | UC04-TC05 | <img src="./assets/UC04-TC05-a.jpeg" alt="UC04-TC05-a.jpeg" width="180"> <img src="./assets/UC04-TC05-b.jpeg" alt="UC04-TC05-b.jpeg" width="180"> |
 | KNF05-TC01 – KNF05-TC03 | <img src="./assets/knf05-tc01-tc03.png" alt="knf05-tc01-tc03.png" width="600"> |
 | KNF05-TC04 | <img src="./assets/knf05-tc04.png" alt="knf05-tc04.png" width="600"> |
-| *...* | *...* |
 
 <br>
 

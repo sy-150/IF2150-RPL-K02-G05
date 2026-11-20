@@ -1,5 +1,5 @@
 /**
- * Pengujian integrasi fitur jadwal (antarmuka I-09 s.d. I-14 pada DPPL).
+ * Pengujian integrasi fitur jadwal (antarmuka I-07 s.d. I-14 pada DPPL).
  * Memakai komponen NYATA: JadwalController → Jadwal / AkunPetugas → Firestore + Firebase Authentication
  * di Firebase Emulator, termasuk security rules (firestore.rules). Tidak ada mock.
  *
@@ -81,6 +81,35 @@ describeEmulator('Integrasi jadwal dengan Firebase Emulator', () => {
     await signOut(auth);
     await fs.terminate(db);
   }, 30000);
+
+  it('INT-I07-TC01 daftar lokasi TPS diambil dari database dan terurut per kecamatan', async () => {
+    const daftar = await JadwalController.getDaftarJadwal();
+    const dariDb = await fs.getDocsFromServer(fs.collection(db, 'jadwal'));
+
+    expect(daftar).toHaveLength(dariDb.size);
+    expect(daftar.map((j) => j.getIdJadwal()).sort()).toEqual(dariDb.docs.map((d) => d.id).sort());
+    const urutan = daftar.map((j) => [j.getKecamatan(), j.getKelurahan()]);
+    const terurut = [...urutan].sort(
+      (a, b) => a[0].localeCompare(b[0], 'id') || a[1].localeCompare(b[1], 'id')
+    );
+    expect(urutan).toEqual(terurut);
+  });
+
+  it('INT-I07-TC02 pencarian lokasi TPS berdasarkan kecamatan/kelurahan', async () => {
+    const hasil = JadwalController.cariLokasiTPS('coblong');
+    const dariDb = await fs.getDocsFromServer(fs.collection(db, 'jadwal'));
+    const seharusnya = dariDb.docs
+      .filter((d) => /coblong/i.test(d.data().kecamatan) || /coblong/i.test(d.data().kelurahan))
+      .map((d) => d.id)
+      .sort();
+
+    expect(hasil.length).toBeGreaterThan(0);
+    expect(hasil.map((j) => j.getIdJadwal()).sort()).toEqual(seharusnya);
+  });
+
+  it('INT-I08-TC01 pencarian lokasi yang tidak terdata menghasilkan daftar kosong', () => {
+    expect(JadwalController.cariLokasiTPS('Bekasi')).toEqual([]);
+  });
 
   it('INT-I09-TC01 masyarakat (belum login) membaca detail jadwal dari database', async () => {
     const hasil = await JadwalController.getJadwal(ID_PETUGAS);
