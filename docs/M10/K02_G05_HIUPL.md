@@ -61,7 +61,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* | *Menambahkan fitur memindai barcode dan komponen-komponennya* |
 | *B* |  |
 | *C* |  |
 | ... |  |
@@ -303,7 +303,11 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 | *C02* | *Pesanan* | *Mendalam* | *Memuat `hitungTotal()` dan transisi status pembayaran* | *C02-UT01 s.d. C02-UT08* |
 | *C03* | *Keranjang* | *Sedang* | *Delegasi sederhana ke Produk dan Pesanan* | *C03-UT01 s.d. C03-UT03, INT-TC02* |
 | *C01* | *Pelanggan* | *Tidak perlu* | *Hanya menyimpan data akun, tanpa logika* | *-* |
-| *[CXX]* | *[Nama kelas]* | *[Mendalam/Sedang/Tidak perlu]* | *[Alasan penentuan tingkat pengujian]* | *[ID test case atau -]* |
+| C10 | PemindaiController | Mendalam | Mengatur jalannya pengambilan foto dan pembacaan barcode, serta mengatur status tampilan | C10-UT01 s.d. C10-UT11, INT-TC01 s.d. INT-TC04 |
+| C11 | PemindaiInterface | Tidak perlu | Hanya bertugas menampilkan layar kamera, kotak penanda objek sampah, dan kartu hasil pemindaian | - |
+| C12 | SampahModel | Mendalam | Bertugas mengirim foto sampah ke layanan AI di server luar | C12-UT01 s.d. C12-UT04, INT-TC03, INT-TC04 |
+| C13 | BarcodeModel | Mendalam | Bertugas mencocokkan nomor barcode produk ke basis data serta mengambil panduan cara daur ulangnya | C13-UT01 s.d. C13-UT03, INT-TC01, INT-TC02, INT-TC05, INT-TC06 |
+
 | *...* | *...* | *...* | *...* | *...* |
 
 ## 4.2 Pengujian Unit Kelas
@@ -315,36 +319,6 @@ Cara menjalankan unit test: `cd src/ecotrack && npm install && npm test`.
 Cara menjalankan test coverage (kelas C04 dan C05): `cd src/ecotrack && npx jest Jadwal --coverage --collectCoverageFrom=src/model/Jadwal.js --collectCoverageFrom=src/controller/JadwalController.js`. Laporan tampil di terminal dan versi HTML-nya tersimpan di `src/ecotrack/coverage/lcov-report/index.html`.
 
 Lokasi file test: `src/tests/`.
-
-### 4.2.1 Kelas [Nama Kelas 1]
-
-**ID Kelas:** *[C02]*  
-**Nama Kelas:** *[Pesanan]*  
-**Tingkat:** *[Mendalam]*
-
-Tabel 4.2.1. Hasil Pengujian Unit Kelas [C02]
-
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *C02-UT01* | *`hitungTotal(): Decimal`* | *Normal* | *Pesanan berisi 2 item: 10.000 x 2 dan 5.000 x 1* | *Total = 25.000* | *[Hasil aktual]* | *Pass/Fail* |
-| *C02-UT02* | *`hitungTotal(): Decimal`* | *Batas* | *Pesanan berisi tepat 1 item dengan jumlah 1* | *Total = harga item tersebut* | *[...]* | *Pass/Fail* |
-| *C02-UT03* | *`hitungTotal(): Decimal`* | *Negatif* | *Pesanan tanpa item* | *Total = 0 atau melempar kesalahan sesuai rancangan* | *[...]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
-
-Khusus kelas **Mendalam**:
-
-Tabel 4.2.1b. Ringkasan Cakupan Kelas [C02]
-
-| Informasi | Keterangan |
-| :--- | :--- |
-| Daftar operasi public pada DPPL | *[op1(), op2(), ...]* |
-| Operasi yang diuji | *[op1(), op2(), ...]* |
-| ID Algoritma yang tercakup | *[Algo-001, ...]* |
-| Coverage (wajib ≥ 70%) | *[% baris / % cabang, alat dan bukti pada 4.6]* |
-
-### 4.2.2 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
 
 ### 4.2.4 Kelas Jadwal
 
@@ -439,6 +413,92 @@ Tabel 4.2.5b. Ringkasan Cakupan Kelas C05
 | ID Algoritma yang tercakup | Algo-JC-001 (`getDaftarJadwal`), Algo-JC-002 (`cariLokasiTPS`), Algo-JC-003 (`getJadwal`), Algo-JC-004 (`editJadwal`); Q-JC-001 dan Q-JC-002 (melalui *mock* model). |
 | Coverage (wajib ≥ 70%) | `src/ecotrack/src/controller/JadwalController.js`: **100% baris, 80,76% cabang, 100% fungsi**. Cabang yang tidak tercakup hanya nilai bawaan parameter `sekarang = new Date()` dan `keyword ?? ''`. Alat: Jest Coverage (Istanbul). |
 
+### 4.2.10 Kelas PemindaiController
+
+**ID Kelas:** *C10*  
+**Nama Kelas:** *PemindaiController*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.1. Hasil Pengujian Unit Kelas PemindaiController
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C10-UT01 | identifikasi() | Normal | Pengguna menekan tombol pemindai saat kamera aktif, lalu layanan AI mengenali 2 objek sampah (Botol & Kaleng) | Hasil deteksi dan ukuran foto tersimpan untuk ditampilkan, status memuat (loading) berhenti, dan berkas foto sementara dihapus | Data 2 objek sampah berhasil diterima, status memuat berhenti, dan berkas foto sementara langsung dihapus | Pass |
+| C10-UT02 | identifikasi() | Batas | Kamera berhasil memotret, tetapi layanan AI tidak menemukan satu pun objek sampah di dalam foto (hasil kosong) | Sistem tetap menampilkan foto dengan daftar deteksi kosong beserta pesan pemberitahuan, dan berkas foto sementara tetap dihapus | Daftar deteksi kosong ([]) tercatat bersama pesan dari sistem, ukuran foto menggunakan ukuran bawaan kamera (640x480), dan berkas foto dihapus | Pass |
+| C10-UT03 | identifikasi() | Negatif | Tombol pemindai ditekan saat kamera belum siap atau proses sebelumnya masih berjalan | Sistem mengabaikan perintah tersebut agar tidak terjadi pemrosesan ganda | Perintah langsung dihentikan tanpa mengirim permintaan ke server | Pass |
+| C10-UT04 | identifikasi() | Negatif | Proses identifikasi gagal karena koneksi internet terputus atau server bermasalah | Muncul pesan peringatan kegagalan kepada pengguna, status memuat berhenti, dan berkas foto sementara tetap dihapus | Pesan peringatan "Gagal mengidentifikasi" muncul, berkas foto tetap dihapus, dan status memuat berhenti | Pass |
+| C10-UT05 | cariKode() | Normal | Memasukkan atau memindai kode barcode produk yang terdaftar (899123) beserta jenis sampahnya (plastik) | Data nama produk dan panduan jenis sampahnya berhasil dimuat, serta status memuat berhenti | Informasi produk dan panduan sampah "plastik" berhasil dimuat dengan lengkap | Pass |
+| C10-UT06 | cariKode() | Batas | Kamera menangkap kode barcode yang sama berkali-kali secara beruntun dalam waktu sepersekian detik | Sistem mengunci pemindaian pertama sehingga pencarian ke basis data hanya dilakukan 1 kali, bukan berulang-ulang | Pencarian ke basis data hanya dijalankan 1 kali untuk kode pertama ("111111"), sedangkan pindaian susulan diabaikan | Pass |
+| C10-UT07 | cariKode() | Negatif | Memindai kode barcode yang belum tercatat di basis data (0000000000000) | Sistem menandai kode tersebut sebagai "tidak terdaftar" dan tidak menampilkan kartu informasi produk | Kode tercatat sebagai tidak terdaftar dan kartu hasil produk tetap kosong | Pass |
+| C10-UT08 | cariKode() | Negatif | Terjadi gangguan jaringan saat mencari data barcode ke basis data | Muncul pesan peringatan gagal mencari barcode dan kunci pemindaian dibuka kembali agar pengguna bisa mencoba memindai ulang | Pesan peringatan "Gagal mencari barcode" tampil dan pemindai siap digunakan kembali untuk percobaan berikutnya | Pass |
+| C10-UT09 | onBarcodeScanned() | Normal | Kamera mendeteksi kode QR/barcode (QR123) saat layar dalam keadaan siap memindai | Sistem otomatis meneruskan kode tersebut ke proses pencarian data produk | Proses pencarian produk otomatis dijalankan untuk kode "QR123" | Pass |
+| C10-UT10 | onBarcodeScanned() | Negatif | Kamera mendeteksi barcode baru saat hasil pemindaian foto sampah sebelumnya masih tampil di layar | Sistem mengabaikan barcode baru tersebut agar tidak menimpa hasil yang sedang dilihat pengguna | Pemindaian barcode baru diabaikan sepenuhnya | Pass |
+| C10-UT11 | setMode() & pindaiLagi() | Normal | Pengguna mengganti mode dari Sampah ke Barcode saat lampu kilat (flash) menyala, lalu menekan tombol Pindai Lagi | Lampu kilat otomatis dimatikan, mode berpindah, dan seluruh hasil pemindaian sebelumnya dibersihkan seperti semula | Mode berpindah ke Barcode, lampu kilat mati, dan seluruh hasil pemindaian sebelumnya bersih kembali | Pass |
+
+
+Tabel 4.2.1b. Ringkasan Cakupan Kelas PemindaiController
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | startPemindaian(), prosesFrame(), prosesBarcode() (diimplementasikan sebagai identifikasi(), cariKode(), onBarcodeScanned(), scanLagi(), setMode(), pindaiLagi(), pilih()) | 
+| Operasi yang diuji | identifikasi(), cariKode(), onBarcodeScanned(), scanLagi(), setMode(), pindaiLagi(), pilih() | 
+| ID Algoritma yang tercakup | Algo-PC-001, Algo-PC-002 | 
+| Coverage (wajib ≥ 70%) | 100% line / 88.88% branch, tool: Jest, bukti pada Subbab 4.6 | 
+
+
+### 4.2.12 Kelas sampahModel
+
+**ID Kelas:** *C12*  
+**Nama Kelas:** *sampahModel*  
+**Tingkat:** *Sedang*
+
+Tabel 4.2.12. Hasil Pengujian Unit Kelas C12
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C12-UT01 | kirimFoto() | Normal | Mengirim data foto sampah saat pengguna sudah masuk (login) dan server merespons berhasil | Foto terkirim ke server AI beserta identitas token pengguna, lalu daftar objek sampah yang terdeteksi dikembalikan | Foto berhasil dikirim beserta identitas pengguna dan data hasil deteksi diterima dengan sesuai | Pass |
+| C12-UT02 | kirimFoto() | Batas | Mengirim data foto sampah saat pengguna memakai aplikasi sebagai tamu (tanpa login) | Foto tetap dapat dikirim ke server AI tanpa token identitas dan tetap menghasilkan deteksi sampah | Permintaan tetap terkirim sebagai pengguna umum dan hasil deteksi berhasil diterima | Pass |
+| C12-UT03 | kirimFoto() | Negatif | Mengirim data foto yang rusak sehingga ditolak oleh server AI | Sistem menangkap penolakan dari server dan meneruskan pesan kesalahan yang jelas | Sistem menampilkan pesan kesalahan sesuai respons server ("Gambar tidak valid" atau "Permintaan gagal") | Pass |
+| C12-UT04 | hapusFile() | Normal & Negatif | Menghapus berkas foto sementara pada 3 kondisi: berkas masih ada, berkas sudah terhapus, dan akses penyimpanan ditolak | Berkas dihapus jika memang ada; jika berkas tidak ada atau akses ditolak, aplikasi tetap berjalan normal tanpa error | Berkas dihapus hanya saat tersedia, dan aplikasi tetap berjalan stabil tanpa gangguan pada kondisi gagal | Pass |
+
+Tabel 4.2.12b. Ringkasan Cakupan Kelas PemindaiController
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | kirimFoto(), hapusFile() | 
+| Operasi yang diuji | kirimFoto(), hapusFile() | 
+| ID Algoritma yang tercakup | Algo-PC-001 | 
+| Coverage (wajib ≥ 70%) | 100% line / 90% branch, tool: Jest, bukti pada Subbab 4.6 |
+
+<br>
+
+### 4.2.13 Kelas barcodeModel
+
+**ID Kelas:** *C13*  
+**Nama Kelas:** *barcodeModel*  
+**Tingkat:** *Sedang*
+
+Tabel 4.2.13. Hasil Pengujian Unit Kelas C13
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C13-UT01 | cariProduk() | Normal | Mencari kode barcode standar (8992761139018) yang sudah tersimpan di basis data | Sistem mengembalikan informasi lengkap produk beserta kategori jenis sampahnya | Informasi nama produk dan kategori sampah berhasil ditemukan dari basis data | Pass |
+| C13-UT02 | cariProduk() | Batas | Memasukkan kode barcode dengan spasi berlebih atau perbedaan panjang standar 12 digit (UPC-A) dengan 13 digit awalan angka 0 (EAN-13) | Sistem otomatis membersihkan spasi serta mencocokkan variasi 12 dan 13 digit secara dua arah hingga produk ditemukan | Spasi dibersihkan dan variasi kode 12 digit maupun 13 digit berhasil dicocokkan dengan tepat | Pass |
+| C13-UT03 | cariProduk() | Negatif | Menguji masukan kosong/spasi | Sistem mengembalikan hasil kosong (null) tanpa error | Masukan kosong ditangani dengan aman tanpa membuat aplikasi terhenti | Pass |
+| C13-UT03 | ambilInfoSampah() | Normal & Negatif | Mengambil panduan daur ulang untuk kategori valid ("plastik"), serta saat basis data sedang luring (offline) | Panduan daur ulang dikembalikan untuk kategori valid; untuk gangguan basis data, sistem mengembalikan hasil kosong (null) tanpa error | Panduan sampah "plastik" berhasil dimuat, sedangkan gangguan koneksi ditangani dengan aman tanpa membuat aplikasi terhenti | Pass |
+
+Tabel 4.2.13b. Ringkasan Cakupan Kelas BarcodeModel
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | cariProduk(), ambilInfoSampah() |
+| Operasi yang diuji | cariProduk(), ambilInfoSampah() |
+| ID Algoritma yang tercakup | Algo-PC-002 |
+| Coverage (wajib ≥ 70%) | 100% line / 100% branch, tool: Jest, bukti pada Subbab 4.6 |
+
+<br>
+
+
 ## 4.3 Pengujian Integrasi
 
 Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada dokumen DPPL, dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*. Apabila ada antarmuka tambahan yang belum didaftarkan pada dokumen DPPL, cantumkan juga.
@@ -455,6 +515,9 @@ Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 | I-12 | JadwalController (`editJadwal`) | Jadwal (Model, `simpanJadwal`) → Cloud Firestore (`jadwal`, *transaction*) | Controller - Model, Aplikasi - Basis data | INT-I12-TC01 |
 | I-13 | JadwalController (`getJadwal` setelah `editJadwal`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I13-TC01 |
 | I-14 | JadwalController (`editJadwal`) | Jadwal (Model) → Cloud Firestore dan *Security Rules* (`firestore.rules`) | Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I14-TC01, INT-I14-TC02 |
+| I-23 | PemindaiInterface -> PemindaiController | SampahModel dan BarcodeModel | Controller - Model | INT-I23-TC01, INT-I23-TC02 |
+| I-24 | PemindaiInterface -> PemindaiController | SampahModel -> Cloudflare Worker API (ai-penilai.3no.workers.dev) | Aplikasi - Sistem eksternal | INT-I24-TC01, INT-I24-TC02 |
+| I-25 | PemindaiInterface -> PemindaiController | BarcodeModel -> Cloud Firestore (barcodeProduk) | Aplikasi - basis data | INT-I25-TC01, INT-I25-TC02 |
 
 Tabel 4.3.2. Hasil Pengujian Integrasi
 
@@ -473,6 +536,12 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 | INT-I13-TC01 | I-13 | Normal: detail menampilkan data yang baru disimpan | Setelah INT-I12-TC01, panggil `getJadwal('lebak-siliwangi')` | Tanggal = [21 Des 2026, 24 Des 2026] | Sesuai harapan (11 ms) | Pass |
 | INT-I14-TC01 | I-14 | Gagal: *security rules* menolak perubahan jadwal wilayah lain | Masih login sebagai petugas Lebak Siliwangi, `editJadwal('pasteur', [25 Des 2026])` | Firestore menolak (`permission-denied`), `editJadwal` mengembalikan `null` (halaman menampilkan "Jadwal gagal diperbarui"), dokumen Pasteur tidak berubah | `null`, log `permission-denied`, dokumen Pasteur tetap (38 ms) | Pass |
 | INT-I14-TC02 | I-14 | Gagal: pengguna belum login mencoba menyimpan | Logout, `editJadwal('lebak-siliwangi', [25 Des 2026])` | Firestore menolak (`permission-denied`), mengembalikan `null`, dokumen tidak berubah | `null`, log `permission-denied`, dokumen tetap [21 Des, 24 Des] (18 ms) | Pass |
+| INT-I23-TC01 | I-23 | Normal: Alur terpadu pemindaian barcode dari layar pemindai hingga pengambilan detail sampah | Memanggil cariKode("2000000000015") pada PemindaiController untuk memicu pencarian produk melalui BarcodeModel, lalu meneruskannya ke kartu hasil | Data produk dan informasi panduan daur ulang terhubung dengan benar serta siap ditampilkan pada antarmuka | Data produk dari BarcodeModel berhasil diteruskan dan digabungkan dengan detail panduan sampah di PemindaiController untuk ditampilkan | Pass |
+| INT-I23-TC02 | I-23 | Gagal: Penanganan ketika data jenis sampah belum tersedia | Memanggil cariKode("98909899") dari layar pemindai dengan kode barcode produk yang terdaftar, tetapi kode jenis sampahnya belum ada | Kartu hasil tetap menampilkan informasi produk sementara bagian panduan sampah bernilai kosong | Informasi produk tetap berhasil dimuat dan tampil di layar I-25 | Pass |
+| INT-I24-TC01 | I-24 | Normal: Pengiriman foto sampah dari layar kamera ke server AI | Mengambil foto pada antarmuka pemindai dan mengirimkan gambar botol plastik melalui kirimFoto() | Server merespons status berhasil dan mengembalikan daftar objek terdeteksi beserta koordinat kotak deteksi untuk ditampilkan pada antarmuka hasil | Server AI merespons dengan status 200 dan mengembalikan objek deteksi botol plastik beserta koordinat dan kategori sampahnya untuk ditampilkan di antarmuka | Pass |
+| INT-I24-TC02 | I-24 | Gagal: Pengiriman data gambar tidak valid ke server AI | Mengirimkan teks kosong atau format gambar yang rusak melalui kirimFoto() | Server menolak permintaan tersebut dan aplikasi menangkap pesan kesalahan dari server | Server menolak permintaan dan fungsi meneruskan pesan kesalahan sesuai respons server | Pass |
+| INT-I25-TC01 | I-25 | Normal: Pembacaan data produk dari Cloud Firestore | Memanggil cariProduk() dengan kode barcode yang tersimpan di koleksi barcodeProduk, lalu meneruskan kode jenis sampahnya ke ambilInformasiSampah() | Dokumen produk dari koleksi barcodeProduk dan koleksi informasiSampah berhasil dibaca secara lengkap dari basis data | Dokumen produk dan panduan daur ulang berhasil dibaca dari Cloud Firestore sesuai dengan data yang tersimpan | Pass |
+| INT-I25-TC02 | I-25 | Gagal: Pencarian kode barcode yang tidak ada di Cloud Firestore | Memanggil cariProduk("9999999999999") secara langsung ke koleksi barcodeProduk dari mode barcode | Basis data mengembalikan hasil kosong sehingga antarmuka menampilkan modal "Barcode Belum Terdaftar" | Fungsi mengembalikan nilai kosong dengan aman | Pass |
 
 <br>
 
@@ -492,6 +561,22 @@ Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
 | *UC01-TC01* | *KF01* | *Normal* | *1. Buka halaman login.<br>2. Masukkan kredensial.<br>3. Klik tombol "Login".* | *User: rpl@gmail.com<br>Pass: 123456* | *Pengguna diarahkan ke Halaman Dashboard.* | *Pengguna diarahkan ke Halaman Dashboard sesuai hasil yang diharapkan.* | *Pass* |
 | *UC01-TC02* | *KF01* | *Alternatif 1: [Nama skenario]* | *[Langkah-langkah pengujian]* | *[Data masukan]* | *[Hasil yang diharapkan]* | *[Hasil aktual]* | *[Pass/Fail. Jika Fail: penjelasan dan solusi]* |
 | *...* | *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+
+### 4.4.2 Use Case Memindai Sampah
+
+**ID Use Case:** *UC02*  
+**Nama Use Case:** *Memindai Sampah*
+
+Tabel 4.4.1. Hasil Pengujian Use Case UC02
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC02-TC01 | KF01, KF02, KF06 | Normal | 1. Buka aplikasi EcoTrack dan tekan tombol ikon kamera pada bilah navigasi bawah<br>2. Setujui permintaan akses kamera perangkat<br>3. Arahkan kamera ke objek sampah lalu ambil gambar<br>4. Setelah foto hasil muncul, tekan kotak deteksi pada objek dan tekan tombol "Lihat Cara Daur Ulang" |gambar botol plastik | Foto beku tampil disertai kotak deteksi berlabel "Plastik" dan kategori "Anorganik", lalu pengguna diarahkan ke halaman panduan daur ulang jika menekan tombolnya | Gambar botol plastik terdeteksi dengan kotak berlabel "Plastik" dan tag "Anorganik", serta tombol navigasi mengarah ke halaman panduan daur ulang dengan tepat | Pass |
+| UC02-TC02 | KF01 | Alternatif 1: Akses izin kamera ditolak | 1. Buka menu pemindai pada perangkat yang belum memberikan atau menolak izin akses kamera | Izin akses kamera ditolak | Aplikasi menampilkan halaman pemberitahuan "Aplikasi butuh izin kamera untuk mengidentifikasi sampah" beserta tombol "Izinkan Kamera" | Layar pemberitahuan kebutuhan izin kamera dan tombol "Izinkan Kamera" tampil dengan jelas | Pass |
+| UC02-TC03 | KF06 | Alternatif 2: Memindai barcode kemasan lewat kamera | 1. Pada layar pemindai, tekan tab "Barcode" di bagian bawah<br>2. Arahkan kamera ke barcode pada kemasan produk yang terdaftar<br> 3. tekan tombol "Lihat Cara Daur Ulang" pada kartu hasil yang muncul | Kemasan produk dengan barcode terdaftar | Sistem menampilkan kartu hasil berisi informasi produk dan kategori sampah yang sesuai | Barcode terbaca otomatis, kartu informasi produk dan kategori sampahnya muncul dari bawah, serta tombol panduan daur ulang berfungsi | Pass |
+| UC02-TC04 | KF06 | Alternatif 2b: Memasukkan kode barcode secara manual | 1. Pada mode "Barcode", tekan tombol "Ketik kode barcode"<br>2. Masukkan angka kode barcode produk terdaftar pada kolom isian, lalu tekan "Cari" | 2000000000015 | Sistem menampilkan kartu hasil berisi informasi produk dan kategori sampah yang sesuai | Dialog input tertutup dan kartu informasi produk beserta kategori sampahnya muncul sesuai kode yang diketik | Pass |
+| UC02-TC05 | KF06 | Alternatif 3: Kode barcode tidak ditemukan di basis data | 1. Pada mode "Barcode", tekan "Ketik kode barcode"<br>2. Masukkan kombinasi angka acak yang tidak terdaftar, lalu tekan Cari | 101940 (kode tidak terdaftar) | Muncul jendela peringatan ("Barcode Belum Terdaftar") beserta tombol "Tutup" | Jendela peringatan "Barcode Belum Terdaftar" dan tombol "Tutup" tampil di layar pemindai | Pass |
+| UC02-TC06 | KF06 | Alternatif 4: Objek sampah tidak terdeteksi / belum tersedia | 1. Pada mode "Sampah", arahkan kamera ke bidang kosong<br>2. Ambil gambar | Foto dinding kosong | Layar hasil menampilkan pesan dari sistem bahwa tidak ada sampah yang terdeteksi dan menampilkan tombol "Pindai Lagi" untuk mengulang pemindaian | Sistem menampilkan pesan bahwa objek tidak terdeteksi beserta tombol "Pindai Lagi" untuk memindai ulang | Pass |
 
 ### 4.4.2 Use Case [Nama Use Case 2]
 
@@ -538,6 +623,8 @@ Tabel 4.5. Hasil Pengujian KNF
 
 | ID Pengujian | ID KNF | Parameter | Target Terukur | Metode dan Alat | Hasil Aktual | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| KNF02-TC01 | KNF02 | Response Time | Rata-rata waktu respons klasifikasi sampah melalui computer vision beserta kategori daur ulang tampil dalam waktu <5 detik | Pengukuran selisih waktu menggunakan pencatatan timestamp log pada 5 kali percobaan pengiriman gambar sampah ke layanan AI, lalu dihitung rata-ratanya | Dari 5 kali pengujian diperoleh waktu respons masing-masing 4,23 detik, 4,02 detik, 3,34 detik, 8,55 detik, dan 3,70 detik, dengan rata-rata 4,77 detik serta seluruh respons berstatus HTTP 200 | Pass |
+| KNF04-TC01 | KNF04 | Availability | Layanan pemindaian tersedia dengan tingkat ketersediaan ≥99% | Pengujian availability probe dengan mengirimkan 20 permintaan beruntun secara otomatis ke endpoint Cloudflare Worker API dan Cloud Firestore REST API serta pemeriksaan status respons server | Dari 20 kali pengujian ketersediaan beruntun, diperoleh tingkat ketersediaan 100% pada Cloudflare Worker API dan 100% pada Cloud Firestore | Pass |
 | KNF05-TC01 | KNF05 | Reliability (akurasi jadwal pembuangan sampah) | Akurasi ≥ 90% jadwal yang ditampilkan (kecamatan, kelurahan, dan seluruh tanggal pengambilan) sama dengan data acuan | Jest (`src/tests/KNF05Akurasi.test.js`) terhadap Firebase Emulator yang di-*seed*. Untuk setiap lokasi pada `src/firebase/data/jadwal.json`, panggil `JadwalController.getJadwal(id)` (Controller → Model → Firestore) dan bandingkan hasilnya dengan data acuan. Akurasi = lokasi cocok / seluruh lokasi. | 151/151 lokasi cocok, **akurasi 100,00%** (903 ms untuk 151 pembacaan) | Pass |
 | KNF05-TC02 | KNF05 | Reliability (akurasi informasi cara mendaur ulang) | Akurasi ≥ 90% informasi material (nama, jenis sampah, deskripsi, serta seluruh tipe beserta langkah dibuang/kreasi/gunakan ulang) sama dengan data acuan | Jest terhadap emulator. Untuk setiap material pada `informasiSampah.json`, bandingkan hasil `InformasiSampahController.getMain()` dan `getDetail(id)` dengan data acuan. | 10/10 material cocok pada halaman daftar dan detail, **akurasi 100,00%** | Pass |
 | KNF05-TC03 | KNF05 | Reliability (akurasi kategori sampah melalui barcode) | Akurasi ≥ 90% kategori (`idSampah`) dan tipe (`idTipe`) hasil pencarian barcode sesuai data acuan dan tipe tersebut ada pada informasi material | Jest terhadap emulator. Untuk setiap kode pada `barcodeProduk.json`, panggil `InformasiSampahController.cariBarcode(kode)` dan bandingkan dengan data acuan. | 6/6 barcode cocok, **akurasi 100,00%** | Pass |
@@ -554,8 +641,17 @@ Tabel 4.6. Bukti Hasil Pengujian
 | ID Pengujian | Bukti Hasil Pengujian |
 | :--- | :--- |
 | C04-UT01 – C04-UT17, C05-UT01 – C05-UT36 | <img src="./assets/unit-test-C04-C05-1.png" alt="unit-test-C04-C05-1.png" width="600"><br><img src="./assets/unit-test-C04-C05-2.png" alt="unit-test-C04-C05-2.png" width="600"><br><img src="./assets/unit-test-C04-C05-3.png" alt="unit-test-C04-C05-3.png" width="600"> |
+| C10-UT01 – C10-UT11, C12-UT01 – C12-UT04, C13-UT01 – C13-UT03 | <img src="./assets/testpemindai.png" width="100%"> |
 | C04, C05 (coverage) | <img src="./assets/coverage-C04-C05.png" alt="coverage-C04-C05.png" width="600"> |
+| C10, C12, C13(Coverage) | <img src="./assets/tespemindaicoverage.png" width="100%"> |
 | INT-I07-TC01 – INT-I14-TC02 | <img src="./assets/integrasi-I07-I14.png" alt="integrasi-I09-I14.png" width="600"> |
+| INT-I23-TC01, INT-I23-TC02, INT-I24-TC01, INT-I24-TC02, INT-I25-TC01, INT-I25-TC02 | <img src="./assets/tes_knf04.png" width="100%"> |
+| UC02-TC01 | <img src="./assets/pemindai1.png" width="20%"> |
+| UC02-TC02 | <img src="./assets/pemindai2.png" width="20%"> |
+| UC02-TC03 | <img src="./assets/pemindai3.jpeg" width="20%"> |
+| UC02-TC04 | <img src="./assets/pemindai4.jpeg" width="20%"> |
+| UC02-TC05 | <img src="./assets/pemindai5.jpeg" width="20%"> |
+| UC02-TC06 | <img src="./assets/pemindai6.jpeg" width="20%"> |
 | UC03-TC01 | <img src="./assets/UC03-TC01-a.png" alt="UC03-TC01-a.png" width="180"><br><img src="./assets/UC03-TC01-b.jpeg" alt="UC03-TC01-b.jpeg" width="180"> <img src="./assets/UC03-TC01-c.jpeg" alt="UC03-TC01-c.jpeg" width="180"> <img src="./assets/UC03-TC01-d.jpeg" alt="UC03-TC01-d.jpeg" width="180"><br><img src="./assets/UC03-TC01-e.jpeg" alt="UC03-TC01-e.jpeg" width="180"> <img src="./assets/UC03-TC01-f.jpeg" alt="UC03-TC01-f.jpeg" width="180"><br><img src="./assets/UC03-TC01-g.png" alt="UC03-TC01-g.png" width="180"> |
 | UC03-TC02 | <img src="./assets/UC03-TC02.jpeg" alt="UC03-TC02.jpeg" width="180"> |
 | UC03-TC03 | <img src="./assets/UC03-TC03.jpeg" alt="UC03-TC03.jpeg" width="180"> |
@@ -567,6 +663,8 @@ Tabel 4.6. Bukti Hasil Pengujian
 | UC04-TC03 | <img src="./assets/UC04-TC03.jpeg" alt="UC04-TC03.jpeg" width="180"> |
 | UC04-TC04 | <img src="./assets/UC04-TC04-a.jpeg" alt="UC04-TC04-a.jpeg" width="180"> <img src="./assets/UC04-TC04-b.jpeg" alt="UC04-TC04-b.jpeg" width="180"> |
 | UC04-TC05 | <img src="./assets/UC04-TC05-a.jpeg" alt="UC04-TC05-a.jpeg" width="180"> <img src="./assets/UC04-TC05-b.jpeg" alt="UC04-TC05-b.jpeg" width="180"> |
+| KNF02-TC01 | <img src="./assets/tes_knf02.png" width="100%"> |
+| KNF04-TC01 | <img src="./assets/tes_knf04.png" width="100%"> |
 | KNF05-TC01 – KNF05-TC03 | <img src="./assets/knf05-tc01-tc03.png" alt="knf05-tc01-tc03.png" width="600"> |
 | KNF05-TC04 | <img src="./assets/knf05-tc04.png" alt="knf05-tc04.png" width="600"> |
 
