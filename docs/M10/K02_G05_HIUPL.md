@@ -386,11 +386,9 @@ Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 | *I-01* | *KeranjangController* | *Keranjang (Model)* | *Controller - Model* | *INT-TC01, INT-TC02* |
 | *I-02* | *Pesanan (Model)* | *Database* | *Aplikasi - Basis data* | *INT-TC03* |
 | *I-03* | *PaymentGatewayAdapter* | *Payment Gateway (dummy)* | *Aplikasi - Sistem eksternal* | *INT-TC04, INT-TC05* |
-| *I-23* | *PemindaiController* | *SampahModel dan BarcodeModel* | *Controller - Model* | *INT-TC04, INT-TC05* |
-| *I-24* | *SampahModel* | *Cloudflare Worker API (ai-penilai.3no.workers.dev)* | *Aplikasi - Sistem eksternal* | *INT-TC04, INT-TC05* |
-| *I-25* | *BarcodeModel* | *Cloud Firestore (barcodeProduk)* | *Aplikasi - basis data* | *INT-TC04, INT-TC05* |
-| *[I-XX]* | *[Komponen asal]* | *[Komponen tujuan]* | *[Jenis batas]* | *[ID test case]* |
-| *...* | *...* | *...* | *...* | *...* |
+| *I-23* | *PemindaiInterface -> PemindaiController* | *SampahModel dan BarcodeModel* | *Controller - Model* | *INT-I23-TC01, INT-I23-TC02* |
+| *I-24* | *PemindaiInterface -> PemindaiController* | *SampahModel -> Cloudflare Worker API (ai-penilai.3no.workers.dev)* | *Aplikasi - Sistem eksternal* | *INT-I24-TC01, INT-I24-TC02* |
+| *I-25* | *PemindaiInterface -> PemindaiController* | *BarcodeModel -> Cloud Firestore (barcodeProduk)* | *Aplikasi - basis data* | *INT-I25-TC01, INT-I25-TC02* |
 
 Tabel 4.3.2. Hasil Pengujian Integrasi
 
@@ -399,7 +397,12 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 | *INT-TC01* | *I-01* | *Normal: tambah item ke keranjang* | *Panggil `tambahItem()` melalui KeranjangController dengan produk valid* | *Item tersimpan pada Keranjang dan tampil pada daftar item* | *[Hasil aktual]* | *Pass/Fail* |
 | *INT-TC03* | *I-02* | *Normal: simpan pesanan* | *Buat pesanan, lalu baca ulang langsung dari basis data* | *Baris pesanan ada dengan nilai total dan status yang sama* | *[...]* | *Pass/Fail* |
 | *INT-TC05* | *I-03* | *Gagal: gateway mengembalikan status gagal* | *Kirim otorisasi dengan saldo dummy tidak cukup* | *Status pesanan tidak berubah menjadi "Lunas", pesan gagal diteruskan ke pengguna* | *[...]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| INT-I23-TC01 | I-23 | Normal: Alur terpadu pemindaian barcode dari layar pemindai hingga pengambilan detail sampah | Memanggil cariKode("2000000000015") pada PemindaiController untuk memicu pencarian produk melalui BarcodeModel, lalu meneruskannya ke kartu hasil | Data produk dan informasi panduan daur ulang terhubung dengan benar serta siap ditampilkan pada antarmuka | Data produk dari BarcodeModel berhasil diteruskan dan digabungkan dengan detail panduan sampah di PemindaiController untuk ditampilkan | Pass |
+| INT-I23-TC02 | I-23 | Gagal: Penanganan ketika data jenis sampah belum tersedia | Memanggil cariKode("98909899") dari layar pemindai dengan kode barcode produk yang terdaftar, tetapi kode jenis sampahnya belum ada | Kartu hasil tetap menampilkan informasi produk sementara bagian panduan sampah bernilai kosong | Informasi produk tetap berhasil dimuat dan tampil di layar I-25 | Pass |
+| INT-I24-TC01 | I-24 | Normal: Pengiriman foto sampah dari layar kamera ke server AI | Mengambil foto pada antarmuka pemindai dan mengirimkan gambar botol plastik melalui kirimFoto() | Server merespons status berhasil dan mengembalikan daftar objek terdeteksi beserta koordinat kotak deteksi untuk ditampilkan pada antarmuka hasil | Server AI merespons dengan status 200 dan mengembalikan objek deteksi botol plastik beserta koordinat dan kategori sampahnya untuk ditampilkan di antarmuka | Pass |
+| INT-I24-TC02 | I-24 | Gagal: Pengiriman data gambar tidak valid ke server AI | Mengirimkan teks kosong atau format gambar yang rusak melalui kirimFoto() | Server menolak permintaan tersebut dan aplikasi menangkap pesan kesalahan dari server | Server menolak permintaan dan fungsi meneruskan pesan kesalahan sesuai respons server | Pass |
+| INT-I25-TC01 | I-25 | Normal: Pembacaan data produk dari Cloud Firestore | Memanggil cariProduk() dengan kode barcode yang tersimpan di koleksi barcodeProduk, lalu meneruskan kode jenis sampahnya ke ambilInformasiSampah() | Dokumen produk dari koleksi barcodeProduk dan koleksi informasiSampah berhasil dibaca secara lengkap dari basis data | Dokumen produk dan panduan daur ulang berhasil dibaca dari Cloud Firestore sesuai dengan data yang tersimpan | Pass |
+| INT-I25-TC02 | I-25 | Gagal: Pencarian kode barcode yang tidak ada di Cloud Firestore | Memanggil cariProduk("9999999999999") secara langsung ke koleksi barcodeProduk dari mode barcode | Basis data mengembalikan hasil kosong sehingga antarmuka menampilkan modal "Barcode Belum Terdaftar" | Fungsi mengembalikan nilai kosong dengan aman | Pass |
 
 <br>
 
@@ -469,14 +472,15 @@ Tabel 4.6. Bukti Hasil Pengujian
 | :--- | :--- |
 | *C10-UT01 – C10-UT11, C12-UT01 – C12-UT04, C13-UT01 – C13-UT03* | *<img src="./assets/testpemindai.png" width="100%">* |
 | *C10, C12, C13(Coverage)* | *<img src="./assets/tespemindaicoverage.png" width="100%">* |
-| *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
-| *UC02-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC02-TC02* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC02-TC03* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC02-TC04* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC02-TC05* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC02-TC06* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *KNF01-TC01* | *[Sisipkan bukti pengukuran parameter KNF01-TC01]* |
+| *INT-I23-TC01, INT-I23-TC02, INT-I24-TC01, INT-I24-TC02, INT-I25-TC01, INT-I25-TC02* | *<img src="./assets/tes_knf04.png" width="100%">* |
+| *UC02-TC01* | *<img src="./assets/pemindai1.png" width="20%">* |
+| *UC02-TC02* | *<img src="./assets/pemindai2.png" width="20%">* |
+| *UC02-TC03* | *<img src="./assets/pemindai3.jpeg" width="20%">* |
+| *UC02-TC04* | *<img src="./assets/pemindai4.jpeg" width="20%">* |
+| *UC02-TC05* | *<img src="./assets/pemindai5.jpeg" width="20%">* |
+| *UC02-TC06* | *<img src="./assets/pemindai6.jpeg" width="20%">* |
+| *KNF02-TC01* | *<img src="./assets/tes_knf02.png" width="100%">* |
+| *KNF02-TC01* | *<img src="./assets/tes_knf04.png" width="100%">* |
 | *...* | *...* |
 
 <br>
