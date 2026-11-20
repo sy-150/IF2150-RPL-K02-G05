@@ -668,7 +668,7 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 | INT-I02-TC02 | I-02 | Normal: baca profil wilayah tugas dan perbarui nomor telepon di Cloud Firestore | Buka halaman Profil Petugas (`I-15`), ubah nomor telepon pada Edit Profil (`I-16`), lalu periksa dokumen `akunPetugas/{uid}` di Firestore Console | Data profil dan nama kelurahan dari koleksi `jadwal` tampil sesuai, serta field `noTelepon` di Firestore terbarui | Data profil beserta nama kelurahan tampil sesuai, dan field `noTelepon` pada dokumen `akunPetugas/{uid}` di Cloud Firestore berhasil terbarui | Pass |
 | INT-I02-TC03 | I-02 | Normal: registrasi dan autentikasi kredensial ke Firebase Authentication | Buat akun baru dan lakukan login menggunakan email serta kata sandi valid terhadap server Firebase Authentication | User baru tercatat pada Firebase Authentication Console dan sesi autentikasi aktif berhasil terbentuk | User baru berhasil dibuat dan tercatat pada Firebase Authentication dengan UID yang sesuai serta sesi aktif terbentuk saat login | Pass |
 | INT-I02-TC04 | I-02 | Gagal: otorisasi login ditolak oleh Firebase Authentication | Kirim permintaan login dengan email terdaftar dan kata sandi salah ke Firebase Authentication | Firebase Authentication menolak kredensial (`auth/invalid-credential`), sesi tidak dibuat, dan pesan gagal diteruskan ke pengguna | Firebase Authentication menolak kredensial dengan kode `auth/invalid-credential`, `currentUser` tetap `null`, dan status `'KREDENSIAL_SALAH'` dikembalikan | Pass |
-| INT-I02-TC05 | I-02 | Normal: pembaruan kata sandi dan pengakhiran sesi pada Firebase Authentication | Ubah kata sandi pada pop-up Ubah Kata Sandi (`I-20`), lakukan Keluar Akun (`I-19`), lalu login ulang dengan kata sandi baru | Kata sandi akun diperbarui pada Firebase Authentication, sesi dihapus saat logout, dan login ulang dengan sandi baru berhasil | Kata sandi berhasil diperbarui pada Firebase Authentication, sesi terhapus setelah `logout()`, dan login ulang menggunakan sandi baru berhasil | Pass |
+| INT-I02-TC0 | I-02 | Normal: pembaruan kata sandi dan pengakhiran sesi pada Firebase Authentication | Ubah kata sandi pada pop-up Ubah Kata Sandi (`I-20`), lakukan Keluar Akun (`I-19`), lalu login ulang dengan kata sandi baru | Kata sandi akun diperbarui pada Firebase Authentication, sesi dihapus saat logout, dan login ulang dengan sandi baru berhasil | Kata sandi berhasil diperbarui pada Firebase Authentication, sesi terhapus setelah `logout()`, dan login ulang menggunakan sandi baru berhasil | Pass |
 | INT-I03-TC01 | I-03 | Normal: memuat daftar kategori | Jalankan aplikasi dengan koneksi internet, buka tab Daur Ulang | Tampil 10 kartu kategori sesuai koleksi `informasiSampah` (Plastik, Kaca, Logam, Kertas & Karton, Organik, Elektronik, Lainnya, Keramik & Porselen, Tekstil & Kain, Minyak Jelantah) | 10 kartu kategori tampil dengan gambar, nama, dan ringkasan sesuai data Firestore | Pass |
 | INT-I03-TC02 | I-03 | Normal: pencarian material | Ketik "botol" pada kolom Cari Material Sampah | Hanya kartu Plastik dan Kaca yang tampil, tanpa request Firestore baru | Kartu Plastik dan Kaca tampil | Pass |
 | INT-I03-TC03 | I-03 | Gagal: database tidak dapat diakses | Aktifkan mode pesawat, buka ulang tab Daur Ulang; lalu matikan mode pesawat dan tekan "Coba Lagi" | Tampil pesan "Gagal memuat informasi sampah." dan tombol "Coba Lagi"; setelah koneksi pulih, kartu kategori tampil kembali | Pesan gagal dan tombol "Coba Lagi" tampil; setelah ditekan, kartu kategori kembali tampil | Pass |
@@ -890,6 +890,9 @@ Tabel 5.2. Matriks Kerunutan KNF terhadap Pengujian
 
 | ID KNF | Parameter | KF/UC Terkait | Test Case |
 | :--- | :--- | :--- | :--- |
-| *KNF01* | *Reliability* | *KF05 / UC03* | *KNF01-TC01* |
-| *KNFXX* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *...* | *...* | *...* | *...* |
+| KNF01 | Ergonomy | KF01–KF13 / UC01–UC07 | KNF01-TC01 |
+| KNF02 | Response Time | KF02 / UC02 | KNF02-TC01 |
+| KNF03 | Compatibility | KF01–KF13 / UC01–UC07 | KNF03-TC03 |
+| KNF04 | Availability | KF02–KF13 / UC01–UC07 | KNF04-TC01 |
+| KNF05 | Reliability | KF02–KF07 / UC02–UC05 | KNF05-TC01, KNF05-TC02, KNF05-TC03, KNF05-TC04 |
+| KNF06 | Security | KF05, KF08–KF13 / UC01, UC03, UC06, UC07 | KNF06-TC01, INT-I14-TC01, INT-I14-TC02 |
