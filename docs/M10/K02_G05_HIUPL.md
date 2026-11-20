@@ -71,7 +71,7 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Dokumen DPPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
+Dokumen HIUPL ditulis dengan tujuan menciptakan suatu dokumen penghubung antara pengembang dan pengguna perangkat lunak. Tidak dapat dipungkiri bahwa dalam pengembangan perangkat lunak, terdapat banyak masalah yang menghambat proses pengembangan, termasuk tapi tidak terbatas pada konflik kepentingan, tuntutan kontrak, dan pemahaman yang berbeda. Aplikasi EcoTrack sendiri tidak terlepas dari masalah ini, mengingat kompleksitas sistem yang dirancang dan akan dibangun. Oleh karena itu, diharapkan bahwa penulisan dokumen ini akan menghilangkan ambiguitas, mencegah miskomunikasi, dan menghasilkan perangkat lunak yang sesuai kebutuhan dan mudah dirawat.
 
 Pengguna dokumen ini mencakup sejumlah pihak yang terlibat dalam proses pengembangan perangkat lunak. Pertama, dokumen ini akan digunakan oleh pengembang awal dan pengembang yang akan datang sebagai acuan kesesuaian spesifikasi dalam pengembangan dan perawatan lanjut. Kedua, dokumen ini menjadi standar untuk memverifikasi kesesuaian fungsionalitas perangkat lunak bagi penguji/evaluator. Ketiga, klien yang merupakan pemangku kepentingan dapat mengacu pada dokumen ini untuk memastikan kebutuhannya telah dipahami dan diimplementasikan dengan benar.
 
@@ -158,9 +158,9 @@ Tabel 1.4. Aturan Penomoran
 - Pristiandaru, Danur Lumbang. Mengenal Tujuan 15 SDGs: Ekosistem Daratan Sumber: https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Membership: https://kmp.im/plus6 Download aplikasi: https://kmp.im/app6, Kompas.com, 23 Mei 2023, https://lestari.kompas.com/read/2023/05/23/080000286/mengenal-tujuan-15-sdgs--ekosistem-daratan. Accessed 30 Agustus 2026.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
-Dokumen SKPL ini terdiri dari enam bab. Bab pertama adalah pendahuluan, yang merupakan penjelasan dari dokumen SKPL ini. Bab tersebut terdiri dari tujuan penulisan, lingkup masalah, tabel definisi, istilah, dan singkatan, aturan penomoran yang digunakan, referensi pembuatan dokumen, serta deskripsi umum dokumen. Bab kedua membahas deskripsi perangkat lunak yang dirancang. Bab tersebut terdiri dari deskripsi umum sistem, dan perangkat lunak, pengguna dan kebutuhannya, batasan perangkat lunak, dan lingkungan operasi perangkat lunak.
+Dokumen HIUPL ini terdiri dari lima bab. Bab pertama adalah pendahuluan yang menjelaskan dokumen HIUPL ini. Bab tersebut terdiri dari tujuan penulisan dokumen, lingkup masalah, definisi, istilah, dan singkatan, aturan penomoran, referensi, serta deskripsi umum dokumen. Bab kedua berisi deskripsi umum perangkat lunak, yaitu gambaran sistem EcoTrack beserta *use case diagram*, keterkaitannya dengan sistem lain di luarnya, dan batasan perangkat lunak.
 
-Bab tiga berisi deskripsi kebutuhan perangkat lunak, yang terdiri dari kebutuhan fungsional dan non fungsional perangkat lunak terkait. Bab empat membahas pemodelan use case, yang berisi identifikasi aktor dan use case, diagram use case, dan skenario-skenario terhadap use case terkait. Bab lima mendeskripsikan pemodelan kelas, yang terdiri dari identifikasi kelas, pemodelan kelas per use case, dan gabungan pemodelan kelas secara keseluruhan. Terkahkih, bab enam berisi tabel traceability yang menghubungkan kelas dan use case dengan kebutuhan awalnya.
+Bab ketiga membahas implementasi perangkat lunak, yang terdiri dari lingkungan implementasi, implementasi modul atau kelas, implementasi antarmuka, dan file lain yang digunakan. Bab keempat memuat hasil pengujian, yang terdiri dari strategi dan kedalaman pengujian kelas, pengujian unit kelas, pengujian integrasi, pengujian *use case*, pengujian kebutuhan non-fungsional, serta tangkapan layar dan bukti hasil pengujian. Terakhir, bab kelima berisi tabel *traceability* yang menghubungkan setiap kebutuhan fungsional dan non-fungsional dengan *use case*, kelas, file implementasi, dan *test case* terkait.
 
 <br>
 
@@ -385,13 +385,13 @@ Tabel 4.2.2b. Ringkasan Cakupan Kelas C02
 | Coverage (wajib ≥ 70%) | 100% statements / 92,5% branch (100% functions, 100% lines) menggunakan Jest, bukti pada Subbab 4.6 |
 
 
-### 4.2.4 Kelas Jadwal
+### 4.2.3 Kelas Jadwal
 
 **ID Kelas:** C04  
 **Nama Kelas:** Jadwal  
 **Tingkat:** Mendalam
 
-Tabel 4.2.4. Hasil Pengujian Unit Kelas C04
+Tabel 4.2.3. Hasil Pengujian Unit Kelas C04
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -413,7 +413,7 @@ Tabel 4.2.4. Hasil Pengujian Unit Kelas C04
 | C04-UT16 | `getJadwalById(idJadwal)` | Negatif | `getJadwalById('tidak-ada')`, dokumen tidak ada | `null` | `null` | Pass |
 | C04-UT17 | `getJadwalById(idJadwal)` | Negatif | `getDoc` mengembalikan data dari *cache* (offline) | Melempar error "Tidak bisa terhubung ke server" | Melempar error sesuai harapan | Pass |
 
-Tabel 4.2.4b. Ringkasan Cakupan Kelas C04
+Tabel 4.2.3b. Ringkasan Cakupan Kelas C04
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -422,13 +422,13 @@ Tabel 4.2.4b. Ringkasan Cakupan Kelas C04
 | ID Algoritma yang tercakup | Algo-J-001, Algo-J-002, Algo-J-003, Algo-J-004, Algo-J-005, dan algoritma `simpanJadwal()` (tertulis Algo-IS-006 pada DPPL 5.4.6); Q-J-001 dan Q-J-002 pada implementasi. |
 | Coverage (wajib ≥ 70%) | `src/ecotrack/src/model/Jadwal.js`: **100% baris, 100% cabang, 100% fungsi**. Alat: Jest Coverage (Istanbul). |
 
-### 4.2.5 Kelas JadwalController
+### 4.2.4 Kelas JadwalController
 
 **ID Kelas:** C05  
 **Nama Kelas:** JadwalController  
 **Tingkat:** Mendalam
 
-Tabel 4.2.1b. Ringkasan Cakupan Kelas C01
+Tabel 4.2.4b. Ringkasan Cakupan Kelas C01
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -440,7 +440,7 @@ Tabel 4.2.1b. Ringkasan Cakupan Kelas C01
 ---
 
 
-Tabel 4.2.5. Hasil Pengujian Unit Kelas C05
+Tabel 4.2.4. Hasil Pengujian Unit Kelas C05
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -481,7 +481,7 @@ Tabel 4.2.5. Hasil Pengujian Unit Kelas C05
 | C05-UT35 | `getJudulBulan(bulan)`, `getTeksHariIni(sekarang)` | Normal | Oktober 2026; 5 Okt 2026 | "Oktober 2026"; "Senin, 5 Oktober 2026" | Sesuai harapan | Pass |
 | C05-UT36 | `getBulanIni(sekarang)` | Batas | 31 Okt 2026 20:00 UTC (= 1 Nov WIB) | `{ tahun: 2026, bulan: 10 }` (November) | Sesuai harapan | Pass |
 
-Tabel 4.2.5b. Ringkasan Cakupan Kelas C05
+Tabel 4.2.4b. Ringkasan Cakupan Kelas C05
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -490,13 +490,13 @@ Tabel 4.2.5b. Ringkasan Cakupan Kelas C05
 | ID Algoritma yang tercakup | Algo-JC-001 (`getDaftarJadwal`), Algo-JC-002 (`cariLokasiTPS`), Algo-JC-003 (`getJadwal`), Algo-JC-004 (`editJadwal`); Q-JC-001 dan Q-JC-002 (melalui *mock* model). |
 | Coverage (wajib ≥ 70%) | `src/ecotrack/src/controller/JadwalController.js`: **100% baris, 80,76% cabang, 100% fungsi**. Cabang yang tidak tercakup hanya nilai bawaan parameter `sekarang = new Date()` dan `keyword ?? ''`. Alat: Jest Coverage (Istanbul). |
 
-### 4.2.7 Kelas InformasiSampah
+### 4.2.5 Kelas InformasiSampah
 
 **ID Kelas:** *[C07]*  
 **Nama Kelas:** *[InformasiSampah]*  
 **Tingkat:** *[Mendalam]*
 
-Tabel 4.2.7. Hasil Pengujian Unit Kelas [C07]
+Tabel 4.2.5. Hasil Pengujian Unit Kelas [C07]
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -517,7 +517,7 @@ Tabel 4.2.7. Hasil Pengujian Unit Kelas [C07]
 | C07-UT15 | `cariBarcode(barcode)` | Negatif | barcode = "9999999999999" (tidak terdaftar) | Mengembalikan `null` | `null` | Pass |
 | C07-UT16 | `cariBarcode(barcode)` | Negatif | Snapshot dari cache (offline) | Melempar error "Tidak bisa terhubung ke server" | Error dilempar | Pass |
 
-Tabel 4.2.7b. Ringkasan Cakupan Kelas [C07]
+Tabel 4.2.5b. Ringkasan Cakupan Kelas [C07]
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -526,13 +526,13 @@ Tabel 4.2.7b. Ringkasan Cakupan Kelas [C07]
 | ID Algoritma yang tercakup | Algo-IS-001, Algo-IS-002, Algo-IS-003 |
 | Coverage (wajib ≥ 70%) | [... % baris / ... % cabang], Jest `--coverage`, bukti pada 4.6 |
 
-### 4.2.8 Kelas InformasiSampahController
+### 4.2.6 Kelas InformasiSampahController
 
 **ID Kelas:** *[C08]*  
 **Nama Kelas:** *[InformasiSampahController]*  
 **Tingkat:** *[Sedang]*
 
-Tabel 4.2.1. Hasil Pengujian Unit Kelas [C08]
+Tabel 4.2.6. Hasil Pengujian Unit Kelas [C08]
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -545,19 +545,19 @@ Tabel 4.2.1. Hasil Pengujian Unit Kelas [C08]
 | C08-UT07 | `cariBarcode(barcode)` | Normal | barcode = "2000000000015" | Data produk dari model diteruskan | Objek dengan `idSampah: "plastik"` | Pass |
 | C08-UT08 | `cariBarcode(barcode)` | Gagal | Model melempar error | Error diteruskan ke pemanggil | Error diteruskan | Pass |
 
-### 4.2.9 Kelas InformasiSampahInterface
+### 4.2.7 Kelas InformasiSampahInterface
 
 **ID Kelas:** *[C09]*  
 **Nama Kelas:** *[InformasiSampahInterface]*  
 **Tingkat:** *[Tidak perlu]*
 
-### 4.2.10 Kelas PemindaiController
+### 4.2.7 Kelas PemindaiController
 
 **ID Kelas:** *C10*  
 **Nama Kelas:** *PemindaiController*  
 **Tingkat:** *Mendalam*
 
-Tabel 4.2.1. Hasil Pengujian Unit Kelas PemindaiController
+Tabel 4.2.7. Hasil Pengujian Unit Kelas PemindaiController
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -574,7 +574,7 @@ Tabel 4.2.1. Hasil Pengujian Unit Kelas PemindaiController
 | C10-UT11 | setMode() & pindaiLagi() | Normal | Pengguna mengganti mode dari Sampah ke Barcode saat lampu kilat (flash) menyala, lalu menekan tombol Pindai Lagi | Lampu kilat otomatis dimatikan, mode berpindah, dan seluruh hasil pemindaian sebelumnya dibersihkan seperti semula | Mode berpindah ke Barcode, lampu kilat mati, dan seluruh hasil pemindaian sebelumnya bersih kembali | Pass |
 
 
-Tabel 4.2.1b. Ringkasan Cakupan Kelas PemindaiController
+Tabel 4.2.7b. Ringkasan Cakupan Kelas PemindaiController
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -583,13 +583,13 @@ Tabel 4.2.1b. Ringkasan Cakupan Kelas PemindaiController
 | ID Algoritma yang tercakup | Algo-PC-001, Algo-PC-002 | 
 | Coverage (wajib ≥ 70%) | 100% line / 88.88% branch, tool: Jest, bukti pada Subbab 4.6 | 
 
-### 4.2.12 Kelas sampahModel
+### 4.2.8 Kelas sampahModel
 
 **ID Kelas:** *C12*  
 **Nama Kelas:** *sampahModel*  
 **Tingkat:** *Sedang*
 
-Tabel 4.2.12. Hasil Pengujian Unit Kelas C12
+Tabel 4.2.8. Hasil Pengujian Unit Kelas C12
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -598,7 +598,7 @@ Tabel 4.2.12. Hasil Pengujian Unit Kelas C12
 | C12-UT03 | kirimFoto() | Negatif | Mengirim data foto yang rusak sehingga ditolak oleh server AI | Sistem menangkap penolakan dari server dan meneruskan pesan kesalahan yang jelas | Sistem menampilkan pesan kesalahan sesuai respons server ("Gambar tidak valid" atau "Permintaan gagal") | Pass |
 | C12-UT04 | hapusFile() | Normal & Negatif | Menghapus berkas foto sementara pada 3 kondisi: berkas masih ada, berkas sudah terhapus, dan akses penyimpanan ditolak | Berkas dihapus jika memang ada; jika berkas tidak ada atau akses ditolak, aplikasi tetap berjalan normal tanpa error | Berkas dihapus hanya saat tersedia, dan aplikasi tetap berjalan stabil tanpa gangguan pada kondisi gagal | Pass |
 
-Tabel 4.2.12b. Ringkasan Cakupan Kelas PemindaiController
+Tabel 4.2.8b. Ringkasan Cakupan Kelas PemindaiController
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -607,13 +607,13 @@ Tabel 4.2.12b. Ringkasan Cakupan Kelas PemindaiController
 | ID Algoritma yang tercakup | Algo-PC-001 | 
 | Coverage (wajib ≥ 70%) | 100% line / 90% branch, tool: Jest, bukti pada Subbab 4.6 |
 
-### 4.2.13 Kelas barcodeModel
+### 4.2.9 Kelas barcodeModel
 
 **ID Kelas:** *C13*  
 **Nama Kelas:** *barcodeModel*  
 **Tingkat:** *Sedang*
 
-Tabel 4.2.13. Hasil Pengujian Unit Kelas C13
+Tabel 4.2.9. Hasil Pengujian Unit Kelas C13
 
 | ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -622,7 +622,7 @@ Tabel 4.2.13. Hasil Pengujian Unit Kelas C13
 | C13-UT03 | cariProduk() | Negatif | Menguji masukan kosong/spasi | Sistem mengembalikan hasil kosong (null) tanpa error | Masukan kosong ditangani dengan aman tanpa membuat aplikasi terhenti | Pass |
 | C13-UT03 | ambilInfoSampah() | Normal & Negatif | Mengambil panduan daur ulang untuk kategori valid ("plastik"), serta saat basis data sedang luring (offline) | Panduan daur ulang dikembalikan untuk kategori valid; untuk gangguan basis data, sistem mengembalikan hasil kosong (null) tanpa error | Panduan sampah "plastik" berhasil dimuat, sedangkan gangguan koneksi ditangani dengan aman tanpa membuat aplikasi terhenti | Pass |
 
-Tabel 4.2.13b. Ringkasan Cakupan Kelas BarcodeModel
+Tabel 4.2.9b. Ringkasan Cakupan Kelas BarcodeModel
 
 | Informasi | Keterangan |
 | :--- | :--- |
@@ -640,8 +640,8 @@ Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 
 | ID Antarmuka | Komponen Asal | Komponen Tujuan | Jenis Batas | Test Case |
 | :--- | :--- | :--- | :--- | :--- |
-| I-01 | `AkunPetugasController` (C02) | `AkunPetugas` (C01) | Controller - Model | INT-TC01, INT-TC02 |
-| I-02 | `AkunPetugas` (C01) | Cloud Firestore | Aplikasi - Basis data dan aplikasi - eksternal | INT-TC03 - INT-TC07 |
+| I-01 | AkunPetugasController (`signUp`) | AkunPetugas (`verifikasiPetugas`, `createAkunPetugas`) → Cloud Firestore (`dataPemerintah`, `akunPetugas`, `nikTerdaftar`) dan Firebase Authentication | Controller - Model, Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I01-TC01, INT-I01-TC02 |
+| I-02 | AkunPetugasController (`prosesLogin`) | AkunPetugas (`loginAuth`) → Firebase Authentication dan Cloud Firestore (`akunPetugas`) | Controller - Model, Aplikasi - Sistem eksternal, Aplikasi - Basis data | INT-I02-TC01, INT-I02-TC02 |
 | I-03 | InformasiSampahInterface (`informasi/index.jsx`) → InformasiSampahController | InformasiSampah (Model) → Firestore koleksi `informasiSampah` | View - Controller - Model; Aplikasi - Basis data | INT-I03-TC01, INT-I03-TC02, INT-I03-TC03 |
 | I-04 | InformasiSampahInterface (`informasi/index.jsx`) → InformasiSampahController | InformasiSampah (Model) | View - Controller - Model | INT-I04-TC01, INT-I04-TC02 |
 | I-05 | InformasiSampahInterface (`informasi/[idSampah]/index.jsx`) → InformasiSampahController | InformasiSampah (Model) → Firestore dokumen `informasiSampah/{id}` | View - Controller - Model; Aplikasi - Basis data | INT-I05-TC01, INT-I05-TC02, INT-I05-TC03 |
@@ -654,6 +654,14 @@ Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 | I-12 | JadwalController (`editJadwal`) | Jadwal (Model, `simpanJadwal`) → Cloud Firestore (`jadwal`, *transaction*) | Controller - Model, Aplikasi - Basis data | INT-I12-TC01 |
 | I-13 | JadwalController (`getJadwal` setelah `editJadwal`) | Jadwal (Model) → Cloud Firestore (`jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I13-TC01 |
 | I-14 | JadwalController (`editJadwal`) | Jadwal (Model) → Cloud Firestore dan *Security Rules* (`firestore.rules`) | Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I14-TC01, INT-I14-TC02 |
+| I-15 | AkunPetugasController (`getProfil`) | AkunPetugas (`getProfil`, `getNamaWilayah`) → Cloud Firestore (`akunPetugas`, `jadwal`) | Controller - Model, Aplikasi - Basis data | INT-I15-TC01 |
+| I-16 | AkunPetugasController (`editProfil`) | AkunPetugas (`editProfil`) → Cloud Firestore (`akunPetugas`, *transaction*) dan Firebase Authentication | Controller - Model, Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I16-TC01 |
+| I-17 | AkunPetugasController (`editProfil`) | AkunPetugas (`editProfil`) → Cloud Firestore (`akunPetugas`, *transaction*) dan Firebase Authentication | Controller - Model, Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I17-TC01 |
+| I-18 | AkunPetugasController (`editProfil`) | AkunPetugas (`editProfil`) → Cloud Firestore (`akunPetugas`, *transaction*) dan Firebase Authentication | Controller - Model, Aplikasi - Basis data, Aplikasi - Sistem eksternal | INT-I18-TC01 |
+| I-19 | AkunPetugasController (`logout`) | AkunPetugas (`logout`) → Firebase Authentication (`signOut`) | Controller - Model, Aplikasi - Sistem eksternal | INT-I19-TC01 |
+| I-20 | AkunPetugasController (`changePassword`) | AkunPetugas (`changePassword`) → Firebase Authentication (`updatePassword`) | Controller - Model, Aplikasi - Sistem eksternal | INT-I20-TC01 |
+| I-21 | AkunPetugasController (`changePassword`) | AkunPetugas (`changePassword`) → Firebase Authentication (`updatePassword`) | Controller - Model, Aplikasi - Sistem eksternal | INT-I21-TC01 |
+| I-22 | AkunPetugasController (`changePassword`) | AkunPetugas (`changePassword`) → Firebase Authentication (`updatePassword`) | Controller - Model, Aplikasi - Sistem eksternal | INT-I22-TC01 |
 | I-23 | PemindaiInterface -> PemindaiController | SampahModel dan BarcodeModel | Controller - Model | INT-I23-TC01, INT-I23-TC02 |
 | I-24 | PemindaiInterface -> PemindaiController | SampahModel -> Cloudflare Worker API (ai-penilai.3no.workers.dev) | Aplikasi - Sistem eksternal | INT-I24-TC01, INT-I24-TC02 |
 | I-25 | PemindaiInterface -> PemindaiController | BarcodeModel -> Cloud Firestore (barcodeProduk) | Aplikasi - basis data | INT-I25-TC01, INT-I25-TC02 |
@@ -662,13 +670,10 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 
 | ID Pengujian | ID Antarmuka | Skenario | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| INT-I01-TC01 | I-01 | Normal: registrasi dan login petugas melalui Controller | Jalankan pendaftaran (`signUp`) dan masuk akun (`prosesLogin`) melalui `AkunPetugasController` dengan data petugas valid (cakupan layar `I-01`, `I-02`) | *Controller* meneruskan verifikasi NIK ke `AkunPetugas`, mengisi status login aktif, dan mengembalikan `'BERHASIL'` | *Controller* berhasil meneruskan verifikasi NIK dan pembuatan akun ke `AkunPetugas`, mengatur `statusLogin = true`, serta mengembalikan `'BERHASIL'` | Pass |
-| INT-I01-TC02 | I-01 | Normal: kelola profil, ubah sandi, dan logout melalui Controller | Panggil `getProfil()`, `editProfil()`, `changePassword()`, dan `logout()` melalui `AkunPetugasController` pada sesi aktif (cakupan layar `I-15` s.d. `I-22`) | *Controller* mendelegasikan seluruh operasi ke `AkunPetugas`, memperbarui atribut sesi, dan mengembalikan `'BERHASIL'` / `true` | *Controller* berhasil membaca profil, memperbarui nomor telepon dan kata sandi melalui `AkunPetugas`, serta mereset sesi saat `logout()` dipanggil | Pass |
-| INT-I02-TC01 | I-02 | Normal: simpan akun baru dan NIK terdaftar ke Cloud Firestore | Daftarkan akun dengan NIK valid dari koleksi `dataPemerintah`, lalu baca langsung koleksi `akunPetugas` dan `nikTerdaftar` di Firestore Console | Dokumen `akunPetugas/{uid}` dan `nikTerdaftar/{nik}` tersimpan secara atomik melalui `writeBatch` dengan atribut yang sesuai | Dokumen `akunPetugas/{uid}` dan `nikTerdaftar/{nik}` berhasil tersimpan di Cloud Firestore dengan atribut profil yang sesuai | Pass |
-| INT-I02-TC02 | I-02 | Normal: baca profil wilayah tugas dan perbarui nomor telepon di Cloud Firestore | Buka halaman Profil Petugas (`I-15`), ubah nomor telepon pada Edit Profil (`I-16`), lalu periksa dokumen `akunPetugas/{uid}` di Firestore Console | Data profil dan nama kelurahan dari koleksi `jadwal` tampil sesuai, serta field `noTelepon` di Firestore terbarui | Data profil beserta nama kelurahan tampil sesuai, dan field `noTelepon` pada dokumen `akunPetugas/{uid}` di Cloud Firestore berhasil terbarui | Pass |
-| INT-I02-TC03 | I-02 | Normal: registrasi dan autentikasi kredensial ke Firebase Authentication | Buat akun baru dan lakukan login menggunakan email serta kata sandi valid terhadap server Firebase Authentication | User baru tercatat pada Firebase Authentication Console dan sesi autentikasi aktif berhasil terbentuk | User baru berhasil dibuat dan tercatat pada Firebase Authentication dengan UID yang sesuai serta sesi aktif terbentuk saat login | Pass |
-| INT-I02-TC04 | I-02 | Gagal: otorisasi login ditolak oleh Firebase Authentication | Kirim permintaan login dengan email terdaftar dan kata sandi salah ke Firebase Authentication | Firebase Authentication menolak kredensial (`auth/invalid-credential`), sesi tidak dibuat, dan pesan gagal diteruskan ke pengguna | Firebase Authentication menolak kredensial dengan kode `auth/invalid-credential`, `currentUser` tetap `null`, dan status `'KREDENSIAL_SALAH'` dikembalikan | Pass |
-| INT-I02-TC0 | I-02 | Normal: pembaruan kata sandi dan pengakhiran sesi pada Firebase Authentication | Ubah kata sandi pada pop-up Ubah Kata Sandi (`I-20`), lakukan Keluar Akun (`I-19`), lalu login ulang dengan kata sandi baru | Kata sandi akun diperbarui pada Firebase Authentication, sesi dihapus saat logout, dan login ulang dengan sandi baru berhasil | Kata sandi berhasil diperbarui pada Firebase Authentication, sesi terhapus setelah `logout()`, dan login ulang menggunakan sandi baru berhasil | Pass |
+| INT-I01-TC01 | I-01 | Normal: registrasi petugas valid melalui Controller | Jalankan `AkunPetugasController.signUp(...)` dengan nama lengkap dan NIK valid dari koleksi `dataPemerintah` (belum ada di `nikTerdaftar`), email baru, nomor telepon, serta kata sandi dan konfirmasi yang cocok | *Controller* meneruskan verifikasi NIK ke `AkunPetugas`, membuat akun di Firebase Auth, menyimpan dokumen `akunPetugas/{uid}` dan `nikTerdaftar/{nik}` di Firestore via `writeBatch`, mengisi `statusLogin = true`, dan mengembalikan `'BERHASIL'` | *Controller* berhasil meneruskan registrasi ke `AkunPetugas`, akun Auth dan dokumen Firestore tersimpan, `statusLogin = true`, dan mengembalikan `'BERHASIL'` | Pass |
+| INT-I01-TC02 | I-01 | Normal: dokumen `akunPetugas` dan `nikTerdaftar` tersimpan di Cloud Firestore | Setelah registrasi berhasil, baca dokumen `akunPetugas/{uid}` dan `nikTerdaftar/{nik}` di Cloud Firestore | Dokumen `akunPetugas/{uid}` berisi `username`, `nik`, `email`, `noTelepon`, dan `wilayahTugas` yang sesuai, serta dokumen `nikTerdaftar/{nik}` berisi `uid` | Dokumen `akunPetugas/{uid}` dan `nikTerdaftar/{nik}` berhasil tersimpan di Cloud Firestore dengan data yang sesuai | Pass |
+| INT-I02-TC01 | I-02 | Normal: login petugas dengan kredensial valid membentuk sesi aktif | Jalankan `AkunPetugasController.prosesLogin(email, password)` dengan email dan kata sandi valid terhadap Firebase Authentication | Firebase Authentication mengautentikasi kredensial, profil `akunPetugas/{uid}` dimuat ke `AkunPetugas` (`statusLogin = true`), sesi aktif terbentuk, dan *Controller* mengembalikan `'BERHASIL'` | Kredensial berhasil diautentikasi oleh Firebase Auth, data profil dimuat ke `AkunPetugas`, sesi aktif terbentuk, dan *Controller* mengembalikan `'BERHASIL'` | Pass |
+| INT-I02-TC02 | I-02 | Gagal: login dengan kata sandi salah ditolak Firebase Authentication | Jalankan `AkunPetugasController.prosesLogin(email, 'SandiSalah999')` pada akun yang sudah terdaftar | Firebase Authentication menolak kredensial (`auth/invalid-credential`), `loginAuth` mengembalikan `false`, sesi tidak terbentuk, dan *Controller* mengembalikan `'KREDENSIAL_SALAH'` | Firebase Auth menolak kredensial salah, `auth.currentUser` tetap `null`, dan *Controller* mengembalikan `'KREDENSIAL_SALAH'` | Pass |
 | INT-I03-TC01 | I-03 | Normal: memuat daftar kategori | Jalankan aplikasi dengan koneksi internet, buka tab Daur Ulang | Tampil 10 kartu kategori sesuai koleksi `informasiSampah` (Plastik, Kaca, Logam, Kertas & Karton, Organik, Elektronik, Lainnya, Keramik & Porselen, Tekstil & Kain, Minyak Jelantah) | 10 kartu kategori tampil dengan gambar, nama, dan ringkasan sesuai data Firestore | Pass |
 | INT-I03-TC02 | I-03 | Normal: pencarian material | Ketik "botol" pada kolom Cari Material Sampah | Hanya kartu Plastik dan Kaca yang tampil, tanpa request Firestore baru | Kartu Plastik dan Kaca tampil | Pass |
 | INT-I03-TC03 | I-03 | Gagal: database tidak dapat diakses | Aktifkan mode pesawat, buka ulang tab Daur Ulang; lalu matikan mode pesawat dan tekan "Coba Lagi" | Tampil pesan "Gagal memuat informasi sampah." dan tombol "Coba Lagi"; setelah koneksi pulih, kartu kategori tampil kembali | Pesan gagal dan tombol "Coba Lagi" tampil; setelah ditekan, kartu kategori kembali tampil | Pass |
@@ -692,6 +697,14 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 | INT-I13-TC01 | I-13 | Normal: detail menampilkan data yang baru disimpan | Setelah INT-I12-TC01, panggil `getJadwal('lebak-siliwangi')` | Tanggal = [21 Des 2026, 24 Des 2026] | Sesuai harapan (11 ms) | Pass |
 | INT-I14-TC01 | I-14 | Gagal: *security rules* menolak perubahan jadwal wilayah lain | Masih login sebagai petugas Lebak Siliwangi, `editJadwal('pasteur', [25 Des 2026])` | Firestore menolak (`permission-denied`), `editJadwal` mengembalikan `null` (halaman menampilkan "Jadwal gagal diperbarui"), dokumen Pasteur tidak berubah | `null`, log `permission-denied`, dokumen Pasteur tetap (38 ms) | Pass |
 | INT-I14-TC02 | I-14 | Gagal: pengguna belum login mencoba menyimpan | Logout, `editJadwal('lebak-siliwangi', [25 Des 2026])` | Firestore menolak (`permission-denied`), mengembalikan `null`, dokumen tidak berubah | `null`, log `permission-denied`, dokumen tetap [21 Des, 24 Des] (18 ms) | Pass |
+| INT-I15-TC01 | I-15 | Normal: pembacaan profil petugas beserta nama wilayah dari Firestore | Pada sesi aktif, panggil `AkunPetugasController.getProfil()` untuk membaca data profil dari `akunPetugas/{uid}` dan nama kelurahan dari `jadwal/{wilayahTugas}` | *Controller* meneruskan pembacaan ke `AkunPetugas` dan mengembalikan objek `{ username, email, noTelepon, wilayahTugas }` dengan nama kelurahan yang sesuai | Objek profil beserta data `email` dan nama wilayah tugas berhasil dibaca dan dikembalikan oleh `getProfil()` | Pass |
+| INT-I16-TC01 | I-16 | Normal: pembaruan nomor telepon tersimpan di Cloud Firestore | Pada sesi aktif, panggil `AkunPetugasController.editProfil(emailSaatIni, teleponBaru)`, lalu periksa dokumen `akunPetugas/{uid}` di Cloud Firestore | *Controller* meneruskan pembaruan ke `AkunPetugas`, `noTelepon` diperbarui via `runTransaction` di Firestore, dan mengembalikan `'BERHASIL'` | `editProfil` mengembalikan `'BERHASIL'` dan *field* `noTelepon` pada dokumen `akunPetugas/{uid}` di Cloud Firestore terbarui sesuai nilai baru | Pass |
+| INT-I17-TC01 | I-17 | Alternatif: pembaruan email memicu verifikasi email baru | Pada sesi aktif, panggil `AkunPetugasController.editProfil(emailBaru, telepon)` dengan email baru yang berbeda dari email saat ini | *Controller* meneruskan pembaruan ke `AkunPetugas`, memanggil `verifyBeforeUpdateEmail`, memperbarui `noTelepon` di Firestore, dan mengembalikan `'VERIFIKASI_EMAIL'` | Pembaruan kontak diteruskan ke `AkunPetugas`, `verifyBeforeUpdateEmail` dipanggil, `noTelepon` diperbarui, dan status `'VERIFIKASI_EMAIL'` dikembalikan | Pass |
+| INT-I18-TC01 | I-18 | Gagal: edit profil ditolak saat sesi tidak aktif atau terjadi galat jaringan | Panggil `AkunPetugasController.editProfil(...)` saat `auth.currentUser` bernilai `null` atau koneksi/operasi terputus | Mengembalikan `'BELUM_LOGIN'` jika sesi kosong, atau `'NETWORK_ERROR'` saat terjadi kegagalan jaringan/autentikasi tanpa mengubah dokumen Firestore | Pembaruan profil ditolak dan status gagal (`'BELUM_LOGIN'` / `'NETWORK_ERROR'`) dikembalikan sesuai kondisi | Pass |
+| INT-I19-TC01 | I-19 | Normal: logout mengakhiri sesi autentikasi aktif | Pada sesi aktif, panggil `AkunPetugasController.logout()` | *Controller* meneruskan proses ke `AkunPetugas`, memanggil `signOut(auth)`, mereset atribut sesi, dan mengembalikan `true` | Sesi berhasil diakhiri (`auth.currentUser` menjadi `null`), atribut direset, dan `logout()` mengembalikan `true` | Pass |
+| INT-I20-TC01 | I-20 | Normal: ganti kata sandi diperbarui di Firebase Auth dan dipakai login ulang | Panggil `AkunPetugasController.changePassword(passwordBaru)` pada sesi aktif, lakukan `logout()`, lalu login ulang menggunakan `prosesLogin(email, passwordBaru)` | Kata sandi baru diperbarui di Firebase Auth (`updatePassword`), *Controller* mengembalikan `'BERHASIL'`, sesi terhapus saat logout, dan login ulang dengan sandi baru mengembalikan `'BERHASIL'` | Kata sandi berhasil diperbarui (`'BERHASIL'`), sesi terhapus setelah logout, dan login ulang dengan kata sandi baru mengembalikan `'BERHASIL'` | Pass |
+| INT-I21-TC01 | I-21 | Normal: status keberhasilan penggantian kata sandi terverifikasi pada sesi aktif | Periksa hasil kembalian `AkunPetugasController.changePassword(passwordBaru)` saat `auth.currentUser` aktif dan kata sandi memenuhi syarat | *Controller* meneruskan perubahan ke `AkunPetugas.changePassword` (`true`) dan mengembalikan `'BERHASIL'` setelah Firebase Auth memperbarui sandi | Operasi `changePassword` mengembalikan `'BERHASIL'` dan kredensial baru terpasang pada akun Firebase Authentication | Pass |
+| INT-I22-TC01 | I-22 | Gagal: ganti kata sandi ditolak saat belum login atau sandi lemah | Panggil `AkunPetugasController.changePassword(...)` saat `auth.currentUser` kosong atau saat Firebase Auth menolak kata sandi (`auth/weak-password`) | Mengembalikan `'BELUM_LOGIN'` jika belum login, atau memetakan `auth/weak-password` menjadi `'SANDI_LEMAH'` tanpa mengubah kata sandi | Perubahan kata sandi ditolak dan mengembalikan status gagal (`'BELUM_LOGIN'` / `'SANDI_LEMAH'`) sesuai kondisi | Pass |
 | INT-I23-TC01 | I-23 | Normal: Alur terpadu pemindaian barcode dari layar pemindai hingga pengambilan detail sampah | Memanggil cariKode("2000000000015") pada PemindaiController untuk memicu pencarian produk melalui BarcodeModel, lalu meneruskannya ke kartu hasil | Data produk dan informasi panduan daur ulang terhubung dengan benar serta siap ditampilkan pada antarmuka | Data produk dari BarcodeModel berhasil diteruskan dan digabungkan dengan detail panduan sampah di PemindaiController untuk ditampilkan | Pass |
 | INT-I23-TC02 | I-23 | Gagal: Penanganan ketika data jenis sampah belum tersedia | Memanggil cariKode("98909899") dari layar pemindai dengan kode barcode produk yang terdaftar, tetapi kode jenis sampahnya belum ada | Kartu hasil tetap menampilkan informasi produk sementara bagian panduan sampah bernilai kosong | Informasi produk tetap berhasil dimuat dan tampil di layar I-25 | Pass |
 | INT-I24-TC01 | I-24 | Normal: Pengiriman foto sampah dari layar kamera ke server AI | Mengambil foto pada antarmuka pemindai dan mengirimkan gambar botol plastik melalui kirimFoto() | Server merespons status berhasil dan mengembalikan daftar objek terdeteksi beserta koordinat kotak deteksi untuk ditampilkan pada antarmuka hasil | Server AI merespons dengan status 200 dan mengembalikan objek deteksi botol plastik beserta koordinat dan kategori sampahnya untuk ditampilkan di antarmuka | Pass |
