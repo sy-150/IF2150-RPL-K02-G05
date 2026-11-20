@@ -100,6 +100,8 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | Claude | Menanyakan cara melakukan test | Bro, apa itu coverage di test? | Validasi jawaban dari Claude dengan bertanya kepada teman. |
+| Gemini | Memverifikasi bahwa kasus uji yang dibuat sesuai dengan SKPL, DPPL, dan implementasi yang ada | Tolong periksa dengan detail dan menyeluruh apakah kasus uji ini benar | Jawaban dari AI dievaluasi secara menyeluruh bahwa tetap mengacu pada spesifikasi. |
+| Gemini | Membuatkan kode untuk kasus uji dan membandingkan hasil uij dengan ekspektasi uji | Tolong buatkan kode kasus uji untuk kelas AkunPetugas dan AkunPetugasController sesuai dengan kasus uji yang ada | Jawaban dari AI diperiksa kembali dan diperbaiki jika kurang tepat. |
 
 ---
 ### Pernyataan Integritas dan Persetujuan

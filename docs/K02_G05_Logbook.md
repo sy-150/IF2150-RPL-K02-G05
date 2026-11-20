@@ -147,5 +147,6 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 20-11-2026 | Arla Salsabila | Mengerjakan bagian 3, bab 4 (yang mengandung fitur lihat dan edit jadwal), serta membuat test untuk fitur lihat dan edit jadwal | 5 | Done | Bingung bagian 4.3 itu menggunakan ID antarmuka yang mana. |
+| 20-11-2026 | Kelvin Sebastian Yen | Membuat kasus uji untuk C01, C02, UC01, UC06, I-01, I-02, I-15 sampai I-22, dan KNF06 | 7 | Done | g kuat men |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
