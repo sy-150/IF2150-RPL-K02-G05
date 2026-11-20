@@ -825,8 +825,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 
 | ID Pengujian | Bukti Hasil Pengujian |
 | :--- | :--- |
-
-| *...* | *...* |
 | C01-UT01 – C01-UT20 | ![Hasil Unit Test C01](./assets/C01-unit-test.png) |
 | C02-UT01 – C02-UT14 | ![Hasil Unit Test C02](./assets/C02-unit-test.png) |
 | C04-UT01 – C04-UT17, C05-UT01 – C05-UT36 | <img src="./assets/unit-test-C04-C05-1.png" alt="unit-test-C04-C05-1.png" width="600"><br><img src="./assets/unit-test-C04-C05-2.png" alt="unit-test-C04-C05-2.png" width="600"><br><img src="./assets/unit-test-C04-C05-3.png" alt="unit-test-C04-C05-3.png" width="600"> |
@@ -839,11 +837,20 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C08 (coverage) | <img src="./assets/C08-UT01–C08-UT08 (2).png" width="50%"> |
 | C10, C12, C13(Coverage) | <img src="./assets/tespemindaicoverage.png" width="100%"> |
 | INT-TC01 – INT-TC07 | ![Hasil Test Runner Integrasi](./assets/INT-runner.png) |
+| INT-I01-TC02 | <img src="./assets/INT-I01-TC02.jpeg" alt="INT-I01-TC02.jpeg" width="600"> |
 | INT-I03-TC01 – INT-I03-TC03 | <img src="./assets/INT-I03-TC01–INT-I03-TC03 (1).jpeg" alt="Hasil unit test I03" width="25%"> <img src="./assets/INT-I03-TC01–INT-I03-TC03 (2).jpeg" alt="Hasil unit test I03" width="25%"> <img src="./assets/INT-I03-TC01–INT-I03-TC03 (3).jpeg" alt="Hasil unit test I03" width="25%"> |
 | INT-I04-TC01 – INT-I04-TC02 | <img src="./assets/INT-I04-TC01–INT-I04-TC02 (1).jpeg" alt="Hasil unit test I04" width="25%"> <img src="./assets/INT-I04-TC01–INT-I04-TC02 (2).jpeg" alt="Hasil unit test I04" width="25%"> |
 | INT-I05-TC01 – INT-I05-TC03 | <img src="./assets/INT-I05-TC01–INT-I05-TC03 (1).jpeg" alt="Hasil unit test I05" width="25%"> <img src="./assets/INT-I05-TC01–INT-I05-TC03 (2).jpeg" alt="Hasil unit test I05" width="25%"> <img src="./assets/INT-I05-TC01–INT-I05-TC03 (3).jpeg" alt="Hasil unit test I05" width="25%"> |
 | INT-I06-TC01 – INT-I06-TC02 | <img src="./assets/INT-I06-TC01–INT-I06-TC02 (1).jpeg" alt="Hasil unit test I06" width="25%"> <img src="./assets/INT-I06-TC01–INT-I06-TC02 (2).jpeg" alt="Hasil unit test I06" width="25%"> |
 | INT-I07-TC01 – INT-I14-TC02 | <img src="./assets/integrasi-I07-I14.png" alt="integrasi-I09-I14.png" width="600"> |
+| INT-I15-TC01 | <img src="./assets/INT-I15-TC01.jpeg" alt="INT-I15-TC01.jpeg" width="180"> |
+| INT-I16-TC01 | <img src="./assets/INT-I16-TC01.jpeg" alt="INT-I16-TC01.jpeg" width="180"> |
+| INT-I17-TC01 | <img src="./assets/INT-I17-TC01.jpeg" alt="INT-I17-TC01.jpeg" width="180"> |
+| INT-I18-TC01 | <img src="./assets/INT-I18-TC01.jpeg" alt="INT-I18-TC01.jpeg" width="180"> |
+| INT-I19-TC01 | <img src="./assets/INT-I19-TC01.jpeg" alt="INT-I19-TC01.jpeg" width="180"> |
+| INT-I20-TC01 | <img src="./assets/INT-I20-TC01-a.jpeg" alt="INT-I20-TC01-a.jpeg" width="180"> <img src="./assets/INT-I20-TC01-b.jpeg" alt="INT-I20-TC01-b.jpeg" width="180"> <img src="./assets/INT-I20-TC01-c.jpeg" alt="INT-I20-TC01-c.jpeg" width="180"> <img src="./assets/INT-I20-TC01-d.jpeg" alt="INT-I20-TC01-d.jpeg" width="180"> <img src="./assets/INT-I20-TC01-e.jpeg" alt="INT-I20-TC01-e.jpeg" width="180"> |
+| INT-I21-TC01 | <img src="./assets/INT-I21-TC01-a.jpeg" alt="INT-I21-TC01-a.jpeg" width="180"> <img src="./assets/INT-I21-TC01-b.jpeg" alt="INT-I21-TC01-b.jpeg" width="180"> <img src="./assets/INT-I21-TC01-c.jpeg" alt="INT-I21-TC01-c.jpeg" width="180"> |
+| INT-I22-TC01 | <img src="./assets/INT-I22-TC01.jpeg" alt="INT-I22-TC01.jpeg" width="180"> |
 | INT-I23-TC01, INT-I23-TC02, INT-I24-TC01, INT-I24-TC02, INT-I25-TC01, INT-I25-TC02 | <img src="./assets/tes_knf04.png" width="100%"> |
 | UC01-TC01 | ![Bukti UC01-TC01](./assets/UC01-TC01.png) |
 | UC01-TC02 | ![Bukti UC01-TC02](./assets/UC01-TC02.png) |
