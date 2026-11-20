@@ -311,11 +311,11 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 
 ## 4.2 Pengujian Unit Kelas
 
-Pengujian unit dilakukan pada kelas bertingkat Mendalam dan Sedang. Kelas Mendalam diuji pada seluruh operasi public dengan kasus normal, batas, dan negatif, serta mencapai *coverage* minimal 70%. Kelas Sedang diuji minimal dengan satu kasus normal dan satu kasus gagal pada operasi public utama.
+Pengujian unit dilakukan pada kelas bertingkat Mendalam dan Sedang. Kelas Mendalam diuji pada seluruh operasi public dengan kasus normal, batas, dan negatif, serta mencapai coverage minimal 70%. Kelas Sedang diuji minimal dengan satu kasus normal dan satu kasus gagal pada operasi public utama.
 
-Cara menjalankan unit test: `npx jest ../tests/AkunPetugas.test.js ../tests/AkunPetugasController.test.js --coverage` (dijalankan dari direktori `src/ecotrack/`).
+Cara menjalankan seluruh unit test sekaligus: `npx jest ../tests --coverage --runInBand` (dijalankan dari direktori `src/ecotrack/`).
 
-Lokasi file test: `src/tests/AkunPetugas.test.js` dan `src/tests/AkunPetugasController.test.js`.
+Lokasi file test: src/tests
 
 ### 4.2.1 Kelas AkunPetugas
 
@@ -879,12 +879,16 @@ Petakan setiap KF ke KNF, use case, kelas perancangan, file implementasi, dan te
 Tabel 5.1. Matriks Kerunutan KF terhadap Implementasi dan Pengujian
 
 | KF ID | KNF Terkait | Use Case ID | Kelas Terkait | Implementasi File Terkait | Test Case (UC) | Test Case (Unit/Integrasi/KNF) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *KF05* | *KNF01* | *UC03* | *C02 - Pesanan* | *`src/...`* | *UC03-TC01* | *C02-UT05, INT-TC04, KNF01-TC01* |
-| *KF01* | *-* | *UC01<br>UC02* | *[C01 - Nama kelas]<br>[C02 - Nama kelas]* | *[path/ke/file1]<br>[path/ke/file2]* | *UC01-TC01, UC01-TC02<br>UC02-TC01* | *-* |
-| *KF02* | *[KNFXX atau -]* | *[UCXX]* | *[CXX - Nama kelas]* | *[path/ke/file]* | *[UCXX-TCYY]* | *[CXX-UTYY, INT-TCYY, KNFXX-TCYY atau -]* |
-| *KFXX* | *-* | *[UCXX atau -]* | *[CXX - Nama kelas atau -]* | *Tidak diimplementasikan: [alasan]* | *-* | *-* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+|---|---|---|---|---|---|---|
+| KF01 | - | UC02, UC05 | C07 - InformasiSampah<br>C08 - InformasiSampahController<br>C09 - InformasiSampahInterface<br>C10 - Nama kelas belum diketahui<br>C11–C14 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | UC02-TC01, UC02-TC02, UC02-TC03<br>Test case UC05 | C07-UT01 s.d. C07-UT16<br>C08-UT01 s.d. C08-UT08 |
+| KF02 | - | UC02, UC05 | C07 - InformasiSampah<br>C08 - InformasiSampahController<br>C09 - InformasiSampahInterface<br>C10–C14 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC02 dan UC05 | C07-UT01 s.d. C07-UT16<br>C08-UT01 s.d. C08-UT08 |
+| KF03 | - | UC03, UC04 | C04 - Nama kelas belum diketahui<br>C05 - Nama kelas belum diketahui<br>C06 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC03 dan UC04 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
+| KF04 | - | UC03, UC04 | C04 - Nama kelas belum diketahui<br>C05 - Nama kelas belum diketahui<br>C06 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC03 dan UC04 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
+| KF05 | - | UC01, UC03, UC04, UC06 | C02 - Nama kelas belum diketahui<br>C04 - Nama kelas belum diketahui<br>C05 - Nama kelas belum diketahui<br>C06 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC01, UC03, UC04, dan UC06 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
+| KF06 | - | UC02, UC05 | C07 - InformasiSampah<br>C08 - InformasiSampahController<br>C09 - InformasiSampahInterface<br>C10–C14 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC02 dan UC05 | C07-UT01 s.d. C07-UT16<br>C08-UT01 s.d. C08-UT08 |
+| KF07 | - | UC02, UC05 | C07 - InformasiSampah<br>C08 - InformasiSampahController<br>C09 - InformasiSampahInterface<br>C10 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC02 dan UC05 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
+| KF08 | - | UC01, UC06 | C01 - Nama kelas belum diketahui<br>C02 - Nama kelas belum diketahui<br>C03 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC01 dan UC06 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
+| KF09 | - | UC01, UC06 | C01 - Nama kelas belum diketahui<br>C02 - Nama kelas belum diketahui<br>C03 - Nama kelas belum diketahui | Perlu disesuaikan dengan file implementasi masing-masing kelas | Test case UC01 dan UC06 | Sesuaikan dengan hasil pengujian kelas dan integrasi |
 
 Tabel 5.2. Matriks Kerunutan KNF terhadap Pengujian
 
